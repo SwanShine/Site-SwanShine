@@ -1,0 +1,529 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+
+/*-------HOME------*/
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter',sans-serif;
+    
+    }
+
+
+/*Sobre nós*/
+.hero{
+background-color: #ffffff;
+overflow: hidden;
+}
+.background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 96vh;
+    background-image: url(about\ us2.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+}
+
+.heading h1{
+    color: #000000;
+    font-size: 55px;
+    text-align: center;
+    margin-top: 35px;
+    
+
+}
+.container{
+    display: flex;
+    justify-content: center  ;
+    
+    width: 10%;
+    margin: 30px auto;
+}
+.hero-content{
+    flex: 1;
+    width: 200px;
+    margin: 0px 25px;
+
+}
+.hero-content h2{
+    font-size: 38px;
+    margin-bottom: 20px;
+    color: #333;
+
+}
+.hero-content p{
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    color: #666;
+
+}
+
+.hero-img{
+    flex: 1;
+    width: 300px;
+    margin: auto;
+
+}
+.img{
+    width: 100;
+    height: auto;
+    border-radius: 10px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Serviços*/
+    .wrapper{
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #fafafa;
+    }
+
+    .wrapper h1{
+        font-size: 3em;
+        margin: 60px;
+
+    }
+    .wrapper p{
+        font-size: 18px;
+    }
+
+    .content-box{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 88%;
+        margin-top: 30px;
+}
+
+    .card{
+        min-height: 220px;
+        width: 400px;
+        padding: 30px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #fff;
+        margin: 10px 4px;
+        box-shadow: 0px 15px 30px rgba(0,0,0,0.2);
+
+}
+.card i{
+    margin: 20px;
+   color: #9400D3;   
+}
+
+.card h2{
+    margin-bottom: 12px;
+    font-weight: 400;
+    text-align: center;
+    
+}
+
+.card p{
+    color: #000;
+    text-align: center;
+}
+
+.card:hover i,
+.card:hover p{
+    color: #ffffff;
+}
+
+.card:hover h2{
+    font-weight: 600;
+
+}
+
+
+.card:nth-child(1):hover{
+    background: linear-gradient(45deg,
+                                   rgba(88, 70, 159, 0.7) 0%
+                                    ,
+                                   rgba( 136,113,199, 0.7) 100%) ,
+                                    url(foto.jpg);
+                                    background-size: cover;
+}
+
+.card:nth-child(2):hover{
+    background: linear-gradient(45deg,
+                                   rgba(88, 70, 159, 0.7) 0% ,
+                                   rgba( 136,113,199, 0.7) 100%) ,
+                                    url(foto2.jpg);
+                                    background-size: cover;
+}
+
+.card:nth-child(3):hover{
+    background: linear-gradient(45deg,
+                                   rgba(88, 70, 159, 0.7) 0% ,
+                                   rgba( 136,113,199, 0.7) 100%) ,
+                                    url(foto3.jpg);
+                                    background-size: cover;
+}
+.card:nth-child(4):hover{
+    background: linear-gradient(45deg,
+                                   rgba(88, 70, 159, 0.7) 0% ,
+                                   rgba( 136,113,199, 0.7) 100%) ,
+                                    url(foto4.jpg);
+                                    background-size: cover;
+}
+
+.card:nth-child(5):hover{
+    background: linear-gradient(45deg,
+                                   rgba(88, 70, 159, 0.7) 0% ,
+                                   rgba( 136,113,199, 0.7) 100%) ,
+                                    url(foto5.jpg);
+                                    background-size: cover;
+}
+
+.card:nth-child(6):hover{
+    background: linear-gradient(45deg,
+                                   rgba(88, 70, 159, 0.7) 0% ,
+                                   rgba( 136,113,199, 0.7) 100%) ,
+                                    url(foto6.jpg);
+                                    background-size: cover;
+}
+
+
+/*Valores da empresa*/
+.container{
+    position: relative;
+    width: 1200px;
+    height: 300px;
+    margin: 60px auto;
+    
+}
+
+.container .box{
+    position: relative;
+    width: calc(400px - 30px);
+    height: calc(300px - 30px);
+    background:#b54ce2;
+    float: left;
+    margin: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.container .box .icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #74179c;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+.container .box:hover .icon{
+    top: 20px;
+    left: calc(50% - 40px);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.container .box .icon .fa{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    transition: 0.5s;
+    color: #000;
+}
+
+
+
+.container .box:hover .icon .fa{
+    font-size: 40px;
+
+}
+
+
+.container .box .content{
+    position: absolute;
+    top: 100%;
+    height: calc(100%  - 100px) ;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+
+.container .box:hover .content{
+    top: 100px;
+    opacity: 1;
+
+}
+
+.container .box .content h3{
+    margin: 0 0 10px;
+    padding: 0;
+    color: #fff;
+    font-size: 24px;
+   font-family: 'Inter', sans-serif;
+}
+
+.container .box .content p{
+    margin: 0;
+    padding: 0;
+    color: #000000;
+    
+
+}
+
+
+
+
+/*------HEADER------*/
+header{
+background-color: #24252a;
+box-shadow: 0px 3px 10px #464646;
+
+}
+
+.nav-bar{
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 6rem;
+
+}
+.logo{
+    display: flex;
+    align-items: center;
+
+}
+.logo h1{
+    color: #fff;
+}
+
+.logo h2{
+    color: #9400D3;
+}
+
+.nav-list{
+    display: flex;
+    align-items: center;
+    
+    
+    
+}
+.nav-list ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    
+
+}
+.nav-item{
+    margin: 0 15px;
+}
+
+.nav-link{
+    text-decoration: none;
+    font-size: 1.15rem;
+    color: #dadada;
+    font-weight: 400;
+display: inline-block;
+}
+
+.nav-link:hover{
+color: #fff;
+transform: scale(1.05);
+}
+
+
+.login-button button {
+    border: none;
+    background-color: #9400D3;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    
+
+}
+
+.login-button button:hover{
+box-shadow: 0px 0px 8px #b301fffa;
+
+
+}
+
+.login-button button a {
+    text-decoration: none;
+    color: #dadada;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: 2s;
+}
+
+.mobile-menu-icon{
+    display: none;
+}
+
+.mobile-menu{
+    display: none;
+}
+@media screen and (max-whidth:730px) {
+    .nav-bar{
+        padding: 1.5rem 4rem;
+
+    }
+    .nav-item{
+        display: none ;
+
+    }
+    .login-button{
+        display: none;
+    }
+    .mobile-menu-icon{
+        display: block;
+    }
+
+    .mobile-menu-icon button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    .mobile-menu ul{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 1rem;
+     }
+
+     .mobile-menu .nav-item{
+        display: block;
+        padding-top: 1.2rem;
+
+     }
+     .mobile-menu .login-button{
+        display: block;
+        padding: 1rem 2rem;
+     }
+
+     .mobile-menu .login-button button {
+        width: 100%;
+     }
+     .open{
+        display: block;
+     }
+}
+    
+
+
+
+
+
+
+/*-----FOOTER------*/
+
+
+* {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
+main{
+   height: 80vh; 
+}
+
+footer{
+    width: 100%;
+    color: #dadada; 
+    background-color: #24252a;
+}
+ 
+.footer-link{
+    text-decoration: none;
+}
+
+#footer-interface{
+
+grid-template-columns: repeat(4,1fr);
+padding: 3rem 3.5rem;
+}
+
+
+
+#footer_copyright{
+display: flex;
+justify-content: center;
+
+
+}
+
+#footer_social_media{
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+#footer_social_media .footer-link i{
+    font-size: 1.25rem;
+}
+
+
+
+#footer_social_media .footer-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: #dadada;
+    border-radius: 50%;
+    transition: all 0.4s;
+}
+
+#footer_social_media .footer-link:hover{
+    opacity: 0.8;
+} 
+    
+@media screen and (max-widht:768px) {
+    #line-footer{
+        grid-template-columns: (2, 1fr);
+        gap: 2rem;
+    }
+    
+}
+
+@media screen and (max-widht:426px) {
+    #line-footer{
+        grid-template-columns: (1, 1fr);
+       padding: 3rem 2rem;
+    }
+    
+}
