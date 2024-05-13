@@ -204,7 +204,7 @@ header{
 }
 .card i{
 margin: 20px;
-color: #9400D3;   
+color: #000;   
 }
 
 .card h2{
@@ -222,6 +222,7 @@ text-align: center;
 .card:hover i,
 .card:hover p{
 color: #ffffff;
+font-weight: bold;
 }
 
 .card:hover h2{
@@ -232,48 +233,47 @@ font-weight: 600;
 
 .card:nth-child(1):hover{
 background: linear-gradient(45deg,
-                               rgba(88, 70, 159, 0.7) 0%
-                                ,
-                               rgba( 136,113,199, 0.7) 100%) ,
+rgba(255, 113, 185, 1),
+rgba(255, 138, 163, 1) 100%),
                                 url(foto.jpg);
                                 background-size: cover;
 }
 
 .card:nth-child(2):hover{
 background: linear-gradient(45deg,
-                               rgba(88, 70, 159, 0.7) 0% ,
-                               rgba( 136,113,199, 0.7) 100%) ,
+rgba(255, 113, 185, 1),
+rgba(255, 184, 122, 1) 100%),
                                 url(foto2.jpg);
                                 background-size: cover;
 }
 
 .card:nth-child(3):hover{
 background: linear-gradient(45deg,
-                               rgba(88, 70, 159, 0.7) 0% ,
-                               rgba( 136,113,199, 0.7) 100%) ,
+rgba(255, 184, 122, 1),
+rgba(255, 208, 100, 1) 100%),
                                 url(foto3.jpg);
                                 background-size: cover;
 }
 .card:nth-child(4):hover{
 background: linear-gradient(45deg,
-                               rgba(88, 70, 159, 0.7) 0% ,
-                               rgba( 136,113,199, 0.7) 100%) ,
+rgba(255, 113, 185, 1),
+rgba(255, 138, 163, 1) 100%),
                                 url(foto4.jpg);
                                 background-size: cover;
 }
 
 .card:nth-child(5):hover{
 background: linear-gradient(45deg,
-                               rgba(88, 70, 159, 0.7) 0% ,
-                               rgba( 136,113,199, 0.7) 100%) ,
+rgba(255, 113, 185, 1),
+rgba(255, 184, 122, 1) 100%),
                                 url(foto5.jpg);
                                 background-size: cover;
 }
 
 .card:nth-child(6):hover{
 background: linear-gradient(45deg,
-                               rgba(88, 70, 159, 0.7) 0% ,
-                               rgba( 136,113,199, 0.7) 100%) ,
+rgba(255, 184, 122, 1),
+rgba(255, 208, 100, 1) 100%),
                                 url(foto6.jpg);
                                 background-size: cover;
 }

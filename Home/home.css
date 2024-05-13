@@ -14,7 +14,7 @@
 header{
     
     box-shadow: 50px 20px 10px;
-    background: linear-gradient(#FF9144, #8852FF);
+    background: linear-gradient(#FF66c4, #ffde59);
     }
     
     .nav-bar{
@@ -53,9 +53,10 @@ header{
     .nav-link{
         text-decoration: none;
         font-size: 1.15rem;
-        color: #dadada;
+        color: #000;
         font-weight: 400;
         display: inline-block;
+        font-weight: bold;
     }
     
     .nav-link:hover{
@@ -188,177 +189,38 @@ overflow: hidden;
 .container{
     display: flex;
     justify-content: center  ;
-    
-    width: 10%;
     margin: 30px auto;
 }
-.hero-content{
-    flex: 1;
-    width: 200px;
-    margin: 0px 25px;
 
-}
-.hero-content h2{
-    font-size: 38px;
-    margin-bottom: 20px;
-    color: #333;
 
+
+.container_text{
+    margin: 0;
+ width: 100vw;
+ height: 100vh;
 }
+
+
+
+
+
 .hero-content p{
     font-size: 20px;
     line-height: 1.5;
     margin-bottom: 40px;
     color: #666;
-
-}
-
-.hero-img{
-    flex: 1;
-    width: 300px;
-    margin: auto;
-
-}
-.img{
-    width: 100;
-    height: auto;
-    border-radius: 10px;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*Serviços*/
-    .wrapper{
-        font-family: 'Inter', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background: #fafafa;
-    }
-
-    .wrapper h1{
-        font-size: 3em;
-        margin: 60px;
-
-    }
-    .wrapper p{
-        font-size: 18px;
-    }
-
-    .content-box{
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        width: 88%;
-        margin-top: 30px;
-}
-
-    .card{
-        min-height: 220px;
-        width: 400px;
-        padding: 30px;
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background: #fff;
-        margin: 10px 4px;
-        box-shadow: 0px 15px 30px rgba(0,0,0,0.2);
-
-}
-.card i{
-    margin: 20px;
-   color: #000;   
-}
-
-.card h2{
-    margin-bottom: 12px;
-    font-weight: 400;
-    text-align: center;
-    
-}
-
-.card p{
-    color: #000;
     text-align: center;
 }
 
-.card:hover i,
-.card:hover p{
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.card:hover h2{
-    font-weight: 600;
-
-}
 
 
-.card:nth-child(1):hover{
-    background: linear-gradient(45deg,
-    rgba(255, 113, 185, 1),
-    rgba(255, 138, 163, 1) 100%),
-                                    url(foto.jpg);
-                                    background-size: cover;
-}
-
-.card:nth-child(2):hover{
-    background: linear-gradient(45deg,
-    rgba(255, 113, 185, 1),
-    rgba(255, 184, 122, 1) 100%),
-                                    url(foto2.jpg);
-                                    background-size: cover;
-}
-
-.card:nth-child(3):hover{
-    background: linear-gradient(45deg,
-    rgba(255, 184, 122, 1),
-    rgba(255, 208, 100, 1) 100%),
-                                    url(foto3.jpg);
-                                    background-size: cover;
-}
-.card:nth-child(4):hover{
-    background: linear-gradient(45deg,
-    rgba(255, 113, 185, 1),
-    rgba(255, 138, 163, 1) 100%),
-                                    url(foto4.jpg);
-                                    background-size: cover;
-}
-
-.card:nth-child(5):hover{
-    background: linear-gradient(45deg,
-    rgba(255, 113, 185, 1),
-    rgba(255, 184, 122, 1) 100%),
-                                    url(foto5.jpg);
-                                    background-size: cover;
-}
-
-.card:nth-child(6):hover{
-    background: linear-gradient(45deg,
-    rgba(255, 184, 122, 1),
-    rgba(255, 208, 100, 1) 100%),
-                                    url(foto6.jpg);
-                                    background-size: cover;
-}
 
 
 /*Valores da empresa*/
+    
+.wrapper{
+    text-align: center;
+}
 .container{
     position: relative;
     width: 1200px;
