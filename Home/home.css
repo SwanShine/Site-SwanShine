@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
 
 /*-------HOME------*/
+
 *{
     padding: 0;
     margin: 0;
@@ -163,154 +164,125 @@ header{
 
 /*Sobre nós*/
 .hero{
-background-color: #ffffff;
-overflow: hidden;
-}
-.background{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 96vh;
-    background-image: url(about\ us2.jpeg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
+    background-color: #ffffff;
+    overflow: hidden;
 }
 
 .heading h1{
     color: #000000;
-    font-size: 55px;
+    font-size: 30px;
     text-align: center;
     margin-top: 35px;
-    
+    margin-bottom: 20px;
 
 }
-.container{
-    display: flex;
-    justify-content: center  ;
-    margin: 30px auto;
-}
-
-
 
 .container_text{
     margin: 0;
- width: 100vw;
- height: 100vh;
+    width: 100vw;
+    height: 10vh;
 }
 
-
-
-
-
-.hero-content p{
+.container_text p{
     font-size: 20px;
     line-height: 1.5;
     margin-bottom: 40px;
-    color: #666;
+    color: #737373;
     text-align: center;
 }
 
+.hero img {
+    margin-left: 350px;
+    width: 900px;
+}
 
+/*------PARTE DO PROFISSIONAL------*/
+.seja {
+    background-color: #ffde59;
+    width: 50vw;
+    height: 25vh;
+    margin-left: 26vw;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    box-shadow: 1px 1px 3px 3px #737373;
+}
 
+h1 {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
 
+.input {
+    margin-bottom: 20px;
+}
 
-/*Valores da empresa*/
-    
-.wrapper{
+.label {
+    margin-top: 30px;
+}
+
+.seja label.label_email {
+    font-size: 20px;
+    margin-left: 15px;
+    margin-bottom: 8px;
+    color: black;
+    font-weight: bold;
+}
+
+.label label.label_email{
+    margin-left: 17px;
+}
+
+.seja input.email {
+    margin-left: 15px;
+    width: 250px;
+    height: 50px;
     text-align: center;
-}
-.container{
-    position: relative;
-    width: 1200px;
-    height: 300px;
-    margin: 60px auto;
-    
+    border-radius: 5px;
+    display: inline-block;
 }
 
-.container .box{
-    position: relative;
-    width: calc(400px - 30px);
-    height: calc(300px - 30px);
-    background:#b54ce2;
-    float: left;
-    margin: 15px;
-    box-sizing: border-box;
-    overflow: hidden;
-    border-radius: 18px;
+.seja label.label_celular {
+    font-size: 20px;
+    margin-left: 15px;
+    margin-bottom: 8px;
+    color: black;
+    font-weight: bold;
 }
 
-.container .box .icon{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #74179c;
-    transition: 0.5s;
-    z-index: 1;
+.label label.label_celular{
+    margin-left: 200px;
 }
 
-.container .box:hover .icon{
-    top: 20px;
-    left: calc(50% - 40px);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+.seja input.celular {
+    margin-left: 15px;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    border-radius: 5px;
 }
 
-.container .box .icon .fa{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 80px;
-    transition: 0.5s;
+.seja .botao_cadastrar {
+    border-radius: 20px;
+    margin-left: 580px;
+}
+
+.seja .botao {
+    display: flex;
+    margin-top: -50px;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
     color: #000;
-}
-
-
-
-.container .box:hover .icon .fa{
-    font-size: 40px;
-
-}
-
-
-.container .box .content{
-    position: absolute;
-    top: 100%;
-    height: calc(100%  - 100px) ;
+    font-weight: bold;
     text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-    transition: 0.5s;
-    opacity: 0;
 }
 
-
-.container .box:hover .content{
-    top: 100px;
-    opacity: 1;
-
+.seja .img {
+    width: 500px;
+    height: 500px;
+    margin-bottom: 100px;
 }
-
-.container .box .content h3{
-    margin: 0 0 10px;
-    padding: 0;
-    color: #fff;
-    font-size: 24px;
-   font-family: 'Inter', sans-serif;
-}
-
-.container .box .content p{
-    margin: 0;
-    padding: 0;
-    color: #000000;
-    
-
-}
+/*------PARTE DO PROFISSIONAL------*/
 
 /*-----FOOTER------*/
 
