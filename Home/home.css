@@ -108,7 +108,7 @@ header{
         font-size: 1.1rem;
         transition: 2s;
     }
-    
+
     .mobile-menu-icon{
         display: none;
     }
@@ -198,7 +198,7 @@ header{
 
 /*------PARTE DO PROFISSIONAL------*/
 .seja {
-    background-color: #ffde59;
+    background-color: #FF66c4;
     width: 50vw;
     height: 25vh;
     margin-left: 26vw;
@@ -262,19 +262,18 @@ h1 {
 }
 
 .seja .botao_cadastrar {
-    border-radius: 20px;
     margin-left: 580px;
+    margin-top: -6.5%;
 }
 
 .seja .botao {
-    display: flex;
-    margin-top: -50px;
     width: 150px;
     height: 50px;
     border-radius: 5px;
     color: #000;
     font-weight: bold;
-    text-align: center;
+    font-size: 20px;
+    background-color: #ffde59;
 }
 
 .seja .img {
@@ -283,6 +282,20 @@ h1 {
     margin-bottom: 100px;
 }
 /*------PARTE DO PROFISSIONAL------*/
+
+/*------PARTE DO CLIENTE------*/
+.cliente h1 {
+    text-align: center;
+}
+
+.cliente .como_funciona {
+    margin-left: 23%;
+    margin-top: -6%;
+    width: 55%;
+    
+}
+
+/*------PARTE DO CLIENTE------*/
 
 /*-----FOOTER------*/
 
@@ -350,7 +363,8 @@ justify-content: center;
 #footer_social_media .footer-link:hover{
     opacity: 0.8;
 } 
-    
+    /*-----MEDIA SCREEN-----*/
+
 @media screen and (max-widht:768px) {
     #line-footer{
         grid-template-columns: (2, 1fr);
@@ -366,3 +380,21 @@ justify-content: center;
     }
     
 }
+
+
+@media only screen and (max-width: 768px) {
+    
+}
+
+/* Estilos para telas maiores que 768px */
+@media only screen and (min-width: 769px) {
+   
+}
+
+/* Estilos para telas menores que 426px (como smartphones em modo paisagem) */
+@media only screen and (max-width: 425px) {
+    
+}
+
+
+    /*-----MEDIA SCREEN-----*/
