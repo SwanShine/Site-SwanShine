@@ -17,40 +17,40 @@
   --nav-font: "Poppins", sans-serif;
 }
 
-/* Global Colors */
+/* Cores Globais */
 :root {
-  /* Background Color - This color is applied to the background of the entire website as well as individual sections. */
+  /* Cor de Fundo - Esta cor é aplicada ao fundo de todo o site, bem como de seções individuais. */
   --background-color: #ffffff;
 
-  /* Default Color - This is the default color used for the majority of the text content. */
-  --default-color: #212529;
+  /* Cor Padrão - Esta é a cor padrão usada para a maioria do conteúdo de texto. */
+  --default-color: #000;
 
-  /* Heading Color - This color is used for titles, headings and secondary elements. */
-  --heading-color: #32353a;
+  /* Cor do Título - Esta cor é usada para títulos, cabeçalhos e elementos secundários. */
+  --heading-color: #000;
 
-  /* Accent Color - This is the main accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out. */
-  --accent-color: #e84545;
+  /* Cor de Destaque - Esta é a cor de destaque principal que representa sua marca no site. É usada para botões, links e outros elementos que precisam se destacar. */
+  --accent-color: #ff6a7e;
 
-  /* Contrast Color - This is a color used for text when the background color is one of the heading, accent, or default colors. Its purpose is to ensure proper contrast and readability when placed over these more dominant colors. */
+  /* Cor de Contraste - Esta é uma cor usada para texto quando a cor de fundo é uma das cores de título, destaque ou padrão. Seu propósito é garantir contraste e legibilidade adequados quando colocados sobre essas cores mais dominantes. */
   --contrast-color: #ffffff;
 }
 
-/* Nav Menu Colors */
+/* Cores do Menu de Navegação */
 :root {
-  /* Nav Color - This is the default color of the main navmenu links. */
+  /* Cor do Nav - Esta é a cor padrão dos links principais do menu de navegação. */
   --nav-color: #3a3939;
 
-  /* Nav Hover Color - This color is applied to main navmenu links when they are hovered over. */
-  --nav-hover-color: #e84545;
+  /* Cor do Hover do Nav - Esta cor é aplicada aos links principais do menu de navegação quando são passados o mouse sobre eles. */
+  --nav-hover-color: #ff6a7e;
 
-  /* Nav Dropdown Background Color - This color is used as the background for dropdown boxes that appear when hovering over primary navigation items. */
+  /* Cor de Fundo do Dropdown do Nav - Esta cor é usada como fundo para caixas suspensas que aparecem ao passar o mouse sobre os itens de navegação primários. */
   --nav-dropdown-background-color: #ffffff;
 
-  /* Nav Dropdown Color - This color is used for navigation links of the dropdown items in the navigation menu. */
+  /* Cor do Dropdown do Nav - Esta cor é usada para os links de navegação dos itens do menu suspenso na navegação. */
   --nav-dropdown-color: #3a3939;
 
-  /* Nav Dropdown Hover Color - Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
-  --nav-dropdown-hover-color: #e84545;
+  /* Cor do Hover do Dropdown do Nav - Semelhante a --nav-hover-color, esta cor é aplicada aos links de navegação suspensos quando são passados o mouse sobre eles. */
+  --nav-dropdown-hover-color: #ff6a7e;
 }
 
 /* Smooth scroll */
