@@ -1,12 +1,30 @@
-<?php 
-$servidor = 'swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com';
-$usuario = 'admin';
-$senha = 'gLAHqWkvUoaxwBnm9wKD';  
-$banco_de_dados = 'swanshine'; 
+<?php
 
-$conn = mysqli_connect($servidor, $usuario, $senha, $banco_de_dados); 
+// Conexão com o banco de dados
+$host = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
+$user = "admin";
+$password = "gLAHqWkvUoaxwBnm9wKD";
+$database = "swanshine";
 
-if (!$conn) {
-    die('Erro ao conectar ao banco de dados: ' . mysqli_connect_error()); 
+try {
+    // Conexão com o banco de dados
+    $conn = new mysqli($host, $user, $password, $database);
+
+    // Verifica se houve erro na conexão
+    if ($conn->connect_error) {
+        die("Erro ao conectar ao banco de dados: " . $conn->connect_error);
+    }
+
+    // Verifica se a conexão está estabelecida corretamente
+    if ($conn->ping()) {
+        echo "Conexão bem-sucedida!";
+    } else {
+        echo "Erro na conexão: " . $conn->error;
+    }
+
+    // Fechar a conexão
+    $conn->close();
+} catch (Exception $e) {
+    echo "Erro ao conectar ao banco de dados: " . $e->getMessage();
 }
-?>
+
