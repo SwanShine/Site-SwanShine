@@ -17,16 +17,16 @@
     </div>
 
     <form id="signin">
-      <input type="text" placeholder="Email" required />
+      <input type="text" id="email1" placeholder="Email" required />
       <i class="fas fa-envelope iEmail"></i>
-      <input type="password" placeholder="Password" required />
+      <input type="password" id="password1" placeholder="Password" required />
       <i class="fas fa-lock iPassword"></i>
       <div class="divCheck">
-        <input type="checkbox" required />
-        <span>Mostrar Senha</span>
+          <input type="checkbox" id="showPassword" required />
+          <span>Mostrar Senha</span>
       </div>
-      <button type="submit">Cadastrar</button>
-    </form>
+      <button type="button" onclick="saveAndRedirect()">Cadastrar</button>
+  </form>
 
     <form id="signup">
       <input type="text" placeholder="Email" required />
@@ -37,7 +37,7 @@
         <input type="checkbox" required />
         <span>Mostrar Senha</span>
       </div>
-      <button type="submit">Cadastrar</button>
+      <button type="button" onclick="window.location.href='form_cadastro.html'">Cadastrar</button>
     </form>
   </div>
 
