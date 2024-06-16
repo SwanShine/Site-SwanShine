@@ -12,26 +12,37 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
-// Prepara e vincula
-$stmt = $conn->prepare("INSERT INTO usuarios (name, endereco, email, cpf, number) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssss", $name, $endereco, $email, $cpf, $number);
+// Prepara a consulta
+$stmt = $conn->prepare("INSERT INTO clientes (Nome, Endereço, Email, CPF, Telefone) VALUES (?, ?, ?, ?, ?)");
+if ($stmt === false) {
+    die("Erro ao preparar a consulta: " . $conn->error);
+}
 
 // Coleta os dados do formulário e define os parâmetros
-$name = $_POST['name'];
-$endereco = $_POST['endereco'];
-$email = $_POST['email'];
-$cpf = $_POST['cpf'];
-$number = $_POST['number'];
+$name = $conn->real_escape_string($_POST['name']);
+$endereco = $conn->real_escape_string($_POST['endereco']);
+$email = $conn->real_escape_string($_POST['email']);
+$cpf = $conn->real_escape_string($_POST['cpf']);
+$number = $conn->real_escape_string($_POST['number']);
 
+// Verifica se todos os dados foram recebidos
+if (isset($name, $endereco, $email, $cpf, $number)) {
+    // Vincula os parâmetros
+    $stmt->bind_param("sssss", $name, $endereco, $email, $cpf, $number);
 
-// Executa a inserção
-if ($stmt->execute()) {
-    echo "Cadastro realizado com sucesso!";
+    // Executa a inserção
+    if ($stmt->execute()) {
+        echo "Cadastro realizado com sucesso!";
+    } else {
+        echo "Erro: " . $stmt->error;
+    }
+
+    // Fecha a declaração
+    $stmt->close();
 } else {
-    echo "Erro: " . $stmt->error;
+    echo "Erro: Todos os campos são obrigatórios.";
 }
 
 // Fecha a conexão
-$stmt->close();
 $conn->close();
 ?>
