@@ -11,10 +11,10 @@
 <body>
     <div class="container">
         <div class="form-image">
-            <img src="../assets/logo preta.png" alt="">
+            <img src="../assets/img/logo_preta.png" alt="">
         </div>
         <div class="form">
-            <form action="Colocar no banco de dados">
+            <form action="conexaoform.php" method="post">
                 <div class="form-header">
                     <div class="title">
                         <h1>Cadastre-se</h1>
@@ -26,22 +26,28 @@
 
                 <div class="input-group">
                     <div class="input-box">
-                        <label for="firstname">Primeiro Nome</label>
-                        <input id="firstname" type="text" name="firstname" placeholder="Digite seu primeiro nome" required>
+                        <label for="name">Nome</label>
+                        <input id="name" type="text" name="name" placeholder="Digite seu nome completo" required>
                     </div>
             
                     <div class="input-box">
-                        <label for="lastname">Sobrenome</label>
-                        <input id="lastname" type="text" name="lastname" placeholder="Digite seu sobrenome" required>
+                        <label for="endereco">Endereço</label>
+                        <input id="endereco" type="text" name="endereco" placeholder="Digite seu Endereço" required>
                     </div>
+
                     <div class="input-box">
                         <label for="email2">E-mail</label>
                         <input id="email2" type="email" name="email" placeholder="Digite seu e-mail" required>
                     </div>
-            
+                    
+                    <div class="input-box">
+                        <label for="cpf">CPF</label>
+                        <input id="cpf" type="tel" name="cpf" placeholder="000.000.000-00" required>
+                    </div>
+
                     <div class="input-box">
                         <label for="number">Celular</label>
-                        <input id="number" type="tel" name="number" placeholder="(xx) xxxx-xxxx" required>
+                        <input id="number" type="tel" name="number" placeholder="(xx)x xxxx-xxxx" required>
                     </div>
             
                     <div class="input-box">
@@ -49,39 +55,13 @@
                         <input id="password2" type="password" name="password" placeholder="Digite sua senha" required>
                     </div>
             
-                    <div class="input-box">
-                        <label for="confirmPassword">Confirme sua Senha</label>
-                        <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
-                    </div>
+                   <div class="buttons">
+                        <input type="submit">
+                        <input type="reset" value="Limpar">
+            </div>
                 </div>
             
-                <div class="gender-inputs">
-                    <div class="gender-title">
-                        <h6>Gênero</h6>
-                    </div>
-            
-                    <div class="gender-group">
-                        <div class="gender-input">
-                            <input id="female" type="radio" name="gender">
-                            <label for="female">Feminino</label>
-                        </div>
-            
-                        <div class="gender-input">
-                            <input id="male" type="radio" name="gender">
-                            <label for="male">Masculino</label>
-                        </div>
-            
-                        <div class="gender-input">
-                            <input id="others" type="radio" name="gender">
-                            <label for="others">Outros</label>
-                        </div>
-            
-                        <div class="gender-input">
-                            <input id="none" type="radio" name="gender">
-                            <label for="none">Prefiro não dizer</label>
-                        </div>
-                    </div>
-                </div>
+                
             
     <script src="index.js"></script>
 </body>

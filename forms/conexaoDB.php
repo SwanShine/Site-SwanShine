@@ -1,6 +1,6 @@
 <?php
 
-// Conexão com o banco de dados
+// Dados para conexão com o banco de dados
 $host = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
 $user = "admin";
 $password = "gLAHqWkvUoaxwBnm9wKD";
@@ -22,9 +22,10 @@ try {
         echo "Erro na conexão: " . $conn->error;
     }
 
-    // Fechar a conexão
+    // Fecha a conexão
     $conn->close();
 } catch (Exception $e) {
     echo "Erro ao conectar ao banco de dados: " . $e->getMessage();
 }
 
+?>
