@@ -28,7 +28,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white ;
+    background-color: white;
     padding: 1rem;
 }
 
@@ -78,7 +78,7 @@ body {
     color: #fff;
 }
 
-.botao_limpar button{
+.botao_limpar button {
     border: none;
     background-color: #6c63ff;
     padding: 0.4rem 1rem;
@@ -182,12 +182,12 @@ body {
     color: #fff;
 }
 
-.botoes_inferiores{
+.botoes_inferiores {
     display: flex;
     margin-top: 5rem;
-    
 }
-.botao_enviar button{
+
+.botao_enviar button {
     border: none;
     background-color: #6c63ff;
     padding: 0.4rem 1rem;
@@ -196,14 +196,13 @@ body {
     color: #fff;
 }
 
-
-
+/* Media Queries for Responsive Design */
 @media screen and (max-width: 1330px) {
     .form-image {
         display: none;
     }
     .container {
-        width: 50%;
+        width: 60%;
     }
     .form {
         width: 100%;
@@ -217,7 +216,6 @@ body {
     }
     .input-group {
         flex-direction: column;
-        z-index: 5;
         padding-right: 5rem;
         max-height: 10rem;
         overflow-y: scroll;
@@ -234,5 +232,50 @@ body {
     }
     .gender-input {
         margin-top: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    .container {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+    }
+    .form-image {
+        width: 100%;
+        padding: 0;
+    }
+    .form-image img {
+        width: 100%;
+        height: auto;
+    }
+    .form {
+        width: 100%;
+        padding: 1rem;
+    }
+    .form-header {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .login-button {
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form-header h1 {
+        font-size: 1.5rem;
+    }
+    .input-box input {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+    .continue-button button {
+        padding: 0.5rem;
+        font-size: 0.85rem;
     }
 }
