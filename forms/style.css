@@ -1,116 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@100;300;400;500;700;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
-
-* {
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'poppins', sans-serif;
 }
 
-body {
-  width: 100vw;
-  height: 100vh;
+.header-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  background-color: #4a154b;
+  padding: 10px 20px;
+  color: white;
 }
 
-.container {
-  background-color: whitesmoke;
-  padding: 6px;
-  width: 350px;
-  height: 450px;
+.header-container .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header-container nav ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.header-container nav ul li {
+  margin: 0 10px;
+}
+
+.header-container .cart {
+  background-color: #00cc66;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+}
+
+.form-container {
+  background-color: white;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1,
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 0 20px 0 darkgrey;
+  margin-bottom: 15px;
 }
 
-form {
-  position: absolute;
-  margin-top: 80px;
-  transition: .5s;
-  width: 300px;
-  height: 400px;
+.form-group label {
+  margin-bottom: 5px;
 }
 
-.buttonsForm {
-  margin-top: 40px;
-  position: relative;
-  border-radius: 30px;
-  box-shadow: 0 0 7px 0 blueviolet;
-}
-
-.buttonsForm button {
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  position: relative;
-  padding: 10px 29px;
-}
-
-.btnColor {
-  position: absolute;
-  width: 132px;
-  height: 100%;
-  background: linear-gradient(to right, #5956e9, #a963f8);
-  border-radius: 30px;
-  transition: .3s;
-}
-
-input[type="text"], input[type="password"] {
-  border: none;
-  margin-top: 40px;
-  border-radius: 60px;
-  padding: 8px 0 8px 35px;
-  outline: none;
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   width: 100%;
 }
 
-button[type="button"] {
-  background: #660fc8;
+.form-group input[type="checkbox"],
+.form-group input[type="radio"] {
+  width: auto;
+}
+
+.submit-button {
+  background-color: #00cc66;
   color: white;
-  border-radius: 30px;
-  width: 100%;
+  padding: 10px 20px;
   border: none;
-  outline: none;
-  padding: 8px 0 8px 15px;
-  font-size: 15px;
-  margin-top: 40px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.divCheck {
-  margin: 10px 0 0 5px;
-  width: 80%;
-  font-size: 13px;
-}
-
-#signin {
-  left: 25px;
-}
-
-#signup {
-  left: 450px;
-}
-
-i {
-  position: absolute;
-  left: 0;
-  padding: 10px 10px;
-}
-
-.iEmail {
-  top: 40px;
-}
-
-.iPassword {
-  top: 114px;
-}
-
-.iPassword2 {
-  top: 190px;
+.submit-button:hover {
+  background-color: #00994d;
 }

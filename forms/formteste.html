@@ -1,230 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 100%;
-            color: #040004;
-            line-height: 1.5;
-        }
-
-        body {
-            background: rgb(2, 0, 36);
-            background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%);
-        }
-
-        .content {
-            background-color: #FFF;
-            width: 720px;
-            padding: 20px;
-            margin: 20px auto 0 auto;
-            box-shadow: 0px 6px 10px;
-            border-radius: 5px;
-        }
-
-        .row {
-            padding: 5px;
-        }
-
-        .buttons {
-            text-align: center;
-        }
-
-        fieldset {
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-color: #c2cbce;
-            box-shadow: 2px 2px 2px #c2cbce;
-        }
-
-        legend {
-            font-size: 2rem;
-            font-weight: bold;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
-        label:not([for="casado"], [for="solteiro"], [for="java"], [for="php"], [for="csharp"]) {
-            display: inline-block;
-            width: 120px;
-        }
-
-        input {
-            padding: 2px;
-            outline: none;
-        }
-
-        input[id="nome"],
-        input[id="sobrenome"],
-        input[id="email"] {
-            width: 480px;
-        }
-
-        input[id="dtnasc"] {
-            width: 180px;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        input[type="number"],
-        input[type="email"] {
-            border: none;
-            border-bottom: 2px solid #c2cbce;
-            transition: 0.3s all ease-in-out;
-        }
-
-        input[type="text"]:focus,
-        input[type="date"]:focus,
-        input[type="number"]:focus,
-        input[type="email"]:focus {
-            color: #c9920e;
-            font-weight: 600;
-            letter-spacing: 1px;
-            border-color: #c9920e;
-        }
-
-        textarea {
-            padding: 10px;
-            resize: none;
-            outline: none;
-            width: 100%;
-        }
-
-        input[type="radio"],
-        input[type="checkbox"] {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        input[type="submit"],
-        input[type="reset"] {
-            padding: 5px 10px;
-            background-color: #c9920e;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            transition: 0.3s all ease-in-out;
-        }
-
-        input[type="submit"]:hover,
-        input[type="reset"]:hover {
-            transform: scale(1.2);
-        }
-
-        label[for="java"],
-        label[for="csharp"],
-        label[for="php"] {
-            border: 1px solid #040004;
-            border-radius: 5px;
-            padding: 10px 15px;
-            font-weight: 600;
-            margin: 10px 0 10px 0;
-            display: inline-block;
-            transition: 0.3s all ease-in-out;
-        }
-
-        input[type="checkbox"]:checked+label {
-            background-color: #00d4ff;
-            border-color: #00d4ff;
-            color: #FFF;
-        }
-
-        input[type="checkbox"] {
-            display: none;
-        }
-
-        label[for="java"]:hover,
-        label[for="csharp"]:hover,
-        label[for="php"]:hover,
-        input[type="submit"],
-        input[type="reset"] {
-            cursor: pointer;
-        }
-    </style>
+    <title>Formulário de Cadastro</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="content">
-        <form action="">
-            <fieldset>
-                <legend>Dados Pessoais</legend>
-                <div class="row">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" autocomplete="off" required>
-                </div>
-                <div class="input-box">
-                    <label for="endereco">Endereço</label>
-                    <input id="endereco" type="text" name="endereco" placeholder="Digite seu Endereço" required>
-                </div>
-                <div class="row">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="e-mail" autocomplete="off" required>
-                </div>
-                <div class="input-box">
-                    <label for="cpf">CPF</label>
-                    <input id="cpf" type="tel" name="cpf" placeholder="000.000.000-00" required>
-                </div>
-                <div class="input-box">
-                    <label for="number">Celular</label>
-                    <input id="number" type="tel" name="number" placeholder="(xx)x xxxx-xxxx" required>
-                </div>
-                <div class="row">
-                    <label for="dtnasc">Data de Nascimento</label>
-                    <input type="date" id="dtnasc" name="dtnasc">
-                </div>
-                <div class="row">
-                    <label for="">Genero</label>
-                    <input type="radio" value="Homem" id="Homem" name="genero">
-                    <label for="casado">Homem</label>
-                    <input type="radio" value="Mulher" id="Mulher" name="genero">
-                    <label for="solteiro">Mulher</label>
-                </div>
-                <div class="row"></div>
-            </fieldset>
-            <fieldset>
-                <legend>Dados Profissionais</legend>
-                <div class="row">
-                    <label for="">Selecione as linguagens que você conhece</label>
-                </div>
-                <div class="row">
-                    <input type="checkbox" id="php" name="php">
-                    <label for="php">PHP</label>
-                    <input type="checkbox" id="java" name="java">
-                    <label for="java">Java</label>
-                    <input type="checkbox" id="csharp" name="csharp">
-                    <label for="csharp">C#</label>
-                </div>
-                <div class="row">
-                    <label for="sobre">Fale sobre você</label>
-                </div>
-                <div class="row">
-                    <textarea name="sobre" id="sobre" cols="30" rows="5" placeholder="Descreva as suas habilidades" autocomplete="off"></textarea>
-                </div>
-                <div class="row">
-                    <input type="file" accept=".pdf, .docx">
-                </div>
-            </fieldset>
-            <div class="buttons">
-                <input type="submit">
-                <input type="reset" value="Limpar">
-            </div>
-        </form>
-    </div>
-</body>
 
+    <main>
+        <div class="form-container">
+            <h1>Cadastro Profissional</h1>
+            <form>
+                <div class="form-group">
+                    <label for="email">E-mail *</label>
+                    <input type="email" id="email" name="email" required placeholder="swanshine@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="repeat-email">Repetir e-mail *</label>
+                    <input type="email" id="repeat-email" name="repeat-email" placeholder="swanshine@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Crie uma senha *</label>
+                    <input type="password" id="password" name="password" required placeholder="********">
+                </div>
+                <div class="form-group">
+                    <label for="repeat-password">Repetir senha *</label>
+                    <input type="password" id="repeat-password" name="repeat-password" required placeholder="********">
+                </div>
+                <h2>Dados cadastrais</h2>
+                <div class="form-group">
+                    <label>Pessoa física</label>
+                    <input type="radio" name="person-type" value="fisica" checked>
+                    <label>Pessoa jurídica</label>
+                    <input type="radio" name="person-type" value="juridica">
+                </div>
+                <div class="form-group">
+                    <label for="first-name">Nome *</label>
+                    <input type="text" id="first-name" name="first-name">
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Sobrenome *</label>
+                    <input type="text" id="last-name" name="last-name">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Sexo *</label>
+                    <select id="gender" name="gender">
+                        <option value="">Selecione</option>
+                        <option value="">Mulher</option>
+                        <option value="">Masculino</option>
+                        <option value="">Prefiro Não Dizer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cpf">CPF/CNPJ*</label>
+                    <input type="text" id="cpf" name="cpf" >
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="text" id="phone" name="phone" placeholder="+55 (00)0 0000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="cell">Celular</label>
+                    <input type="text" id="cell" name="cell" placeholder="+55 (00)0 0000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">Nascimento</label>
+                    <input type="date" id="birthdate" name="birthdate">
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="offers" name="offers">
+                    <label for="offers">Receber ofertas e novidades por e-mail</label>
+                </div>
+                <h2>Endereço de entrega</h2>
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input type="text" id="cep" name="cep">
+                </div>
+                <div class="form-group">
+                    <label for="street">Rua</label>
+                    <input type="text" id="street" name="street">
+                </div>
+                <div class="form-group">
+                    <label for="number">Número</label>
+                    <input type="text" id="number" name="number">
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="no-number" name="no-number">
+                    <label for="no-number">Sem Número</label>
+                </div>
+                <div class="form-group">
+                    <label for="complement">Complemento</label>
+                    <input type="text" id="complement" name="complement">
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="no-complement" name="no-complement">
+                    <label for="no-complement">Sem Complemento</label>
+                </div>
+                <div class="form-group">
+                    <label for="reference">Referência</label>
+                    <input type="text" id="reference" name="reference">
+                </div>
+                <div class="form-group">
+                    <label for="neighborhood">Bairro</label>
+                    <input type="text" id="neighborhood" name="neighborhood">
+                </div>
+                <div class="form-group">
+                    <label for="city">Cidade</label>
+                    <input type="text" id="city" name="city">
+                </div>
+                <div class="form-group">
+                    <label for="state">Estado</label>
+                    <input type="text" id="state" name="state">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit-button">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
 </html>
