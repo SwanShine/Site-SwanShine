@@ -63,6 +63,9 @@ body {
     padding: 0.4rem 1rem;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
 }
 
 .login-button button:hover {
@@ -72,6 +75,15 @@ body {
 .login-button button a {
     text-decoration: none;
     font-weight: 500;
+    color: #fff;
+}
+
+.botao_limpar button{
+    border: none;
+    background-color: #6c63ff;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
     color: #fff;
 }
 
@@ -169,6 +181,22 @@ body {
     font-weight: 500;
     color: #fff;
 }
+
+.botoes_inferiores{
+    display: flex;
+    margin-top: 5rem;
+    
+}
+.botao_enviar button{
+    border: none;
+    background-color: #6c63ff;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+
+
 
 @media screen and (max-width: 1330px) {
     .form-image {
