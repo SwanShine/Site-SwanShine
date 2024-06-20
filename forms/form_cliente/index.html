@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Layout</title>
+    <title>Swanshine - Cliente</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="form-box">
         <h2>Torne-se Cliente</h2>
         <p>Já é um membro? <a href="#">Login</a></p>
-        <form action="../conexao/conexaoform.php">
+        
+        <form action="../conexao/conexaoform.php" method="post">
             <div class="form-row">
                 <div class="input-group">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" placeholder="Digite o seu nome completo" required>
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" name="name" placeholder="Digite o seu nome completo" required>
                 </div>
                 
                 <div class="input-group">
@@ -25,23 +26,23 @@
 
             <div class="form-row">
                 <div class="input-group">
-                    <label for="CPF">CPF</label>
-                    <input type="text" name="CPF" id="CPF" placeholder="Digite seu CPF" required>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Digite o seu email" required>
                 </div>
                 <div class="input-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="Digite o seu email" required>
+                    <label for="cpf">CPF</label>
+                    <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="input-group">
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone" placeholder="Digite o seu telefone" required>
+                    <label for="number">Telefone</label>
+                    <input type="tel" id="number" name="number" placeholder="Digite o seu telefone" required>
                 </div>
                 <div class="input-group">
                     <label for="genero">Gênero</label>
-                    <select id="genero" required>
+                    <select id="genero" name="genero" required>
                         <option value="">Selecione</option>
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
@@ -53,11 +54,11 @@
             <div class="form-row">
                 <div class="input-group">
                     <label for="senha">Senha</label>
-                    <input type="password" id="senha" placeholder="Digite sua senha" required>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
                 </div>
                 <div class="input-group">
                     <label for="Confirmarsenha">Confirmar Senha</label>
-                    <input type="password" id="Confirmarsenha" placeholder="Confirme a senha" required>
+                    <input type="password" id="Confirmarsenha" name="Confirmarsenha" placeholder="Confirme a senha" required>
                 </div>
             </div>
 

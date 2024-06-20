@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var cpfInput = document.getElementById('CPF');
+    var cpfInput = document.getElementById('cpf');
+    var telInput = document.getElementById('number');
 
     cpfInput.addEventListener('input', function () {
         var value = cpfInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
@@ -14,10 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         cpfInput.value = value;
     });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    var telInput = document.getElementById('telefone');
 
     telInput.addEventListener('input', function () {
         var value = telInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
@@ -28,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (value.length === 10) {
             value = value.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
         } else if (value.length === 9) {
-            value = value.replace(/^(\d{1})(\d{4})(\d{4})$/, '($1) $2-$3');
+            value = value.replace(/^(\d{1})(\d{4})(\d{4})$/, '$1 $2-$3');
         } else if (value.length === 8) {
             value = value.replace(/^(\d{4})(\d{4})$/, '$1-$2');
         }
