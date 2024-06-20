@@ -40,7 +40,7 @@ body{
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(40px);
     padding: 30px 40px;
-    width: 50%;
+    width: 100%;
     border-radius: 0 20px 20px 0;
 }
 .form-box h2{
@@ -66,7 +66,8 @@ form .input-group label{
     display: block;
     margin-bottom: 5px;
 }
-form .input-group input{
+form .input-group input,
+form .input-group select {
     width: 100%;
     height: 47px;
     background-color: rgba(255, 255, 255, 0.32);
@@ -78,7 +79,8 @@ form .input-group input{
     color: #616161;
     transition: all 0.4s ease;
 }
-form .input-group input:focus{
+form .input-group input:focus,
+form .input-group select:focus {
     border-color: #ff008869;
 }
 form .input-group button{
@@ -92,6 +94,15 @@ form .input-group button{
     color: white;
     cursor: pointer;
     font-size: 16px;
+}
+/* Adicionando as novas classes para o layout flex */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.form-row .input-group {
+    flex: 1;
 }
 @media (max-width:930px) {
     .img-box{
@@ -109,5 +120,8 @@ form .input-group button{
     .w50{
         width: 100%;
         padding: 0;
+    }
+    .form-row {
+        flex-direction: column;
     }
 }
