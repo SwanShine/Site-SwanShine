@@ -96,7 +96,7 @@ body {
 }
 
 .submit-button {
-    background-color: #FF008A;
+    background-color: #FF64cc;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -108,7 +108,7 @@ body {
 }
 
 .submit-button:hover {
-    background-color: #ff0066;
+    background-color: #ff64cc;
 }
 
 /* CSS para tornar o formulário responsivo em todas as telas */
