@@ -317,3 +317,55 @@
   }
 
 })();
+
+/*--------------------------------------------------------------
+# Serviço
+--------------------------------------------------------------*/
+document.addEventListener('DOMContentLoaded', function() {
+  const tabela = document.getElementById('tabelaEditavel');
+  const botoesEditar = tabela.getElementsByClassName('btnEditar');
+  const botoesSalvar = tabela.getElementsByClassName('btnSalvar');
+
+  // Adicionar event listeners para todos os botões de editar
+  for (let btn of botoesEditar) {
+    btn.addEventListener('click', function() {
+      let linha = this.closest('tr');
+      tornarEditavel(linha);
+    });
+  }
+
+  // Adicionar event listeners para todos os botões de salvar
+  for (let btn of botoesSalvar) {
+    btn.addEventListener('click', function() {
+      let linha = this.closest('tr');
+      salvarLinha(linha);
+    });
+  }
+
+  function tornarEditavel(linha) {
+    // Habilitar edição para todas as células editáveis na linha
+    let celulas = linha.querySelectorAll('td[contenteditable="true"]');
+    celulas.forEach(function(celula) {
+      celula.setAttribute('contenteditable', 'true');
+      celula.style.backgroundColor = '#ffffff';
+    });
+
+    // Alternar visibilidade dos botões
+    linha.querySelector('.btnEditar').style.display = 'none';
+    linha.querySelector('.btnSalvar').style.display = 'inline-block';
+  }
+
+  function salvarLinha(linha) {
+    // Desabilitar edição para todas as células editáveis na linha
+    let celulas = linha.querySelectorAll('td[contenteditable="true"]');
+    celulas.forEach(function(celula) {
+      celula.setAttribute('contenteditable', 'false');
+      celula.style.backgroundColor = '#f9f9f9';
+    });
+
+    // Alternar visibilidade dos botões
+    linha.querySelector('.btnEditar').style.display = 'inline-block';
+    linha.querySelector('.btnSalvar').style.display = 'none';
+  }
+});
+

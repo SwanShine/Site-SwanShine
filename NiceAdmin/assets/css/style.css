@@ -1230,3 +1230,45 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+/*--------------------------------------------------------------
+# Serviço
+--------------------------------------------------------------*/
+.servico .table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.servico .table, th, td {
+  border: 1px solid #ddd;
+}
+
+.servico .th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+.servico .th {
+  background-color: #f2f2f2;
+}
+
+.servico .td[contenteditable="true"] {
+  background-color: #f9f9f9;
+}
+
+.servico .button {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.servico .btnEditar {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.servico .btnSalvar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
