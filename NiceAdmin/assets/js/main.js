@@ -369,3 +369,79 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+/*--------------------------------------------------------------
+# Cadastre seu Serviço
+--------------------------------------------------------------*/
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('formServico');
+  const tabelaServicos = document.getElementById('tabelaServicos').getElementsByTagName('tbody')[0];
+  let editingRowIndex = -1; // Índice da linha em edição (-1 significa sem edição)
+
+  // Função para adicionar uma nova linha na tabela
+  function addRow(servico, horario, preco, imagem) {
+      const newRow = tabelaServicos.insertRow();
+
+      // Cria as células da nova linha
+      newRow.innerHTML = `
+          <td>${servico}</td>
+          <td>${horario}</td>
+          <td>${preco}</td>
+          <td>${imagem}</td>
+          <td>
+              <button type="button" class="btn btn-sm btn-primary btn-edit">Editar</button>
+              <button type="button" class="btn btn-sm btn-danger btn-delete">Excluir</button>
+          </td>
+      `;
+
+      // Adiciona event listener para o botão de editar
+      const editButton = newRow.querySelector('.btn-edit');
+      editButton.addEventListener('click', function () {
+          editingRowIndex = newRow.rowIndex - 1; // Ajusta o índice baseado no cabeçalho
+          fillFormFields(newRow);
+      });
+
+      // Adiciona event listener para o botão de excluir
+      const deleteButton = newRow.querySelector('.btn-delete');
+      deleteButton.addEventListener('click', function () {
+          if (confirm('Tem certeza que deseja excluir este serviço?')) {
+              tabelaServicos.deleteRow(newRow.rowIndex - 1); // Remove a linha da tabela
+          }
+      });
+  }
+
+  // Função para preencher o formulário com dados da linha selecionada para edição
+  function fillFormFields(row) {
+      const cells = row.cells;
+      document.getElementById('servico').value = cells[0].textContent;
+      document.getElementById('horario').value = cells[1].textContent;
+      document.getElementById('preco').value = cells[2].textContent;
+      document.getElementById('imagem').value = cells[3].textContent;
+  }
+
+  // Event listener para envio do formulário
+  form.addEventListener('submit', function (event) {
+      event.preventDefault(); // Previne o envio padrão do formulário
+
+      // Captura os valores dos inputs
+      const servico = document.getElementById('servico').value;
+      const horario = document.getElementById('horario').value;
+      const preco = document.getElementById('preco').value;
+      const imagem = document.getElementById('imagem').value;
+
+      if (editingRowIndex === -1) {
+          // Adiciona nova linha na tabela
+          addRow(servico, horario, preco, imagem);
+      } else {
+          // Edita a linha existente na tabela
+          const editedRow = tabelaServicos.rows[editingRowIndex];
+          editedRow.cells[0].textContent = servico;
+          editedRow.cells[1].textContent = horario;
+          editedRow.cells[2].textContent = preco;
+          editedRow.cells[3].textContent = imagem;
+          editingRowIndex = -1; // Reseta o índice de edição
+      }
+
+      // Limpa o formulário após adicionar ou editar na tabela
+      form.reset();
+  });
+});
