@@ -398,59 +398,74 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
-        <div class="col-lg-6">
-
-          <form action="#" method="post" id="formServico">
-            <div class="form-row">
-                <div class="input-group">
-                    <label for="servico">Serviço</label>
-                    <select id="servico" name="servico" required>
-                        <option value="">Selecione</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="feminino">Feminino</option>
-                        <option value="outro">Outro</option>
-                    </select>
-                </div>
-        
-                <div class="input-group">
-                    <label for="horario">Horário</label>
-                    <input type="time" id="horario" name="horario" required>
-                </div>
-        
-                <div class="input-group">
-                    <label for="preco">Preço</label>
-                    <input type="text" id="preco" name="preco" placeholder="Digite o preço" required>
-                </div>
-        
-                <div class="input-group">
-                    <label for="imagem">Imagem</label>
-                    <input type="text" id="imagem" name="imagem" placeholder="URL da imagem" required>
-                </div>
-            </div>
-        
-            <div class="input-group">
-                <button type="submit">Cadastrar</button>
-            </div>
-        </form>
-        
-        <!-- Tabela para exibir os dados -->
-<table id="tabelaServicos" class="table">
-  <thead>
-      <tr>
-          <th>Serviço</th>
-          <th>Horário</th>
-          <th>Preço</th>
-          <th>Imagem</th>
-          <th>Ações</th> <!-- Nova coluna para botões de ação -->
-      </tr>
-  </thead>
-  <tbody>
-      <!-- Linhas serão adicionadas dinamicamente aqui -->
-  </tbody>
-</table>
-
+      <div class="container"> <!-- Container Bootstrap para centralizar conteúdo -->
+        <div class="row justify-content-center"> <!-- Centraliza horizontalmente dentro do container -->
+          <div class="col-lg-6">
+    
+            <form action="#" method="post" id="formServico">
+              <div class="form-row">
+                  <div class="input-group">
+                      <label for="servico">Serviço</label>
+                      <select id="servico" name="servico" required>
+                          <option value="">Selecione</option>
+                          <option value="masculino">Masculino</option>
+                          <option value="feminino">Feminino</option>
+                          <option value="outro">Outro</option>
+                      </select>
+                  </div>
+          
+                  <div class="input-group">
+                      <label for="horario">Horário</label>
+                      <input type="time" id="horario" name="horario" required>
+                  </div>
+          
+                  <div class="input-group">
+                      <label for="preco">Preço</label>
+                      <input type="text" id="preco" name="preco" placeholder="Digite o preço" required>
+                  </div>
+          
+                  <div class="form-row">
+                    <div class="input-group">
+                      <label class="imagem" for="imagem">Imagem</label>
+                      <div class="file-input-wrapper">
+                        <input type="file" id="imagem" class="imagem" name="imagem">
+                        <label for="imagem" class="custom-file-upload">
+                          <i class="bi bi-images"></i> Escolher Imagem
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                
+                
+              </div>
+          
+              <div class="input-group">
+                  <button type="submit">Cadastrar</button>
+              </div>
+            </form>
+            
+            <!-- Tabela para exibir os dados -->
+            <table id="tabelaServicos" class="table">
+              <thead>
+                  <tr>
+                      <th>Serviço</th>
+                      <th>Horário</th>
+                      <th>Preço</th>
+                      <th>Imagem</th>
+                      <th>Ações</th> <!-- Nova coluna para botões de ação -->
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- Linhas serão adicionadas dinamicamente aqui -->
+              </tbody>
+            </table>
+    
+          </div>
+        </div>
+      </div>
     </section>
+    
 
   </main><!-- End #main -->
 
