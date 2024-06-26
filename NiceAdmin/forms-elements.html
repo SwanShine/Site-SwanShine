@@ -404,47 +404,43 @@
     
             <form action="#" method="post" id="formServico">
               <div class="form-row">
-                  <div class="input-group">
+                  <!-- Agrupando os campos na mesma linha -->
+                  <div class="input-group same-size">
                       <label for="servico">Serviço</label>
                       <select id="servico" name="servico" required>
                           <option value="">Selecione</option>
-                          <option value="masculino">Masculino</option>
-                          <option value="feminino">Feminino</option>
-                          <option value="outro">Outro</option>
+                          <option value="barbeiro">Barbeiro</option>
+                          <option value="maquiagem">Maquiagem</option>
+                          <option value="depilacao">Depilação</option>
+                          <option value="nail_designer">Nail Designer</option>
+                          <option value="lash_designer">Lash Designer</option>
+                          <option value="cabelereira">Cabelereira</option>
+                          <option value="trancista">Trancista</option>
+                          <option value="esteticista">Esteticista</option>
                       </select>
                   </div>
           
-                  <div class="input-group">
+                  <div class="input-group same-size">
                       <label for="horario">Horário</label>
                       <input type="time" id="horario" name="horario" required>
                   </div>
           
-                  <div class="input-group">
+                  <div class="input-group same-size">
                       <label for="preco">Preço</label>
                       <input type="text" id="preco" name="preco" placeholder="Digite o preço" required>
                   </div>
           
-                  <div class="form-row">
-                    <div class="input-group">
-                      <label class="imagem" for="imagem">Imagem</label>
-                      <div class="file-input-wrapper">
-                        <input type="file" id="imagem" class="imagem" name="imagem">
-                        <label for="imagem" class="custom-file-upload">
-                          <i class="bi bi-images"></i> Escolher Imagem
-                        </label>
-                      </div>
-                    </div>
+                  <div class="input-group same-size">
+                      <label for="imagem">Imagem</label>
+                      <input type="file" name="imagem" id="imagem">
                   </div>
-                  
-                
-                
               </div>
           
               <div class="input-group">
-                  <button type="submit">Cadastrar</button>
+                  <button type="submit">Cadastre seu Serviço</button>
               </div>
-            </form>
-            
+          </form>
+          
             <!-- Tabela para exibir os dados -->
             <table id="tabelaServicos" class="table">
               <thead>

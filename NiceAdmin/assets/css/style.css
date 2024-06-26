@@ -1224,49 +1224,74 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
-/*--------------------------------------------------------------
-# Serviço
---------------------------------------------------------------*/
+  /*--------------------------------------------------------------
+  # Serviço
+  --------------------------------------------------------------*/
+  /* Define uma seção de estilos para o componente de serviço */
 
-.servico .table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
+  .servico .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  /* Estilos para tabelas dentro do componente .servico */
+  /* A tabela ocupa 100% da largura, com bordas colapsadas e margem acima de 20px */
 
-.servico .table, th, td {
-  border: 1px solid #ddd;
-}
+  .servico .table, .servico th, .servico td {
+    border: 1px solid #ddd;
+  }
+  /* Define bordas de 1px sólidas para a tabela, cabeçalhos e células da tabela */
+  /* Utiliza a cor cinza #ddd para as bordas */
 
-.servico .th, td {
-  padding: 8px;
-  text-align: left;
-}
+  .servico th, .servico td {
+    padding: 8px;
+    text-align: center;
+  }
+  /* Estiliza cabeçalhos e células da tabela */
+  /* Define um preenchimento interno de 8px e alinhamento do texto à esquerda */
 
-.servico .th {
-  background-color: #f2f2f2;
-}
+  .servico th {
+    background-color: #f2f2f2;
+    text-align: center;
+  }
+  /* Estilos específicos para cabeçalhos da tabela */
+  /* Fundo cinza claro #f2f2f2 para os cabeçalhos */
 
-.servico .td[contenteditable="true"] {
-  background-color: #f9f9f9;
-}
+  .servico td[contenteditable="true"] {
+    background-color: #f9f9f9;
+  }
+  /* Estilos para células editáveis da tabela */
+  /* Fundo cinza mais claro #f9f9f9 para células editáveis */
 
-.servico .button {
-  padding: 6px 10px;
-  cursor: pointer;
-}
+  .servico .button {
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  /* Estilos para botões dentro do componente .servico */
+  /* Preenchimento de 6px na vertical e 10px na horizontal */
+  /* Cursor alterado para ponteiro ao passar por cima */
 
-.servico .btnEditar {
-  background-color: #007bff;
-  color: white;
-  border: none;
-}
+  .servico .btnEditar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  /* Estilos específicos para botão de editar dentro de .servico */
+  /* Fundo azul #007bff, texto branco e sem borda visível */
 
-.servico .btnSalvar {
-  background-color: #28a745;
-  color: white;
-  border: none;
-}
+  .servico .btnSalvar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+  }
+  /* Estilos específicos para botão de salvar dentro de .servico */
+  /* Fundo verde #28a745, texto branco e sem borda visível */
+
+  .table {
+    margin-left: -220px;
+    width: 152%;
+    
+  }
 
 /*--------------------------------------------------------------
 # Cadatre seu Serviço
@@ -1274,47 +1299,22 @@ h6 {
 .form-row {
   display: flex;
   gap: 10px;
+  margin-left: -220px;/* margin-left: -220px; Removido para evitar desalinhamento */
 }
 
 .input-group {
   margin-bottom: 15px;
   display: flex;
-  align-items: center; /* Ajuste conforme necessário */
+  align-items: center; /* Alinha os itens ao centro */
+  width: 100%; /* Faz o input-group ocupar toda a largura do pai */
 }
 
 .input-group label {
-  display: block;
-  margin-bottom: 5px;
-  color: #3D3D3D;
+  margin-right: 10px; /* Espaço entre a label e o input */
+  color: #000;
   font-weight: bold;
-  width: 120px; /* Tamanho fixo para as labels */
-}
-
-.file-input-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.file-input-wrapper input[type="file"] {
-  width: 100%; /* Ajuste conforme necessário */
-  height: 40px; /* Ajuste conforme necessário */
-  opacity: 0; /* Tornando o input invisível */
-  cursor: pointer;
-  z-index: 2;
-}
-
-.custom-file-upload {
-  display: inline-block;
-  padding: 8px 12px;
-  background-color: #fff; /* Cor de fundo do botão */
-  color: black; /* Cor do texto */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.custom-file-upload i {
-  margin-right: 5px; /* Espaçamento entre o ícone e o texto */
+  font-size: 20px;
+  width: 130px; /* Largura fixa para as labels */
 }
 
 .input-group input,
@@ -1324,7 +1324,7 @@ h6 {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #FF008A;
   transition: border-color 0.3s ease;
 }
 
@@ -1334,10 +1334,11 @@ h6 {
 }
 
 .input-group button {
-  width: 100%;
+  margin-left: -220px;
+  width: 155%;
   height: 40px;
   background-color: #FF008A;
-  color: white;
+  color: #000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
