@@ -46,11 +46,16 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <!-- Link para o arquivo CSS -->
 
+  <!-- Outros links existentes react -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel" src="assets/js/App.js"></script>
 </head>
 
 
 <body>
-
+  <div id="root"></div>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
     <!-- Cabeçalho fixo no topo da página, utilizando classes do Bootstrap para layout flexível e alinhamento de itens -->
@@ -339,12 +344,17 @@
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-menu-button-wide"></i><span>Componentes</span><i class="bi bi-chevron-down ms-auto"></i>
+        <i class="bi bi-menu-button-wide"></i><span>Serviço</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a href="forms-elements.html">
+          <a href="service.html">
             <i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span>
+          </a>
+        </li>
+        <li>
+          <a href="service-cadastrado.html">
+            <i class="bi bi-circle"></i><span>Serviços Cadastrados</span>
           </a>
         </li>
       </ul>

@@ -319,55 +319,8 @@
 })();
 
 /*--------------------------------------------------------------
-# Serviço
+# Serviço cadastrado
 --------------------------------------------------------------*/
-document.addEventListener('DOMContentLoaded', function() {
-  const tabela = document.getElementById('tabelaEditavel');
-  const botoesEditar = tabela.getElementsByClassName('btnEditar');
-  const botoesSalvar = tabela.getElementsByClassName('btnSalvar');
-
-  // Adicionar event listeners para todos os botões de editar
-  for (let btn of botoesEditar) {
-    btn.addEventListener('click', function() {
-      let linha = this.closest('tr');
-      tornarEditavel(linha);
-    });
-  }
-
-  // Adicionar event listeners para todos os botões de salvar
-  for (let btn of botoesSalvar) {
-    btn.addEventListener('click', function() {
-      let linha = this.closest('tr');
-      salvarLinha(linha);
-    });
-  }
-
-  function tornarEditavel(linha) {
-    // Habilitar edição para todas as células editáveis na linha
-    let celulas = linha.querySelectorAll('td[contenteditable="true"]');
-    celulas.forEach(function(celula) {
-      celula.setAttribute('contenteditable', 'true');
-      celula.style.backgroundColor = '#ffffff';
-    });
-
-    // Alternar visibilidade dos botões
-    linha.querySelector('.btnEditar').style.display = 'none';
-    linha.querySelector('.btnSalvar').style.display = 'inline-block';
-  }
-
-  function salvarLinha(linha) {
-    // Desabilitar edição para todas as células editáveis na linha
-    let celulas = linha.querySelectorAll('td[contenteditable="true"]');
-    celulas.forEach(function(celula) {
-      celula.setAttribute('contenteditable', 'false');
-      celula.style.backgroundColor = '#f9f9f9';
-    });
-
-    // Alternar visibilidade dos botões
-    linha.querySelector('.btnEditar').style.display = 'inline-block';
-    linha.querySelector('.btnSalvar').style.display = 'none';
-  }
-});
 
 /*--------------------------------------------------------------
 # Cadastre seu Serviço
@@ -379,69 +332,69 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Função para adicionar uma nova linha na tabela
   function addRow(servico, horario, preco, imagem) {
-      const newRow = tabelaServicos.insertRow();
+    const newRow = tabelaServicos.insertRow();
 
-      // Cria as células da nova linha
-      newRow.innerHTML = `
-          <td>${servico}</td>
-          <td>${horario}</td>
-          <td>${preco}</td>
-          <td>${imagem}</td>
-          <td>
-              <button type="button" class="btn btn-sm btn-primary btn-edit">Editar</button>
-              <button type="button" class="btn btn-sm btn-danger btn-delete">Excluir</button>
-          </td>
-      `;
+    // Cria as células da nova linha
+    newRow.innerHTML = `
+      <td>${servico}</td>
+      <td>${horario}</td>
+      <td>${preco}</td>
+      <td><img src="${imagem}" alt="Imagem do Serviço" style="max-width: 100px; height: auto;"></td>
+      <td>
+        <button type="button" class="btn btn-sm btn-primary btn-edit">Editar</button>
+        <button type="button" class="btn btn-sm btn-danger btn-delete">Excluir</button>
+      </td>
+    `;
 
-      // Adiciona event listener para o botão de editar
-      const editButton = newRow.querySelector('.btn-edit');
-      editButton.addEventListener('click', function () {
-          editingRowIndex = newRow.rowIndex - 1; // Ajusta o índice baseado no cabeçalho
-          fillFormFields(newRow);
-      });
+    // Adiciona event listener para o botão de editar
+    const editButton = newRow.querySelector('.btn-edit');
+    editButton.addEventListener('click', function () {
+      editingRowIndex = newRow.rowIndex - 1; // Ajusta o índice baseado no cabeçalho
+      fillFormFields(newRow);
+    });
 
-      // Adiciona event listener para o botão de excluir
-      const deleteButton = newRow.querySelector('.btn-delete');
-      deleteButton.addEventListener('click', function () {
-          if (confirm('Tem certeza que deseja excluir este serviço?')) {
-              tabelaServicos.deleteRow(newRow.rowIndex - 1); // Remove a linha da tabela
-          }
-      });
+    // Adiciona event listener para o botão de excluir
+    const deleteButton = newRow.querySelector('.btn-delete');
+    deleteButton.addEventListener('click', function () {
+      if (confirm('Tem certeza que deseja excluir este serviço?')) {
+        tabelaServicos.deleteRow(newRow.rowIndex); // Remove a linha da tabela
+      }
+    });
   }
 
   // Função para preencher o formulário com dados da linha selecionada para edição
   function fillFormFields(row) {
-      const cells = row.cells;
-      document.getElementById('servico').value = cells[0].textContent;
-      document.getElementById('horario').value = cells[1].textContent;
-      document.getElementById('preco').value = cells[2].textContent;
-      document.getElementById('imagem').value = cells[3].textContent;
+    const cells = row.cells;
+    document.getElementById('servico').value = cells[0].textContent;
+    document.getElementById('horario').value = cells[1].textContent;
+    document.getElementById('preco').value = cells[2].textContent;
+    document.getElementById('imagem').value = cells[3].querySelector('img').src;
   }
 
   // Event listener para envio do formulário
   form.addEventListener('submit', function (event) {
-      event.preventDefault(); // Previne o envio padrão do formulário
+    event.preventDefault(); // Previne o envio padrão do formulário
 
-      // Captura os valores dos inputs
-      const servico = document.getElementById('servico').value;
-      const horario = document.getElementById('horario').value;
-      const preco = document.getElementById('preco').value;
-      const imagem = document.getElementById('imagem').value;
+    // Captura os valores dos inputs
+    const servico = document.getElementById('servico').value;
+    const horario = document.getElementById('horario').value;
+    const preco = document.getElementById('preco').value;
+    const imagem = document.getElementById('imagem').value;
 
-      if (editingRowIndex === -1) {
-          // Adiciona nova linha na tabela
-          addRow(servico, horario, preco, imagem);
-      } else {
-          // Edita a linha existente na tabela
-          const editedRow = tabelaServicos.rows[editingRowIndex];
-          editedRow.cells[0].textContent = servico;
-          editedRow.cells[1].textContent = horario;
-          editedRow.cells[2].textContent = preco;
-          editedRow.cells[3].textContent = imagem;
-          editingRowIndex = -1; // Reseta o índice de edição
-      }
+    if (editingRowIndex === -1) {
+      // Adiciona nova linha na tabela
+      addRow(servico, horario, preco, imagem);
+    } else {
+      // Edita a linha existente na tabela
+      const editedRow = tabelaServicos.rows[editingRowIndex];
+      editedRow.cells[0].textContent = servico;
+      editedRow.cells[1].textContent = horario;
+      editedRow.cells[2].textContent = preco;
+      editedRow.cells[3].querySelector('img').src = imagem;
+      editingRowIndex = -1; // Reseta o índice de edição
+    }
 
-      // Limpa o formulário após adicionar ou editar na tabela
-      form.reset();
+    // Limpa o formulário após adicionar ou editar na tabela
+    form.reset();
   });
 });
