@@ -1,127 +1,297 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+/* Importa a fonte Poppins do Google Fonts */
+
+* {
+    padding: 0; /* Remove o padding de todos os elementos */
+    margin: 0; /* Remove a margin de todos os elementos */
+    box-sizing: border-box; /* Define o box-sizing como border-box para todos os elementos */
+    font-family: 'Poppins', sans-serif; /* Define a fonte Poppins para todos os elementos */
 }
-body{
-    background-image: url(../img/background.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    min-height: 100vh;
+
+body {
+    background-image: url(../img/background.png); /* Define a imagem de fundo do corpo */
+    background-position: center; /* Centraliza a imagem de fundo */
+    background-repeat: no-repeat; /* Evita a repetição da imagem de fundo */
+    background-size: cover; /* Faz com que a imagem cubra toda a área do fundo */
+    display: flex; /* Define o display como flex */
+    align-items: center; /* Centraliza verticalmente os itens dentro do corpo */
+    justify-content: center; /* Centraliza horizontalmente os itens dentro do corpo */
+    padding: 20px; /* Adiciona um padding de 20px ao corpo */
+    min-height: 100vh; /* Define a altura mínima do corpo como 100% da altura da janela */
 }
-.w50{
+/* Define a largura como 50% */
+.w50 {
     width: 50%;
-    float: left;
-    padding-right: 15px;
+    float: left; /* Flutua o elemento à esquerda */
+    padding-right: 15px; /* Adiciona um padding à direita de 15px */
 }
-.box{
-    display: flex;
-    width: 930px;
+
+/* Define um contêiner flexível com uma largura de 930px */
+.box {
+    display: flex; /* Usa o layout flex */
+    width: 930px; /* Define a largura como 930px */
 }
-.img-box{
-    background-color: rgba(255, 255, 255, 0.5);
-    width: 50%;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border-radius: 20px  0 0 20px;
+
+/* Define a caixa de imagem */
+.img-box {
+    background-color: rgba(255, 255, 255, 0.5); /* Cor de fundo com transparência */
+    width: 50%; /* Define a largura como 50% */
+    display: flex; /* Usa o layout flex */
+    align-items: center; /* Alinha os itens no centro verticalmente */
+    padding: 20px; /* Adiciona um padding de 20px */
+    border-radius: 20px 0 0 20px; /* Define bordas arredondadas */
 }
-.img-box img{
-    width: 100%;
+
+/* Define a imagem dentro da caixa de imagem */
+.img-box img {
+    width: 100%; /* Define a largura da imagem como 100% */
 }
-.form-box{
-    background-color: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(40px);
-    padding: 30px 40px;
-    width: 50%;
-    border-radius: 0 20px 20px 0;
+
+/* Define a caixa de formulário */
+.form-box {
+    background-color: rgba(255, 255, 255, 0.4); /* Cor de fundo com transparência */
+    backdrop-filter: blur(40px); /* Adiciona um desfoque ao fundo */
+    padding: 30px 40px; /* Adiciona um padding de 30px em cima e em baixo, 40px nos lados */
+    width: 50%; /* Define a largura como 50% */
+    border-radius: 0 20px 20px 0; /* Define bordas arredondadas */
 }
-.form-box h2{
-    font-size: 30px;
+
+/* Define o estilo do título dentro da caixa de formulário */
+.form-box h2 {
+    font-size: 30px; /* Define o tamanho da fonte como 30px */
 }
-.form-box p{
-    font-weight: bold;
-    color: #3D3D3D;
+
+/* Define o estilo dos parágrafos dentro da caixa de formulário */
+.form-box p {
+    font-weight: bold; /* Define o peso da fonte como negrito */
+    color: #3D3D3D; /* Define a cor do texto */
 }
-.form-box p a{
-    color: #FF008A;
-    text-decoration: none;
+
+/* Define o estilo dos links dentro dos parágrafos da caixa de formulário */
+.form-box p a {
+    color: #FF008A; /* Define a cor dos links */
+    text-decoration: none; /* Remove a sublinha dos links */
 }
-.form-box form{
-    margin: 20px 0;
+
+/* Define o estilo dos formulários dentro da caixa de formulário */
+.form-box form {
+    margin: 20px 0; /* Adiciona uma margem em cima e embaixo */
 }
-form .input-group{
-    margin-bottom: 15px;
+
+/* Define o estilo dos grupos de entrada dentro dos formulários */
+form .input-group {
+    margin-bottom: 15px; /* Adiciona uma margem inferior de 15px */
 }
-form .input-group label{
-    color: #3D3D3D;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+
+/* Define o estilo dos rótulos dentro dos grupos de entrada */
+form .input-group label {
+    color: #3D3D3D; /* Define a cor do texto */
+    font-weight: bold; /* Define o peso da fonte como negrito */
+    display: block; /* Exibe o rótulo como um bloco */
+    margin-bottom: 5px; /* Adiciona uma margem inferior de 5px */
 }
+
+/* Define o estilo dos campos de entrada e seleção dentro dos grupos de entrada */
 form .input-group input,
 form .input-group select {
-    width: 100%;
-    height: 47px;
-    background-color: rgba(255, 255, 255, 0.32);
-    border-radius: 20px;
-    outline: none;
-    border: 2px solid transparent;
-    padding: 15px;
-    font-size: 15px;
-    color: #616161;
-    transition: all 0.4s ease;
+    width: 100%; /* Define a largura como 100% */
+    height: 47px; /* Define a altura como 47px */
+    background-color: rgba(255, 255, 255, 0.32); /* Cor de fundo com transparência */
+    border-radius: 20px; /* Define bordas arredondadas */
+    outline: none; /* Remove a borda de foco */
+    border: 2px solid transparent; /* Define a borda como transparente */
+    padding: 15px; /* Adiciona um padding de 15px */
+    font-size: 15px; /* Define o tamanho da fonte como 15px */
+    color: #616161; /* Define a cor do texto */
+    transition: all 0.4s ease; /* Adiciona uma transição suave */
 }
+
+/* Define o estilo dos campos de entrada e seleção quando focados */
 form .input-group input:focus,
 form .input-group select:focus {
-    border-color: #ff008869;
+    border-color: #ff008869; /* Define a cor da borda ao focar */
 }
-form .input-group button{
-    width: 100%;
-    height: 47px;
-    background: #FF008A;
-    border-radius: 20px;
-    outline: none;
-    border: none;
-    margin-top: 15px;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
+
+/* Define o estilo dos botões dentro dos grupos de entrada */
+form .input-group button {
+    width: 100%; /* Define a largura como 100% */
+    height: 47px; /* Define a altura como 47px */
+    background: #FF008A; /* Define a cor de fundo */
+    border-radius: 20px; /* Define bordas arredondadas */
+    outline: none; /* Remove a borda de foco */
+    border: none; /* Remove a borda */
+    margin-top: 15px; /* Adiciona uma margem superior de 15px */
+    color: white; /* Define a cor do texto como branco */
+    cursor: pointer; /* Muda o cursor para pointer */
+    font-size: 16px; /* Define o tamanho da fonte como 16px */
 }
-/* Adicionando as novas classes para o layout flex */
+
+/* Define o estilo para a linha de formulário */
 .form-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    display: flex; /* Usa o layout flex */
+    justify-content: space-between; /* Espaça os itens igualmente */
+    gap: 10px; /* Adiciona um espaço de 10px entre os itens */
 }
+
+/* Define o estilo dos grupos de entrada dentro da linha de formulário */
 .form-row .input-group {
-    flex: 1;
+    flex: 1; /* Faz com que os grupos de entrada cresçam igualmente */
 }
-@media (max-width:930px) {
-    .img-box{
-        display: none;
+
+.popup {
+    display: none; /* Inicialmente esconde o pop-up */
+    position: fixed; /* Define a posição como fixa */
+    z-index: 1; /* Define o z-index como 1 */
+    left: 0; /* Define a posição esquerda como 0 */
+    top: 0; /* Define a posição superior como 0 */
+    width: 100%; /* Define a largura como 100% */
+    height: 100%; /* Define a altura como 100% */
+    overflow: auto; /* Adiciona barra de rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.5); /* Define a cor de fundo com transparência */
+    backdrop-filter: blur(5px); /* Adiciona um desfoque ao fundo */
+}
+
+.popup-content {
+    background-color: rgba(255, 255, 255, 0.9); /* Define a cor de fundo com transparência */
+    margin: 10% auto; /* Adiciona uma margem de 10% no topo e centro horizontalmente */
+    padding: 20px; /* Adiciona um padding de 20px */
+    border: 1px solid #888; /* Adiciona uma borda cinza */
+    width: 80%; /* Define a largura como 80% */
+    max-width: 600px; /* Define a largura máxima como 600px */
+    border-radius: 20px; /* Define bordas arredondadas de 20px */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Adiciona uma sombra */
+    position: relative; /* Define a posição como relativa */
+}
+
+.close-btn {
+    color: #aaa; /* Define a cor do texto como cinza claro */
+    float: right; /* Alinha o botão à direita */
+    font-size: 28px; /* Define o tamanho da fonte como 28px */
+    font-weight: bold; /* Define o peso da fonte como negrito */
+    cursor: pointer; /* Muda o cursor para pointer */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Muda a cor para preto ao passar o mouse ou focar */
+    text-decoration: none; /* Remove a sublinha */
+    cursor: pointer; /* Muda o cursor para pointer */
+}
+
+.card-container {
+    display: flex; /* Define o display como flex */
+    justify-content: space-between; /* Espaça os itens igualmente */
+    gap: 20px; /* Adiciona um espaço de 20px entre os itens */
+    flex-wrap: wrap; /* Permite que os itens quebrem linha se necessário */
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.5); /* Define a cor de fundo com transparência */
+    padding: 20px; /* Adiciona um padding de 20px */
+    border: 1px solid #ddd; /* Adiciona uma borda cinza claro */
+    border-radius: 20px; /* Define bordas arredondadas de 20px */
+    width: 45%; /* Define a largura como 45% */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra */
+    text-align: center; /* Centraliza o texto */
+    backdrop-filter: blur(10px); /* Adiciona um desfoque ao fundo */
+}
+
+.card h2 {
+    margin-bottom: 15px; /* Adiciona uma margem inferior de 15px */
+    font-size: 24px; /* Define o tamanho da fonte como 24px */
+}
+
+.card p {
+    margin-bottom: 20px; /* Adiciona uma margem inferior de 20px */
+    font-weight: bold; /* Define o peso da fonte como negrito */
+    color: #3D3D3D; /* Define a cor do texto como cinza escuro */
+}
+
+.card button {
+    padding: 10px 20px; /* Adiciona um padding de 10px vertical e 20px horizontal */
+    background-color: #FF008A; /* Define a cor de fundo como rosa */
+    color: white; /* Define a cor do texto como branco */
+    border: none; /* Remove a borda */
+    border-radius: 20px; /* Define bordas arredondadas de 20px */
+    cursor: pointer; /* Muda o cursor para pointer */
+    font-size: 16px; /* Define o tamanho da fonte como 16px */
+}
+
+.card button:hover {
+    background-color: #E6007A; /* Muda a cor de fundo para um rosa mais escuro ao passar o mouse */
+}
+
+/* Estilos responsivos */
+/* Estilos responsivos para telas pequenas */
+@media (max-width: 930px) {
+    .w50 {
+        width: 100%; /* Ajusta a largura para 100% */
+        float: none; /* Remove a flutuação */
+        padding-right: 0; /* Remove o padding direito */
     }
-    .box{
-        width: 700px;
+
+    .box {
+        flex-direction: column; /* Muda a direção para coluna */
+        width: 100%; /* Ajusta a largura para 100% */
     }
-    .form-box{
-        width: 100%;
-        border-radius: 20px;
+
+    .img-box, .form-box {
+        width: 100%; /* Ajusta a largura para 100% */
+        border-radius: 0; /* Remove as bordas arredondadas */
+    }
+
+    .form-row .input-group {
+        min-width: 0; /* Remove a largura mínima */
+    }
+
+    .card-container {
+        flex-direction: column; /* Muda a direção para coluna */
+    }
+
+    .card {
+        width: 100%; /* Ajusta a largura para 100% */
+        margin-bottom: 20px; /* Adiciona uma margem inferior de 20px */
     }
 }
-@media (max-width:500px) {
-    .w50{
-        width: 100%;
-        padding: 0;
+
+/* Estilos responsivos para telas muito pequenas */
+@media (max-width: 768px) {
+    .form-box h2 {
+        font-size: 24px; /* Ajusta o tamanho da fonte do título */
     }
-    .form-row {
-        flex-direction: column;
+
+    .form-box p {
+        font-size: 14px; /* Ajusta o tamanho da fonte dos parágrafos */
+    }
+
+    .form-box form {
+        margin: 15px 0; /* Reduz a margem dos formulários */
+    }
+
+    form .input-group input,
+    form .input-group select {
+        height: 40px; /* Ajusta a altura dos campos de entrada e seleção */
+        font-size: 14px; /* Ajusta o tamanho da fonte */
+    }
+
+    form .input-group button {
+        height: 40px; /* Ajusta a altura do botão */
+        font-size: 14px; /* Ajusta o tamanho da fonte do botão */
+    }
+
+    .card h2 {
+        font-size: 20px; /* Ajusta o tamanho da fonte dos títulos dos cartões */
+    }
+
+    .card p {
+        font-size: 14px; /* Ajusta o tamanho da fonte dos parágrafos dos cartões */
+    }
+
+    .popup-content {
+        margin: 5% auto; /* Ajusta a margem do pop-up para telas pequenas */
+    }
+
+    .close-btn {
+        font-size: 24px; /* Ajusta o tamanho da fonte do botão de fechar */
     }
 }

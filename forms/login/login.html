@@ -10,10 +10,28 @@
 <body>
     <div class="form-box">
         <h2>Seja Bem Vindo de Volta!</h2>
-        <p>Ainda não é um membro? <a href="#">cadastre-se</a></p>
+        <p>Ainda não é um membro? <a href="#" id="cadastre-se-link">cadastre-se</a></p>
         
+        <!--pop up-->
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close-btn">&times;</span>
+                <div class="card-container">
+                    <div class="card">
+                        <h2>Cliente</h2>
+                        <p>Informações sobre cadastro de cliente.</p>
+                        <button>Cadastre-se como Cliente</button>
+                    </div>
+                    <div class="card">
+                        <h2>Profissional</h2>
+                        <p>Informações sobre cadastro de profissional.</p>
+                        <button>Cadastre-se como Profissional</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--/pop up-->
+
         <form action="../conexao/conexaoform.php" method="post">
-            
             <div class="form-row">
                 <div class="input-group">
                     <label for="email">E-mail</label>
