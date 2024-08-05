@@ -1225,7 +1225,6 @@ h6 {
   color: #012970;
 }
 
-
 /*--------------------------------------------------------------
 # Cadastre seu Serviço
 --------------------------------------------------------------*/
@@ -1258,7 +1257,7 @@ h6 {
   display: flex; /* Utiliza o Flexbox para alinhamento horizontal */
   flex-wrap: wrap; /* Permite que os itens quebrem linha conforme necessário */
   gap: 20px; /* Espaço entre os itens do Flexbox */
-  margin-bottom: 15px; /* Espaço abaixo dos grupos de entrada */
+  margin-bottom: 20px; /* Espaço abaixo dos grupos de entrada */
 }
 
 /* Define o estilo para grupos de entrada (label e input/select juntos) */
@@ -1268,11 +1267,12 @@ h6 {
   flex-direction: column; /* Alinha os itens verticalmente em telas pequenas */
   align-items: flex-start; /* Alinha os itens ao início do eixo principal */
   width: 100%; /* Faz o grupo de entrada ocupar toda a largura disponível */
+  margin-bottom: 20px; /* Espaço abaixo do grupo de entrada */
 }
 
 /* Estilo das labels dentro dos grupos de entrada */
 .input-group label {
-  margin-bottom: 5px; /* Espaço abaixo da label */
+  margin-bottom: 15px; /* Espaço abaixo da label */
   color: #000; /* Cor do texto da label */
   font-weight: bold; /* Texto em negrito */
   font-size: 1.25rem; /* Tamanho da fonte da label (20px) */
@@ -1286,7 +1286,7 @@ h6 {
   padding: 0.5rem; /* Espaçamento interno dos inputs/selects (8px) */
   font-size: 1rem; /* Tamanho da fonte dos inputs/selects (16px) */
   border-radius: 5px; /* Bordas arredondadas */
-  border: 1.5px solid #FF008A; /* Cor da borda inicial dos inputs/selects */
+  border: 2px solid #FF008A; /* Aumenta a espessura e cor da borda dos inputs/selects */
   transition: border-color 0.3s ease; /* Transição suave na mudança de cor da borda */
 }
 
@@ -1340,7 +1340,7 @@ h6 {
 
   .input-group label {
     width: 130px; /* Largura fixa para as labels em telas maiores */
-    margin-right: 10px; /* Espaço à direita da label */
+    margin-right: 15px; /* Espaço à direita da label */
     margin-bottom: 0; /* Remove o espaço abaixo da label */
   }
 
@@ -1357,7 +1357,6 @@ h6 {
     max-width: 50%; /* Define a largura máxima dos contêineres como 50% do pai */
   }
 }
-
 
 /*--------------------------------------------------------------
 # Serviço Cadastrado
