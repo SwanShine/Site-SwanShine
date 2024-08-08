@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "swanshine",
+            "username": "admin",
+            "database": "swanshine"
+        }
+    ]
+}
