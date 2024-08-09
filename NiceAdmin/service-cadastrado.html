@@ -384,78 +384,121 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
-        <div class="container">
-          <div id="servicos-container" class="row">
-            <!-- Cards dos serviços serão adicionados aqui pelo JavaScript -->
-          </div>
-        </div>
-      </section>
-    
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
-          const container = document.getElementById('servicos-container');
-    
-          container.innerHTML = ''; // Limpa o container para evitar duplicação
-    
-          servicos.forEach((servico, index) => {
-            const card = document.createElement('div');
-            card.className = 'col-lg-4 col-md-6 d-flex align-items-stretch';
-            card.innerHTML = `
-              <div class="card">
-                <img src="assets/img/placeholder.png" class="card-img-top" alt="Imagem do Serviço">
-                <div class="card-body">
-                  <h5 class="card-title">${servico.servico}</h5>
-                  <p class="card-text">Horário: ${servico.horario}</p>
-                  <p class="card-text">Preço: R$ ${parseFloat(servico.preco).toFixed(2)}</p>
-                  <div class="d-flex justify-content-between">
-                    <button class="btn btn-warning btn-sm edit-btn" data-index="${index}">Editar</button>
-                    <button class="btn btn-danger btn-sm delete-btn" data-index="${index}">Excluir</button>
-                  </div>
+
+<!-- Seção que contém a lista de serviços -->
+<section class="section">
+  <div class="container">
+    <!-- Container para os cards dos serviços -->
+    <div id="servicos-container" class="row">
+      <!-- Cards dos serviços serão adicionados aqui pelo JavaScript -->
+    </div>
+  </div>
+</section>
+
+<style>
+ 
+ /* Estilo para a seção que contém o horário e o preço no card */
+.card-details {
+  /* Define que os elementos filhos serão exibidos em uma linha (layout flexível) */
+  display: flex;
+  /* Distribui o espaço restante entre os itens filhos, colocando o máximo de espaço possível entre eles */
+  justify-content: space-between;
+  /* Adiciona uma margem inferior para separar visualmente esta seção do restante do conteúdo no card */
+  margin-bottom: 10px;
+}
+
+/* Estilo para cada item de detalhe no card (horário e preço) */
+.card-detail-item {
+  /* Faz com que o item de detalhe ocupe um espaço flexível, permitindo que os itens ao lado se ajustem de acordo */
+  flex: 1;
+  /* Alinha o texto centralmente dentro de cada item de detalhe */
+  text-align: center;
+}
+
+/* Estilo para os parágrafos dentro dos itens de detalhe */
+.card-detail-item p {
+  /* Remove as margens padrão dos parágrafos para garantir que não haja espaço extra ao redor do texto */
+  margin: 0;
+}
+
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('servicos-container');
+
+    function renderServicos() {
+      const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+      container.innerHTML = '';
+
+      servicos.forEach((servico, index) => {
+        const card = document.createElement('div');
+        card.className = 'col-lg-4 col-md-6 d-flex align-items-stretch';
+        card.innerHTML = `
+          <div class="card">
+            <img src="${servico.imagem || 'assets/img/placeholder.png'}" class="card-img-top" alt="Imagem do Serviço">
+            <div class="card-body">
+              <h5 class="card-title">${servico.servico}</h5>
+              <div class="card-details">
+                <div class="card-detail-item">
+                  <p class="card-text">Horário</p>
+                  <p class="card-text">${servico.horario}</p>
+                </div>
+                <div class="card-detail-item">
+                  <p class="card-text">Preço</p>
+                  <p class="card-text">R$ ${parseFloat(servico.preco).toFixed(2)}</p>
                 </div>
               </div>
-            `;
-            container.appendChild(card);
-          });
-    
-          // Editar
-          container.addEventListener('click', function(event) {
-            if (event.target.classList.contains('edit-btn')) {
-              const index = event.target.getAttribute('data-index');
-              const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
-              const servico = servicos[index];
-    
-              // Obtém os novos dados
-              const novoServico = prompt('Editar Serviço (JSON format):', JSON.stringify(servico));
-              if (novoServico) {
-                try {
-                  const servicoEditado = JSON.parse(novoServico);
-                  servicos[index] = servicoEditado;
-                  localStorage.setItem('servicos', JSON.stringify(servicos));
-                  location.reload(); // Recarrega a página para mostrar as mudanças
-                } catch (error) {
-                  alert('Formato inválido. Por favor, insira os dados em formato JSON válido.');
-                }
-              }
-            }
-          });
-    
-          // Excluir
-          container.addEventListener('click', function(event) {
-            if (event.target.classList.contains('delete-btn')) {
-              const index = event.target.getAttribute('data-index');
-              const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
-    
-              if (confirm('Tem certeza que deseja excluir este serviço?')) {
-                servicos.splice(index, 1);
-                localStorage.setItem('servicos', JSON.stringify(servicos));
-                location.reload(); // Recarrega a página para refletir a exclusão
-              }
-            }
-          });
-        });
-      </script>
+              <p class="card-text">Descrição: ${servico.descricao}</p>
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-warning btn-sm edit-btn" data-index="${index}">Editar</button>
+                <button class="btn btn-danger btn-sm delete-btn" data-index="${index}">Excluir</button>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    renderServicos();
+
+    container.addEventListener('click', function(event) {
+      if (event.target.classList.contains('edit-btn')) {
+        const index = event.target.getAttribute('data-index');
+        const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+        const servico = servicos[index];
+
+        const novoServico = prompt('Editar Serviço (JSON format):', JSON.stringify(servico));
+        if (novoServico) {
+          try {
+            const servicoEditado = JSON.parse(novoServico);
+            servicos[index] = servicoEditado;
+            localStorage.setItem('servicos', JSON.stringify(servicos));
+            renderServicos();
+          } catch (error) {
+            alert('Formato inválido. Por favor, insira os dados em formato JSON válido.');
+          }
+        }
+      }
+    });
+
+    container.addEventListener('click', function(event) {
+      if (event.target.classList.contains('delete-btn')) {
+        const index = event.target.getAttribute('data-index');
+        const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+
+        if (confirm('Tem certeza que deseja excluir este serviço?')) {
+          servicos.splice(index, 1);
+          localStorage.setItem('servicos', JSON.stringify(servicos));
+          renderServicos();
+        }
+      }
+    });
+  });
+</script>
+
+
 
   </main><!-- End #main -->
 

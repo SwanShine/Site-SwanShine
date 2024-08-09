@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $horario = $conn->real_escape_string($_POST['horario']);
     $preco = $conn->real_escape_string($_POST['preco']);
     $descricao = $conn->real_escape_string($_POST['descricao']);
-    $id_cliente = isset($_POST['id_cliente']) ? $conn->real_escape_string($_POST['id_cliente']) : null;
+   
     $id_profissional = isset($_POST['id_profissional']) ? $conn->real_escape_string($_POST['id_profissional']) : null;
 
     // Lida com o upload de arquivo
@@ -33,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Move o arquivo para o diretório de uploads
         if (move_uploaded_file($_FILES['imagem']['tmp_name'], $uploadFile)) {
             $caminhoImagem = basename($_FILES['imagem']['name']);
-            
             // Lê o conteúdo do arquivo para armazenar como binário
             $imagemBinaria = file_get_contents($_FILES['imagem']['tmp_name']);
         } else {
@@ -43,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepara a consulta SQL
-    $sql = "INSERT INTO serviços (Nome, Preço, Descrição, Id_clientes, id_profissionais, caminho_imagem, imagem, horario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO serviços (Nome, Preço, Descrição, id_profissionais, caminho_imagem, imagem, horario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Prepara a declaração
     $stmt = $conn->prepare($sql);
@@ -53,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vincula os parâmetros
-    $stmt->bind_param('sssisssb', $servico, $preco, $descricao, $id_cliente, $id_profissional, $caminhoImagem, $imagemBinaria, $horario);
+    $stmt->bind_param('sssisssb', $servico, $preco, $descricao, $id_profissional, $caminhoImagem, $imagemBinaria, $horario);
 
     // Executa a consulta
     if ($stmt->execute()) {

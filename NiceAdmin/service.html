@@ -383,7 +383,7 @@
 
     <section class="section">
       <div class="container">
-        <form action="#" method="post" id="formServico" enctype="multipart/form-data">
+        <form action="/NiceAdmin/forms/service.php" method="post" id="formServico" enctype="multipart/form-data">
           <div class="row mb-3">
             <div class="col-md-6">
               <div class="form-group">
@@ -438,33 +438,43 @@
       </div>
     </section>
     
-
     <script>
       document.getElementById('formServico').addEventListener('submit', function(event) {
         event.preventDefault(); // Impede o envio padrão do formulário
-  
-        // Obtendo os dados do formulário
-        const servico = document.getElementById('servico').value;
-        const horario = document.getElementById('horario').value;
-        const preco = document.getElementById('preco').value;
-  
-        // Cria um objeto com os dados
-        const novoServico = {
-          servico: servico,
-          horario: horario,
-          preco: preco,
-          // Para simplificar, não estamos manipulando a imagem aqui
-        };
-  
-        // Armazena o objeto no localStorage
-        let servicos = JSON.parse(localStorage.getItem('servicos')) || [];
-        servicos.push(novoServico);
-        localStorage.setItem('servicos', JSON.stringify(servicos));
-  
-        // Redireciona para a página de serviços cadastrados
-        window.location.href = 'service-cadastrado.html';
+    
+        // Cria um FormData para enviar o formulário
+        const formData = new FormData(this);
+    
+        // Envia os dados do formulário para o servidor usando fetch
+        fetch('/NiceAdmin/forms/service.php', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+          // Exibe a resposta completa do servidor para depuração
+          console.log('Resposta do servidor:', data);
+    
+          // Verifica se a resposta do servidor indica sucesso
+          if (data.includes('Serviço cadastrado com sucesso!')) {
+            // Redireciona para a página de serviços cadastrados
+            window.location.href = 'service-cadastrado.html';
+          } else {
+            // Exibe uma mensagem de erro
+            alert('Erro ao cadastrar o serviço: ' + data);
+          }
+        })
+        .catch(error => {
+          // Exibe qualquer erro que ocorra durante a requisição
+          console.error('Erro:', error);
+          alert('Erro ao enviar a requisição: ' + error.message);
+        });
       });
     </script>
+    
+    
+    
+
     
   </main><!-- End #main -->
 
