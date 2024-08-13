@@ -1,4 +1,5 @@
 <?php
+
 // Dados para conexão com o banco de dados
 $host = getenv('DB_HOST') ?: "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
 $user = getenv('DB_USER') ?: "admin";
@@ -19,13 +20,20 @@ try {
         throw new Exception("Erro ao conectar ao banco de dados: " . $conn->connect_error);
     }
 
+    // Verifica se a conexão está estabelecida corretamente
+    if ($conn->ping()) {
+        echo "Conexão bem-sucedida!";
+    } else {
+        throw new Exception("Erro na conexão: " . $conn->error);
+    }
+
     // Verifica se o formulário foi enviado
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Coleta e sanitiza os dados do formulário
         $name = sanitize_input($_POST["name"]);
         $email = sanitize_input($_POST["email"]);
         $password = sanitize_input($_POST["password"]);
-        $cpf = sanitize_input($_POST["cpf"]);
+        $cpf = sanitize_input($_POST["cpf"]); // Adicionado o campo cpf
         $repeat_email = sanitize_input($_POST["repeat-email"]);
         $repeat_password = sanitize_input($_POST["repeat-password"]);
         $cell = sanitize_input($_POST["cell"]);
@@ -40,6 +48,7 @@ try {
         $city = sanitize_input($_POST["city"]);
         $state = sanitize_input($_POST["state"]);
         $servico = sanitize_input($_POST["servico"]);
+        
 
         // Verifica se os e-mails e senhas conferem
         if ($email !== $repeat_email) {
@@ -65,9 +74,7 @@ try {
 
         // Executa a declaração
         if ($stmt->execute()) {
-            // Redirecionar para a página de perfil após o cadastro
-            header("Location: perfil.php?email=" . urlencode($email));
-            exit();
+            echo "Novo profissional cadastrado com sucesso!";
         } else {
             throw new Exception("Erro ao executar a declaração: " . $stmt->error);
         }
