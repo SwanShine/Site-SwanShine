@@ -1,55 +1,59 @@
 <?php
+// Dados de conexão com o banco de dados
 $servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "gLAHqWkvUoaxwBnm9wKD";
 $dbname = "swanshine";
 
-// Cria a conexão
+// Criar conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verifica a conexão
+// Verificar conexão
 if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+    die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Verifica se todos os dados foram recebidos
-if (isset($_POST['name'], $_POST['endereco'], $_POST['email'], $_POST['cpf'], $_POST['number'], $_POST['senha'], $_POST['Confirmarsenha'])) {
-    // Coleta os dados do formulário e define os parâmetros
-    $name = $conn->real_escape_string($_POST['name']);
-    $endereco = $conn->real_escape_string($_POST['endereco']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $cpf = $conn->real_escape_string($_POST['cpf']);
-    $number = $conn->real_escape_string($_POST['number']);
-    $senha = $conn->real_escape_string($_POST['senha']);
-    $confirmarsenha = $conn->real_escape_string($_POST['Confirmarsenha']);
+// Obter e sanitizar dados do formulário
+$nome = trim($_POST['Nome']);
+$endereco = trim($_POST['Endereço']);
+$email = filter_var(trim($_POST['Email']), FILTER_SANITIZE_EMAIL);
+$cpf = trim($_POST['cpf']);
+$telefone = trim($_POST['Telefone']);
+$genero = trim($_POST['genero']);
+$senha = trim($_POST['senha']);
+$confirmar_senha = trim($_POST['Confirmar_senha']);
 
-    // Verifica se as senhas coincidem
-    if ($senha !== $confirmarsenha) {
-        die("Erro: As senhas não coincidem.");
-    }
+// Validar dados
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    die("E-mail inválido.");
+}
 
-    // Prepara a consulta
-    $stmt = $conn->prepare("INSERT INTO clientes (Nome, Endereço, Email, CPF, Telefone, Senha) VALUES (?, ?, ?, ?, ?, ?)");
-    if ($stmt === false) {
-        die("Erro ao preparar a consulta: " . $conn->error);
-    }
+if ($senha !== $confirmar_senha) {
+    die("As senhas não coincidem.");
+}
 
-    // Vincula os parâmetros
-    $stmt->bind_param("ssssss", $name, $endereco, $email, $cpf, $number, $senha);
+// Hash da senha
+$senha_hash = password_hash($senha, PASSWORD_BCRYPT);
 
-    // Executa a inserção
+// Preparar e executar a inserção
+$sql = "INSERT INTO clientes (nome, endereco, email, cpf, telefone, genero, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+if ($stmt = $conn->prepare($sql)) {
+    // Associe os parâmetros com os valores
+    $stmt->bind_param("sssssss", $nome, $endereco, $email, $cpf, $telefone, $genero, $senha_hash);
+
     if ($stmt->execute()) {
-        echo "Cadastro realizado com sucesso!";
+        echo "Novo registro criado com sucesso!";
     } else {
-        echo "Erro: " . $stmt->error;
+        echo "Erro ao executar a consulta: " . $stmt->error;
     }
 
-    // Fecha a declaração
+    // Fechar a declaração
     $stmt->close();
 } else {
-    echo "Erro: Todos os campos são obrigatórios.";
+    echo "Erro ao preparar a consulta: " . $conn->error;
 }
 
-// Fecha a conexão
+// Fechar a conexão
 $conn->close();
 ?>
