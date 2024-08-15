@@ -16,12 +16,10 @@ if ($conn->connect_error) {
 // Verifica se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Coleta e valida os dados do formulário
-    $servico = $conn->real_escape_string($_POST['servico']);
-    $horario = $conn->real_escape_string($_POST['horario']);
-    $preco = $conn->real_escape_string($_POST['preco']);
-    $descricao = $conn->real_escape_string($_POST['descricao']);
-   
-    $id_profissional = isset($_POST['id_profissional']) ? $conn->real_escape_string($_POST['id_profissional']) : null;
+    $servico = $conn->real_escape_string(trim($_POST['servico']));
+    $preco = $conn->real_escape_string(trim($_POST['preco']));
+    $descricao = isset($_POST['descricao']) ? $conn->real_escape_string(trim($_POST['descricao'])) : null;
+    $horario = isset($_POST['horario']) ? $conn->real_escape_string(trim($_POST['horario'])) : null;
 
     // Lida com o upload de arquivo
     $caminhoImagem = '';
@@ -30,19 +28,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uploadDir = 'uploads/'; // Diretório onde os arquivos serão armazenados
         $uploadFile = $uploadDir . basename($_FILES['imagem']['name']);
 
+        // Verifica se o diretório de uploads existe, caso contrário, cria-o
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
         // Move o arquivo para o diretório de uploads
         if (move_uploaded_file($_FILES['imagem']['tmp_name'], $uploadFile)) {
             $caminhoImagem = basename($_FILES['imagem']['name']);
             // Lê o conteúdo do arquivo para armazenar como binário
             $imagemBinaria = file_get_contents($_FILES['imagem']['tmp_name']);
         } else {
-            echo "Erro ao fazer upload do arquivo.";
-            exit();
+            die("Erro ao fazer upload do arquivo.");
         }
     }
 
     // Prepara a consulta SQL
-    $sql = "INSERT INTO serviços (Nome, Preço, Descrição, id_profissionais, caminho_imagem, imagem, horario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO serviços (Nome, Preço, Descrição, caminho_imagem, imagem, horario) VALUES (?, ?, ?, ?, ?, ?)";
 
     // Prepara a declaração
     $stmt = $conn->prepare($sql);
@@ -52,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vincula os parâmetros
-    $stmt->bind_param('sssisssb', $servico, $preco, $descricao, $id_profissional, $caminhoImagem, $imagemBinaria, $horario);
+    // Para binários, é necessário usar 'b' como tipo de dado na bind_param
+    $stmt->bind_param('sssssb', $servico, $preco, $descricao, $caminhoImagem, $imagemBinaria, $horario);
 
     // Executa a consulta
     if ($stmt->execute()) {

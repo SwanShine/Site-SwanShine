@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>SwanShine</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="../assets/img/favicon.png" rel="icon">
-  <!-- Link para o favicon da página -->
   <link href="../assets/img/favicon.png" rel="apple-touch-icon">
-  <!-- Link para o ícone de toque da Apple -->
 
   <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -33,341 +28,54 @@
 </head>
 
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
- <!-- Cabeçalho fixo no topo da página, utilizando classes do Bootstrap para layout flexível e alinhamento de itens -->
-    
- <div class="d-flex align-items-center justify-content-between">
-  <!-- Div para alinhar itens centralizados e justificados entre os extremos -->
-    <a href="index.html" class="logo d-flex align-items-center">
-    <!-- Link para a página inicial com classes de logo e alinhamento flexível -->
-      <img src="../assets/img/logo_preta.png" alt="">
-      <!-- Imagem do logo -->
-      <span class="d-none d-lg-block">SwanShine</span>
-      <!-- Texto "NiceAdmin" visível apenas em telas grandes -->
-    </a>
-    <i class="bi bi-list toggle-sidebar-btn"></i>
-    <!-- Ícone para alternar a barra lateral -->
-  </div><!-- Fim do Logo -->
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="../assets/img/logo_preta.png" alt="">
+        <span class="d-none d-lg-block">SwanShine</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
 
-  <div class="search-bar">
-  <!-- Div da barra de pesquisa -->
-    <form class="search-form d-flex align-items-center" method="POST" action="#">
-    <!-- Formulário de pesquisa com alinhamento flexível e método POST -->
-      <input type="text" name="query" placeholder="Pesquisar" title="Digite a palavra-chave de pesquisa">
-      <!-- Campo de entrada de texto para a pesquisa -->
-      <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      <!-- Botão de envio com ícone de pesquisa -->
-    </form>
-  </div><!-- Fim da Barra de Pesquisa -->
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Pesquisar" title="Digite a palavra-chave de pesquisa">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
 
-  <nav class="header-nav ms-auto">
-    <!-- Navegação do cabeçalho com margem à esquerda automática -->
+    <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-      <!-- Lista não ordenada para itens de navegação com alinhamento flexível -->
-
-        <li class="nav-item d-block d-lg-none">
-        <!-- Item de navegação visível apenas em telas pequenas -->
-          <a class="nav-link nav-icon search-bar-toggle" href="#">
-          <!-- Link para alternar a barra de pesquisa -->
-            <i class="bi bi-search"></i>
-            <!-- Ícone de pesquisa -->
-          </a>
-        </li><!-- Fim do Ícone de Pesquisa -->
-
-        <li class="nav-item dropdown">
-        <!-- Item de navegação com menu suspenso -->
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <!-- Link para o menu suspenso de notificações -->
-            <i class="bi bi-bell"></i>
-            <!-- Ícone de sino (notificações) -->
-            <span class="badge bg-primary badge-number">4</span>
-            <!-- Badge com o número de notificações -->
-          </a><!-- Fim do Ícone de Notificações -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-          <!-- Menu suspenso das notificações -->
-            <li class="dropdown-header">
-            <!-- Cabeçalho do menu suspenso -->
-              Você tem 4 novas notificações
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-              <!-- Link para ver todas as notificações -->
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-              <!-- Divisor horizontal -->
-            </li>
-
-            <li class="notification-item">
-            <!-- Item de notificação -->
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <!-- Ícone de círculo de exclamação (aviso) -->
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. atrás</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <!-- Ícone de círculo com X (erro) -->
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. atrás</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <!-- Ícone de círculo com check (sucesso) -->
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. atrás</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <!-- Ícone de círculo com info (informação) -->
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. atrás</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Mostrar todas as notificações</a>
-              <!-- Link para mostrar todas as notificações -->
-            </li>
-
-          </ul><!-- Fim dos Itens do Menu Suspenso de Notificações -->
-
-        </li><!-- Fim da Navegação de Notificações -->
-
-        <li class="nav-item dropdown">
-        <!-- Item de navegação com menu suspenso -->
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <!-- Link para o menu suspenso de mensagens -->
-            <i class="bi bi-chat-left-text"></i>
-            <!-- Ícone de mensagens -->
-            <span class="badge bg-success badge-number">3</span>
-            <!-- Badge com o número de mensagens -->
-          </a><!-- Fim do Ícone de Mensagens -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-          <!-- Menu suspenso das mensagens -->
-            <li class="dropdown-header">
-            <!-- Cabeçalho do menu suspenso -->
-              Você tem 3 novas mensagens
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-              <!-- Link para ver todas as mensagens -->
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-              <!-- Divisor horizontal -->
-            </li>
-
-            <li class="message-item">
-            <!-- Item de mensagem -->
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <!-- Imagem do remetente da mensagem -->
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. atrás</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. atrás</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. atrás</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Mostrar todas as mensagens</a>
-              <!-- Link para mostrar todas as mensagens -->
-            </li>
-
-          </ul><!-- Fim dos Itens do Menu Suspenso de Mensagens -->
-
-        </li><!-- Fim da Navegação de Mensagens -->
-
-        <li class="nav-item dropdown pe-3">
-        <!-- Item de navegação com menu suspenso e padding à direita -->
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <!-- Link para o menu suspenso de perfil -->
-            <img src="../assets/img/team/thiago.jpg" alt="Profile" class="rounded-circle">
-            <!-- Imagem do perfil -->
-            <span class="d-none d-md-block dropdown-toggle ps-2">Thiago</span>
-            <!-- Nome do usuário visível apenas em telas médias e maiores -->
-          </a><!-- Fim do Ícone de Imagem de Perfil -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-          <!-- Menu suspenso do perfil -->
-            <li class="dropdown-header">
-            <!-- Cabeçalho do menu suspenso -->
-              <h6>Thiago Nicolas</h6>
-              <span>Web</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-              <!-- Divisor horizontal -->
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>Meu Perfil</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Configurações da Conta</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Precisa de Ajuda?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="../index.html">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sair</span>
-              </a>
-            </li>
-
-          </ul><!-- Fim dos Itens do Menu Suspenso de Perfil -->
-        </li><!-- Fim da Navegação de Perfil -->
-
+        <!-- Add other nav items here as needed -->
       </ul>
-    </nav><!-- Fim da Navegação de Ícones -->
+    </nav>
+  </header>
 
-  </header><!-- End Header -->
-
-  <!-- ======= Barra Lateral ======= -->
+  <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
-  
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link" href="index.html">
           <i class="bi bi-grid"></i>
           <span>Painel</span>
         </a>
-      </li><!-- Fim do Nav do Painel -->
-  
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Serviço</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="service.html">
-              <i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span>
-            </a>
-          </li>
-          <li>
-            <a href="service-cadastrado.html">
-              <i class="bi bi-circle"></i><span>Serviços Cadastrados</span>
-            </a>
-          </li>
+        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li><a href="service.html"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a></li>
+          <li><a href="service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a></li>
         </ul>
-      </li><!-- Fim do Nav de Componentes -->
- 
-  <!-- Cabeçalho da Navegação -->
-  <li class="nav-heading">Páginas</li>
-  
-  <!-- Link para a página de Perfil -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="users-profile.html">
-      <i class="bi bi-person"></i>
-      <span>Perfil</span>
-    </a>
-  </li><!-- Fim do Link para a página de Perfil -->
-  
-  <!-- Link para a página de F.A.Q -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-faq.html">
-      <i class="bi bi-question-circle"></i>
-      <span>F.A.Q</span>
-    </a>
-  </li><!-- Fim do Link para a página de F.A.Q -->
-  
-  <!-- Link para a página de Contato -->
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-contact.html">
-      <i class="bi bi-envelope"></i>
-      <span>Contato</span>
-    </a>
-  </li><!-- Fim do Link para a página de Contato -->
-  
-      </ul>
-  
-    </aside><!-- End Sidebar-->
+      </li>
+      <li class="nav-heading">Páginas</li>
+      <li class="nav-item"><a class="nav-link collapsed" href="users-profile.html"><i class="bi bi-person"></i><span>Perfil</span></a></li>
+      <li class="nav-item"><a class="nav-link collapsed" href="pages-faq.html"><i class="bi bi-question-circle"></i><span>F.A.Q</span></a></li>
+      <li class="nav-item"><a class="nav-link collapsed" href="pages-contact.html"><i class="bi bi-envelope"></i><span>Contato</span></a></li>
+    </ul>
+  </aside>
 
   <main id="main" class="main">
     <div class="pagetitle">
@@ -379,7 +87,7 @@
           <li class="breadcrumb-item active">Cadastre o Seu Serviço</li>
         </ol>
       </nav>
-    </div><!-- End Page Title -->
+    </div>
 
     <section class="section">
       <div class="container">
@@ -401,28 +109,28 @@
                 </select>
               </div>
             </div>
-    
+
             <div class="col-md-6">
               <div class="form-group">
                 <label for="horario">Horário</label>
                 <input type="time" id="horario" name="horario" class="form-control" required>
               </div>
             </div>
-    
+
             <div class="col-md-6">
               <div class="form-group">
                 <label for="preco">Preço</label>
                 <input type="number" id="preco" name="preco" class="form-control" placeholder="Digite o preço" step="0.01" min="0" required>
               </div>
             </div>
-    
+
             <div class="col-md-6">
               <div class="form-group">
                 <label for="imagem">Imagem</label>
                 <input type="file" name="imagem" id="imagem" class="form-control">
               </div>
             </div>
-            
+
             <div class="col-md-12">
               <div class="form-group">
                 <label for="descricao">Descrição</label>
@@ -430,60 +138,21 @@
               </div>
             </div>
           </div>
-    
+
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Cadastre seu Serviço</button>
           </div>
         </form>
       </div>
     </section>
-    
-    <script>
-      document.getElementById('formServico').addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
-    
-        // Cria um FormData para enviar o formulário
-        const formData = new FormData(this);
-    
-        // Envia os dados do formulário para o servidor usando fetch
-        fetch('/NiceAdmin/forms/service.php', {
-          method: 'POST',
-          body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-          // Exibe a resposta completa do servidor para depuração
-          console.log('Resposta do servidor:', data);
-    
-          // Verifica se a resposta do servidor indica sucesso
-          if (data.includes('Serviço cadastrado com sucesso!')) {
-            // Redireciona para a página de serviços cadastrados
-            window.location.href = 'service-cadastrado.html';
-          } else {
-            // Exibe uma mensagem de erro
-            alert('Erro ao cadastrar o serviço: ' + data);
-          }
-        })
-        .catch(error => {
-          // Exibe qualquer erro que ocorra durante a requisição
-          console.error('Erro:', error);
-          alert('Erro ao enviar a requisição: ' + error.message);
-        });
-      });
-    </script>
-    
-    
-    
-
-    
-  </main><!-- End #main -->
+  </main>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>SwanShine</span></strong>. All Rights Reserved
     </div>
-  </footer><!-- End Footer -->
+  </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -499,8 +168,31 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/app.js"></script>
+
+  <!-- Script para envio do formulário via Fetch -->
+  <script>
+    document.getElementById('formServico').addEventListener('submit', function(event) {
+      event.preventDefault(); // Previne o comportamento padrão de envio do formulário
+
+      let formData = new FormData(this);
+
+      fetch('forms/service.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(result => {
+        // Manipule o resultado aqui (ex.: mostrar uma mensagem de sucesso ou erro)
+        console.log(result);
+        alert('Serviço cadastrado com sucesso!');
+        document.getElementById('formServico').reset(); // Limpa o formulário
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert('Ocorreu um erro ao cadastrar o serviço.');
+      });
+    });
+  </script>
 
 </body>
-
 </html>
