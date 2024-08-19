@@ -16,16 +16,14 @@ if ($conn->connect_error) {
 session_start();
 
 $email = $_POST['email'];
-$senha = $_POST['senha'];
 
 // Depuração: Verificar os valores recebidos
 error_log("Email: " . $email);
-error_log("Senha: " . $senha);
 
 // Busca na tabela "profissionais"
-$query_profissional = "SELECT * FROM profissionais WHERE email = ? AND senha = ?";
+$query_profissional = "SELECT * FROM profissionais WHERE email = ?";
 $stmt = $conn->prepare($query_profissional);
-$stmt->bind_param("ss", $email, $senha);
+$stmt->bind_param("s", $email); // Corrigido para um único parâmetro
 $stmt->execute();
 $result_profissional = $stmt->get_result();
 
@@ -40,9 +38,9 @@ if ($result_profissional->num_rows > 0) {
 }
 
 // Busca na tabela "clientes"
-$query_cliente = "SELECT * FROM clientes WHERE email = ? AND senha = ?";
+$query_cliente = "SELECT * FROM clientes WHERE email = ?";
 $stmt = $conn->prepare($query_cliente);
-$stmt->bind_param("ss", $email, $senha);
+$stmt->bind_param("s", $email); // Corrigido para um único parâmetro
 $stmt->execute();
 $result_cliente = $stmt->get_result();
 
@@ -56,9 +54,9 @@ if ($result_cliente->num_rows > 0) {
     exit();
 }
 
-// Se o email e a senha não forem encontrados em nenhuma tabela
-$_SESSION['login_error'] = "Email ou senha incorretos!";
-error_log("Email ou senha incorretos.");
-header('Location: ../login/login.html');
+// Se o email não for encontrado em nenhuma tabela
+$_SESSION['login_error'] = "Email não encontrado!";
+error_log("Email não encontrado.");
+header('Location: ../../index.html');
 exit();
 ?>

@@ -32,9 +32,6 @@ if ($senha !== $confirmar_senha) {
     die("As senhas não coincidem.");
 }
 
-// Hash da senha
-$senha_hash = password_hash($senha, PASSWORD_BCRYPT);
-
 // Verificar se o e-mail já existe
 $email_check_sql = "SELECT COUNT(*) FROM clientes WHERE email = ?";
 if ($email_check_stmt = $conn->prepare($email_check_sql)) {
@@ -71,15 +68,15 @@ if ($cpf_check_stmt = $conn->prepare($cpf_check_sql)) {
 $sql = "INSERT INTO clientes (nome, endereco, email, cpf, telefone, genero, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("sssssss", $nome, $endereco, $email, $cpf, $telefone, $genero, $senha_hash);
+    $stmt->bind_param("sssssss", $nome, $endereco, $email, $cpf, $telefone, $genero, $senha);
 
     if ($stmt->execute()) {
         // Fechar a declaração e a conexão
         $stmt->close();
         $conn->close();
 
-        // Redirecionar para a página index.html (no mesmo diretório)
-        header("Location: index.html");
+        // Redirecionar para a página do cliente (no diretório "cliente")
+        header("Location: ../../cliente/index.html");
         exit();
     } else {
         echo "Erro ao executar a consulta: " . $stmt->error;

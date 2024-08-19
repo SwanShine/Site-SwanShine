@@ -166,3 +166,19 @@ body {
       font-size: 14px; /* Reduz o tamanho da fonte para campos de entrada em telas pequenas */
   }
 }
+
+/*estilo da seta*/
+.breadcrumb {
+    position: relative;
+    padding: 20px;
+    /* Outros estilos que você possa ter para o breadcrumb */
+}
+
+.back-link {
+    position: absolute;
+    top: 1px;
+    right: 20px;
+    font-size: 24px;
+    color: #000; /* Ou qualquer cor que você preferir */
+    text-decoration: none;
+}

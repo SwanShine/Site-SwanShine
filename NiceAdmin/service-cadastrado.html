@@ -385,16 +385,14 @@
     </div><!-- End Page Title -->
 
 
-<!-- Seção que contém a lista de serviços -->
-<section class="section">
-  <div class="container">
-    <!-- Container para os cards dos serviços -->
-    <div id="servicos-container" class="row">
-      <!-- Cards dos serviços serão adicionados aqui pelo JavaScript -->
-    </div>
-  </div>
-</section>
-
+    <section class="section">
+      <div class="container">
+        <div id="servico-card" class="row">
+          <!-- Card do serviço será adicionado aqui pelo JavaScript -->
+        </div>
+      </div>
+    </section>
+    
 <style>
  
  /* Estilo para a seção que contém o horário e o preço no card */
@@ -425,79 +423,43 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('servicos-container');
-
-    function renderServicos() {
-      const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
-      container.innerHTML = '';
-
-      servicos.forEach((servico, index) => {
-        const card = document.createElement('div');
-        card.className = 'col-lg-4 col-md-6 d-flex align-items-stretch';
-        card.innerHTML = `
-          <div class="card">
-            <img src="${servico.imagem || 'assets/img/placeholder.png'}" class="card-img-top" alt="Imagem do Serviço">
-            <div class="card-body">
-              <h5 class="card-title">${servico.servico}</h5>
-              <div class="card-details">
-                <div class="card-detail-item">
-                  <p class="card-text">Horário</p>
-                  <p class="card-text">${servico.horario}</p>
-                </div>
-                <div class="card-detail-item">
-                  <p class="card-text">Preço</p>
-                  <p class="card-text">R$ ${parseFloat(servico.preco).toFixed(2)}</p>
-                </div>
-              </div>
-              <p class="card-text">Descrição: ${servico.descricao}</p>
-              <div class="d-flex justify-content-between">
-                <button class="btn btn-warning btn-sm edit-btn" data-index="${index}">Editar</button>
-                <button class="btn btn-danger btn-sm delete-btn" data-index="${index}">Excluir</button>
-              </div>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    renderServicos();
-
-    container.addEventListener('click', function(event) {
-      if (event.target.classList.contains('edit-btn')) {
-        const index = event.target.getAttribute('data-index');
-        const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
-        const servico = servicos[index];
-
-        const novoServico = prompt('Editar Serviço (JSON format):', JSON.stringify(servico));
-        if (novoServico) {
-          try {
-            const servicoEditado = JSON.parse(novoServico);
-            servicos[index] = servicoEditado;
-            localStorage.setItem('servicos', JSON.stringify(servicos));
-            renderServicos();
-          } catch (error) {
-            alert('Formato inválido. Por favor, insira os dados em formato JSON válido.');
-          }
-        }
-      }
-    });
-
-    container.addEventListener('click', function(event) {
-      if (event.target.classList.contains('delete-btn')) {
-        const index = event.target.getAttribute('data-index');
-        const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
-
-        if (confirm('Tem certeza que deseja excluir este serviço?')) {
-          servicos.splice(index, 1);
-          localStorage.setItem('servicos', JSON.stringify(servicos));
-          renderServicos();
-        }
-      }
-    });
+      fetch('forms/service-cadastrado.php')
+          .then(response => response.json())
+          .then(servicos => {
+              if (servicos && servicos.length > 0) {
+                  const container = document.getElementById('servico-card');
+                  servicos.forEach(servico => {
+                      const card = document.createElement('div');
+                      card.className = 'col-lg-4 col-md-6 d-flex align-items-stretch';
+                      card.innerHTML = `
+                          <div class="card">
+                              <img src="uploads/${servico.caminho_imagem || 'placeholder.png'}" class="card-img-top" alt="Imagem do Serviço">
+                              <div class="card-body">
+                                  <h5 class="card-title">${servico.nome}</h5>
+                                  <div class="card-details">
+                                      <div class="card-detail-item">
+                                          <p class="card-text">Horário</p>
+                                          <p class="card-text">${servico.horario}</p>
+                                      </div>
+                                      <div class="card-detail-item">
+                                          <p class="card-text">Preço</p>
+                                          <p class="card-text">R$ ${parseFloat(servico.preco).toFixed(2)}</p>
+                                      </div>
+                                  </div>
+                                  <p class="card-text">Descrição: ${servico.descricao}</p>
+                              </div>
+                          </div>
+                      `;
+                      container.appendChild(card);
+                  });
+              } else {
+                  document.getElementById('servico-card').innerHTML = '<p>Nenhum serviço encontrado.</p>';
+              }
+          })
+          .catch(error => console.error('Erro ao buscar os serviços:', error));
   });
 </script>
-
+<script src="path/to/bootstrap.bundle.min.js"></script>
 
 
   </main><!-- End #main -->

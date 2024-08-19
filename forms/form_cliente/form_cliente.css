@@ -125,3 +125,18 @@ form .input-group button{
         flex-direction: column;
     }
 }
+
+/*icone seta */
+.back-link {
+    position: absolute;
+    top: 1px;
+    right: 20px;
+    font-size: 24px;
+    color: #000; /* Ou qualquer cor que você preferir */
+}
+
+.form-box {
+    position: relative;
+    padding: 20px;
+    /* Adicione outros estilos conforme necessário */
+}
