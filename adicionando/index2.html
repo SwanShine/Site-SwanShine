@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Serviço</title>
+    <style>
+        body {
+            background-color: #fdd835;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+        .progress-bar {
+            height: 4px;
+            width: 100%;
+            background-color: #e0e0e0;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .progress {
+            width: 40%;
+            height: 100%;
+            background-color: #42a5f5;
+            border-radius: 2px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .subtitle img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .service-list {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .service-list label {
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .service-list input {
+            margin-right: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttons button {
+            width: 48%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .back-button {
+            background-color: #e0e0e0;
+            color: #000;
+        }
+        .next-button {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .buttons button:hover {
+            opacity: 0.9;
+        }
+        .footer-text {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #4caf50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+    <div class="subtitle">
+        <img src="https://via.placeholder.com/20" alt="Ícone"> Confira as avaliações dos profissionais
+    </div>
+    <h2>O serviço será para quantas pessoas?</h2>
+    <div class="service-list">
+        <label><input type="radio" name="pessoas" checked> 1</label>
+        <label><input type="radio" name="pessoas"> 2</label>
+        <label><input type="radio" name="pessoas"> 3</label>
+        <label><input type="radio" name="pessoas"> 4</label>
+        <label><input type="radio" name="pessoas"> 5 ou mais</label>
+    </div>
+    <div class="buttons">
+        <button class="back-button">Voltar</button>
+        <button class="next-button">Próximo</button>
+    </div>
+    <div class="footer-text">Orçamentos em até 60 minutos</div>
+</div>
+
+</body>
+</html>
