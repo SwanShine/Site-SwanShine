@@ -22,7 +22,7 @@ try {
 
     // Verifica se a conexão está estabelecida corretamente
     if ($conn->ping()) {
-        echo "Conexão bem-sucedida!";
+        //echo "Conexão bem-sucedida!"; // Remover ou comentar para produção
     } else {
         throw new Exception("Erro na conexão: " . $conn->error);
     }
@@ -48,7 +48,6 @@ try {
         $city = sanitize_input($_POST["city"]);
         $state = sanitize_input($_POST["state"]);
         $servico = sanitize_input($_POST["servico"]);
-        
 
         // Verifica se os e-mails e senhas conferem
         if ($email !== $repeat_email) {
@@ -57,9 +56,6 @@ try {
         if ($password !== $repeat_password) {
             throw new Exception("As senhas não conferem.");
         }
-
-        // Hash da senha
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
         // Prepara a declaração SQL
         $stmt = $conn->prepare("INSERT INTO profissionais (nome, email, senha, celular, data_de_aniversario, genero, cep, rua, numero, complemento, referencia, bairro, cidade, estado, servicos, cpf) 
@@ -70,21 +66,22 @@ try {
         }
 
         // Vincula os parâmetros
-        $stmt->bind_param("ssssssssssssssss", $name, $email, $password_hash, $cell, $birthdate, $gender, $cep, $street, $number, $complement, $reference, $neighborhood, $city, $state, $servico, $cpf);
+        $stmt->bind_param("ssssssssssssssss", $name, $email, $password, $cell, $birthdate, $gender, $cep, $street, $number, $complement, $reference, $neighborhood, $city, $state, $servico, $cpf);
 
         // Executa a declaração
         if ($stmt->execute()) {
-            echo "Novo profissional cadastrado com sucesso!";
+            // Fecha a declaração e a conexão
+            $stmt->close();
+            $conn->close();
+
+            // Redirecionar para a página do cliente
+            header("Location: ../../NiceAdmin/index.html");
+            exit();
         } else {
             throw new Exception("Erro ao executar a declaração: " . $stmt->error);
         }
-
-        // Fecha a declaração
-        $stmt->close();
     }
 
-    // Fecha a conexão
-    $conn->close();
 } catch (Exception $e) {
     echo "Erro: " . $e->getMessage();
 }

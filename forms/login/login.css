@@ -49,6 +49,8 @@ body {
 
 /* Define a caixa de formulário */
 .form-box {
+    position: relative;
+    padding: 20px;
     background-color: rgba(255, 255, 255, 0.4); /* Cor de fundo com transparência */
     backdrop-filter: blur(40px); /* Adiciona um desfoque ao fundo */
     padding: 30px 40px; /* Adiciona um padding de 30px em cima e em baixo, 40px nos lados */
@@ -294,4 +296,12 @@ form .input-group button {
     .close-btn {
         font-size: 24px; /* Ajusta o tamanho da fonte do botão de fechar */
     }
+}
+.back-link {
+    position: absolute;
+    top: 1px;
+    right: 20px;
+    font-size: 24px;
+    color: #000; /* Ou qualquer cor que você preferir */
+    text-decoration: none;
 }
