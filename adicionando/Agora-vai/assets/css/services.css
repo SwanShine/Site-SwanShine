@@ -1,0 +1,186 @@
+/* Utiliza o Flexbox para layout flexível nas seções */
+.section {
+    display: flex; /* Utiliza o Flexbox para layout flexível */
+    flex-wrap: wrap; /* Permite que os itens quebrem linha se necessário */
+    gap: 20px; /* Espaço entre os itens */
+    padding: 10px; /* Espaçamento interno da seção */
+}
+
+/* Contêiner principal que agrupa todas as seções */
+.main-container {
+    width: 100%;
+    max-width: 1000px; /* Largura máxima para centralizar o conteúdo */
+    margin: auto; /* Centraliza horizontalmente */
+    background-color: #f5f5f5; /* Cor de fundo */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+/* Estiliza as seções individuais do formulário */
+.section-container {
+    background-color: #fff; /* Cor de fundo branca */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 20px; /* Espaçamento interno */
+    margin-bottom: 30px; /* Espaçamento inferior entre seções */
+    margin-left: 200px;
+}
+
+/* Estiliza o contêiner de CTA (Call to Action) */
+.cta-container {
+    text-align: center; /* Centraliza o texto */
+    padding: 20px; /* Espaçamento interno */
+    background-color: #fff; /* Cor de fundo branca */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 30px; /* Espaçamento inferior entre o CTA e outras seções */
+}
+
+/* Título da seção de CTA */
+.cta-title {
+    font-size: 24px; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    margin-bottom: 10px; /* Espaçamento inferior */
+    color: #333; /* Cor do texto */
+}
+
+/* Subtítulo da seção de CTA */
+.cta-subtitle {
+    font-size: 16px; /* Tamanho da fonte */
+    color: #666; /* Cor do texto */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+/* Estiliza o botão da seção de CTA */
+.cta-button {
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    background-color: #007bff; /* Cor de fundo */
+    color: #fff; /* Cor do texto */
+    border: none; /* Remove a borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    cursor: pointer; /* Cursor em forma de mão */
+    text-decoration: none; /* Remove o sublinhado */
+    transition: background-color 0.3s ease; /* Transição suave para cor de fundo */
+}
+
+/* Efeito de hover no botão da seção de CTA */
+.cta-button:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estiliza o contêiner do formulário */
+.form-container {
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Barra de progresso */
+.progress-bar {
+    height: 4px; /* Altura da barra */
+    width: 100%; /* Largura total */
+    background-color: #e0e0e0; /* Cor de fundo da barra */
+    margin-bottom: 20px; /* Espaçamento inferior */
+    border-radius: 2px; /* Bordas arredondadas */
+}
+
+/* Progresso atual da barra */
+.progress {
+    width: 40%; /* Largura do progresso */
+    height: 100%; /* Altura total */
+    background-color: #42a5f5; /* Cor do progresso */
+    border-radius: 2px; /* Bordas arredondadas */
+}
+.subtitle{
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+/* Títulos das seções do formulário */
+h2 {
+    font-size: 18px; /* Tamanho da fonte */
+    margin-top: 10px;
+    margin-bottom: 10px; /* Espaçamento inferior */
+}
+
+/* Parágrafos dentro das seções do formulário */
+p {
+    font-size: 14px; /* Tamanho da fonte */
+    color: #666; /* Cor do texto */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+/* Lista de serviços */
+.service-list {
+    text-align: left; /* Alinha o texto à esquerda */
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+/* Estiliza os labels dentro da lista de serviços */
+.service-list label {
+    font-size: 16px; /* Tamanho da fonte */
+    display: flex; /* Utiliza Flexbox para alinhamento */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+    margin-bottom: 10px; /* Espaçamento inferior entre os labels */
+}
+
+/* Espaçamento entre o input e o texto do label */
+.service-list input {
+    margin-right: 10px; /* Espaçamento à direita do input */
+}
+
+/* Estiliza as áreas de texto */
+textarea {
+    width: 100%; /* Largura total */
+    height: 100px; /* Altura */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    border: 1px solid #ccc; /* Borda cinza clara */
+    font-size: 14px; /* Tamanho da fonte */
+    resize: none; /* Desabilita o redimensionamento */
+}
+
+/* Dica informativa */
+.hint {
+    background-color: #fff9c4; /* Cor de fundo amarela clara */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin-top: 10px; /* Espaçamento superior */
+    font-size: 12px; /* Tamanho da fonte */
+    color: #f57f17; /* Cor do texto */
+}
+
+/* Contêiner dos botões */
+.buttons {
+    margin-top: 20px; /* Espaçamento superior */
+    display: flex; /* Utiliza Flexbox para layout dos botões */
+    justify-content: space-between; /* Espaça os botões igualmente */
+}
+
+/* Estiliza os botões */
+.buttons button {
+    width: 100%; /* Largura dos botões */
+    padding: 10px; /* Espaçamento interno */
+    border: none; /* Remove a borda padrão */
+    border-radius: 50px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    cursor: pointer; /* Cursor em forma de mão */
+}
+
+/* Botão de voltar */
+.back-button {
+    background-color: #ff6a7e; /* Cor de fundo cinza */
+    color: #000; /* Cor do texto */
+}
+
+/* Botão de próximo */
+.next-button {
+    background-color: #ff6a7e; /* Cor de fundo azul */
+    color: #fff; /* Cor do texto */
+}
+
+/* Texto de rodapé das seções */
+.footer-text {
+    margin-top: 20px; /* Espaçamento superior */
+    font-size: 12px; /* Tamanho da fonte */
+    color: #4caf50; /* Cor do texto verde */
+}

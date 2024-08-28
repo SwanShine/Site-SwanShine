@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>SwanShine - Cliente</title>
+  <title>Swan Shine - Cliente</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
-  <link href="../assets/img/favicon.png" rel="apple-touch-icon">
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon">
   
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -41,9 +41,9 @@
       <!-- Div para alinhar itens centralizados e justificados entre os extremos -->
         <a href="index.html" class="logo d-flex align-items-center">
         <!-- Link para a página inicial com classes de logo e alinhamento flexível -->
-          <img src="../assets/img/logo_preta.png" alt="">
+          <img src="assets/img/logo_preta.png" alt="">
           <!-- Imagem do logo -->
-          <span class="d-none d-lg-block">SwanShine</span>
+          <span class="d-none d-lg-block">Swan Shine</span>
           <!-- Texto "NiceAdmin" visível apenas em telas grandes -->
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -307,34 +307,56 @@
   
   </header><!-- Fim do Cabeçalho -->
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Painel</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Serviço</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <li><a href="service.html"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a></li>
-          <li><a href="service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a></li>
-        </ul>
-      </li>
-      <li class="nav-heading">Páginas</li>
-      <li class="nav-item"><a class="nav-link collapsed" href="users-profile.html"><i class="bi bi-person"></i><span>Perfil</span></a></li>
-      <li class="nav-item"><a class="nav-link collapsed" href="pages-faq.html"><i class="bi bi-question-circle"></i><span>F.A.Q</span></a></li>
-      <li class="nav-item"><a class="nav-link collapsed" href="pages-contact.html"><i class="bi bi-envelope"></i><span>Contato</span></a></li>
-    </ul>
-  </aside>
+<!-- ======= Barra Lateral ======= -->
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="index.html">
+        <i class="bi bi-grid"></i>
+        <span>Início</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="index.html">
+        <i class="bi bi-person"></i>
+        <span>Perfil</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="service.html">
+        <i class="bi bi-card-list"></i>
+        <span>Serviços</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#">
+        <i class="bi bi-chat-dots"></i>
+        <span>Suporte</span>
+      </a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#">
+        <i class="bi bi-bar-chart"></i>
+        <span>Relatórios</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#">
+        <i class="bi bi-envelope"></i>
+        <span>Mensagens</span>
+      </a>
+    </li>
+  </ul>
+</aside><!-- End Sidebar-->
 
   <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Contrate o Serviço</h1>
+      <h1>Contrate seu Serviço</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -361,7 +383,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="/assets/img/barbearia.png" alt="barbearia"></div>
               <div>
-                <h4 class="title"><a href="services-details.html"
+                <h4 class="title"><a href="barbeiro/barbeiro.html"
                     class="stretched-link">Barbeiro</a></h4>
                 <p class="description">O barbeiro transforma cada corte de cabelo e barba em uma obra-prima personalizada, oferecendo uma experiência única de cuidado e estilo.</p>
               </div>
@@ -373,7 +395,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="/assets/img/maquiagem.png" alt="maquiagem"></div>
               <div>
-                <h4 class="title"><a href="services-details.html"
+                <h4 class="title"><a href="maquiagem/maquiagem.html"
                     class="stretched-link">Maquiagem</a></h4>
                 <p class="description">O maquiador realça sua beleza natural com técnicas personalizadas, proporcionando uma experiência única de cuidado e estilo para elevar sua confiança.</p>
               </div>
@@ -384,7 +406,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="/assets/img/depilacao.png" alt="depilação"></div>
               <div>
-                <h4 class="title"><a href="services-details.html"
+                <h4 class="title"><a href="depilacao/depilacao.html"
                     class="stretched-link">Depilação</a></h4>
                 <p class="description">O depilador oferece uma experiência de cuidado e suavidade, garantindo resultados impecáveis e confortáveis que elevam sua confiança.</p>
               </div>
@@ -395,7 +417,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="/assets/img/nail_designer.png" alt="nail designer"></div>
               <div>
-                <h4 class="title"><a href="services-details.html"
+                <h4 class="title"><a href="nail_designer/nail_designer.html"
                     class="stretched-link">Nail designer</a></h4>
                 <p class="description">O nail designer cria verdadeiras obras de arte nas suas unhas, oferecendo uma experiência única de cuidado e estilo que eleva sua confiança.</p>
               </div>
@@ -407,7 +429,7 @@
               <div class="icon flex-shrink-0"><i
                   class="bi bi-brightness-high"></i></div>
               <div>
-                <h4 class="title"><a href="services-details.html"
+                <h4 class="title"><a href="lash_designer/lash_designer.html"
                     class="stretched-link">Lash Designer</a></h4>
                 <p class="description">O designer de sobrancelhas esculpe suas sobrancelhas com precisão artística, proporcionando uma experiência única de cuidado e estilo que realça sua beleza natural.</p>
               </div>
@@ -418,7 +440,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="/assets/img/cabelereira.png" alt="cabelereira"></div>
               <div>
-                <h4 class="title"><a href="services-details.html"
+                <h4 class="title"><a href="cabelereira/cabelereira.html"
                     class="stretched-link">Cabelereira</a></h4>
                 <p class="description">A cabeleireira transforma seu cabelo com talento e criatividade, oferecendo uma experiência única de cuidado e estilo que realça sua beleza e confiança.</p>
               </div>
@@ -429,7 +451,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="/assets/img/trancista.png" alt="trancista"></div>
               <div>
-                <h4 class="title"><a href="services-details.html"
+                <h4 class="title"><a href="trancista/trancista.html"
                     class="stretched-link">Trancista</a></h4>
                 <p class="description">A trancista cria penteados únicos e artísticos, proporcionando uma experiência de cuidado e estilo que destaca sua individualidade e beleza.</p>
               </div>
@@ -440,7 +462,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="/assets/img/esteticista.png" alt="esteticista"></div>
               <div>
-                <h4 class="title"><a href="services-details.html"
+                <h4 class="title"><a href="esteticista/esteticista.html"
                     class="stretched-link">Esteticista</a></h4>
                 <p class="description">A esteticista cuida da sua pele com expertise, oferecendo uma experiência de cuidado e beleza que realça sua confiança e bem-estar.</p>
               </div>
@@ -453,33 +475,7 @@
 
     </section><!-- /Services Section -->
 
-    <!-- Features Section -->
-    <section id="features" class="features section">
 
-      <!-- Section Title -->
-      <div class="container">
-
-        <div class="row gy-4 align-items-stretch justify-content-between features-item ">
-          <div class="col-lg-6 d-flex align-items-center features-img-bg"
-            data-aos="zoom-out">
-            <img src="assets/img/features-light-3.jpg" class="img-fluid"
-              alt>
-          </div>
-          <div class="col-lg-5 d-flex justify-content-center flex-column"
-            data-aos="fade-up">
-            <h3>Seja um Profissional SwanShine</h3>
-            <p>Você também pode se tornar um profissional da SwanShine e explorar diversas possibilidades de mostrar os seus serviços para o mundo e ampliar a sua clientela usando de sistemas fluidos e confiáveis para ajudar na sua jornada rumo ao sucesso profissional.
-              <li><i class="bi bi-check"></i> <span>Acesso a gerenciamento mobile e desktop</span></li>
-              <li><i class="bi bi-check"></i><span>Suporte 24hrs por parte da plataforma</span></li>
-              <li><i class="bi bi-check"></i> <span>Sistema de pagamento Swan Pay</span>.</li>
-            </ul> <br>
-            <a href="#" class="btn btn-get-started align-self-start">Saiba Mais</a>
-          </div>
-        </div><!-- Features Item -->
-
-      </div>
-
-    </section><!-- /Features Section -->
 
 
   </main>

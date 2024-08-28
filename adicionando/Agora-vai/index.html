@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <!-- Configura a viewport para garantir que a página seja renderizada corretamente em diferentes dispositivos -->
 
-  <title>Swanshine - Profissional</title>
+  <title>Swan Shine - Cliente</title>
   <!-- Define o título da página -->
   <meta content="" name="description">
   <!-- Meta tag para a descrição da página (vazia neste exemplo) -->
@@ -15,9 +15,9 @@
   <!-- Meta tag para palavras-chave da página (vazia neste exemplo) -->
 
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon">
   <!-- Link para o favicon da página -->
-  <link href="../assets/img/favicon.png" rel="apple-touch-icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon">
   <!-- Link para o ícone de toque da Apple -->
 
   <!-- Google Fonts -->
@@ -44,18 +44,17 @@
 
   <!-- Arquivo CSS -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
   <!-- Link para o arquivo CSS -->
 
   <!-- Outros links existentes react -->
-  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  <script type="text/babel" src="assets/js/App.js"></script>
+
 </head>
 
-
 <body>
+
   <div id="root"></div>
+
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
     <!-- Cabeçalho fixo no topo da página, utilizando classes do Bootstrap para layout flexível e alinhamento de itens -->
@@ -64,9 +63,9 @@
         <!-- Div para alinhar itens centralizados e justificados entre os extremos -->
           <a href="index.html" class="logo d-flex align-items-center">
           <!-- Link para a página inicial com classes de logo e alinhamento flexível -->
-            <img src="../assets/img/logo_preta.png" alt="">
+            <img src="assets/img/logo_preta.png" alt="">
             <!-- Imagem do logo -->
-            <span class="d-none d-lg-block">SwanShine</span>
+            <span class="d-none d-lg-block">Swan Shine</span>
             <!-- Texto "NiceAdmin" visível apenas em telas grandes -->
           </a>
           <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -331,66 +330,51 @@
     </header><!-- Fim do Cabeçalho -->
     
  <!-- ======= Barra Lateral ======= -->
-<aside id="sidebar" class="sidebar">
-
+ <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
-
     <li class="nav-item">
-      <a class="nav-link " href="index.html">
+      <a class="nav-link collapsed" href="index.html">
         <i class="bi bi-grid"></i>
-        <span>Painel</span>
+        <span>Início</span>
       </a>
-    </li><!-- Fim do Nav do Painel -->
+    </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-menu-button-wide"></i><span>Serviço</span><i class="bi bi-chevron-down ms-auto"></i>
+      <a class="nav-link collapsed" href="index.html">
+        <i class="bi bi-person"></i>
+        <span>Perfil</span>
       </a>
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="service.html">
-            <i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span>
-          </a>
-        </li>
-        <li>
-          <a href="service-cadastrado.html">
-            <i class="bi bi-circle"></i><span>Serviços Cadastrados</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- Fim do Nav de Componentes -->
+    </li>
 
-    <!-- Cabeçalho da Navegação -->
-<li class="nav-heading">Páginas</li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="service.html">
+        <i class="bi bi-card-list"></i>
+        <span>Serviços</span>
+      </a>
+    </li>
 
-<!-- Link para a página de Perfil -->
-<li class="nav-item">
-  <a class="nav-link collapsed" href="users-profile.html">
-    <i class="bi bi-person"></i>
-    <span>Perfil</span>
-  </a>
-</li><!-- Fim do Link para a página de Perfil -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#">
+        <i class="bi bi-chat-dots"></i>
+        <span>Suporte</span>
+      </a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#">
+        <i class="bi bi-bar-chart"></i>
+        <span>Relatórios</span>
+      </a>
+    </li>
 
-<!-- Link para a página de F.A.  -->
-<li class="nav-item">
-  <a class="nav-link collapsed" href="pages-faq.html">
-    <i class="bi bi-question-circle"></i>
-    <span>F.A.Q</span>
-  </a>
-</li><!-- Fim do Link para a página de F.A.Q -->
-
-<!-- Link para a página de Contato -->
-<li class="nav-item">
-  <a class="nav-link collapsed" href="pages-contact.html">
-    <i class="bi bi-envelope"></i>
-    <span>Contato</span>
-  </a>
-</li><!-- Fim do Link para a página de Contato -->
-
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#">
+        <i class="bi bi-envelope"></i>
+        <span>Mensagens</span>
+      </a>
+    </li>
+  </ul>
+</aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
@@ -482,40 +466,7 @@
             </div><!-- Fim do Cartão de Receita -->
     
             <!-- Cartão de Clientes -->
-            <div class="col-xxl-4 col-xl-12">
-    
-              <div class="card info-card customers-card">
-    
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filtrar</h6>
-                    </li>
-    
-                    <li><a class="dropdown-item" href="#">Hoje</a></li>
-                    <li><a class="dropdown-item" href="#">Este Mês</a></li>
-                    <li><a class="dropdown-item" href="#">Este Ano</a></li>
-                  </ul>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Clientes <span>| Este Ano</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>0</h6>
-                      <span class="text-danger small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">diminuição</span>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- Fim do Cartão de Clientes -->
+            <!-- Fim do Cartão de Clientes -->
             
             <!-- Relatórios -->
             <div class="col-12">
@@ -674,78 +625,7 @@
             </div><!-- End Recent Sales -->
 
             <!-- Top Selling -->
-            <div class="col-12">
-              <div class="card top-selling overflow-auto">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Top Selling <span>| Today</span></h5>
-
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">Preview</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Sold</th>
-                        <th scope="col">Revenue</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                        <td>$64</td>
-                        <td class="fw-bold">124</td>
-                        <td>$5,828</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                        <td>$46</td>
-                        <td class="fw-bold">98</td>
-                        <td>$4,508</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                        <td>$59</td>
-                        <td class="fw-bold">74</td>
-                        <td>$4,366</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                        <td>$32</td>
-                        <td class="fw-bold">63</td>
-                        <td>$2,016</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                        <td>$79</td>
-                        <td class="fw-bold">41</td>
-                        <td>$3,239</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Top Selling -->
+            <!-- End Top Selling -->
 
           </div>
         </div><!-- End Left side columns -->
@@ -827,210 +707,13 @@
           </div><!-- End Recent Activity -->
 
           <!-- Budget Report -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Budget Report <span>| This Month</span></h5>
-
-              <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                    legend: {
-                      data: ['Allocated Budget', 'Actual Spending']
-                    },
-                    radar: {
-                      // shape: 'circle',
-                      indicator: [{
-                          name: 'Sales',
-                          max: 6500
-                        },
-                        {
-                          name: 'Administration',
-                          max: 16000
-                        },
-                        {
-                          name: 'Information Technology',
-                          max: 30000
-                        },
-                        {
-                          name: 'Customer Support',
-                          max: 38000
-                        },
-                        {
-                          name: 'Development',
-                          max: 52000
-                        },
-                        {
-                          name: 'Marketing',
-                          max: 25000
-                        }
-                      ]
-                    },
-                    series: [{
-                      name: 'Budget vs spending',
-                      type: 'radar',
-                      data: [{
-                          value: [4200, 3000, 20000, 35000, 50000, 18000],
-                          name: 'Allocated Budget'
-                        },
-                        {
-                          value: [5000, 14000, 28000, 26000, 42000, 21000],
-                          name: 'Actual Spending'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Budget Report -->
+          <!-- End Budget Report -->
 
           <!-- Website Traffic -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 735,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 580,
-                          name: 'Email'
-                        },
-                        {
-                          value: 484,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 300,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script>
-
-            </div>
-          </div><!-- End Website Traffic -->
+          <!-- End Website Traffic -->
 
           <!-- News & Updates Traffic -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="assets/img/news-1.jpg" alt="">
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/news-2.jpg" alt="">
-                  <h4><a href="#">Quidem autem et impedit</a></h4>
-                  <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/news-3.jpg" alt="">
-                  <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/news-4.jpg" alt="">
-                  <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                  <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="assets/img/news-5.jpg" alt="">
-                  <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
-
-            </div>
-          </div><!-- End News & Updates -->
+          <!-- End News & Updates -->
 
         </div><!-- End Right side columns -->
 
@@ -1043,14 +726,9 @@
   <!-- ======= Rodapé ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>Swanshine</span></strong>. Todos os Direitos Reservados
+      &copy; Copyright <strong><span>SwanShine</span></strong>. Todos os Direitos Reservados
     </div>
-    <div class="credits">
-      <!-- Todos os links no rodapé devem permanecer intactos. -->
-      <!-- Você pode deletar os links somente se comprou a versão profissional. -->
-      <!-- Informações sobre licenciamento: https://bootstrapmade.com/license/ -->
-      <!-- Compre a versão profissional com formulário de contato PHP/AJAX funcional: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      
+    <div class="credits">     
     </div>
   </footer><!-- Fim do Rodapé -->
 
@@ -1077,6 +755,7 @@
 
   <!-- Arquivo JS Principal -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/main1.js"></script>
   <!-- Script principal -->
 
 </body>
