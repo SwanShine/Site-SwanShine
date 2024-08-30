@@ -15,15 +15,15 @@ if ($conn->connect_error) {
 
 session_start();
 
-$email = $_POST['email'];
+$cpf = $_POST['cpf'];
 
 // Depuração: Verificar os valores recebidos
-error_log("Email: " . $email);
+error_log("CPF: " . $cpf);
 
 // Busca na tabela "profissionais"
-$query_profissional = "SELECT * FROM profissionais WHERE email = ?";
+$query_profissional = "SELECT * FROM profissionais WHERE cpf = ?";
 $stmt = $conn->prepare($query_profissional);
-$stmt->bind_param("s", $email); // Corrigido para um único parâmetro
+$stmt->bind_param("s", $cpf); // Corrigido para um único parâmetro
 $stmt->execute();
 $result_profissional = $stmt->get_result();
 
@@ -38,9 +38,9 @@ if ($result_profissional->num_rows > 0) {
 }
 
 // Busca na tabela "clientes"
-$query_cliente = "SELECT * FROM clientes WHERE email = ?";
+$query_cliente = "SELECT * FROM clientes WHERE cpf = ?";
 $stmt = $conn->prepare($query_cliente);
-$stmt->bind_param("s", $email); // Corrigido para um único parâmetro
+$stmt->bind_param("s", $cpf); // Corrigido para um único parâmetro
 $stmt->execute();
 $result_cliente = $stmt->get_result();
 
@@ -54,9 +54,9 @@ if ($result_cliente->num_rows > 0) {
     exit();
 }
 
-// Se o email não for encontrado em nenhuma tabela
-$_SESSION['login_error'] = "Email não encontrado!";
-error_log("Email não encontrado.");
+// Se o CPF não for encontrado em nenhuma tabela
+$_SESSION['login_error'] = "CPF não encontrado!";
+error_log("CPF não encontrado.");
 header('Location: ../../index.html');
 exit();
 ?>
