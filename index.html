@@ -122,28 +122,32 @@
               </script>
               
               <style>
-                  .popup {
-                      display: none;
-                      position: fixed;
-                      left: 50%;
-                      top: 50%;
-                      transform: translate(-50%, -50%);
-                      border: 1px solid #ccc;
-                      background-color: white;
-                      padding: 20px;
-                      z-index: 1000;
-                  }
-                  .popup-overlay {
-                      display: none;
-                      position: fixed;
-                      top: 0;
-                      left: 0;
-                      width: 100%;
-                      height: 100%;
-                      background: rgba(0, 0, 0, 0.5);
-                      z-index: 999;
-                  }
+                /* Estilos para o pop-up de confirmação */
+                .popup {
+                  display: none; /* Oculta o pop-up inicialmente */
+                  position: fixed; /* Posiciona o pop-up de forma fixa na tela */
+                  left: 50%; /* Centraliza o pop-up horizontalmente */
+                  top: 50%; /* Centraliza o pop-up verticalmente */
+                  transform: translate(-50%, -50%); /* Ajusta o pop-up para ficar exatamente no centro da tela */
+                  border: 1px solid #ccc; /* Adiciona uma borda ao redor do pop-up */
+                  background-color: #ff66c4; /* Adiciona um gradiente de cor de fundo ao pop-up */
+                  padding: 20px; /* Adiciona espaço interno ao redor do conteúdo do pop-up */
+                  z-index: 1000; /* Garante que o pop-up apareça acima de outros elementos */
+                }
+              
+                /* Estilos para a sobreposição de fundo do pop-up */
+                .popup-overlay {
+                  display: none; /* Oculta a sobreposição inicialmente */
+                  position: fixed; /* Posiciona a sobreposição de forma fixa na tela */
+                  top: 0; /* Alinha a sobreposição ao topo da tela */
+                  left: 0; /* Alinha a sobreposição à esquerda da tela */
+                  width: 100%; /* Faz com que a sobreposição cubra toda a largura da tela */
+                  height: 100%; /* Faz com que a sobreposição cubra toda a altura da tela */
+                  background: rgba(0, 0, 0, 0.5); /* Adiciona um fundo semitransparente para escurecer o restante da tela */
+                  z-index: 999; /* Garante que a sobreposição apareça abaixo do pop-up mas acima de outros elementos da página */
+                }
               </style>
+              
               
             </div>
         </div>
@@ -161,7 +165,7 @@
                 <h3>Sobre Nós</h3>
                 <h2>Entre no Universo Swanshine</h2>
                 <p>Nossos sistemas são definitivos para a contratação de serviços de estética, projetado para oferecer uma experiência de alta qualidade aos seus usuários. Nossa plataforma foi desenvolvida com o objetivo de proporcionar máxima credibilidade e rapidez em todas as etapas do processo de agendamento de serviços de beleza e bem-estar.</p>
-                <a href="#" class="read-more"><span>Saiba mais</span><i
+                <a href="manutencao.html" class="read-more"><span>Saiba mais</span><i
                     class="bi bi-arrow-right"></i></a>
               </div>
 
@@ -658,12 +662,11 @@
           <div class="row gy-4">
             <div class="col-lg-5 col-md-12 footer-about">
               <a href="index.html" class="logo d-flex align-items-center">
-                <span class="sitename">SwanShine</span>
+                <span class="sitename">Swan Shine</span>
               </a>
               <p>...</p>
               <div class="social-links d-flex mt-4">
-                <a href="https://github.com/Infinity-Scripts-Tcc" target="_blank"><i class="bi bi-github"></i></a>
-                <a href=""><i class="bi bi-tiktok"></i></a>
+                <a href="https://github.com/swanshine" target="_blank"><i class="bi bi-github"></i></a>
                 <a href="https://www.instagram.com/swanshinne/" target="_blank"><i class="bi bi-instagram"></i></a>
                 <a href="https://www.youtube.com/@SwanShinne" target="_blank"><i class="bi bi-youtube"></i></a>
                 <a href="https://whatsapp.com/channel/0029VacDYoUCsU9I23FF3i0V" target="_blank"><i class="bi bi-whatsapp"></i></a>
@@ -673,25 +676,25 @@
             <div class="col-lg-2 col-6 footer-links">
               <h4>Principal</h4>
               <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Termos de Serviços</a></li>
-                <li><a href="#">Política de Privacidade</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">Sobre</a></li>
+                <li><a href="index.html#services">Serviços</a></li>
+                <li><a href="manutencao.html">Termos de Serviços</a></li>
+                <li><a href="manutencao.html">Política de Privacidade</a></li>
               </ul>
             </div>
 
             <div class="col-lg-2 col-6 footer-links">
               <h4>Serviços</h4>
               <ul>
-                <li><a href="#">Barbeiro</a></li>
-                <li><a href="#">Maquiagem</a></li>
-                <li><a href="#">Depilação</a></li>
-                <li><a href="#">Nail designer</a></li>
-                <li><a href="#">Lash designer</a></li>
-                <li><a href="#">Cabelereira</a></li>
-                <li><a href="#">Trancista</a></li>
-                <li><a href="#">Esteticista</a></li>
+                <li><a href="index.html#services">Barbeiro</a></li>
+                <li><a href="index.html#services">Maquiagem</a></li>
+                <li><a href="index.html#services">Depilação</a></li>
+                <li><a href="index.html#services">Nail designer</a></li>
+                <li><a href="index.html#services">Lash designer</a></li>
+                <li><a href="index.html#services">Cabelereira</a></li>
+                <li><a href="index.html#services">Trancista</a></li>
+                <li><a href="index.html#services">Esteticista</a></li>
               </ul>
             </div>
 
