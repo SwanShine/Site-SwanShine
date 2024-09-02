@@ -219,74 +219,62 @@ textarea {
 /* Estiliza a parte preenchida da barra de progresso */
 .progress {
     height: 100%; /* Altura total da barra de progresso */
-    background: #ff66c4; /* Cor de fundo da parte preenchida */
+    background: #4caf50; /* Cor da barra de progresso preenchida */
     border-radius: 5px; /* Bordas arredondadas */
+    width: 0%; /* Largura inicial */
+    transition: width 0.4s ease; /* Transição suave para a largura */
 }
 
-/* Formatação de labels e inputs para os campos do formulário */
-input[type="text"], input[type="email"], input[type="password"], select {
-    width: 100%; /* Largura total */
-    padding: 10px; /* Espaçamento interno */
-    border: 1px solid #ddd; /* Borda cinza clara */
-    border-radius: 5px; /* Bordas arredondadas */
-    font-size: 14px; /* Tamanho da fonte */
-    margin-bottom: 20px; /* Espaçamento inferior */
-}
-
-/* Estiliza os campos de input e os rótulos dentro dos formulários */
-input[type="checkbox"], input[type="radio"] {
-    margin-right: 10px; /* Espaçamento à direita do input */
-}
-
-/* Títulos das seções dentro do formulário */
-h2, h3 {
-    margin-bottom: 20px; /* Espaçamento inferior */
-}
-
-/* Estiliza os botões de ação */
-button {
-    padding: 10px 20px; /* Espaçamento interno */
-    border: none; /* Remove a borda padrão */
-    border-radius: 5px; /* Bordas arredondadas */
-    font-size: 16px; /* Tamanho da fonte */
-    cursor: pointer; /* Cursor em forma de mão */
-    color: #fff; /* Cor do texto */
-    transition: background-color 0.3s ease; /* Transição suave para a cor de fundo */
-}
-
-/* Botão de ação primário */
-button.primary {
-    background-color: #007bff; /* Cor de fundo */
-}
-
-/* Botão de ação secundário */
-button.secondary {
-    background-color: #6c757d; /* Cor de fundo */
-}
-
-/* Estilo do título principal */
-h1 {
-    font-size: 28px; /* Tamanho da fonte */
-    margin-bottom: 20px; /* Espaçamento inferior */
-}
-
-/* Estilo do texto principal */
-p {
-    font-size: 16px; /* Tamanho da fonte */
-    color: #333; /* Cor do texto */
-}
-
-/* Adiciona uma margem extra para as seções em dispositivos móveis */
+/* Ajuste de responsividade para dispositivos móveis */
 @media (max-width: 768px) {
-    .section {
-        flex-direction: column; /* Coloca os itens em coluna em vez de linha */
+    .main-container {
+        padding: 15px; /* Ajusta o espaçamento interno para telas menores */
     }
 
-    .buttons {
-        flex-direction: column; /* Alinha os botões em coluna */
+    .section-container {
+        padding: 15px; /* Ajusta o espaçamento interno para seções em telas menores */
+        margin-bottom: 20px; /* Espaçamento inferior ajustado */
+    }
+
+    .cta-container {
+        padding: 15px; /* Ajusta o espaçamento interno para a seção CTA */
     }
 
     .buttons button {
-        margin-bottom: 10px; /* Espaçamento inferior entre os botões */
+        width: 100%; /* Botões ocupam toda a largura em telas menores */
+        margin-top: 10px; /* Adiciona espaçamento superior entre botões */
+    }
+
+    .progress-bar {
+        margin-bottom: 15px; /* Ajusta o espaçamento inferior da barra de progresso */
+    }
+
+    .service-list label {
+        flex-direction: column; /* Alinha os itens da lista de serviços verticalmente em telas menores */
+        align-items: flex-start; /* Alinha os itens ao início */
+    }
+
+    .subtitle, h2, p {
+        font-size: 14px; /* Ajusta o tamanho da fonte para textos em telas menores */
+    }
+
+    .cta-title {
+        font-size: 20px; /* Ajusta o tamanho da fonte para o título da CTA */
+    }
+
+    .cta-subtitle {
+        font-size: 14px; /* Ajusta o tamanho da fonte para o subtítulo da CTA */
+    }
+
+    textarea {
+        height: 80px; /* Ajusta a altura das áreas de texto em telas menores */
+    }
+
+    .hint {
+        font-size: 11px; /* Ajusta o tamanho da fonte para dicas informativas */
+    }
+
+    .footer-text {
+        font-size: 10px; /* Ajusta o tamanho da fonte para textos de rodapé */
     }
 }
