@@ -54,155 +54,112 @@
   </head>
 
 <body>
+  
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-    <!-- Cabeçalho fixo no topo da página, utilizando classes do Bootstrap para layout flexível e alinhamento de itens -->
-    
-        <div class="d-flex align-items-center justify-content-between">
-        <!-- Div para alinhar itens centralizados e justificados entre os extremos -->
-          <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Link para a página inicial com classes de logo e alinhamento flexível -->
-            <img src="assets/img/logo_preta.png" alt="">
-            <!-- Imagem do logo -->
-            <span class="d-none d-lg-block">Swan Shine</span>
-            <!-- Texto "NiceAdmin" visível apenas em telas grandes -->
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo_preta.png" alt="">
+        <span class="d-none d-lg-block">Swan Shine</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <!-- Notifications Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">0</span>
           </a>
-          <i class="bi bi-list toggle-sidebar-btn"></i>
-          <!-- Ícone para alternar a barra lateral -->
-        </div><!-- Fim do Logo -->
-    
-        <nav class="header-nav ms-auto">
-        <!-- Navegação do cabeçalho com margem à esquerda automática -->
-          <ul class="d-flex align-items-center">
-          <!-- Lista não ordenada para itens de navegação com alinhamento flexível -->
-  
-            <li class="nav-item dropdown">
-            <!-- Item de navegação com menu suspenso -->
-              <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-              <!-- Link para o menu suspenso de notificações -->
-                <i class="bi bi-bell"></i>
-                <!-- Ícone de sino (notificações) -->
-                <span class="badge bg-primary badge-number">0</span>
-                <!-- Badge com o número de notificações -->
-              </a><!-- Fim do Ícone de Notificações -->
-    
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-              <!-- Menu suspenso das notificações -->
-                <li class="dropdown-header">
-                <!-- Cabeçalho do menu suspenso -->
-                  Você tem 0 notificações
-                  <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-                  <!-- Link para ver todas as notificações -->
-                </li>
-               
-                <li class="dropdown-footer">
-                  <a href="#">Mostrar todas as notificações</a>
-                  <!-- Link para mostrar todas as notificações -->
-                </li>
-    
-              </ul><!-- Fim dos Itens do Menu Suspenso de Notificações -->
-    
-            </li><!-- Fim da Navegação de Notificações -->
-          
-            <li class="nav-item dropdown">
-            <!-- Item de navegação com menu suspenso -->
-              <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-              <!-- Link para o menu suspenso de mensagens -->
-                <i class="bi bi-chat-left-text"></i>
-                <!-- Ícone de mensagens -->
-                <span class="badge bg-success badge-number">0</span>
-                <!-- Badge com o número de mensagens -->
-              </a><!-- Fim do Ícone de Mensagens -->
-    
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-              <!-- Menu suspenso das mensagens -->
-                <li class="dropdown-header">
-                <!-- Cabeçalho do menu suspenso -->
-                  Você tem 0 mensagens
-                  <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-                  <!-- Link para ver todas as mensagens -->
-                </li>
-                
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-    
-                <li class="dropdown-footer">
-                  <a href="mensagem.html">Mostrar todas as mensagens</a>
-                  <!-- Link para mostrar todas as mensagens -->
-                </li>
-    
-              </ul><!-- Fim dos Itens do Menu Suspenso de Mensagens -->
-    
-            </li><!-- Fim da Navegação de Mensagens -->
-    
-            <li class="nav-item dropdown pe-3">
-            <!-- Item de navegação com menu suspenso e padding à direita -->
-    
-              <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <!-- Link para o menu suspenso de perfil -->
-                <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
-                <!-- Imagem do perfil -->
-                <span class="d-none d-md-block dropdown-toggle ps-2">Thiago</span>
-                <!-- Nome do usuário visível apenas em telas médias e maiores -->
-              </a><!-- Fim do Ícone de Imagem de Perfil -->
-    
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-              <!-- Menu suspenso do perfil -->
-                <li class="dropdown-header">
-                <!-- Cabeçalho do menu suspenso -->
-                  <h6>Thiago Nicolas</h6>
-                  <span>Web</span>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                  <!-- Divisor horizontal -->
-                </li>
-    
-                <li>
-                  <a class="dropdown-item d-flex align-items-center" href="perfil.html">
-                    <i class="bi bi-person"></i>
-                    <span>Meu Perfil</span>
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-    
-                <li>
-                  <a class="dropdown-item d-flex align-items-center" href="perfil.html">
-                    <i class="bi bi-gear"></i>
-                    <span>Configurações da Conta</span>
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-    
-                <li>
-                  <a class="dropdown-item d-flex align-items-center" href="suporte.html">
-                    <i class="bi bi-question-circle"></i>
-                    <span>Precisa de Ajuda?</span>
-                  </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-    
-                <li>
-                  <a class="dropdown-item d-flex align-items-center" href="../../index.html">
-                    <i class="bi bi-box-arrow-right"></i>
-                    <span>Sair</span>
-                  </a>
-                </li>
-    
-              </ul><!-- Fim dos Itens do Menu Suspenso de Perfil -->
-            </li><!-- Fim da Navegação de Perfil -->
-    
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              Você tem 0 notificações
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+            </li>
+            <li class="dropdown-footer">
+              <a href="#">Mostrar todas as notificações</a>
+            </li>
           </ul>
-        </nav><!-- Fim da Navegação de Ícones -->
-    
-    </header><!-- Fim do Cabeçalho -->
+        </li>
+
+        <!-- Messages Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">0</span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              Você tem 0 mensagens
+              <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+              <a href="mensagem.html">Mostrar todas as mensagens</a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Profile Dropdown -->
+        <li class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">Usuario</span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Usuario</h6>
+              <span>...</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
+                <i class="bi bi-person"></i>
+                <span>Meu Perfil</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
+                <i class="bi bi-gear"></i>
+                <span>Configurações da Conta</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Precisa de Ajuda?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="../index.html">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
   
   <!-- ======= Barra Lateral ======= -->
   <aside id="sidebar" class="sidebar">

@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 
 session_start();
 
-$cpf = $_POST['cpf']; // Recebe o CPF do formulário
+$cpf = isset($_POST['cpf']) ? $_POST['cpf'] : ''; // Recebe o CPF do formulário com verificação de existência
 
 // Depuração: Verificar os valores recebidos
 error_log("CPF: " . $cpf);
@@ -42,8 +42,13 @@ if ($result_profissional->num_rows > 0) {
     $_SESSION['user_type'] = 'profissional';
     error_log("Redirecionando para a página dos profissionais.");
     header('Location: ../../NiceAdmin/index.html');
+    $stmt->close(); // Fechar o statement antes de sair
+    $conn->close(); // Fechar a conexão antes de sair
     exit();
 }
+
+// Fechar o statement antes de reusá-lo
+$stmt->close();
 
 // Busca na tabela "clientes"
 $query_cliente = "SELECT * FROM clientes WHERE cpf = ?";
@@ -59,12 +64,16 @@ if ($result_cliente->num_rows > 0) {
     $_SESSION['user_type'] = 'cliente';
     error_log("Redirecionando para a página dos clientes.");
     header('Location: ../../cliente/index.html');
+    $stmt->close(); // Fechar o statement antes de sair
+    $conn->close(); // Fechar a conexão antes de sair
     exit();
 }
 
 // Se o CPF não for encontrado em nenhuma tabela
 $_SESSION['login_error'] = "CPF não encontrado! Por favor, cadastre-se.";
 error_log("CPF não encontrado.");
+$stmt->close(); // Fechar o statement
+$conn->close(); // Fechar a conexão
 header('Location: ../login/login.html'); // Redireciona para a página de cadastro
 exit();
 ?>
