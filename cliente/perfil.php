@@ -4,7 +4,7 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-  header('Location: ../login/login.html');
+  header('Location: ../home/forms/login/login.html');
   exit();
 }
 
@@ -178,7 +178,7 @@ $conn->close();
               <hr class="dropdown-divider">
             </li>
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="../../../index.html">
+              <a class="dropdown-item d-flex align-items-center" href="../home/index.html">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sair</span>
               </a>
@@ -283,18 +283,23 @@ $conn->close();
             <div class="card-body pt-3">
               <!-- Abas com Bordas -->
               <ul class="nav nav-tabs nav-tabs-bordered">
+                
                 <li class="nav-item">
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Visão Geral</button>
                 </li>
+
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
                 </li>
-                <!-- <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configurações</button>
-                </li> -->
+                
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Mudar Senha</button>
                 </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configurações</button>
+                </li> 
+
               </ul>
 
               <div class="tab-content pt-2">
@@ -340,7 +345,7 @@ $conn->close();
                       </div>
                     </div>
                   </form>
-                </div>
+                </div><!-- Visão Geral -->
 
                 <!-- Editar Perfil -->
                 <div class="tab-pane fade" id="profile-edit">
@@ -386,9 +391,33 @@ $conn->close();
                       <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </div>
                   </form>
-                </div>
+                </div><!-- Editar Perfil -->
 
-                <!-- Configurações 
+                <!-- Mudar Senha -->
+                <div class="tab-pane fade pt-3" id="profile-change-password">
+                  <h5 class="card-title">Mudar Senha</h5>
+                  <form action="form/update_password.php" method="POST" onsubmit="return confirmUpdate() && validatePassword();">
+                    <div class="row mb-3">
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nova Senha</label>
+                      <div class="col-md-8 col-lg-9 position-relative">
+                        <input name="newPassword" type="password" class="form-control profile-input" id="newPassword" required>
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword('newPassword')"></i>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar Nova Senha</label>
+                      <div class="col-md-8 col-lg-9 position-relative">
+                        <input name="confirmPassword" type="password" class="form-control profile-input" id="confirmPassword" required>
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Alterar Senha</button>
+                    </div>
+                  </form>
+                </div><!-- Mudar Senha -->
+
+                <!-- Configurações --> 
                 <div class="tab-pane fade pt-3" id="profile-settings">
                   <h5 class="card-title">Configurações</h5>
                   <form>
@@ -414,31 +443,8 @@ $conn->close();
                       <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </div>
                   </form>
-                </div>-->
+                </div> <!-- Configurações --> 
 
-                <!-- Mudar Senha -->
-                <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <h5 class="card-title">Mudar Senha</h5>
-                  <form action="form/update_password.php" method="POST" onsubmit="return confirmUpdate() && validatePassword();">
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nova Senha</label>
-                      <div class="col-md-8 col-lg-9 position-relative">
-                        <input name="newPassword" type="password" class="form-control profile-input" id="newPassword" required>
-                        <i class="fas fa-eye toggle-password" onclick="togglePassword('newPassword')"></i>
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar Nova Senha</label>
-                      <div class="col-md-8 col-lg-9 position-relative">
-                        <input name="confirmPassword" type="password" class="form-control profile-input" id="confirmPassword" required>
-                        <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Alterar Senha</button>
-                    </div>
-                  </form>
-                </div>
               </div>
             </div>
           </div>
