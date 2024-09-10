@@ -1,4 +1,7 @@
 <?php
+// Iniciar a sessão
+session_start();
+
 // Dados de conexão com o banco de dados
 $servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
 $username = "admin";
@@ -71,6 +74,9 @@ if ($stmt = $conn->prepare($sql)) {
     $stmt->bind_param("sssssss", $nome, $endereco, $email, $cpf, $telefone, $genero, $senha);
 
     if ($stmt->execute()) {
+        // Armazenar o email na sessão
+        $_SESSION['user_email'] = $email;
+
         // Fechar a declaração e a conexão
         $stmt->close();
         $conn->close();

@@ -1,5 +1,8 @@
 <?php
 
+// Iniciar a sessão
+session_start();
+
 // Dados para conexão com o banco de dados
 $host = getenv('DB_HOST') ?: "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
 $user = getenv('DB_USER') ?: "admin";
@@ -70,6 +73,9 @@ try {
 
         // Executa a declaração
         if ($stmt->execute()) {
+            // Armazenar o email na sessão
+            $_SESSION['user_email'] = $email;
+
             // Fecha a declaração e a conexão
             $stmt->close();
             $conn->close();

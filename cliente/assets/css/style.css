@@ -594,59 +594,262 @@ h6 {
 /*--------------------------------------------------------------
 # Icons list page
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+# General Styles for All Devices
+--------------------------------------------------------------*/
+/* Estilo para o container do card */
+.profile-container {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente */
+  height: 100vh;           /* Altura da tela */
+  width: 100vw;            /* Largura da tela */
+  padding: 20px;           /* Espaçamento ao redor do card */
+  box-sizing: border-box;  /* Inclui padding e border na largura e altura total */
+}
+
+/* Estilo para o card */
+.card {
+  width: 100%;              /* Largura total do container */
+  max-width: 900px;         /* Largura máxima do card */
+  height: 100%;             /* Altura total do container */
+  max-height: 800px;        /* Altura máxima do card */
+  overflow: hidden;         /* Garante que o conteúdo não ultrapasse os limites */
+  border-radius: 10px;     /* Bordas arredondadas */
+}
+
+/* Estilo adicional para tornar o card mais responsivo e visualmente atraente */
+.card-body {
+  padding: 20px;            /* Espaçamento interno do card */
+  background-color: #ffffff; /* Cor de fundo do card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  border-radius: 10px;     /* Bordas arredondadas do card */
+}
+
+/* Estilo para o cartão de perfil */
+.profile .profile-card {
+  width: 100%; /* Largura do cartão igual a 100% do contêiner pai */
+  height: 100%; /* Altura do cartão igual a 100% do contêiner pai */
+  box-sizing: border-box; /* Inclui padding e border na largura e altura total */
+  display: flex; /* Usa flexbox para alinhar o conteúdo */
+  flex-direction: column; /* Alinha o conteúdo verticalmente */
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+/* Estilo para a imagem do perfil */
+.profile .profile-card img {
+  max-width: 100%; /* Ajusta a imagem para caber na largura do cartão */
+  height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Estilo para o nome do usuário no cartão de perfil */
+.profile .profile-card h2 {
+  font-size: 20px; /* Tamanho da fonte para o nome */
+}
+
+/* Estilo para a descrição ou título secundário no cartão de perfil */
+.profile .profile-card h3 {
+  font-size: 16px; /* Tamanho da fonte para a descrição ou título secundário */
+}
+
+/* Estilo para os links sociais no cartão de perfil */
+.profile .profile-card .social-links a {
+  font-size: 18px; /* Tamanho da fonte para ícones sociais */
+}
+
+/* Estilo para o formulário de edição de perfil */
+.profile .profile-edit img {
+  max-width: 100%; /* Ajusta a imagem do perfil na edição para caber na tela */
+}
+
+/* Estilo para os campos de entrada */
+.profile-input {
+  font-size: 14px; /* Tamanho da fonte para os campos de entrada */
+  padding: 8px; /* Espaçamento interno dos campos de entrada */
+}
+
+/* Estilo para os campos de entrada ao passar o mouse ou focar */
+.profile-input:focus {
+  border-color: #007bff; /* Cor da borda quando o campo de entrada está em foco */
+}
+
+/* Estilo para a área de texto "Sobre" */
+.profile-textarea {
+  height: 80px; /* Altura da área de texto */
+}
+
+/* Estilo para o botão de ação */
+.btn-primary {
+  font-size: 14px; /* Tamanho da fonte do botão */
+  padding: 8px 16px; /* Espaçamento interno do botão */
+}
+
+/* Estilo para o botão de ação ao passar o mouse */
+.btn-primary:hover {
+  background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
+}
 
 /*--------------------------------------------------------------
-# Profie Page
+# Responsive Styles for Mobile Devices
 --------------------------------------------------------------*/
-.profile .profile-card img {
-  max-width: 120px;
+
+@media (max-width: 768px) {
+  /* Estilo para o cartão de perfil em telas menores */
+  .profile .profile-card {
+    max-width: 100%; /* Garante que o cartão não ultrapasse a largura da tela */
+    height: auto; /* Ajusta a altura automaticamente conforme o conteúdo */
+  }
+
+  /* Estilo para a imagem do perfil em telas menores */
+  .profile .profile-card img {
+    max-width: 80px; /* Ajusta o tamanho da imagem para caber em telas menores */
+  }
+
+  /* Estilo para o nome do usuário no cartão de perfil em telas menores */
+  .profile .profile-card h2 {
+    font-size: 18px; /* Reduz o tamanho da fonte do nome */
+  }
+
+  /* Estilo para a descrição ou título secundário no cartão de perfil em telas menores */
+  .profile .profile-card h3 {
+    font-size: 14px; /* Reduz o tamanho da fonte da descrição */
+  }
+
+  /* Estilo para os links sociais no cartão de perfil em telas menores */
+  .profile .profile-card .social-links a {
+    font-size: 16px; /* Reduz o tamanho da fonte dos ícones sociais */
+  }
+
+  /* Estilo para o formulário de edição de perfil em telas menores */
+  .profile .profile-edit img {
+    max-width: 80px; /* Ajusta o tamanho da imagem do perfil na edição */
+  }
+
+  /* Estilo para os campos de entrada em telas menores */
+  .profile-input {
+    font-size: 12px; /* Reduz o tamanho da fonte dos campos de entrada */
+    padding: 6px; /* Reduz o espaçamento interno dos campos de entrada */
+  }
+
+  /* Estilo para a área de texto "Sobre" em telas menores */
+  .profile-textarea {
+    height: 60px; /* Ajusta a altura da área de texto */
+  }
+
+  /* Estilo para o botão de ação em telas menores */
+  .btn-primary {
+    font-size: 12px; /* Reduz o tamanho da fonte do botão */
+    padding: 6px 12px; /* Reduz o espaçamento interno do botão */
+  }
 }
 
-.profile .profile-card h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #2c384e;
-  margin: 10px 0 0 0;
+/*--------------------------------------------------------------
+# Responsive Styles for Tablet Devices
+--------------------------------------------------------------*/
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Estilo para o cartão de perfil em tablets */
+  .profile .profile-card {
+    max-width: 100%; /* Garante que o cartão não ultrapasse a largura da tela do tablet */
+    height: auto; /* Ajusta a altura automaticamente conforme o conteúdo */
+  }
+
+  /* Estilo para a imagem do perfil em tablets */
+  .profile .profile-card img {
+    max-width: 100px; /* Ajusta o tamanho da imagem para tablets */
+  }
+
+  /* Estilo para o nome do usuário no cartão de perfil em tablets */
+  .profile .profile-card h2 {
+    font-size: 22px; /* Ajusta o tamanho da fonte do nome */
+  }
+
+  /* Estilo para a descrição ou título secundário no cartão de perfil em tablets */
+  .profile .profile-card h3 {
+    font-size: 16px; /* Ajusta o tamanho da fonte da descrição */
+  }
+
+  /* Estilo para os links sociais no cartão de perfil em tablets */
+  .profile .profile-card .social-links a {
+    font-size: 18px; /* Ajusta o tamanho da fonte dos ícones sociais */
+  }
+
+  /* Estilo para o formulário de edição de perfil em tablets */
+  .profile .profile-edit img {
+    max-width: 100px; /* Ajusta o tamanho da imagem do perfil na edição */
+  }
+
+  /* Estilo para os campos de entrada em tablets */
+  .profile-input {
+    font-size: 14px; /* Ajusta o tamanho da fonte dos campos de entrada */
+    padding: 8px; /* Ajusta o espaçamento interno dos campos de entrada */
+  }
+
+  /* Estilo para a área de texto "Sobre" em tablets */
+  .profile-textarea {
+    height: 70px; /* Ajusta a altura da área de texto */
+  }
+
+  /* Estilo para o botão de ação em tablets */
+  .btn-primary {
+    font-size: 14px; /* Ajusta o tamanho da fonte do botão */
+    padding: 8px 16px; /* Ajusta o espaçamento interno do botão */
+  }
 }
 
-.profile .profile-card h3 {
-  font-size: 18px;
-}
+/*--------------------------------------------------------------
+# Responsive Styles for Large Screens (Desktops and Larger)
+--------------------------------------------------------------*/
 
-.profile .profile-card .social-links a {
-  font-size: 20px;
-  display: inline-block;
-  color: rgba(1, 41, 112, 0.5);
-  line-height: 0;
-  margin-right: 10px;
-  transition: 0.3s;
-}
+@media (min-width: 1025px) {
+  /* Estilo para o cartão de perfil em telas grandes */
+  .profile .profile-card {
+    max-width: 100%; /* Garante que o cartão não ultrapasse a largura da tela */
+    height: 100%; /* Garante que o cartão ocupe 100% da altura do contêiner pai */
+  }
 
-.profile .profile-card .social-links a:hover {
-  color: #012970;
-}
+  /* Estilo para a imagem do perfil em telas grandes */
+  .profile .profile-card img {
+    max-width: 120px; /* Ajusta o tamanho da imagem para telas grandes */
+  }
 
-.profile .profile-overview .row {
-  margin-bottom: 20px;
-  font-size: 15px;
-}
+  /* Estilo para o nome do usuário no cartão de perfil em telas grandes */
+  .profile .profile-card h2 {
+    font-size: 24px; /* Ajusta o tamanho da fonte do nome */
+  }
 
-.profile .profile-overview .card-title {
-  color: #012970;
-}
+  /* Estilo para a descrição ou título secundário no cartão de perfil em telas grandes */
+  .profile .profile-card h3 {
+    font-size: 18px; /* Ajusta o tamanho da fonte da descrição */
+  }
 
-.profile .profile-overview .label {
-  font-weight: 600;
-  color: rgba(1, 41, 112, 0.6);
-}
+  /* Estilo para os links sociais no cartão de perfil em telas grandes */
+  .profile .profile-card .social-links a {
+    font-size: 20px; /* Ajusta o tamanho da fonte dos ícones sociais */
+  }
 
-.profile .profile-edit label {
-  font-weight: 600;
-  color: rgba(1, 41, 112, 0.6);
-}
+  /* Estilo para o formulário de edição de perfil em telas grandes */
+  .profile .profile-edit img {
+    max-width: 120px; /* Ajusta o tamanho da imagem do perfil na edição */
+  }
 
-.profile .profile-edit img {
-  max-width: 120px;
+  /* Estilo para os campos de entrada em telas grandes */
+  .profile-input {
+    font-size: 16px; /* Ajusta o tamanho da fonte dos campos de entrada */
+    padding: 10px; /* Ajusta o espaçamento interno dos campos de entrada */
+  }
+
+  /* Estilo para a área de texto "Sobre" em telas grandes */
+  .profile-textarea {
+    height: 100px; /* Ajusta a altura da área de texto */
+  }
+
+  /* Estilo para o botão de ação em telas grandes */
+  .btn-primary {
+    font-size: 16px; /* Ajusta o tamanho da fonte do botão */
+    padding: 10px 20px; /* Ajusta o espaçamento interno do botão */
+  }
 }
 
 /*--------------------------------------------------------------

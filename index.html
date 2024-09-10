@@ -77,76 +77,7 @@
                     <h2 data-aos="fade-up" data-aos-delay="100">Seja Bem Vindo!</h2>
                     <p data-aos="fade-up" data-aos-delay="200">Entre e aproveite de nossos serviços.</p>
                 </div>
-                <div class="col-lg-5">
-                  <form action="forms/conexao/conexaoform-index.php" class="sign-up-form d-flex" data-aos="fade-up" data-aos-delay="300" method="post" onsubmit="return validarCPF();">
-                      <input type="text" id="cpf" class="form-control" name="cpf" placeholder="Insira o seu CPF" required oninput="formatarCPF(this)">
-                      <input type="submit" class="btn btn-primary" value="Entrar">
-                  </form>
-              </div>
-              
-              <!-- Pop-up de confirmação -->
-              <div class="popup-overlay" id="popupOverlay" style="display:none;"></div>
-              <div class="popup" id="popupCPF" style="display:none;">
-                  <p>Confirme o CPF: <span id="cpfConfirmacao"></span></p>
-                  <button onclick="confirmarCPF()">Confirmar</button>
-                  <button onclick="cancelarCPF()">Cancelar</button>
-              </div>
-              
-              <script>
-                  function formatarCPF(campo) {
-                      // Máscara de CPF
-                      campo.value = campo.value.replace(/\D/g, "")
-                                               .replace(/(\d{3})(\d)/, "$1.$2")
-                                               .replace(/(\d{3})(\d)/, "$1.$2")
-                                               .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-                  }
-              
-                  function validarCPF() {
-                      var cpf = document.getElementById("cpf").value;
-                      document.getElementById("cpfConfirmacao").innerText = cpf;
-                      document.getElementById("popupCPF").style.display = "block";
-                      document.getElementById("popupOverlay").style.display = "block";
-                      return false; // Impede o envio imediato do formulário
-                  }
-              
-                  function confirmarCPF() {
-                      document.getElementById("popupCPF").style.display = "none";
-                      document.getElementById("popupOverlay").style.display = "none";
-                      document.forms[0].submit(); // Envia o formulário após a confirmação
-                  }
-              
-                  function cancelarCPF() {
-                      document.getElementById("popupCPF").style.display = "none";
-                      document.getElementById("popupOverlay").style.display = "none";
-                  }
-              </script>
-              
-              <style>
-                /* Estilos para o pop-up de confirmação */
-                .popup {
-                  display: none; /* Oculta o pop-up inicialmente */
-                  position: fixed; /* Posiciona o pop-up de forma fixa na tela */
-                  left: 50%; /* Centraliza o pop-up horizontalmente */
-                  top: 50%; /* Centraliza o pop-up verticalmente */
-                  transform: translate(-50%, -50%); /* Ajusta o pop-up para ficar exatamente no centro da tela */
-                  border: 1px solid #ccc; /* Adiciona uma borda ao redor do pop-up */
-                  background-color: #ff66c4; /* Adiciona um gradiente de cor de fundo ao pop-up */
-                  padding: 20px; /* Adiciona espaço interno ao redor do conteúdo do pop-up */
-                  z-index: 1000; /* Garante que o pop-up apareça acima de outros elementos */
-                }
-              
-                /* Estilos para a sobreposição de fundo do pop-up */
-                .popup-overlay {
-                  display: none; /* Oculta a sobreposição inicialmente */
-                  position: fixed; /* Posiciona a sobreposição de forma fixa na tela */
-                  top: 0; /* Alinha a sobreposição ao topo da tela */
-                  left: 0; /* Alinha a sobreposição à esquerda da tela */
-                  width: 100%; /* Faz com que a sobreposição cubra toda a largura da tela */
-                  height: 100%; /* Faz com que a sobreposição cubra toda a altura da tela */
-                  background: rgba(0, 0, 0, 0.5); /* Adiciona um fundo semitransparente para escurecer o restante da tela */
-                  z-index: 999; /* Garante que a sobreposição apareça abaixo do pop-up mas acima de outros elementos da página */
-                }
-              </style>
+               
               
               
             </div>

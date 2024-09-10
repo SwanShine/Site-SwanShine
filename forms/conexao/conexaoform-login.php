@@ -30,12 +30,13 @@ $stmt->execute();
 $result_profissional = $stmt->get_result();
 
 if ($result_profissional->num_rows > 0) {
-    // Se o usuário for um profissional, redireciona para a página dos profissionais
+    // Se o usuário for um profissional, armazena o email e redireciona
     $user = $result_profissional->fetch_assoc();
     $_SESSION['user_id'] = $user['id_profissional'];
+    $_SESSION['user_email'] = $email;  // Armazenar o email do usuário
     $_SESSION['user_type'] = 'profissional';
     error_log("Redirecionando para a página dos profissionais.");
-    header('Location: ../../NiceAdmin/index.html'); // Corrigido para redirecionar para a página dos profissionais
+    header('Location: ../../NiceAdmin/index.html');
     exit();
 }
 
@@ -47,12 +48,13 @@ $stmt->execute();
 $result_cliente = $stmt->get_result();
 
 if ($result_cliente->num_rows > 0) {
-    // Se o usuário for um cliente, redireciona para a página dos clientes
+    // Se o usuário for um cliente, armazena o email e redireciona
     $user = $result_cliente->fetch_assoc();
     $_SESSION['user_id'] = $user['id_cliente'];
+    $_SESSION['user_email'] = $email;  // Armazenar o email do usuário
     $_SESSION['user_type'] = 'cliente';
     error_log("Redirecionando para a página dos clientes.");
-    header('Location: ../../cliente/index.html'); // Corrigido para redirecionar para a página dos clientes
+    header('Location: ../../cliente/index.html');
     exit();
 }
 
