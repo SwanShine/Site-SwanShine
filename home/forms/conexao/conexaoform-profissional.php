@@ -81,7 +81,7 @@ try {
             $conn->close();
 
             // Redirecionar para a página do cliente
-            header("Location: ../../../NiceAdmin/index.html");
+            header("Location: ../../../NiceAdmin/index.php");
             exit();
         } else {
             throw new Exception("Erro ao executar a declaração: " . $stmt->error);

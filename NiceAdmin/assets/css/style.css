@@ -588,13 +588,6 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Dashboard
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-# Icons list page
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
 # General Styles for All Devices
 --------------------------------------------------------------*/
 /* Estilo para o container do card */
@@ -854,18 +847,6 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# F.A.Q Page
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-# Contact
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-# Error 404
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 .footer {
@@ -1110,5 +1091,133 @@ h6 {
 @media (min-width: 576px) {
   .card {
     width: 100%; /* Largura dos cards em telas maiores */
+  }
+}
+
+
+/* Estilos gerais para o container dos cards */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Estilos para o card */
+.card-container .card {
+  background: linear-gradient(135deg, #f0f8ff, #e0f7fa); /* Degradê azul claro */
+  color: #333;
+  border: 1px solid #d1d1d1;
+  padding: 20px;
+  position: relative; /* Necessário para posicionar o status */
+  border-radius: 15px; /* Arredondamento dos cantos */
+  margin: 20px 0;
+  max-width: 600px; /* Limita o tamanho do card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-container .card:hover {
+  transform: scale(1.02); /* Aumenta ligeiramente o card ao passar o mouse */
+}
+
+/* Estilos para o status */
+.card-container .card .status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #007bff; /* Cor de fundo azul */
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+/* Estilos para o serviço em destaque */
+.card-container .card .servico-destaque {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #007bff; /* Cor azul para destacar */
+}
+
+/* Estilos para o card sem pedidos */
+.card-container .no-pedidos {
+  background: linear-gradient(135deg, #ffe5e5, #ffcccc); /* Degradê para o card de nenhum pedido */
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  text-align: center;
+}
+
+.close-card {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #721c24;
+  font-weight: bold;
+}
+
+.close-card:hover {
+  color: #d9534f;
+}
+
+/* Estilos para os botões */
+.button {
+  background-color: #007bff; /* Cor azul */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px; /* Espaço entre os botões */
+  text-align: center;
+  display: inline-block; /* Exibe os botões um ao lado do outro */
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+}
+
+.button:active {
+  background-color: #003f7f; /* Azul ainda mais escuro ao clicar */
+}
+
+/* Estilos para os campos do card */
+.card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
+  gap: 10px; /* Espaçamento entre as colunas */
+  width: 100%;
+}
+
+.card-content p {
+  margin: 5px 0;
+}
+
+.card-content p strong {
+  display: block; /* Exibe os tópicos em bloco para melhor alinhamento */
+}
+
+.card-content p span {
+  display: block; /* Exibe os valores em bloco para melhor alinhamento */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card-container .card {
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .button {
+    width: 100%;
+    padding: 15px;
   }
 }
