@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^index\.html$ Lançamento.html [L,R=301] 
