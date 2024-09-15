@@ -4,7 +4,7 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-    header('Location: ../../../home/forms/login/login.html');
+    header('Location: ../../../../home/forms/login/login.html');
     exit();
 }
 
@@ -38,7 +38,7 @@ $stmt->bind_param("dsi", $valor, $detalhes, $id_pedido);
 
 if ($stmt->execute()) {
     // Redirecionar de volta à página principal com uma mensagem de sucesso
-    header('Location: ../../index.php?message=Orçamento enviado com sucesso');
+    header('Location: ../../../index.php?message=Orçamento enviado com sucesso');
 } else {
     echo "Erro ao enviar o orçamento: " . $stmt->error;
 }

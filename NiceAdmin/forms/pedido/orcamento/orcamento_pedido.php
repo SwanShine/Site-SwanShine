@@ -4,7 +4,7 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-    header('Location: ../../../home/forms/login/login.html');
+    header('Location: ../../../../home/forms/login/login.html');
     exit();
 }
 

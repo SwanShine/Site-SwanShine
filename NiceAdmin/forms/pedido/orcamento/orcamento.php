@@ -4,7 +4,7 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-    header('Location: ../../../home/forms/login/login.html');
+    header('Location: ../../../../home/forms/login/login.html');
     exit();
 }
 
@@ -58,9 +58,9 @@ $conn->close();
     <!-- Meta tag para palavras-chave da página (vazia neste exemplo) -->
 
     <!-- Favicons -->
-    <link href="../../assets/img/favicon.png" rel="icon" />
+    <link href="../../../assets/img/favicon.png" rel="icon" />
     <!-- Link para o favicon da página -->
-    <link href="../../assets/img/favicon.png" rel="apple-touch-icon" />
+    <link href="../../../assets/img/favicon.png" rel="apple-touch-icon" />
     <!-- Link para o ícone de toque da Apple -->
 
     <!-- Google Fonts -->
@@ -70,24 +70,24 @@ $conn->close();
     <!-- Importa as fontes do Google (Open Sans, Nunito e Poppins) com diferentes estilos e pesos -->
 
     <!-- Arquivos CSS de Fornecedores -->
-    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!-- CSS do Bootstrap -->
-    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="../../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
     <!-- Ícones do Bootstrap -->
-    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="../../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
     <!-- CSS dos Boxicons -->
-    <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="../../../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
     <!-- CSS do Quill (editor de texto) - tema Snow -->
-    <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="../../../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
     <!-- CSS do Quill (editor de texto) - tema Bubble -->
-    <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="../../../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
     <!-- CSS do Remixicon -->
-    <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+    <link href="../../../assets/vendor/simple-datatables/style.css" rel="stylesheet" />
     <!-- CSS do Simple Datatables -->
 
     <!-- Arquivo CSS -->
-    <link href="../../assets/css/style.css" rel="stylesheet" />
-    <link href="../../assets/css/main.css" rel="stylesheet" />
+    <link href="../../../assets/css/style.css" rel="stylesheet" />
+    <link href="../../../assets/css/main.css" rel="stylesheet" />
     <!-- Link para o arquivo CSS -->
 
     <style>
@@ -307,7 +307,7 @@ $conn->close();
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
-                <img src="../../assets/img/logo_preta.png" alt="" />
+                <img src="../../../assets/img/logo_preta.png" alt="" />
                 <span class="d-none d-lg-block">Swan Shine</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -345,13 +345,13 @@ $conn->close();
                         class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                         <li class="dropdown-header">
                             Você tem 0 mensagens
-                            <a href="../../mensagens.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+                            <a href="../../../mensagens.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
                         <li class="dropdown-footer">
-                            <a href="../../mensagens.html">Mostrar todas as mensagens</a>
+                            <a href="../../../mensagens.html">Mostrar todas as mensagens</a>
                         </li>
                     </ul>
                 </li>
@@ -363,7 +363,7 @@ $conn->close();
                         href="perfil.php"
                         data-bs-toggle="dropdown">
                         <img
-                            src="../../assets/img/usuario.png"
+                            src="../../../assets/img/usuario.png"
                             alt="Profile"
                             class="rounded-circle" />
                     </a>
@@ -374,7 +374,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="../../perfil.php">
+                                href="../../../perfil.php">
                                 <i class="bi bi-person"></i>
                                 <span>Meu Perfil</span>
                             </a>
@@ -385,7 +385,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="../../perfil.php">
+                                href="../../../perfil.php">
                                 <i class="bi bi-gear"></i>
                                 <span>Configurações da Conta</span>
                             </a>
@@ -396,7 +396,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="../../manutencao.html">
+                                href="../../../manutencao.html">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Precisa de Ajuda?</span>
                             </a>
@@ -407,7 +407,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="forms/log_out.php">
+                                href="../../log_out.php">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sair</span>
                             </a>
@@ -420,66 +420,90 @@ $conn->close();
 
     <!-- ======= Barra Lateral ======= -->
     <aside id="sidebar" class="sidebar">
-        <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../../index.php">
-                    <i class="bi bi-grid"></i>
-                    <span>Início</span>
-                </a>
-            </li>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="../../../index.php">
+                <i class="bi bi-grid"></i>
+                <span>Início</span>
+            </a>
+        </li>
 
-            <!-- Perfil -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../../perfil.php">
-                    <i class="bi bi-person"></i>
-                    <span>Perfil</span>
-                </a>
-            </li>
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#components-nav"
+                data-bs-toggle="collapse"
+                href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+                id="components-nav"
+                class="nav-content collapse"
+                data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="../../../pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+                </li>
+                <li>
+                    <a href="../../../pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+                </li>
+                <li>
+                    <a href="../../../pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+                </li>
+            </ul>
+        </li>
 
-            <li class="nav-item">
-                <a
-                    class="nav-link collapsed"
-                    data-bs-target="#components-nav"
-                    data-bs-toggle="collapse"
-                    href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul
-                    id="components-nav"
-                    class="nav-content collapse"
-                    data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="../../service.html"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
-                    </li>
-                    <li>
-                        <a href="../../service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
-                    </li>
-                </ul>
-            </li>
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#components-nav"
+                data-bs-toggle="collapse"
+                href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+                id="components-nav"
+                class="nav-content collapse"
+                data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="../../../servico/"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
+                </li>
+                <li>
+                    <a href="../../../servico/"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
+                </li>
+            </ul>
+        </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../../suporte.html">
-                    <i class="bi bi-chat-dots"></i>
-                    <span>Suporte</span>
-                </a>
-            </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="../../../mensagens.html">
+                <i class="bi bi-envelope"></i>
+                <span>Mensagens</span>
+            </a>
+        </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../../mensagens.html">
-                    <i class="bi bi-envelope"></i>
-                    <span>Mensagens</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
-    <!-- End Sidebar-->
+        <!-- Perfil -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="../../../perfil.php">
+                <i class="bi bi-person"></i>
+                <span>Perfil</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="../../../suporte.html">
+                <i class="bi bi-chat-dots"></i>
+                <span>Suporte</span>
+            </a>
+        </li>
+
+     </ul>
+   </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
         <div class="pagetitle">
             <h1>Painel</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../../index.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../../../index.php">Home</a></li>
                     <li class="breadcrumb-item active">Painel</li>
                 </ol>
             </nav>
@@ -503,7 +527,7 @@ $conn->close();
                 <div class="form-group">
                     <button type="submit">Enviar Orçamento</button>
                 </div>
-                <a href="../../index.php" class="back-link">&#8592; Voltar para os serviços</a>
+                <a href="../../../index.php" class="back-link">&#8592; Voltar para os serviços</a>
             </form>
         </div>
     </div>
@@ -535,18 +559,18 @@ $conn->close();
     </a>
 
     <!-- Vendor JS Files -->
-    <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="../../assets/vendor/echarts/echarts.min.js"></script>
-    <script src="../../assets/vendor/quill/quill.js"></script>
-    <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="../../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="../../../assets/vendor/echarts/echarts.min.js"></script>
+    <script src="../../../assets/vendor/quill/quill.js"></script>
+    <script src="../../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../../../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../../../assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/main1.js"></script>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="../../../assets/js/main1.js"></script>
 </body>
 
 </html>

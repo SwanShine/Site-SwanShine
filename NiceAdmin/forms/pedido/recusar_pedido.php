@@ -4,7 +4,7 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-    header('Location: ../../home/forms/login/login.html');
+    header('Location: ../../../home/forms/login/login.html');
     exit();
 }
 
@@ -67,7 +67,7 @@ if (!isset($_SESSION['recusados'])) {
 $_SESSION['recusados'][] = $id_pedido;
 
 // Redirecionar de volta à página principal com uma mensagem de sucesso
-header('Location: ../index.php?message=Pedido recusado com sucesso');
+header('Location: ../../index.php?message=Pedido recusado com sucesso');
 
 // Fechar a conexão
 $stmt->close();
