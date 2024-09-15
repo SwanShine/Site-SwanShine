@@ -116,7 +116,7 @@ $conn->close();
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="index.php" class="logo d-flex align-items-center">
                 <img src="assets/img/logo_preta.png" alt="">
                 <span class="d-none d-lg-block">Swan Shine</span>
             </a>
@@ -213,59 +213,86 @@ $conn->close();
 
     <!-- ======= Barra Lateral ======= -->
     <aside id="sidebar" class="sidebar">
-        <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="index.php">
-                    <i class="bi bi-grid"></i>
-                    <span>Início</span>
-                </a>
-            </li>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="index.php">
+                <i class="bi bi-grid"></i>
+                <span>Início</span>
+            </a>
+        </li>
 
-            <!-- Perfil -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="perfil.php">
-                    <i class="bi bi-person"></i>
-                    <span>Perfil</span>
-                </a>
-            </li>
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#components-nav"
+                data-bs-toggle="collapse"
+                href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+                id="components-nav"
+                class="nav-content collapse"
+                data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+                </li>
+                <li>
+                    <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+                </li>
+                <li>
+                    <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+                </li>
+                <li>
+                    <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                </li>
+            </ul>
+        </li>
 
-            <li class="nav-item">
-                <a
-                    class="nav-link collapsed"
-                    data-bs-target="#components-nav"
-                    data-bs-toggle="collapse"
-                    href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul
-                    id="components-nav"
-                    class="nav-content collapse"
-                    data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="service.html"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
-                    </li>
-                    <li>
-                        <a href="service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
-                    </li>
-                </ul>
-            </li>
+        <li class="nav-item">
+            <a
+                class="nav-link collapsed"
+                data-bs-target="#components-nav"
+                data-bs-toggle="collapse"
+                href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul
+                id="components-nav"
+                class="nav-content collapse"
+                data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="servico/service.php"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
+                </li>
+                <li>
+                    <a href="servico/service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
+                </li>
+            </ul>
+        </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="manutencao.html">
-                    <i class="bi bi-chat-dots"></i>
-                    <span>Suporte</span>
-                </a>
-            </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="mensagens.html">
+                <i class="bi bi-envelope"></i>
+                <span>Mensagens</span>
+            </a>
+        </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="manutencao.html">
-                    <i class="bi bi-envelope"></i>
-                    <span>Mensagens</span>
-                </a>
-            </li>
-        </ul>
-    </aside>
-    <!-- End Sidebar-->
+        <!-- Perfil -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="perfil.php">
+                <i class="bi bi-person"></i>
+                <span>Perfil</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="suporte.html">
+                <i class="bi bi-chat-dots"></i>
+                <span>Suporte</span>
+            </a>
+        </li>
+
+     </ul>
+   </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
 
