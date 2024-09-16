@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Atualizar a senha no banco de dados
     $hashedNewPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-    $sql = "UPDATE clientes SET senha = ? WHERE email = ?";
+    $sql = "UPDATE profissionais SET senha = ? WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $hashedNewPassword, $email);
     $stmt->execute();

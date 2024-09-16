@@ -54,7 +54,7 @@ if ($result_cliente->num_rows > 0) {
     $_SESSION['user_email'] = $email;  // Armazenar o email do usuário
     $_SESSION['user_type'] = 'cliente';
     error_log("Redirecionando para a página dos clientes.");
-    header('Location: ../../../cliente/index.html');
+    header('Location: ../../../cliente/index.php');
     exit();
 }
 

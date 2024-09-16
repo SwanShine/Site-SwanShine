@@ -25,48 +25,47 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
-// Buscar os serviços oferecidos pelo profissional logado
-$stmt = $conn->prepare("SELECT servicos FROM profissionais WHERE email = ?");
+// Buscar os pedidos feitos pelo cliente
+$stmt = $conn->prepare("SELECT servicos FROM pedidos WHERE email = ? AND status = 'em análise' ORDER BY data_pedido DESC");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Verificar se o profissional foi encontrado e possui serviços
+// Verificar se o cliente tem pedidos
 if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $servicos_oferecidos = explode(', ', $row['servicos']); // Serviços oferecidos convertidos em array
+    $servicos_solicitados = [];
+    while ($row = $result->fetch_assoc()) {
+        $servicos = explode(', ', $row['servicos']); // Serviços solicitados convertidos em array
+        $servicos_solicitados = array_merge($servicos_solicitados, $servicos); // Adicionar aos serviços solicitados
+    }
 } else {
-    echo "Nenhum serviço encontrado para este profissional.";
+    echo "Nenhum serviço encontrado para este cliente.";
     exit();
 }
 
-// Fechar a consulta de serviços do profissional
+// Fechar a consulta de pedidos do cliente
 $stmt->close();
 
-// Consultar os pedidos que correspondem aos serviços oferecidos pelo profissional e com status "pendente"
-$placeholders = implode(', ', array_fill(0, count($servicos_oferecidos), '?')); // Gerar placeholders
-$types = str_repeat('s', count($servicos_oferecidos)); // Tipo para bind_param
+// Filtrar serviços duplicados
+$servicos_solicitados = array_unique($servicos_solicitados);
 
-$query = "SELECT * FROM pedidos WHERE servicos IN ($placeholders) AND status = 'pendente' ORDER BY data_pedido DESC";
-$stmt = $conn->prepare($query);
-$stmt->bind_param($types, ...$servicos_oferecidos); // Inserir serviços no bind_param
-$stmt->execute();
-
-// Obter os pedidos
-$result = $stmt->get_result();
-$pedidos = $result->fetch_all(MYSQLI_ASSOC); // Obter todos os pedidos como array associativo
+// Mostrar os serviços solicitados
+echo "<h3>Serviços Solicitados</h3>";
+if (!empty($servicos_solicitados)) {
+    echo "<ul>";
+    foreach ($servicos_solicitados as $servico) {
+        echo "<li>" . htmlspecialchars($servico) . "</li>";
+    }
+    echo "</ul>";
+} else {
+    echo "Nenhum serviço encontrado.";
+}
 
 // Fechar a conexão
-$stmt->close();
 $conn->close();
-
-// Filtrar pedidos recusados para o usuário atual
-if (isset($_SESSION['recusados'])) {
-    $pedidos = array_filter($pedidos, function ($pedido) {
-        return !in_array($pedido['id'], $_SESSION['recusados']);
-    });
-}
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -332,76 +331,77 @@ if (isset($_SESSION['recusados'])) {
 
     <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Pedidos Pendentes</h1>
+      <h1>Pedidos em Andamento</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
           <li class="breadcrumb-item">Pedido</li>
-          <li class="breadcrumb-item active">Pedidos Pendentes</li>
+          <li class="breadcrumb-item active">Pedidos em Andamento</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-        <section class="section dashboard">
-            <div class="row">
-                <div class="card-container">
-                    <h1 class="titulo" style="text-align: center;">Seus Pedidos Pendentes</h1>
-                    <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
-                        <div class="card notification-card">
-                            <h3>Pedido Recusado</h3>
-                            <p>O pedido foi recusado com sucesso.</p>
-                            <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
-                        </div>
-                    <?php elseif (!empty($pedidos)): ?>
-                        <?php foreach ($pedidos as $pedido): ?>
-                            <div class="card">
-                                <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Novo elemento para o status -->
-                                <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
-                                <div class="card-content">
-                                    <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
-                                    <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
-                                    <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
-                                    <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
-                                    <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
-                                    <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
-                                    <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
-                                    <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
-                                </div>
-                                <div class="buttons">
-                                    <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Orçamento</button>
-                                    <button class="button recusar" data-id="<?= htmlspecialchars($pedido['id']) ?>">Recusar</button>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="card no-pedidos">
-                            <h3>Nenhum serviço solicitado</h3>
-                            <p>Atualmente, não há nenhum pedido disponível para os serviços oferecidos.</p>
-                            <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
-                        </div>
-                    <?php endif; ?>
+    <section class="section dashboard">
+    <div class="row">
+        <div class="card-container">
+            <h1 class="titulo" style="text-align: center;">Seus Pedidos em Andamento</h1> <!-- Título atualizado -->
+            <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
+                <div class="card notification-card">
+                    <h3>Pedido Recusado</h3>
+                    <p>O pedido foi recusado com sucesso.</p>
+                    <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
                 </div>
-            </div>
-        </section>
+            <?php elseif (!empty($pedidos)): ?>
+                <?php foreach ($pedidos as $pedido): ?>
+                    <div class="card">
+                        <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Exibe o status -->
+                        <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
+                        <div class="card-content">
+                            <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
+                            <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
+                            <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
+                            <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
+                            <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
+                            <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
+                            <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
+                            <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
+                        </div>
+                        <div class="buttons">
+                            <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Orçamento</button>
+                            <button class="button recusar" data-id="<?= htmlspecialchars($pedido['id']) ?>">Recusar</button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="card no-pedidos">
+                    <h3>Nenhum pedido em andamento</h3> <!-- Mensagem atualizada -->
+                    <p>Atualmente, não há nenhum pedido em andamento para os serviços oferecidos.</p>
+                    <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
 
-        <!-- JavaScript para lidar com os botões de orçamento e recusa -->
-        <script>
-            document.querySelectorAll('.recusar').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    if (confirm('Tem certeza que deseja recusar este pedido?')) {
-                        window.location.href = `../forms/pedido/recusar_pedido.php?id=${id}`;
-                    }
-                });
-            });
+<!-- JavaScript para lidar com os botões de orçamento e recusa -->
+<script>
+    document.querySelectorAll('.recusar').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            if (confirm('Tem certeza que deseja recusar este pedido?')) {
+                window.location.href = `../forms/pedido/recusar_pedido.php?id=${id}`;
+            }
+        });
+    });
 
-            document.querySelectorAll('.orcamento').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    window.location.href = `../forms/pedido/orcamento/orcamento_pedido.php?id=${id}`;
-                });
-            });
-        </script>
+    document.querySelectorAll('.orcamento').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            window.location.href = `../forms/pedido/orcamento/orcamento_pedido.php?id=${id}`;
+        });
+    });
+</script>
+
 
 
     </main>

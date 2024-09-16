@@ -15,9 +15,9 @@
   <!-- Meta tag para palavras-chave da página (vazia neste exemplo) -->
 
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon" />
+  <link href=".assets/img/favicon.png" rel="icon" />
   <!-- Link para o favicon da página -->
-  <link href="../assets/img/favicon.png" rel="apple-touch-icon" />
+  <link href="assets/img/favicon.png" rel="apple-touch-icon" />
   <!-- Link para o ícone de toque da Apple -->
 
   <!-- Google Fonts -->
@@ -61,11 +61,11 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+   <!-- ======= Header ======= -->
+   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="assets/img/logo_preta.png" alt="" />
+        <a href="index.php" class="logo d-flex align-items-center">
+            <img src="assets/img/logo_preta.png" alt="">
             <span class="d-none d-lg-block">Swan Shine</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -73,6 +73,7 @@
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
+
             <!-- Notifications Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -80,8 +81,7 @@
                     <span class="badge bg-primary badge-number">0</span>
                 </a>
 
-                <ul
-                    class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
                         Você tem 0 notificações
                         <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
@@ -99,14 +99,13 @@
                     <span class="badge bg-success badge-number">0</span>
                 </a>
 
-                <ul
-                    class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                     <li class="dropdown-header">
                         Você tem 0 mensagens
                         <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                     </li>
                     <li>
-                        <hr class="dropdown-divider" />
+                        <hr class="dropdown-divider">
                     </li>
                     <li class="dropdown-footer">
                         <a href="mensagem.html">Mostrar todas as mensagens</a>
@@ -116,56 +115,40 @@
 
             <!-- Profile Dropdown -->
             <li class="nav-item dropdown pe-3">
-                <a
-                    class="nav-link nav-profile d-flex align-items-center pe-0"
-                    href="perfil.php"
-                    data-bs-toggle="dropdown">
-                    <img
-                        src="assets/img/usuario.png"
-                        alt="Profile"
-                        class="rounded-circle" />
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
                 </a>
 
-                <ul
-                    class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li>
-                        <a
-                            class="dropdown-item d-flex align-items-center"
-                            href="perfil.php">
+                        <a class="dropdown-item d-flex align-items-center" href="perfil.php">
                             <i class="bi bi-person"></i>
                             <span>Meu Perfil</span>
                         </a>
                     </li>
                     <li>
-                        <hr class="dropdown-divider" />
+                        <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a
-                            class="dropdown-item d-flex align-items-center"
-                            href="perfil.php">
+                        <a class="dropdown-item d-flex align-items-center" href="perfil.php">
                             <i class="bi bi-gear"></i>
                             <span>Configurações da Conta</span>
                         </a>
                     </li>
                     <li>
-                        <hr class="dropdown-divider" />
+                        <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a
-                            class="dropdown-item d-flex align-items-center"
-                            href="manutencao.html">
+                        <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
                             <i class="bi bi-question-circle"></i>
                             <span>Precisa de Ajuda?</span>
                         </a>
                     </li>
                     <li>
-                        <hr class="dropdown-divider" />
+                        <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a
-                            class="dropdown-item d-flex align-items-center"
-                            href="forms/log_out.php">
+                        <a class="dropdown-item d-flex align-items-center" href="../index.html">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sair</span>
                         </a>
@@ -179,58 +162,85 @@
 <!-- ======= Barra Lateral ======= -->
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="index.php">
-              <i class="bi bi-grid"></i>
-              <span>Início</span>
-          </a>
-      </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+            <i class="bi bi-grid"></i>
+            <span>Início</span>
+        </a>
+    </li>
 
-      <!-- Perfil -->
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="perfil.php">
-              <i class="bi bi-person"></i>
-              <span>Perfil</span>
-          </a>
-      </li>
+    <li class="nav-item">
+        <a
+            class="nav-link collapsed"
+            data-bs-target="#components-nav"
+            data-bs-toggle="collapse"
+            href="#">
+            <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul
+            id="components-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+            </li>
+            <li>
+                <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+            </li>
+            <li>
+                <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+            </li>
+            <li>
+                <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+            </li>
+        </ul>
+    </li>
 
-      <li class="nav-item">
-          <a
-              class="nav-link collapsed"
-              data-bs-target="#components-nav"
-              data-bs-toggle="collapse"
-              href="#">
-              <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul
-              id="components-nav"
-              class="nav-content collapse"
-              data-bs-parent="#sidebar-nav">
-              <li>
-                  <a href="service.html"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
-              </li>
-              <li>
-                  <a href="service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
-              </li>
-          </ul>
-      </li>
+    <li class="nav-item">
+        <a
+            class="nav-link collapsed"
+            data-bs-target="#components-nav"
+            data-bs-toggle="collapse"
+            href="#">
+            <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul
+            id="components-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="servico/service.php"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
+            </li>
+            <li>
+                <a href="servico/service-cadastrado.php"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
+            </li>
+        </ul>
+    </li>
 
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="suporte.html">
-              <i class="bi bi-chat-dots"></i>
-              <span>Suporte</span>
-          </a>
-      </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="mensagens.html">
+            <i class="bi bi-envelope"></i>
+            <span>Mensagens</span>
+        </a>
+    </li>
 
-      <li class="nav-item">
-          <a class="nav-link collapsed" href="mensagens.html">
-              <i class="bi bi-envelope"></i>
-              <span>Mensagens</span>
-          </a>
-      </li>
-  </ul>
-</aside>
-<!-- End Sidebar-->
+    <!-- Perfil -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="perfil.php">
+            <i class="bi bi-person"></i>
+            <span>Perfil</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="suporte.html">
+            <i class="bi bi-chat-dots"></i>
+            <span>Suporte</span>
+        </a>
+    </li>
+
+ </ul>
+</aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
@@ -238,7 +248,7 @@
       <h1>Contato</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item">Pages</li>
           <li class="breadcrumb-item active">Contact</li>
         </ol>
@@ -322,20 +332,476 @@
       </div>
 
     </section>
+    <section class="section faq">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card basic">
+            <div class="card-body">
+              <h5 class="card-title">Basic Questions</h5>
 
+              <div>
+                <h6>
+                  1. Nisi ut ut exercitationem voluptatem esse sunt rerum?
+                </h6>
+                <p>
+                  Saepe perspiciatis ea. Incidunt blanditiis enim mollitia qui
+                  voluptates. Id rem nulla tenetur nihil in unde rerum. Quae
+                  consequatur placeat qui cumque earum eius omnis quos.
+                </p>
+              </div>
+
+              <div class="pt-2">
+                <h6>2. Reiciendis dolores repudiandae?</h6>
+                <p>
+                  Id ipsam non ut. Placeat doloremque deserunt quia tenetur
+                  inventore laboriosam dolores totam odio. Aperiam incidunt
+                  et. Totam ut quos sunt atque modi molestiae dolorem.
+                </p>
+              </div>
+
+              <div class="pt-2">
+                <h6>
+                  3. Qui qui reprehenderit ut est illo numquam voluptatem?
+                </h6>
+                <p>
+                  Enim inventore in consequuntur ipsam voluptatem consequatur
+                  beatae. Nostrum consequuntur voluptates et blanditiis.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- F.A.Q Group 1 -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Laborum dolorem quam porro</h5>
+
+              <div class="accordion accordion-flush" id="faq-group-1">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsOne-1"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Debitis adipisci eius?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsOne-1"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-1"
+                  >
+                    <div class="accordion-body">
+                      Ut quasi odit odio totam accusamus vero eius. Nostrum
+                      asperiores voluptatem eos nulla ab dolores est
+                      asperiores iure. Quo est quis praesentium aut maiores.
+                      Corrupti sed aut expedita fugit vero dolorem. Nemo rerum
+                      sapiente. A quaerat dignissimos.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsOne-2"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Omnis fugiat quis repellendus?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsOne-2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-1"
+                  >
+                    <div class="accordion-body">
+                      In minus quia impedit est quas deserunt deserunt et.
+                      Nulla non quo dolores minima fugiat aut saepe aut
+                      inventore. Qui nesciunt odio officia beatae iusto sed
+                      voluptatem possimus quas. Officia vitae sit voluptatem
+                      nostrum a.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsOne-3"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Et occaecati praesentium aliquam modi incidunt?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsOne-3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-1"
+                  >
+                    <div class="accordion-body">
+                      Voluptates magni amet enim perspiciatis atque excepturi
+                      itaque est. Sit beatae animi incidunt eum repellat sequi
+                      ea saepe inventore. Id et vel et et. Nesciunt itaque
+                      corrupti quia ducimus. Consequatur maiores voluptatum
+                      fuga quod ut non fuga.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsOne-4"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Quo unde eaque vero dolor quis ipsam?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsOne-4"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-1"
+                  >
+                    <div class="accordion-body">
+                      Numquam ut reiciendis aliquid. Quia veritatis quasi
+                      ipsam sed quo ut eligendi et non. Doloremque sed
+                      voluptatem at in voluptas aliquid dolorum.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsOne-5"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Natus sunt quo atque mollitia accusamus?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsOne-5"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-1"
+                  >
+                    <div class="accordion-body">
+                      Aut necessitatibus maxime quis dolor et. Nihil
+                      laboriosam molestiae qui molestias placeat corrupti non
+                      quo accusamus. Nemo qui quis harum enim sed. Aliquam
+                      molestias pariatur delectus voluptas quidem qui rerum id
+                      quisquam. Perspiciatis voluptatem voluptatem eos. Vel
+                      aut minus labore at rerum eos.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End F.A.Q Group 1 -->
+        </div>
+
+        <div class="col-lg-6">
+          <!-- F.A.Q Group 2 -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Deserunt ut unde corporis</h5>
+
+              <div class="accordion accordion-flush" id="faq-group-2">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsTwo-1"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Cumque voluptatem recusandae blanditiis?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsTwo-1"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-2"
+                  >
+                    <div class="accordion-body">
+                      Ut quasi odit odio totam accusamus vero eius. Nostrum
+                      asperiores voluptatem eos nulla ab dolores est
+                      asperiores iure. Quo est quis praesentium aut maiores.
+                      Corrupti sed aut expedita fugit vero dolorem. Nemo rerum
+                      sapiente. A quaerat dignissimos.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsTwo-2"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Provident beatae eveniet placeat est aperiam repellat
+                      adipisci?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsTwo-2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-2"
+                  >
+                    <div class="accordion-body">
+                      In minus quia impedit est quas deserunt deserunt et.
+                      Nulla non quo dolores minima fugiat aut saepe aut
+                      inventore. Qui nesciunt odio officia beatae iusto sed
+                      voluptatem possimus quas. Officia vitae sit voluptatem
+                      nostrum a.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsTwo-3"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Minus aliquam modi id reprehenderit nihil?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsTwo-3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-2"
+                  >
+                    <div class="accordion-body">
+                      Voluptates magni amet enim perspiciatis atque excepturi
+                      itaque est. Sit beatae animi incidunt eum repellat sequi
+                      ea saepe inventore. Id et vel et et. Nesciunt itaque
+                      corrupti quia ducimus. Consequatur maiores voluptatum
+                      fuga quod ut non fuga.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsTwo-4"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Quaerat qui est iusto asperiores qui est reiciendis eos
+                      et?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsTwo-4"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-2"
+                  >
+                    <div class="accordion-body">
+                      Numquam ut reiciendis aliquid. Quia veritatis quasi
+                      ipsam sed quo ut eligendi et non. Doloremque sed
+                      voluptatem at in voluptas aliquid dolorum.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsTwo-5"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Laboriosam asperiores eum?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsTwo-5"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-2"
+                  >
+                    <div class="accordion-body">
+                      Aut necessitatibus maxime quis dolor et. Nihil
+                      laboriosam molestiae qui molestias placeat corrupti non
+                      quo accusamus. Nemo qui quis harum enim sed. Aliquam
+                      molestias pariatur delectus voluptas quidem qui rerum id
+                      quisquam. Perspiciatis voluptatem voluptatem eos. Vel
+                      aut minus labore at rerum eos.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End F.A.Q Group 2 -->
+
+          <!-- F.A.Q Group 3 -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Dolore occaecati ducimus quam</h5>
+
+              <div class="accordion accordion-flush" id="faq-group-3">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsThree-1"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Assumenda doloribus est fugiat sint incidunt animi totam
+                      nisi?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsThree-1"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-3"
+                  >
+                    <div class="accordion-body">
+                      Ut quasi odit odio totam accusamus vero eius. Nostrum
+                      asperiores voluptatem eos nulla ab dolores est
+                      asperiores iure. Quo est quis praesentium aut maiores.
+                      Corrupti sed aut expedita fugit vero dolorem. Nemo rerum
+                      sapiente. A quaerat dignissimos.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsThree-2"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Consequatur saepe explicabo odio atque nisi?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsThree-2"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-3"
+                  >
+                    <div class="accordion-body">
+                      In minus quia impedit est quas deserunt deserunt et.
+                      Nulla non quo dolores minima fugiat aut saepe aut
+                      inventore. Qui nesciunt odio officia beatae iusto sed
+                      voluptatem possimus quas. Officia vitae sit voluptatem
+                      nostrum a.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsThree-3"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Voluptates vel est fugiat molestiae rem sit eos sint?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsThree-3"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-3"
+                  >
+                    <div class="accordion-body">
+                      Voluptates magni amet enim perspiciatis atque excepturi
+                      itaque est. Sit beatae animi incidunt eum repellat sequi
+                      ea saepe inventore. Id et vel et et. Nesciunt itaque
+                      corrupti quia ducimus. Consequatur maiores voluptatum
+                      fuga quod ut non fuga.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsThree-4"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Ab ipsa cum autem voluptas doloremque velit?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsThree-4"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-3"
+                  >
+                    <div class="accordion-body">
+                      Numquam ut reiciendis aliquid. Quia veritatis quasi
+                      ipsam sed quo ut eligendi et non. Doloremque sed
+                      voluptatem at in voluptas aliquid dolorum.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed"
+                      data-bs-target="#faqsThree-5"
+                      type="button"
+                      data-bs-toggle="collapse"
+                    >
+                      Aliquam magni ducimus facilis numquam dolorum harum
+                      eveniet iusto?
+                    </button>
+                  </h2>
+                  <div
+                    id="faqsThree-5"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faq-group-3"
+                  >
+                    <div class="accordion-body">
+                      Aut necessitatibus maxime quis dolor et. Nihil
+                      laboriosam molestiae qui molestias placeat corrupti non
+                      quo accusamus. Nemo qui quis harum enim sed. Aliquam
+                      molestias pariatur delectus voluptas quidem qui rerum id
+                      quisquam. Perspiciatis voluptatem voluptatem eos. Vel
+                      aut minus labore at rerum eos.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End F.A.Q Group 3 -->
+        </div>
+      </div>
+    </section>
   </main><!-- End #main -->
 
   <!-- ======= Rodapé ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>Swanshine</span></strong>. Todos os Direitos Reservados
-    </div>
-    <div class="credits">
-      <!-- Todos os links no rodapé devem permanecer intactos. -->
-      <!-- Você pode deletar os links somente se comprou a versão profissional. -->
-      <!-- Informações sobre licenciamento: https://bootstrapmade.com/license/ -->
-      <!-- Compre a versão profissional com formulário de contato PHP/AJAX funcional: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      
     </div>
   </footer><!-- Fim do Rodapé -->
 

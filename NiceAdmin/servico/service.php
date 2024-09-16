@@ -26,17 +26,17 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
-// Buscar os serviços oferecidos pelo profissional logado
-$stmt = $conn->prepare("SELECT servicos FROM profissionais WHERE email = ?");
+// Buscar o ID do profissional logado
+$stmt = $conn->prepare("SELECT id FROM profissionais WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $servicos_oferecidos = explode(', ', $row['servicos']); // Serviços oferecidos convertidos em array
+    $id_profissional = $row['id'];
 } else {
-    echo "Nenhum serviço encontrado para este profissional.";
+    echo "Profissional não encontrado.";
     exit();
 }
 
@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepara a consulta SQL
-    $sql = "INSERT INTO serviços (Nome, Preço, Descrição, caminho_imagem, imagem, horario) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO serviços (Nome, Preço, Descrição, id_profissionais, caminho_imagem, imagem, horario) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     // Prepara a declaração
     $stmt = $conn->prepare($sql);
@@ -95,7 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Erro ao preparar a consulta.");
     }
 
-    $stmt->bind_param('sssssb', $servico, $preco, $descricao, $caminhoImagem, $imagemBinaria, $horario);
+    // Definindo o parâmetro 'b' para o campo binário (imagem)
+    $stmt->bind_param('sssisbs', $servico, $preco, $descricao, $id_profissional, $caminhoImagem, $imagemBinaria, $horario);
 
     if ($stmt->execute()) {
         echo "Serviço cadastrado com sucesso!";
@@ -320,6 +321,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <li>
             <a href="../pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
           </li>
+          <li>
+            <a href="../pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+          </li>
         </ul>
       </li>
 
@@ -339,7 +343,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="service.php"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
           </li>
           <li>
-            <a href="service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
+            <a href="service-cadastrado.php"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
           </li>
         </ul>
       </li>
@@ -382,60 +386,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <section class="section">
-      <div class="container">
-        <form action="" method="post" id="formServico" enctype="multipart/form-data">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="servico">Serviço</label>
-                <select id="servico" name="servico" class="form-control" required>
-                  <option value="">Selecione</option>
-                  <option value="barbeiro">Barbeiro</option>
-                  <option value="maquiagem">Maquiagem</option>
-                  <option value="depilacao">Depilação</option>
-                  <option value="nail_designer">Nail Designer</option>
-                  <option value="lash_designer">Lash Designer</option>
-                  <option value="cabelereira">Cabelereira</option>
-                  <option value="trancista">Trancista</option>
-                  <option value="esteticista">Esteticista</option>
-                </select>
-              </div>
-            </div>
+        <div class="container">
+            <form action="" method="post" id="formServico" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="servico">Serviço</label>
+                            <select id="servico" name="servico" class="form-control" required>
+                                <option value="">Selecione</option>
+                                <option value="barbeiro">Barbeiro</option>
+                                <option value="maquiagem">Maquiagem</option>
+                                <option value="depilacao">Depilação</option>
+                                <option value="nail_designer">Nail Designer</option>
+                                <option value="lash_designer">Lash Designer</option>
+                                <option value="cabelereira">Cabelereira</option>
+                                <option value="trancista">Trancista</option>
+                                <option value="esteticista">Esteticista</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="horario">Horário</label>
-                <input type="time" id="horario" name="horario" class="form-control" required>
-              </div>
-            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="horario">Horário</label>
+                            <input type="time" id="horario" name="horario" class="form-control" required>
+                        </div>
+                    </div>
 
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="preco">Preço</label>
-                <input type="number" id="preco" name="preco" class="form-control" placeholder="Digite o preço" step="0.01" min="0" required>
-              </div>
-            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="preco">Preço</label>
+                            <input type="number" id="preco" name="preco" class="form-control" placeholder="Digite o preço" step="0.01" min="0" required>
+                        </div>
+                    </div>
 
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="imagem">Imagem</label>
-                <input type="file" name="imagem" id="imagem" class="form-control">
-              </div>
-            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="imagem">Imagem</label>
+                            <input type="file" name="imagem" id="imagem" class="form-control">
+                        </div>
+                    </div>
 
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="descricao">Descrição</label>
-                <textarea id="descricao" name="descricao" class="form-control" rows="4" placeholder="Descreva o serviço detalhadamente"></textarea>
-              </div>
-            </div>
-          </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="descricao">Descrição</label>
+                            <textarea id="descricao" name="descricao" class="form-control" rows="4" placeholder="Descreva o serviço detalhadamente"></textarea>
+                        </div>
+                    </div>
+                </div>
 
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Cadastre seu Serviço</button>
-          </div>
-        </form>
-      </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Cadastre seu Serviço</button>
+                </div>
+            </form>
+        </div>
     </section>
   </main>
   <!-- ======= Footer ======= -->

@@ -80,14 +80,14 @@ $conn->close();
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>SwanShine - Perfil</title>
+    <title>Swan Shine - Perfil</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="assets/img/favicon.png" rel="icon">
     <!-- Link para o favicon da página -->
-    <link href="../assets/img/favicon.png" rel="apple-touch-icon">
+    <link href="assets/img/favicon.png" rel="apple-touch-icon">
     <!-- Link para o ícone de toque da Apple -->
 
     <!-- Google Fonts -->
@@ -264,7 +264,7 @@ $conn->close();
                     <a href="servico/service.php"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
                 </li>
                 <li>
-                    <a href="servico/service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
+                    <a href="servico/service-cadastrado.php"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
                 </li>
             </ul>
         </li>
@@ -407,8 +407,6 @@ $conn->close();
                                 </div>
 
                                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit"><!-- Formulário de Edição do Perfil -->
-
-
                                     <form action="forms/atualizar_perfil.php" method="POST">
                                         <div class="row mb-3">
                                             <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nome Completo</label>

@@ -136,7 +136,7 @@ if (isset($_SESSION['recusado'])) {
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="../index.html" class="logo d-flex align-items-center">
+            <a href="../index.php" class="logo d-flex align-items-center">
                 <img src="../assets/img/logo_preta.png" alt="" />
                 <span class="d-none d-lg-block">Swan Shine</span>
             </a>
@@ -298,10 +298,10 @@ if (isset($_SESSION['recusado'])) {
                 class="nav-content collapse"
                 data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="servico/"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
+                    <a href="../servico/service.php"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
                 </li>
                 <li>
-                    <a href="servico/"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
+                    <a href="../servico/service-cadastrado.php"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
                 </li>
             </ul>
         </li>
