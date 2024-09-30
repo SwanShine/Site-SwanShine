@@ -14,8 +14,8 @@ if ($conn->connect_error) {
 }
 
 // Recebe os dados do formulário
-$servicos = isset($_POST['service']) ? implode(", ", $_POST['service']) : '';
-$tipo = $_POST['tipo'] ?? '';
+$servicos = "barbeiro"; // Valor fixo para serviços
+$tipo = $_POST['tipo'] ?? ''; // Novo campo para tipo
 $estilo = $_POST['estilo'] ?? '';
 $atendimento = $_POST['atendimento'] ?? '';
 $urgencia = $_POST['urgencia'] ?? '';
@@ -26,8 +26,8 @@ $email = $_POST['Email'] ?? '';
 $telefone = $_POST['Telefone'] ?? '';
 
 // Prepara e vincula
-$stmt = $conn->prepare("INSERT INTO pedidos (servicos, tipo, estilo, atendimento, urgencia, detalhes, cep, nome, email, telefone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssssss", $servicos, $tipo $estilo, $atendimento, $urgencia, $detalhes, $cep, $nome, $email, $telefone);
+$stmt = $conn->prepare("INSERT INTO pedidos (servicos, tipo, estilo, atendimento, urgencia, detalhes, cep, nome, email, telefone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssssss", $servicos, $tipo, $estilo, $atendimento, $urgencia, $detalhes, $cep, $nome, $email, $telefone);
 
 // Executa a inserção
 if ($stmt->execute()) {

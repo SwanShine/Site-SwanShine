@@ -371,304 +371,344 @@
               >Quero me cadastrar</a
             >
           </div>
-          
+
+          <form action="../../form/servicos.php" method="POST">   
             <!-- Seção do Formulário 1 -->
-            <form action="../../form/servicos.php" method="POST">
-              <div id="step-1" class="section-container form-container active">
+            <div id="step-1" class="section-container form-container active">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-1"></div>
                 </div>
                 <div class="subtitle">
-                  <img src="https://via.placeholder.com/20" alt="Ícone" />
-                  Orçamentos rápidos e seguros
+                    <img src="https://via.placeholder.com/20" alt="Ícone" />
+                    Orçamentos rápidos e seguros
                 </div>
                 <h2>Qual tipo de serviço de barbeiro você procura?</h2>
                 <div class="service-list">
-                  <label>
-                    <input type="checkbox" name="tipo[]" value="Corte de Cabelo Masculino" required />
-                    Corte de Cabelo Masculino
-                  </label>
-                  <label>
-                    <input type="checkbox" name="tipo[]" value="Barba" required />
-                    Barba
-                  </label>
-                  <label>
-                    <input type="checkbox" name="tipo[]" value="Desenho de Barba" required />
-                    Desenho de Barba
-                  </label>
-                  <label>
-                    <input type="checkbox" name="tipo[]" value="Corte de Cabelo com Máquina" required />
-                    Corte de Cabelo com Máquina
-                  </label>
-                  <label>
-                    <input type="checkbox" name="tipo[]" value="Corte de Cabelo e Barba" required />
-                    Corte de Cabelo e Barba
-                  </label>
-                  <label>
-                    <input type="checkbox" name="tipo[]" value="Tratamento Capilar Masculino" required />
-                    Tratamento Capilar Masculino
-                  </label>
-                  <label>
-                    <input type="checkbox" name="tipo[]" value="Outro" required />
-                    Outro
-                  </label>
+                    <label>
+                        <input type="checkbox" name="tipo[]" value="Corte de Cabelo Masculino" />
+                        Corte de Cabelo Masculino
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo[]" value="Barba" />
+                        Barba
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo[]" value="Desenho de Barba" />
+                        Desenho de Barba
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo[]" value="Corte de Cabelo com Máquina" />
+                        Corte de Cabelo com Máquina
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo[]" value="Corte de Cabelo e Barba" />
+                        Corte de Cabelo e Barba
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo[]" value="Tratamento Capilar Masculino" />
+                        Tratamento Capilar Masculino
+                    </label>
+                    <label>
+                        <input type="checkbox" name="tipo[]" value="Outro" />
+                        Outro
+                    </label>
                 </div>
                 <div class="buttons">
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
             
-
-            <!-- Seção do Formulário 2 -->
-            <form action="../../form/servicos.php" method="POST"> 
-              <div id="step-2" class="section-container form-container">
+            <!-- Seção do Formulário 2 --> 
+            <div id="step-2" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-2"></div>
                 </div>
                 <div class="subtitle">
-                  <img src="https://via.placeholder.com/20" alt="Ícone" /> Você está indo bem, agora falta pouco!
+                    <img src="https://via.placeholder.com/20" alt="Ícone" /> Você está indo bem, agora falta pouco!
                 </div>
                 <h2>Qual o estilo desejado para o corte de cabelo?</h2>
                 <div class="service-list">
-                  <label>
-                    <input type="radio" name="estilo" value="Clássico" required />
-                    Clássico
-                  </label>
-                  <label>
-                    <input type="radio" name="estilo" value="Moderno" required />
-                    Moderno
-                  </label>
-                  <label>
-                    <input type="radio" name="estilo" value="Desconectado" required />
-                    Desconectado
-                  </label>
-                  <label>
-                    <input type="radio" name="estilo" value="Fade" required />
-                    Fade
-                  </label>
-                  <label>
-                    <input type="radio" name="estilo" value="Com Franja" required />
-                    Com Franja
-                  </label>
-                  <label>
-                    <input type="radio" name="estilo" value="Outro" required />
-                    Outro
-                  </label>
+                    <label>
+                        <input type="radio" name="estilo" value="Clássico" required />
+                        Clássico
+                    </label>
+                    <label>
+                        <input type="radio" name="estilo" value="Moderno" required />
+                        Moderno
+                    </label>
+                    <label>
+                        <input type="radio" name="estilo" value="Desconectado" required />
+                        Desconectado
+                    </label>
+                    <label>
+                        <input type="radio" name="estilo" value="Fade" required />
+                        Fade
+                    </label>
+                    <label>
+                        <input type="radio" name="estilo" value="Com Franja" required />
+                        Com Franja
+                    </label>
+                    <label>
+                        <input type="radio" name="estilo" value="Outro" required />
+                        Outro
+                    </label>
                 </div>
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
             
-
             <!-- Seção do Formulário 3 -->
-            <form action="../../form/servicos.php" method="POST">
-              <div id="step-3" class="section-container form-container">
+            <div id="step-3" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-3"></div>
                 </div>
                 <div class="subtitle">
-                  <img src="https://via.placeholder.com/20" alt="Ícone" /> Você está indo bem, agora falta pouco!
+                    <img src="https://via.placeholder.com/20" alt="Ícone" /> Você está indo bem, agora falta pouco!
                 </div>
                 <h2>Onde você gostaria de ser atendido(a)?</h2>
                 <div class="service-list">
-                  <label>
-                    <input type="radio" name="atendimento" value="em-casa" required />
-                    Em casa
-                  </label>
-                  <label>
-                    <input type="radio" name="atendimento" value="espaco-profissional" required />
-                    Espaço do Profissional
-                  </label>
-                  <label>
-                    <input type="radio" name="atendimento" value="sem-preferencia" required />
-                    Sem Preferência
-                  </label>
+                    <label>
+                        <input type="radio" name="atendimento" value="em-casa" required />
+                        Em casa
+                    </label>
+                    <label>
+                        <input type="radio" name="atendimento" value="espaco-profissional" required />
+                        Espaço do Profissional
+                    </label>
+                    <label>
+                        <input type="radio" name="atendimento" value="sem-preferencia" required />
+                        Sem Preferência
+                    </label>
                 </div>
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
             
-
             <!-- Seção do Formulário 4 -->
-            <form action="../../form/servicos.php" method="POST">
-              <div id="step-4" class="section-container form-container">
+            <div id="step-4" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-4"></div>
                 </div>
                 <h2>Qual a urgência do seu pedido?</h2>
                 <div class="service-list">
-                  <select name="urgencia" id="urgencia" required>
-                    <option value="" disabled selected>
-                      Selecione uma opção
-                    </option>
-                    <option value="urgent">Urgente</option>
-                    <option value="8horas">Próximas 8 horas</option>
-                    <option value="12horas">Próximas 12 horas</option>
-                    <option value="2dias">Próximas 2 dias</option>
-                    <option value="semana">Próxima Semana</option>
-                    <option value="not-urgent">Não Urgente</option>
-                  </select>
+                    <select name="urgencia" id="urgencia" required>
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="urgent">Urgente</option>
+                        <option value="8horas">Próximas 8 horas</option>
+                        <option value="12horas">Próximas 12 horas</option>
+                        <option value="2dias">Próximas 2 dias</option>
+                        <option value="semana">Próxima Semana</option>
+                        <option value="not-urgent">Não Urgente</option>
+                    </select>
                 </div>
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
             
-
             <!-- Seção do Formulário 5 -->
-            <form action="../../form/servicos.php" method="POST">
-              <div id="step-5" class="section-container form-container">
+            <div id="step-5" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-5"></div>
                 </div>
                 <h2>Explique o que você precisa</h2>
                 <p>Você está indo bem, agora falta pouco!</p>
-                <textarea
-                  name="detalhes"
-                  placeholder='Traga todos os detalhes do seu pedido. Tente "Preciso de ..."'
-                  required
-                ></textarea>
-                <div class="hint">
-                  🛈 Quanto mais informações você fornecer, melhor será o seu pedido!
-                </div>
+                <textarea name="detalhes" placeholder='Traga todos os detalhes do seu pedido. Tente "Preciso de..."' required></textarea>
+                <div class="hint">🛈 Quanto mais informações você fornecer, melhor será o seu pedido!</div>
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
             
-
             <!-- Seção do Formulário 6 -->
-            <form action="../../form/servicos.php" method="POST">
-              <div id="step-6" class="section-container form-container">
+            <div id="step-6" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-6"></div>
                 </div>
                 <h2>Informe seu CEP</h2>
                 <p>Você está indo bem, agora falta pouco!</p>
-                <label for="CEP">CEP:</label>
-                <input
-                  type="text"
-                  name="CEP"
-                  id="CEP"
-                  placeholder="12345-678"
-                  required
-                />
+                <label for="cep">CEP:</label>
+                <input type="text" name="cep" id="cep" placeholder="12345-678" required />
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
             
-
             <!-- Seção do Formulário 7 -->
-            <form action="../../form/servicos.php" method="POST">
-              <div id="step-7" class="section-container form-container">
+            <div id="step-7" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-7"></div>
                 </div>
                 <h2>Informe seu Nome</h2>
                 <p>Você está indo bem, agora falta pouco!</p>
-                <label for="Nome">Nome:</label>
-                <input
-                  type="text"
-                  name="Nome"
-                  id="Nome"
-                  placeholder="Digite seu Nome Completo"
-                  required
-                />
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" placeholder="Digite seu Nome Completo" required />
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
             
-
             <!-- Seção do Formulário 8 -->
-            <form action="../../form/servicos.php" method="POST">
-              <div id="step-8" class="section-container form-container">
+            <div id="step-8" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-8"></div>
                 </div>
                 <h2>Informe seu E-mail</h2>
                 <p>Você está indo bem, agora falta pouco!</p>
-                <label for="Email">E-mail:</label>
-                <input
-                  type="email"
-                  name="Email"
-                  id="Email"
-                  placeholder="Digite seu E-mail"
-                  required
-                />
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email" placeholder="Digite seu E-mail" required />
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
             
-
             <!-- Seção do Formulário 9 -->
-            <form action="../../form/servicos.php" method="POST">
-              <div id="step-9" class="section-container form-container">
+            <div id="step-9" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-9"></div>
                 </div>
                 <h2>Informe seu Telefone</h2>
                 <p>Você está indo bem, agora falta pouco!</p>
-                <label for="Telefone">Telefone:</label>
-                <input
-                  type="text"
-                  name="Telefone"
-                  id="Telefone"
-                  placeholder="Digite seu Telefone"
-                  required
-                />
+                <label for="telefone">Telefone:</label>
+                <input type="text" name="telefone" id="telefone" placeholder="Digite seu Telefone" required />
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="nextStep()">Continuar</button>
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="nextStep()">Continuar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
-
-
+            </div>
+            
             <!-- Seção do Formulário 10 -->
-            <form id="service-form" action="../../form/servicos.php" method="POST">
-              <div id="step-10" class="section-container form-container">
+            <div id="step-10" class="section-container form-container">
                 <div class="progress-bar">
-                  <div class="progress" id="progress-bar"></div>
+                    <div class="progress" id="progress-bar-10"></div>
                 </div>
                 <h2>Deseja enviar as informações?</h2>
                 <p>Você está quase lá! Revise seus dados antes de enviar.</p>
-                <div id="summary-container"></div> <!-- Para mostrar um resumo das informações -->
+                <div id="summary-container" style="display:none;"></div> <!-- Para mostrar um resumo das informações -->
                 <div class="buttons">
-                  <button type="button" onclick="prevStep()">Voltar</button>
-                  <button type="button" onclick="submitForm()">Enviar</button> <!-- Mudança para botão com função JavaScript -->
+                    <button type="button" onclick="prevStep()">Voltar</button>
+                    <button type="button" onclick="submitForm()">Enviar</button>
                 </div>
                 <div class="footer-text">Orçamentos em até 60 minutos</div>
-              </div>
-            </form>
+            </div>
+        </form>
+        
+ <script>       
+        // Variáveis globais
+        let currentStep = 0;
+        const steps = document.querySelectorAll('.section-container');
+        const progressBars = document.querySelectorAll('.progress');
+        
+        function showStep(step) {
+            // Oculta todas as seções do formulário
+            steps.forEach((section, index) => {
+                section.style.display = index === step ? 'block' : 'none';
+            });
+            
+            // Atualiza a barra de progresso
+            const progressPercent = ((step + 1) / steps.length) * 100;
+            progressBars.forEach(progress => {
+                progress.style.width = `${progressPercent}%`;
+            });
+        
+            // Atualiza o resumo das informações na última seção
+            if (step === steps.length - 1) {
+                updateSummary();
+            }
+        }
+        
+        function nextStep() {
+            // Valida se todos os campos obrigatórios estão preenchidos
+            if (validateCurrentStep()) {
+                currentStep++;
+                if (currentStep >= steps.length) {
+                    currentStep = steps.length - 1; // Impede que o índice ultrapasse o número de etapas
+                }
+                showStep(currentStep);
+            }
+        }
+        
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+        
+        function validateCurrentStep() {
+            const currentInputs = steps[currentStep].querySelectorAll('input, select, textarea');
+            let isValid = true;
+            currentInputs.forEach(input => {
+                if (input.required && !input.value) {
+                    isValid = false;
+                    input.classList.add('input-error'); // Adiciona classe para estilizar o erro
+                } else {
+                    input.classList.remove('input-error'); // Remove classe se o campo está válido
+                }
+            });
+            return isValid;
+        }
+        
+        function updateSummary() {
+            const summaryContainer = document.getElementById('summary-container');
+            summaryContainer.innerHTML = ''; // Limpa o conteúdo anterior
+        
+            // Coleta informações dos campos e gera um resumo
+            const fields = [
+                { name: 'tipo', label: 'Tipo de Serviço' },
+                { name: 'estilo', label: 'Estilo Desejado' },
+                { name: 'atendimento', label: 'Local de Atendimento' },
+                { name: 'urgencia', label: 'Urgência do Pedido' },
+                { name: 'detalhes', label: 'Detalhes do Pedido' },
+                { name: 'cep', label: 'CEP' },
+                { name: 'nome', label: 'Nome' },
+                { name: 'email', label: 'E-mail' },
+                { name: 'telefone', label: 'Telefone' }
+            ];
+        
+            fields.forEach(field => {
+                const inputValue = document.querySelector(`[name="${field.name}"]`);
+                if (inputValue) {
+                    let value = inputValue.value;
+                    if (Array.isArray(value)) {
+                        value = value.join(', '); // Para checkboxes, junta os valores
+                    }
+                    summaryContainer.innerHTML += `<p><strong>${field.label}:</strong> ${value}</p>`;
+                }
+            });
+        
+            summaryContainer.style.display = 'block'; // Exibe o resumo
+        }
+        
+        function submitForm() {
+            // Aqui você pode fazer mais validações ou processar o envio
+            const form = document.querySelector('form');
+            if (validateCurrentStep()) {
+                form.submit(); // Envia o formulário
+            }
+        }
+        
+        // Inicializa o formulário mostrando o primeiro passo
+        showStep(currentStep);
+</script>        
 
         </div>
       </section>
@@ -703,157 +743,5 @@
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/main1.js"></script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        let currentStep = 1; // Passo atual do formulário
-        const totalSteps = 10; // Total de passos no formulário
-        const formData = {}; // Objeto para armazenar dados do formulário
-    
-        // Atualiza a barra de progresso
-        function updateProgress() {
-          const progress = document.getElementById("progress-bar");
-          const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
-          progress.style.width = `${percentage}%`;
-        }
-    
-        // Exibe o passo atual do formulário
-        function showStep(step) {
-          const sections = document.querySelectorAll(".section-container");
-          sections.forEach((section, index) => {
-            section.classList.toggle("active", index + 1 === step);
-          });
-          updateProgress();
-          populateFields(step);
-        }
-    
-        // Avança para o próximo passo do formulário
-        function nextStep() {
-          if (isValidStep(currentStep)) {
-            if (currentStep === totalSteps) {
-              showSummary(); // Mostra o resumo
-              return;
-            }
-            storeData(currentStep);
-            currentStep++;
-            showStep(currentStep);
-          } else {
-            alert("Por favor, preencha todos os campos obrigatórios.");
-          }
-        }
-    
-        // Volta ao passo anterior do formulário
-        function prevStep() {
-          if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
-          }
-        }
-    
-        // Valida os campos do passo atual
-        function isValidStep(step) {
-          const currentSection = document.getElementById(`step-${step}`);
-          const inputs = currentSection.querySelectorAll("input[required], textarea[required], select[required]");
-          let valid = true;
-    
-          inputs.forEach((input) => {
-            if (input.type === "checkbox" || input.type === "radio") {
-              const name = input.name;
-              const checkedInputs = document.querySelectorAll(`input[name="${name}"]:checked`);
-              if (checkedInputs.length === 0) valid = false;
-            } else {
-              if (input.value.trim() === "") valid = false;
-            }
-          });
-    
-          return valid;
-        }
-    
-        // Armazena dados do formulário
-        function storeData(step) {
-          const currentSection = document.getElementById(`step-${step}`);
-          const inputs = currentSection.querySelectorAll("input, textarea, select");
-    
-          inputs.forEach((input) => {
-            if (input.type !== "checkbox" && input.type !== "radio") {
-              formData[input.name] = input.value;
-            } else if (input.checked) {
-              formData[input.name] = input.value;
-            }
-          });
-        }
-    
-        // Preenche os campos com os dados armazenados
-        function populateFields(step) {
-          const currentSection = document.getElementById(`step-${step}`);
-          const inputs = currentSection.querySelectorAll("input, textarea, select");
-    
-          inputs.forEach((input) => {
-            if (input.type !== "checkbox" && input.type !== "radio") {
-              input.value = formData[input.name] || "";
-            } else {
-              input.checked = formData[input.name] === input.value;
-            }
-          });
-        }
-    
-        // Mostra o resumo no passo final
-        function showSummary() {
-          const summaryContainer = document.getElementById("summary-container");
-          summaryContainer.innerHTML = ""; // Limpa o conteúdo anterior
-    
-          for (const key in formData) {
-            const div = document.createElement("div");
-            div.classList.add("summary-item");
-            div.innerHTML = `<strong>${key}:</strong> ${formData[key]}`;
-            summaryContainer.appendChild(div);
-          }
-        }
-    
-        // Envia o formulário
-        function submitForm() {
-          const form = document.querySelector("form");
-          const formDataToSend = new FormData();
-    
-          // Adiciona os dados do objeto formData ao FormData para envio
-          for (const key in formData) {
-            formDataToSend.append(key, formData[key]);
-          }
-    
-          fetch("../../servicos.php", {
-            method: "POST",
-            body: formDataToSend,
-          })
-            .then((response) => response.text())
-            .then((data) => {
-              console.log("Resposta do servidor:", data);
-              document.getElementById("success-message").style.display = "block";
-              document.getElementById("card-container").style.display = "none";
-            })
-            .catch((error) => {
-              console.error("Erro:", error);
-            });
-        }
-    
-        showStep(currentStep); // Exibe o primeiro passo
-    
-        // Máscaras para telefone e CEP
-        const telefoneMask = new Inputmask("(99) 99999-9999");
-        telefoneMask.mask(document.getElementById("Telefone"));
-    
-        const cepMask = new Inputmask("99999-999");
-        cepMask.mask(document.getElementById("CEP"));
-    
-        // Armazena dados ao mudar os campos
-        document.querySelectorAll("input, textarea, select").forEach((input) => {
-          input.addEventListener("change", () => storeData(currentStep));
-        });
-    
-        // Expondo as funções para o escopo global
-        window.nextStep = nextStep;
-        window.prevStep = prevStep;
-        window.submitForm = submitForm;
-      });
-    </script>
-    
   </body>
 </html>
