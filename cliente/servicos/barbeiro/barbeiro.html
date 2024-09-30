@@ -205,113 +205,219 @@
   </head>
 
   <body>
-   <!-- ======= Header ======= -->
-   <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo_preta.png" alt="">
-        <span class="d-none d-lg-block">Swan Shine</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="../../index.php" class="logo d-flex align-items-center">
+          <img src="../../assets/img/logo_preta.png" alt="" />
+          <span class="d-none d-lg-block">Swan Shine</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
 
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <!-- Notifications Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-bell"></i>
+              <span class="badge bg-primary badge-number">0</span>
+            </a>
 
-        <!-- Notifications Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">0</span>
-          </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+            >
+              <li class="dropdown-header">
+                Você tem 0 notificações
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Ver todas</span
+                  ></a
+                >
+              </li>
+              <li class="dropdown-footer">
+                <a href="#">Mostrar todas as notificações</a>
+              </li>
+            </ul>
+          </li>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Você tem 0 notificações
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Mostrar todas as notificações</a>
-            </li>
-          </ul>
-        </li>
+          <!-- Messages Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="badge bg-success badge-number">0</span>
+            </a>
 
-        <!-- Messages Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">0</span>
-          </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
+            >
+              <li class="dropdown-header">
+                Você tem 0 mensagens
+                <a href="../../mensagem.html"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Ver todas</span
+                  ></a
+                >
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li class="dropdown-footer">
+                <a href="../../mensagem.html">Mostrar todas as mensagens</a>
+              </li>
+            </ul>
+          </li>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              Você tem 0 mensagens
-              <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="mensagem.html">Mostrar todas as mensagens</a>
-            </li>
-          </ul>
-        </li>
+          <!-- Profile Dropdown -->
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="../../perfil.php"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                src="../../assets/img/usuario.png"
+                alt="Profile"
+                class="rounded-circle"
+              />
+            </a>
 
-        <!-- Profile Dropdown -->
-        <li class="nav-item dropdown pe-3">
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../../assets/img/usuario.png" alt="Profile" class="rounded-circle">
-          </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../perfil.php"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>Meu Perfil</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../perfil.php"
+                >
+                  <i class="bi bi-gear"></i>
+                  <span>Configurações da Conta</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../manutencao.html"
+                >
+                  <i class="bi bi-question-circle"></i>
+                  <span>Precisa de Ajuda?</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../forms/log_out.php"
+                >
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sair</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="../../perfil.php">
-                <i class="bi bi-person"></i>
-                <span>Meu Perfil</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="../../perfil.php">
-                <i class="bi bi-gear"></i>
-                <span>Configurações da Conta</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Precisa de Ajuda?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="../../../index.html">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sair</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-    <!-- ======= Sidebar ======= -->
+    <!-- ======= Barra Lateral ======= -->
     <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-          <a class="nav-link collapsed" href="../../index.html">
+          <a class="nav-link collapsed" href="../../index.php">
             <i class="bi bi-grid"></i>
             <span>Início</span>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#components-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-menu-button-wide"></i><span>Pedidos</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="components-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="../../pedidos/pedido_pendente.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a
+              >
+            </li>
+            <li>
+              <a href="../../pedidos/pedido_andamento.php"
+                ><i class="bi bi-circle"></i
+                ><span>Pedidos Em Andamento</span></a
+              >
+            </li>
+            <li>
+              <a href="../../pedidos/pedido_recusado.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a
+              >
+            </li>
+            <li>
+              <a href="../../pedidos/pedido_concluido.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#components-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-menu-button-wide"></i><span>Serviços</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="components-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="../../servicos.php"
+                ><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a
+              >
+            </li>
+            <li>
+              <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../mensagens.html">
+            <i class="bi bi-envelope"></i>
+            <span>Mensagens</span>
+          </a>
+        </li>
+
         <!-- Perfil -->
         <li class="nav-item">
           <a class="nav-link collapsed" href="../../perfil.php">
@@ -319,26 +425,16 @@
             <span>Perfil</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="../../service.html">
-            <i class="bi bi-card-list"></i>
-            <span>Serviços</span>
-          </a>
-        </li>
+
         <li class="nav-item">
           <a class="nav-link collapsed" href="../../suporte.html">
             <i class="bi bi-chat-dots"></i>
             <span>Suporte</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="../../mensagem.html">
-            <i class="bi bi-envelope"></i>
-            <span>Mensagens</span>
-          </a>
-        </li>
       </ul>
     </aside>
+    <!-- End Sidebar-->
 
     <!-- Main Content -->
     <main id="main" class="main">
@@ -356,7 +452,6 @@
       <!-- Services Section -->
       <section class="section">
         <div class="main-container">
-          
           <!-- Seção de CTA -->
           <div class="cta-container">
             <div class="cta-title">Você é Barbeiro Profissional?</div>
@@ -372,344 +467,429 @@
             >
           </div>
 
-          <form action="barbeiro.php" method="POST">   
+          <form action="barbeiro.php" method="POST">
             <!-- Seção do Formulário 1 -->
             <div id="step-1" class="section-container form-container active">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-1"></div>
-                </div>
-                <div class="subtitle">
-                    <img src="https://via.placeholder.com/20" alt="Ícone" />
-                    Orçamentos rápidos e seguros
-                </div>
-                <h2>Qual tipo de serviço de barbeiro você procura?</h2>
-                <div class="service-list">
-                    <label>
-                        <input type="checkbox" name="tipo[]" value="Corte de Cabelo Masculino" />
-                        Corte de Cabelo Masculino
-                    </label>
-                    <label>
-                        <input type="checkbox" name="tipo[]" value="Barba" />
-                        Barba
-                    </label>
-                    <label>
-                        <input type="checkbox" name="tipo[]" value="Desenho de Barba" />
-                        Desenho de Barba
-                    </label>
-                    <label>
-                        <input type="checkbox" name="tipo[]" value="Corte de Cabelo com Máquina" />
-                        Corte de Cabelo com Máquina
-                    </label>
-                    <label>
-                        <input type="checkbox" name="tipo[]" value="Corte de Cabelo e Barba" />
-                        Corte de Cabelo e Barba
-                    </label>
-                    <label>
-                        <input type="checkbox" name="tipo[]" value="Tratamento Capilar Masculino" />
-                        Tratamento Capilar Masculino
-                    </label>
-                    <label>
-                        <input type="checkbox" name="tipo[]" value="Outro" />
-                        Outro
-                    </label>
-                </div>
-                <div class="buttons">
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-1"></div>
+              </div>
+              <div class="subtitle">
+                <img src="https://via.placeholder.com/20" alt="Ícone" />
+                Orçamentos rápidos e seguros
+              </div>
+              <h2>Qual tipo de serviço de barbeiro você procura?</h2>
+              <div class="service-list">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="tipo[]"
+                    value="Corte de Cabelo Masculino"
+                  />
+                  Corte de Cabelo Masculino
+                </label>
+                <label>
+                  <input type="checkbox" name="tipo[]" value="Barba" />
+                  Barba
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="tipo[]"
+                    value="Desenho de Barba"
+                  />
+                  Desenho de Barba
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="tipo[]"
+                    value="Corte de Cabelo com Máquina"
+                  />
+                  Corte de Cabelo com Máquina
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="tipo[]"
+                    value="Corte de Cabelo e Barba"
+                  />
+                  Corte de Cabelo e Barba
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="tipo[]"
+                    value="Tratamento Capilar Masculino"
+                  />
+                  Tratamento Capilar Masculino
+                </label>
+                <label>
+                  <input type="checkbox" name="tipo[]" value="Outro" />
+                  Outro
+                </label>
+              </div>
+              <div class="buttons">
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
-            <!-- Seção do Formulário 2 --> 
+
+            <!-- Seção do Formulário 2 -->
             <div id="step-2" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-2"></div>
-                </div>
-                <div class="subtitle">
-                    <img src="https://via.placeholder.com/20" alt="Ícone" /> Você está indo bem, agora falta pouco!
-                </div>
-                <h2>Qual o estilo desejado para o corte de cabelo?</h2>
-                <div class="service-list">
-                    <label>
-                        <input type="radio" name="estilo" value="Clássico" required />
-                        Clássico
-                    </label>
-                    <label>
-                        <input type="radio" name="estilo" value="Moderno" required />
-                        Moderno
-                    </label>
-                    <label>
-                        <input type="radio" name="estilo" value="Desconectado" required />
-                        Desconectado
-                    </label>
-                    <label>
-                        <input type="radio" name="estilo" value="Fade" required />
-                        Fade
-                    </label>
-                    <label>
-                        <input type="radio" name="estilo" value="Com Franja" required />
-                        Com Franja
-                    </label>
-                    <label>
-                        <input type="radio" name="estilo" value="Outro" required />
-                        Outro
-                    </label>
-                </div>
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-2"></div>
+              </div>
+              <div class="subtitle">
+                <img src="https://via.placeholder.com/20" alt="Ícone" /> Você
+                está indo bem, agora falta pouco!
+              </div>
+              <h2>Qual o estilo desejado para o corte de cabelo?</h2>
+              <div class="service-list">
+                <label>
+                  <input type="radio" name="estilo" value="Clássico" required />
+                  Clássico
+                </label>
+                <label>
+                  <input type="radio" name="estilo" value="Moderno" required />
+                  Moderno
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="estilo"
+                    value="Desconectado"
+                    required
+                  />
+                  Desconectado
+                </label>
+                <label>
+                  <input type="radio" name="estilo" value="Fade" required />
+                  Fade
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="estilo"
+                    value="Com Franja"
+                    required
+                  />
+                  Com Franja
+                </label>
+                <label>
+                  <input type="radio" name="estilo" value="Outro" required />
+                  Outro
+                </label>
+              </div>
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
+
             <!-- Seção do Formulário 3 -->
             <div id="step-3" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-3"></div>
-                </div>
-                <div class="subtitle">
-                    <img src="https://via.placeholder.com/20" alt="Ícone" /> Você está indo bem, agora falta pouco!
-                </div>
-                <h2>Onde você gostaria de ser atendido(a)?</h2>
-                <div class="service-list">
-                    <label>
-                        <input type="radio" name="atendimento" value="em-casa" required />
-                        Em casa
-                    </label>
-                    <label>
-                        <input type="radio" name="atendimento" value="espaco-profissional" required />
-                        Espaço do Profissional
-                    </label>
-                    <label>
-                        <input type="radio" name="atendimento" value="sem-preferencia" required />
-                        Sem Preferência
-                    </label>
-                </div>
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-3"></div>
+              </div>
+              <div class="subtitle">
+                <img src="https://via.placeholder.com/20" alt="Ícone" /> Você
+                está indo bem, agora falta pouco!
+              </div>
+              <h2>Onde você gostaria de ser atendido(a)?</h2>
+              <div class="service-list">
+                <label>
+                  <input
+                    type="radio"
+                    name="atendimento"
+                    value="em-casa"
+                    required
+                  />
+                  Em casa
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="atendimento"
+                    value="espaco-profissional"
+                    required
+                  />
+                  Espaço do Profissional
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="atendimento"
+                    value="sem-preferencia"
+                    required
+                  />
+                  Sem Preferência
+                </label>
+              </div>
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
+
             <!-- Seção do Formulário 4 -->
             <div id="step-4" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-4"></div>
-                </div>
-                <h2>Qual a urgência do seu pedido?</h2>
-                <div class="service-list">
-                    <select name="urgencia" id="urgencia" required>
-                        <option value="" disabled selected>Selecione uma opção</option>
-                        <option value="urgent">Urgente</option>
-                        <option value="8horas">Próximas 8 horas</option>
-                        <option value="12horas">Próximas 12 horas</option>
-                        <option value="2dias">Próximas 2 dias</option>
-                        <option value="semana">Próxima Semana</option>
-                        <option value="not-urgent">Não Urgente</option>
-                    </select>
-                </div>
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-4"></div>
+              </div>
+              <h2>Qual a urgência do seu pedido?</h2>
+              <div class="service-list">
+                <select name="urgencia" id="urgencia" required>
+                  <option value="" disabled selected>
+                    Selecione uma opção
+                  </option>
+                  <option value="urgent">Urgente</option>
+                  <option value="8horas">Próximas 8 horas</option>
+                  <option value="12horas">Próximas 12 horas</option>
+                  <option value="2dias">Próximas 2 dias</option>
+                  <option value="semana">Próxima Semana</option>
+                  <option value="not-urgent">Não Urgente</option>
+                </select>
+              </div>
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
+
             <!-- Seção do Formulário 5 -->
             <div id="step-5" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-5"></div>
-                </div>
-                <h2>Explique o que você precisa</h2>
-                <p>Você está indo bem, agora falta pouco!</p>
-                <textarea name="detalhes" placeholder='Traga todos os detalhes do seu pedido. Tente "Preciso de..."' required></textarea>
-                <div class="hint">🛈 Quanto mais informações você fornecer, melhor será o seu pedido!</div>
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-5"></div>
+              </div>
+              <h2>Explique o que você precisa</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <textarea
+                name="detalhes"
+                placeholder='Traga todos os detalhes do seu pedido. Tente "Preciso de..."'
+                required
+              ></textarea>
+              <div class="hint">
+                🛈 Quanto mais informações você fornecer, melhor será o seu
+                pedido!
+              </div>
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
+
             <!-- Seção do Formulário 6 -->
             <div id="step-6" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-6"></div>
-                </div>
-                <h2>Informe seu CEP</h2>
-                <p>Você está indo bem, agora falta pouco!</p>
-                <label for="cep">CEP:</label>
-                <input type="text" name="cep" id="cep" placeholder="12345-678" required />
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-6"></div>
+              </div>
+              <h2>Informe seu CEP</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <label for="cep">CEP:</label>
+              <input
+                type="text"
+                name="cep"
+                id="cep"
+                placeholder="12345-678"
+                required
+              />
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
+
             <!-- Seção do Formulário 7 -->
             <div id="step-7" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-7"></div>
-                </div>
-                <h2>Informe seu Nome</h2>
-                <p>Você está indo bem, agora falta pouco!</p>
-                <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" placeholder="Digite seu Nome Completo" required />
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-7"></div>
+              </div>
+              <h2>Informe seu Nome</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <label for="nome">Nome:</label>
+              <input
+                type="text"
+                name="nome"
+                id="nome"
+                placeholder="Digite seu Nome Completo"
+                required
+              />
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
+
             <!-- Seção do Formulário 8 -->
             <div id="step-8" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-8"></div>
-                </div>
-                <h2>Informe seu E-mail</h2>
-                <p>Você está indo bem, agora falta pouco!</p>
-                <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email" placeholder="Digite seu E-mail" required />
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-8"></div>
+              </div>
+              <h2>Informe seu E-mail</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <label for="email">E-mail:</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Digite seu E-mail"
+                required
+              />
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
+
             <!-- Seção do Formulário 9 -->
             <div id="step-9" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-9"></div>
-                </div>
-                <h2>Informe seu Telefone</h2>
-                <p>Você está indo bem, agora falta pouco!</p>
-                <label for="telefone">Telefone:</label>
-                <input type="text" name="telefone" id="telefone" placeholder="Digite seu Telefone" required />
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="nextStep()">Continuar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-9"></div>
+              </div>
+              <h2>Informe seu Telefone</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <label for="telefone">Telefone:</label>
+              <input
+                type="text"
+                name="telefone"
+                id="telefone"
+                placeholder="Digite seu Telefone"
+                required
+              />
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-            
+
             <!-- Seção do Formulário 10 -->
             <div id="step-10" class="section-container form-container">
-                <div class="progress-bar">
-                    <div class="progress" id="progress-bar-10"></div>
-                </div>
-                <h2>Deseja enviar as informações?</h2>
-                <p>Você está quase lá! Revise seus dados antes de enviar.</p>
-                <div id="summary-container" style="display:none;"></div> <!-- Para mostrar um resumo das informações -->
-                <div class="buttons">
-                    <button type="button" onclick="prevStep()">Voltar</button>
-                    <button type="button" onclick="submitForm()">Enviar</button>
-                </div>
-                <div class="footer-text">Orçamentos em até 60 minutos</div>
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-10"></div>
+              </div>
+              <h2>Deseja enviar as informações?</h2>
+              <p>Você está quase lá! Revise seus dados antes de enviar.</p>
+              <div id="summary-container" style="display: none"></div>
+              <!-- Para mostrar um resumo das informações -->
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="submitForm()">Enviar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
             </div>
-        </form>
-        
- <script>       
-        // Variáveis globais
-        let currentStep = 0;
-        const steps = document.querySelectorAll('.section-container');
-        const progressBars = document.querySelectorAll('.progress');
-        
-        function showStep(step) {
-            // Oculta todas as seções do formulário
-            steps.forEach((section, index) => {
-                section.style.display = index === step ? 'block' : 'none';
-            });
-            
-            // Atualiza a barra de progresso
-            const progressPercent = ((step + 1) / steps.length) * 100;
-            progressBars.forEach(progress => {
+          </form>
+
+          <script>
+            // Variáveis globais
+            let currentStep = 0;
+            const steps = document.querySelectorAll(".section-container");
+            const progressBars = document.querySelectorAll(".progress");
+
+            function showStep(step) {
+              // Oculta todas as seções do formulário
+              steps.forEach((section, index) => {
+                section.style.display = index === step ? "block" : "none";
+              });
+
+              // Atualiza a barra de progresso
+              const progressPercent = ((step + 1) / steps.length) * 100;
+              progressBars.forEach((progress) => {
                 progress.style.width = `${progressPercent}%`;
-            });
-        
-            // Atualiza o resumo das informações na última seção
-            if (step === steps.length - 1) {
+              });
+
+              // Atualiza o resumo das informações na última seção
+              if (step === steps.length - 1) {
                 updateSummary();
+              }
             }
-        }
-        
-        function nextStep() {
-            // Valida se todos os campos obrigatórios estão preenchidos
-            if (validateCurrentStep()) {
+
+            function nextStep() {
+              // Valida se todos os campos obrigatórios estão preenchidos
+              if (validateCurrentStep()) {
                 currentStep++;
                 if (currentStep >= steps.length) {
-                    currentStep = steps.length - 1; // Impede que o índice ultrapasse o número de etapas
+                  currentStep = steps.length - 1; // Impede que o índice ultrapasse o número de etapas
                 }
                 showStep(currentStep);
+              }
             }
-        }
-        
-        function prevStep() {
-            if (currentStep > 0) {
+
+            function prevStep() {
+              if (currentStep > 0) {
                 currentStep--;
                 showStep(currentStep);
+              }
             }
-        }
-        
-        function validateCurrentStep() {
-            const currentInputs = steps[currentStep].querySelectorAll('input, select, textarea');
-            let isValid = true;
-            currentInputs.forEach(input => {
-                if (input.required && !input.value) {
-                    isValid = false;
-                    input.classList.add('input-error'); // Adiciona classe para estilizar o erro
-                } else {
-                    input.classList.remove('input-error'); // Remove classe se o campo está válido
-                }
-            });
-            return isValid;
-        }
-        
-        function updateSummary() {
-            const summaryContainer = document.getElementById('summary-container');
-            summaryContainer.innerHTML = ''; // Limpa o conteúdo anterior
-        
-            // Coleta informações dos campos e gera um resumo
-            const fields = [
-                { name: 'tipo', label: 'Tipo de Serviço' },
-                { name: 'estilo', label: 'Estilo Desejado' },
-                { name: 'atendimento', label: 'Local de Atendimento' },
-                { name: 'urgencia', label: 'Urgência do Pedido' },
-                { name: 'detalhes', label: 'Detalhes do Pedido' },
-                { name: 'cep', label: 'CEP' },
-                { name: 'nome', label: 'Nome' },
-                { name: 'email', label: 'E-mail' },
-                { name: 'telefone', label: 'Telefone' }
-            ];
-        
-            fields.forEach(field => {
-                const inputValue = document.querySelector(`[name="${field.name}"]`);
-                if (inputValue) {
-                    let value = inputValue.value;
-                    if (Array.isArray(value)) {
-                        value = value.join(', '); // Para checkboxes, junta os valores
-                    }
-                    summaryContainer.innerHTML += `<p><strong>${field.label}:</strong> ${value}</p>`;
-                }
-            });
-        
-            summaryContainer.style.display = 'block'; // Exibe o resumo
-        }
-        
-        function submitForm() {
-            // Aqui você pode fazer mais validações ou processar o envio
-            const form = document.querySelector('form');
-            if (validateCurrentStep()) {
-                form.submit(); // Envia o formulário
-            }
-        }
-        
-        // Inicializa o formulário mostrando o primeiro passo
-        showStep(currentStep);
-</script>        
 
+            function validateCurrentStep() {
+              const currentInputs = steps[currentStep].querySelectorAll(
+                "input, select, textarea"
+              );
+              let isValid = true;
+              currentInputs.forEach((input) => {
+                if (input.required && !input.value) {
+                  isValid = false;
+                  input.classList.add("input-error"); // Adiciona classe para estilizar o erro
+                } else {
+                  input.classList.remove("input-error"); // Remove classe se o campo está válido
+                }
+              });
+              return isValid;
+            }
+
+            function updateSummary() {
+              const summaryContainer =
+                document.getElementById("summary-container");
+              summaryContainer.innerHTML = ""; // Limpa o conteúdo anterior
+
+              // Coleta informações dos campos e gera um resumo
+              const fields = [
+                { name: "tipo", label: "Tipo de Serviço" },
+                { name: "estilo", label: "Estilo Desejado" },
+                { name: "atendimento", label: "Local de Atendimento" },
+                { name: "urgencia", label: "Urgência do Pedido" },
+                { name: "detalhes", label: "Detalhes do Pedido" },
+                { name: "cep", label: "CEP" },
+                { name: "nome", label: "Nome" },
+                { name: "email", label: "E-mail" },
+                { name: "telefone", label: "Telefone" },
+              ];
+
+              fields.forEach((field) => {
+                const inputValue = document.querySelector(
+                  `[name="${field.name}"]`
+                );
+                if (inputValue) {
+                  let value = inputValue.value;
+                  if (Array.isArray(value)) {
+                    value = value.join(", "); // Para checkboxes, junta os valores
+                  }
+                  summaryContainer.innerHTML += `<p><strong>${field.label}:</strong> ${value}</p>`;
+                }
+              });
+
+              summaryContainer.style.display = "block"; // Exibe o resumo
+            }
+
+            function submitForm() {
+              // Aqui você pode fazer mais validações ou processar o envio
+              const form = document.querySelector("form");
+              if (validateCurrentStep()) {
+                form.submit(); // Envia o formulário
+              }
+            }
+
+            // Inicializa o formulário mostrando o primeiro passo
+            showStep(currentStep);
+          </script>
         </div>
       </section>
     </main>
@@ -742,6 +922,5 @@
     <!-- Main JavaScript -->
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/main1.js"></script>
-
   </body>
 </html>

@@ -30,14 +30,14 @@ $sql = "SELECT * FROM profissionais";
 $result = $conn->query($sql);
 
 $profissionais = [
-  'barbeiro' => [],
-  'maquiagem' => [],
-  'lash_designer' => [],
-  'nail_designer' => [],
-  'trancista' => [],
-  'esteticista' => [],
-  'cabeleireira' => [],
-  'depilacao' => []
+  'Barbeiro' => [],
+  'Maquiagem' => [],
+  'Lash_Designer' => [],
+  'Nail_Designer' => [],
+  'Trancista' => [],
+  'Esteticista' => [],
+  'Cabeleireira' => [],
+  'Depilação' => []
 ];
 
 if ($result->num_rows > 0) {
@@ -92,10 +92,136 @@ $conn->close();
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="assets/css/services.css" rel="stylesheet">
-  <link href="assets/css/ver_profissionais.css" rel="stylesheet">
-  <style>
 
+  <style>
+    /* Estilos gerais do container */
+
+    /* Estilização para todos os cards */
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      width: 300px;
+      /* Define uma largura fixa para os cards */
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      /* Animação ao passar o mouse */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      /* Sombra mais forte no hover */
+    }
+
+    /* Estilo para o título dentro do card */
+    .card h2 {
+      color: #333;
+      margin: 0 0 10px;
+      font-size: 28px;
+      /* Aumenta o tamanho da fonte para o título */
+    }
+
+    /* Estilo para os parágrafos dentro do card */
+    .card p {
+      color: #777;
+      margin: 0;
+      font-size: 18px;
+      /* Aumenta o tamanho da fonte dos textos */
+    }
+
+    /* Estilização específica para os cards de serviço */
+    .services {
+      overflow-y: auto;
+      /* Permite rolagem vertical na section */
+      max-height: 100vh;
+      /* Altura máxima da seção */
+      padding: 20px;
+    }
+
+    .services .section-title {
+      text-align: center;
+      /* Centraliza o título dos serviços */
+      margin-bottom: 20px;
+    }
+
+    .services .section-title h2 {
+      font-size: 32px;
+      color: #333;
+    }
+
+    .services .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilização para os detalhes do card (separando por tópicos) */
+    .card-details .field {
+      border: 1px solid #ddd;
+      padding: 15px;
+      /* Aumenta o espaço interno */
+      margin-bottom: 15px;
+      /* Aumenta o espaçamento entre os tópicos */
+      border-radius: 5px;
+      font-size: 18px;
+      /* Aumenta o tamanho da fonte nos detalhes */
+      text-align: left;
+      /* Alinha o texto à esquerda para melhor leitura */
+    }
+
+    /* Remove a margem inferior no último campo */
+    .card-details .field:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Estilo para o título do card */
+    .card-title {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    /* Estilização para o botão dentro do card */
+    .btn.card-button {
+      display: block;
+      width: 100%;
+      /* O botão ocupa toda a largura do card */
+      margin-top: 15px;
+      padding: 10px;
+      /* Aumenta o padding para maior clique */
+      font-size: 18px;
+      /* Aumenta o tamanho da fonte no botão */
+    }
+
+    /* Garante que o conteúdo do card fique bem organizado */
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      /* Espaça os elementos de forma consistente */
+    }
+
+    /* Gerenciamento de largura e organização dos cards em colunas */
+    .services .row {
+      display: flex;
+      flex-wrap: wrap;
+      /* Cards vão quebrar de linha conforme necessário */
+      gap: 20px;
+      /* Espaçamento entre os cards */
+      justify-content: center;
+      /* Centraliza os cards */
+    }
+
+    /* Estilo para garantir que o título do serviço seja centralizado */
+    .services .service-category {
+      text-align: center;
+      /* Centraliza o nome do serviço */
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
   </style>
+
 </head>
 
 <body>
@@ -300,64 +426,69 @@ $conn->close();
 
   <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Veja e Contrate os Melhores Profissionais</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item">Painel</li>
-                <li class="breadcrumb-item active">Veja e Contrate</li>
-            </ol>
-        </nav>
+      <h1>Veja e Contrate os Melhores Profissionais</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item">Painel</li>
+          <li class="breadcrumb-item active">Veja e Contrate</li>
+        </ol>
+      </nav>
     </div>
 
     <!-- Services Section -->
     <section id="services" class="services section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-            <h2>Serviços</h2>
-            <p>Procure por seus serviços e encontre os melhores profissionais.</p>
-        </div><!-- End Section Title -->
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Serviços</h2>
+        <p>Procure por seus serviços e encontre os melhores profissionais.</p>
+      </div><!-- End Section Title -->
 
-        <div class="container">
-            <div class="row gy-4">
-                <?php foreach ($profissionais as $servico => $lista): ?>
-                    <div class="col-md-12">
-                        <h2 class="service-category"><?php echo ucfirst($servico); ?></h2>
-                        <?php if (count($lista) > 0): ?>
-                            <?php foreach ($lista as $profissional): ?>
-                                <div class="service-card">
-                                    <h3><?php echo htmlspecialchars($profissional['nome']); ?></h3>
-                                    <div class="card-details">
-                                        <p><strong>Email:</strong> <?php echo htmlspecialchars($profissional['email']); ?></p>
-                                        <p><strong>Celular:</strong> <?php echo htmlspecialchars($profissional['celular']); ?></p>
-                                        <p><strong>Data de Aniversário:</strong> <?php echo htmlspecialchars($profissional['data_de_aniversario']); ?></p>
-                                        <p><strong>Gênero:</strong> <?php echo htmlspecialchars($profissional['genero']); ?></p>
-                                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($profissional['rua']); ?>, <?php echo htmlspecialchars($profissional['numero']); ?>, <?php echo htmlspecialchars($profissional['complemento']); ?> - <?php echo htmlspecialchars($profissional['bairro']); ?>, <?php echo htmlspecialchars($profissional['cidade']); ?>/<?php echo htmlspecialchars($profissional['estado']); ?> - <?php echo htmlspecialchars($profissional['cep']); ?></p>
-                                        <p><strong>CPF:</strong> <?php echo htmlspecialchars($profissional['cpf']); ?></p>
-                                        <p><strong>Redes Sociais:</strong></p>
-                                        <p>
-                                            <?php if (!empty($profissional['tiktok'])): ?> TikTok: <a href="<?php echo htmlspecialchars($profissional['tiktok']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['tiktok']); ?></a><br> <?php endif; ?>
-                                            <?php if (!empty($profissional['instagram'])): ?> Instagram: <a href="<?php echo htmlspecialchars($profissional['instagram']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['instagram']); ?></a><br> <?php endif; ?>
-                                            <?php if (!empty($profissional['facebook'])): ?> Facebook: <a href="<?php echo htmlspecialchars($profissional['facebook']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['facebook']); ?></a><br> <?php endif; ?>
-                                            <?php if (!empty($profissional['linkedin'])): ?> LinkedIn: <a href="<?php echo htmlspecialchars($profissional['linkedin']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['linkedin']); ?></a><br> <?php endif; ?>
-                                            <?php if (!empty($profissional['whatsapp'])): ?> WhatsApp: <a href="https://wa.me/<?php echo htmlspecialchars($profissional['whatsapp']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['whatsapp']); ?></a><br> <?php endif; ?>
-                                        </p>
-                                    </div>
-                                    <a href="mensagem.php?id=<?php echo urlencode($profissional['id']); ?>" class="card-button">
-                                        <i class="fas fa-envelope"></i> Enviar Mensagem
-                                    </a>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <div class="service-card">
-                                <p>Nenhum profissional disponível para <?php echo htmlspecialchars($servico); ?>.</p>
-                            </div>
-                        <?php endif; ?>
+      <div class="container">
+        <div class="row gy-4">
+          <?php foreach ($profissionais as $servico => $lista): ?>
+            <div class="col-md-12">
+              <h2 class="service-category"><?php echo ucfirst($servico); ?></h2>
+              <?php if (count($lista) > 0): ?>
+                <?php foreach ($lista as $profissional): ?>
+                  <div class="service-card card mb-4 shadow-sm">
+                    <div class="card-body">
+                      <h3 class="card-title"><?php echo htmlspecialchars($profissional['nome']); ?></h3>
+                      <div class="card-details">
+                        <p><strong>Email:</strong> <?php echo htmlspecialchars($profissional['email']); ?></p>
+                        <p><strong>Celular:</strong> <?php echo htmlspecialchars($profissional['celular']); ?></p>
+                        <p><strong>Data de Aniversário:</strong> <?php echo htmlspecialchars($profissional['data_de_aniversario']); ?></p>
+                        <p><strong>Gênero:</strong> <?php echo htmlspecialchars($profissional['genero']); ?></p>
+                        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($profissional['rua']); ?>, <?php echo htmlspecialchars($profissional['numero']); ?>, <?php echo htmlspecialchars($profissional['complemento']); ?> - <?php echo htmlspecialchars($profissional['bairro']); ?>, <?php echo htmlspecialchars($profissional['cidade']); ?>/<?php echo htmlspecialchars($profissional['estado']); ?> - <?php echo htmlspecialchars($profissional['cep']); ?></p>
+                        <p><strong>CPF:</strong> <?php echo htmlspecialchars($profissional['cpf']); ?></p>
+                        <p><strong>Redes Sociais:</strong></p>
+                        <p>
+                          <?php if (!empty($profissional['tiktok'])): ?> TikTok: <a href="<?php echo htmlspecialchars($profissional['tiktok']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['tiktok']); ?></a><br> <?php endif; ?>
+                          <?php if (!empty($profissional['instagram'])): ?> Instagram: <a href="<?php echo htmlspecialchars($profissional['instagram']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['instagram']); ?></a><br> <?php endif; ?>
+                          <?php if (!empty($profissional['facebook'])): ?> Facebook: <a href="<?php echo htmlspecialchars($profissional['facebook']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['facebook']); ?></a><br> <?php endif; ?>
+                          <?php if (!empty($profissional['linkedin'])): ?> LinkedIn: <a href="<?php echo htmlspecialchars($profissional['linkedin']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['linkedin']); ?></a><br> <?php endif; ?>
+                          <?php if (!empty($profissional['whatsapp'])): ?> WhatsApp: <a href="https://wa.me/<?php echo htmlspecialchars($profissional['whatsapp']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['whatsapp']); ?></a><br> <?php endif; ?>
+                        </p>
+                      </div>
+                      <a href="mensagem.php?id=<?php echo urlencode($profissional['id']); ?>" class="btn btn-primary card-button">
+                        <i class="fas fa-envelope"></i> Enviar Mensagem
+                      </a>
                     </div>
+                  </div>
                 <?php endforeach; ?>
+              <?php else: ?>
+                <div class="service-card card mb-4 shadow-sm">
+                  <div class="card-body">
+                    <p>Nenhum profissional disponível para <?php echo htmlspecialchars($servico); ?>.</p>
+                  </div>
+                </div>
+              <?php endif; ?>
             </div>
+          <?php endforeach; ?>
         </div>
+      </div>
     </section><!-- /Services Section -->
+
 
   </main>
 

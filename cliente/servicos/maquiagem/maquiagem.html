@@ -1,145 +1,165 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SwanShine - Cliente</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>SwanShine - Cliente</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="../../assets/img/favicon.png" rel="icon" />
+    <link href="../../assets/img/favicon.png" rel="apple-touch-icon" />
 
-  <!-- Favicons -->
-  <link href="../../assets/img/favicon.png" rel="icon">
-  <link href="../../assets/img/favicon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link
+      href="../../assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="../../assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../../assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../../assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link
+      href="../../assets/vendor/simple-datatables/style.css"
+      rel="stylesheet"
+    />
 
-  <!-- Vendor CSS Files -->
-  <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../../assets/css/main.css" rel="stylesheet" />
+    <link href="../../assets/css/style.css" rel="stylesheet" />
+    <link href="../../assets/css/services.css" rel="stylesheet" />
 
-  <!-- Custom CSS -->
-  <link href="../../assets/css/main.css" rel="stylesheet">
-  <link href="../../assets/css/style.css" rel="stylesheet">
-  <link href="../../assets/css/services.css" rel="stylesheet">
+    <!--Links JS-->
+    <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/inputmask.min.js"></script>
 
-  <!--Links JS-->
-  <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/inputmask.min.js"></script>
+    <style>
+      /* Estilos Gerais */
 
-  <style>
-    /* Estilos Gerais */
-
-    /* Estiliza os contêineres das seções, inicialmente escondidos */
-    .section-container {
+      /* Estiliza os contêineres das seções, inicialmente escondidos */
+      .section-container {
         display: none; /* Oculta a seção por padrão */
         position: relative; /* Permite o posicionamento relativo dos elementos internos */
         padding: 20px; /* Espaçamento interno */
         background-color: #fff; /* Cor de fundo branca */
         border-radius: 10px; /* Bordas arredondadas */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    }
+      }
 
-    /* Torna a seção visível quando a classe 'active' é adicionada */
-    .active {
+      /* Torna a seção visível quando a classe 'active' é adicionada */
+      .active {
         display: block; /* Exibe a seção */
-    }
+      }
 
-    /* Estiliza a barra de progresso */
-    .progress-bar {
+      /* Estiliza a barra de progresso */
+      .progress-bar {
         position: relative; /* Permite o posicionamento relativo da barra de progresso interna */
         height: 10px; /* Altura da barra de progresso */
         background: #f0f0f0; /* Cor de fundo da barra */
         border-radius: 5px; /* Bordas arredondadas */
         margin-bottom: 20px; /* Espaçamento inferior */
-    }
+      }
 
-    /* Estiliza a parte preenchida da barra de progresso */
-    .progress {
+      /* Estiliza a parte preenchida da barra de progresso */
+      .progress {
         height: 100%; /* Altura total da barra de progresso */
         width: 0; /* Largura inicial da parte preenchida (ajustada dinamicamente) */
         background: #ff66c4; /* Cor de fundo da parte preenchida */
         border-radius: 5px; /* Bordas arredondadas */
         transition: width 0.3s ease; /* Transição suave para a mudança de largura */
-    }
+      }
 
-    /* Estiliza o contêiner do formulário */
-    .form-container {
+      /* Estiliza o contêiner do formulário */
+      .form-container {
         text-align: center; /* Centraliza o texto dentro do contêiner */
-    }
+      }
 
-    /* Estiliza o título dentro do contêiner do formulário */
-    .form-container h2 {
+      /* Estiliza o título dentro do contêiner do formulário */
+      .form-container h2 {
         margin-bottom: 10px; /* Espaçamento inferior */
-    }
+      }
 
-    /* Estiliza a lista de serviços dentro do contêiner do formulário */
-    .form-container .service-list {
+      /* Estiliza a lista de serviços dentro do contêiner do formulário */
+      .form-container .service-list {
         margin-bottom: 20px; /* Espaçamento inferior */
-    }
+      }
 
-    /* Estiliza a seção de botões dentro do contêiner do formulário */
-.form-container .buttons {
-  margin-top: 20px; /* Espaçamento superior */
-  display: flex; /* Utiliza Flexbox para layout dos botões */
-}
+      /* Estiliza a seção de botões dentro do contêiner do formulário */
+      .form-container .buttons {
+        margin-top: 20px; /* Espaçamento superior */
+        display: flex; /* Utiliza Flexbox para layout dos botões */
+      }
 
-/* Estiliza os botões dentro da seção de botões */
-.form-container .buttons button {
-  padding: 10px 20px; /* Espaçamento interno do botão */
-  border: none; /* Remove a borda padrão */
-  background-color: #ffbd59; /* Cor de fundo laranja */
-  color: #fff; /* Cor do texto */
-  border-radius: 5px; /* Bordas arredondadas */
-  cursor: pointer; /* Cursor em forma de mão para indicar clicável */
-  margin-right: 10px; /* Espaçamento à direita entre os botões */
-}
+      /* Estiliza os botões dentro da seção de botões */
+      .form-container .buttons button {
+        padding: 10px 20px; /* Espaçamento interno do botão */
+        border: none; /* Remove a borda padrão */
+        background-color: #ffbd59; /* Cor de fundo laranja */
+        color: #fff; /* Cor do texto */
+        border-radius: 5px; /* Bordas arredondadas */
+        cursor: pointer; /* Cursor em forma de mão para indicar clicável */
+        margin-right: 10px; /* Espaçamento à direita entre os botões */
+      }
 
-/* Remove a margem direita do último botão */
-.form-container .buttons button:last-child {
-  margin-right: 0; /* Remove a margem direita do último botão */
-}
+      /* Remove a margem direita do último botão */
+      .form-container .buttons button:last-child {
+        margin-right: 0; /* Remove a margem direita do último botão */
+      }
 
-    /* Estiliza o texto de rodapé dentro do contêiner do formulário */
-    .form-container .footer-text {
+      /* Estiliza o texto de rodapé dentro do contêiner do formulário */
+      .form-container .footer-text {
         margin-top: 20px; /* Espaçamento superior */
         color: #777; /* Cor do texto cinza claro */
-    }
+      }
 
-    /* Estiliza as dicas informativas dentro do contêiner do formulário */
-    .form-container .hint {
+      /* Estiliza as dicas informativas dentro do contêiner do formulário */
+      .form-container .hint {
         margin-top: 10px; /* Espaçamento superior */
         color: #000; /* Cor do texto cinza */
-    }
+      }
 
-    /* Estiliza o contêiner de Call to Action (CTA) */
-    .cta-container {
+      /* Estiliza o contêiner de Call to Action (CTA) */
+      .cta-container {
         text-align: center; /* Centraliza o texto dentro do contêiner */
         margin-bottom: 20px; /* Espaçamento inferior */
-    }
+      }
 
-    /* Estiliza o título da seção de CTA */
-    .cta-title {
+      /* Estiliza o título da seção de CTA */
+      .cta-title {
         font-size: 24px; /* Tamanho da fonte */
         margin-bottom: 10px; /* Espaçamento inferior */
-    }
+      }
 
-    /* Estiliza o subtítulo da seção de CTA */
-    .cta-subtitle {
+      /* Estiliza o subtítulo da seção de CTA */
+      .cta-subtitle {
         font-size: 18px; /* Tamanho da fonte */
         margin-bottom: 20px; /* Espaçamento inferior */
-    }
+      }
 
-    /* Estiliza o botão da seção de CTA */
-    .cta-button {
+      /* Estiliza o botão da seção de CTA */
+      .cta-button {
         padding: 10px 20px; /* Espaçamento interno do botão */
         border: none; /* Remove a borda padrão */
         background-color: #ff66c4; /* Cor de fundo verde */
@@ -147,531 +167,795 @@
         border-radius: 5px; /* Bordas arredondadas */
         text-decoration: none; /* Remove o sublinhado */
         font-size: 16px; /* Tamanho da fonte */
-    }
+      }
 
-    /* Estiliza os campos de entrada e área de texto */
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"],
-    textarea,
-    select {
+      /* Estiliza os campos de entrada e área de texto */
+      input[type="text"],
+      input[type="tel"],
+      input[type="email"],
+      textarea,
+      select {
         width: 100%; /* Largura total */
         padding: 10px; /* Espaçamento interno */
         border: 1px solid #ddd; /* Borda cinza clara */
         border-radius: 5px; /* Bordas arredondadas */
         margin-top: 5px; /* Espaçamento superior */
         box-sizing: border-box; /* Inclui padding e border na largura total */
-    }
+      }
 
-    /* Estiliza o texto do placeholder dos campos de entrada */
-    input[type="text"]::placeholder,
-    input[type="tel"]::placeholder,
-    input[type="email"]::placeholder,
-    textarea::placeholder {
+      /* Estiliza o texto do placeholder dos campos de entrada */
+      input[type="text"]::placeholder,
+      input[type="tel"]::placeholder,
+      input[type="email"]::placeholder,
+      textarea::placeholder {
         color: #aaa; /* Cor do texto do placeholder */
-    }
+      }
 
-    .card-container {
-      border: 1px solid #ddd;
-      padding: 20px;
-      border-radius: 8px;
-      background-color: #ff66c4;
-  }
-  
-  .card-item {
-      margin-bottom: 10px;
-  }
-  
-</style>
+      .card-container {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #ff66c4;
+      }
 
-</head>
+      .card-item {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
 
-<body>
-   <!-- ======= Header ======= -->
-   <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo_preta.png" alt="">
-        <span class="d-none d-lg-block">Swan Shine</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div>
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="../../index.php" class="logo d-flex align-items-center">
+          <img src="../../assets/img/logo_preta.png" alt="" />
+          <span class="d-none d-lg-block">Swan Shine</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
 
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <!-- Notifications Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-bell"></i>
+              <span class="badge bg-primary badge-number">0</span>
+            </a>
 
-        <!-- Notifications Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">0</span>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+            >
+              <li class="dropdown-header">
+                Você tem 0 notificações
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Ver todas</span
+                  ></a
+                >
+              </li>
+              <li class="dropdown-footer">
+                <a href="#">Mostrar todas as notificações</a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Messages Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="badge bg-success badge-number">0</span>
+            </a>
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
+            >
+              <li class="dropdown-header">
+                Você tem 0 mensagens
+                <a href="../../mensagem.html"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Ver todas</span
+                  ></a
+                >
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li class="dropdown-footer">
+                <a href="../../mensagem.html">Mostrar todas as mensagens</a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Profile Dropdown -->
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="../../perfil.php"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                src="../../assets/img/usuario.png"
+                alt="Profile"
+                class="rounded-circle"
+              />
+            </a>
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../perfil.php"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>Meu Perfil</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../perfil.php"
+                >
+                  <i class="bi bi-gear"></i>
+                  <span>Configurações da Conta</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../manutencao.html"
+                >
+                  <i class="bi bi-question-circle"></i>
+                  <span>Precisa de Ajuda?</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../forms/log_out.php"
+                >
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sair</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ======= Barra Lateral ======= -->
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../index.php">
+            <i class="bi bi-grid"></i>
+            <span>Início</span>
           </a>
+        </li>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Você tem 0 notificações
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#components-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-menu-button-wide"></i><span>Pedidos</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="components-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="../../pedidos/pedido_pendente.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a
+              >
             </li>
-            <li class="dropdown-footer">
-              <a href="#">Mostrar todas as notificações</a>
+            <li>
+              <a href="../../pedidos/pedido_andamento.php"
+                ><i class="bi bi-circle"></i
+                ><span>Pedidos Em Andamento</span></a
+              >
+            </li>
+            <li>
+              <a href="../../pedidos/pedido_recusado.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a
+              >
+            </li>
+            <li>
+              <a href="../../pedidos/pedido_concluido.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a
+              >
             </li>
           </ul>
         </li>
 
-        <!-- Messages Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">0</span>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#components-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-menu-button-wide"></i><span>Serviços</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              Você tem 0 mensagens
-              <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+          <ul
+            id="components-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="../../servicos.php"
+                ><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a
+              >
             </li>
             <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="mensagem.html">Mostrar todas as mensagens</a>
+              <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
             </li>
           </ul>
         </li>
 
-        <!-- Profile Dropdown -->
-        <li class="nav-item dropdown pe-3">
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../mensagens.html">
+            <i class="bi bi-envelope"></i>
+            <span>Mensagens</span>
           </a>
+        </li>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="perfil.php">
-                <i class="bi bi-person"></i>
-                <span>Meu Perfil</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="perfil.php">
-                <i class="bi bi-gear"></i>
-                <span>Configurações da Conta</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Precisa de Ajuda?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="../index.html">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sair</span>
-              </a>
-            </li>
-          </ul>
+        <!-- Perfil -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../perfil.php">
+            <i class="bi bi-person"></i>
+            <span>Perfil</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../suporte.html">
+            <i class="bi bi-chat-dots"></i>
+            <span>Suporte</span>
+          </a>
         </li>
       </ul>
-    </nav>
-  </header>
+    </aside>
+    <!-- End Sidebar-->
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../../index.html">
-          <i class="bi bi-grid"></i>
-          <span>Início</span>
-        </a>
-      </li>
-      <!-- Perfil -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="../../perfil.php">
-        <i class="bi bi-person"></i>
-        <span>Perfil</span>
-      </a>
-    </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../../service.html">
-          <i class="bi bi-card-list"></i>
-          <span>Serviços</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../../suporte.html">
-          <i class="bi bi-chat-dots"></i>
-          <span>Suporte</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../../mensagem.html">
-          <i class="bi bi-envelope"></i>
-          <span>Mensagens</span>
-        </a>
-      </li>
-    </ul>
-  </aside>
-
-  <!-- Main Content -->
-  <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Contrate seu Serviço</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
-          <li class="breadcrumb-item">Serviço</li>
-          <li class="breadcrumb-item active">Contrate o Serviço</li>
-        </ol>
-      </nav>
-    </div>
-
-   <!-- Services Section -->
-<section class="section">
-  <div class="main-container">
-      <!-- Seção de CTA -->
-      <div class="cta-container">
-          <div class="cta-title">Você é Maquiador(a) Profissional?</div>
-          <div class="cta-subtitle">A Swan Shine recebe mais de 2 mil pedidos por mês e pode ajudar a aumentar sua renda</div>
-          <a href="../../../../forms/form_profissional/form_profissional.html" class="cta-button" title="Cadastre-se como Maquiador(a) Profissional">Quero me cadastrar</a>
+    <!-- Main Content -->
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Contrate seu Serviço</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+            <li class="breadcrumb-item">Serviço</li>
+            <li class="breadcrumb-item active">Contrate o Serviço</li>
+          </ol>
+        </nav>
       </div>
 
-      <!-- Seção do Formulário 1 -->
-      <div id="step-1" class="section-container form-container active">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
+      <!-- Services Section -->
+      <section class="section">
+        <div class="main-container">
+          <!-- Seção de CTA -->
+          <div class="cta-container">
+            <div class="cta-title">Você é Maquiador(a) Profissional?</div>
+            <div class="cta-subtitle">
+              A Swan Shine recebe mais de 2 mil pedidos por mês e pode ajudar a
+              aumentar sua renda
+            </div>
+            <a
+              href="../../../../forms/form_profissional/form_profissional.html"
+              class="cta-button"
+              title="Cadastre-se como Maquiador(a) Profissional"
+              >Quero me cadastrar</a
+            >
           </div>
-          <div class="subtitle">
-              <img src="https://via.placeholder.com/20" alt="Ícone"> Orçamentos rápidos e seguros
-          </div>
-          <h2>Qual tipo de serviço de maquiagem você procura?</h2>
-          <div class="service-list">
-              <label><input type="checkbox" name="service" value="Maquiagem para Eventos" required> Maquiagem para Eventos</label>
-              <label><input type="checkbox" name="service" value="Maquiagem para Noivas" required> Maquiagem para Noivas</label>
-              <label><input type="checkbox" name="service" value="Maquiagem Social" required> Maquiagem Social</label>
-              <label><input type="checkbox" name="service" value="Maquiagem Artística" required> Maquiagem Artística</label>
-              <label><input type="checkbox" name="service" value="Maquiagem para Fotos" required> Maquiagem para Fotos</label>
-              <label><input type="checkbox" name="service" value="Maquiagem para Filmes" required> Maquiagem para Filmes</label>
-              <label><input type="checkbox" name="service" value="Outro" required> Outro</label>
-          </div>
-          <div class="buttons">
-              <button onclick="nextStep()">Continuar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
 
-      <!-- Seção do Formulário 2 -->
-      <div id="step-2" class="section-container form-container">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
-          </div>
-          <div class="subtitle">
-              <img src="https://via.placeholder.com/20" alt="Ícone"> Você está indo bem, agora falta pouco!
-          </div>
-          <h2>Qual o estilo desejado para a maquiagem?</h2>
-          <div class="service-list">
-              <label><input type="radio" name="estilo-maquiagem" value="Natural" required> Natural</label>
-              <label><input type="radio" name="estilo-maquiagem" value="Glamour" required> Glamour</label>
-              <label><input type="radio" name="estilo-maquiagem" value="Clássico" required> Clássico</label>
-              <label><input type="radio" name="estilo-maquiagem" value="Smokey Eye" required> Smokey Eye</label>
-              <label><input type="radio" name="estilo-maquiagem" value="Colorido" required> Colorido</label>
-              <label><input type="radio" name="estilo-maquiagem" value="Outro" required> Outro</label>
-          </div>
-          <div class="buttons">
-              <button onclick="prevStep()">Voltar</button>
-              <button onclick="nextStep()">Continuar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
+          <form action="maquiagem.php" method="POST">
+            <!-- Seção do Formulário 1 -->
+            <div id="step-1" class="section-container form-container active">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar"></div>
+              </div>
+              <div class="subtitle">
+                <img src="https://via.placeholder.com/20" alt="Ícone" />
+                Orçamentos rápidos e seguros
+              </div>
+              <h2>Qual tipo de serviço de maquiagem você procura?</h2>
+              <div class="service-list">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="service"
+                    value="Maquiagem para Eventos"
+                    required
+                  />
+                  Maquiagem para Eventos</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="service"
+                    value="Maquiagem para Noivas"
+                    required
+                  />
+                  Maquiagem para Noivas</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="service"
+                    value="Maquiagem Social"
+                    required
+                  />
+                  Maquiagem Social</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="service"
+                    value="Maquiagem Artística"
+                    required
+                  />
+                  Maquiagem Artística</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="service"
+                    value="Maquiagem para Fotos"
+                    required
+                  />
+                  Maquiagem para Fotos</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="service"
+                    value="Maquiagem para Filmes"
+                    required
+                  />
+                  Maquiagem para Filmes</label
+                >
+                <label
+                  ><input
+                    type="checkbox"
+                    name="service"
+                    value="Outro"
+                    required
+                  />
+                  Outro</label
+                >
+              </div>
+              <div class="buttons">
+                <button onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
 
-      <!-- Seção do Formulário 3 -->
-      <div id="step-3" class="section-container form-container">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
-          </div>
-          <div class="subtitle">
-              <img src="https://via.placeholder.com/20" alt="Ícone"> Você está indo bem, agora falta pouco!
-          </div>
-          <h2>Onde você gostaria de ser atendido(a)?</h2>
-          <div class="service-list">
-              <label><input type="radio" name="atendimento" value="em-casa" required> Em casa</label>
-              <label><input type="radio" name="atendimento" value="espaco-profissional" required> Espaço do Profissional</label>
-              <label><input type="radio" name="atendimento" value="sem-preferencia" required> Sem Preferência</label>
-          </div>
-          <div class="buttons">
-              <button onclick="prevStep()">Voltar</button>
-              <button onclick="nextStep()">Continuar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
+            <!-- Seção do Formulário 2 -->
+            <div id="step-2" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar"></div>
+              </div>
+              <div class="subtitle">
+                <img src="https://via.placeholder.com/20" alt="Ícone" /> Você
+                está indo bem, agora falta pouco!
+              </div>
+              <h2>Qual o estilo desejado para a maquiagem?</h2>
+              <div class="service-list">
+                <label
+                  ><input
+                    type="radio"
+                    name="estilo-maquiagem"
+                    value="Natural"
+                    required
+                  />
+                  Natural</label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="estilo-maquiagem"
+                    value="Glamour"
+                    required
+                  />
+                  Glamour</label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="estilo-maquiagem"
+                    value="Clássico"
+                    required
+                  />
+                  Clássico</label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="estilo-maquiagem"
+                    value="Smokey Eye"
+                    required
+                  />
+                  Smokey Eye</label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="estilo-maquiagem"
+                    value="Colorido"
+                    required
+                  />
+                  Colorido</label
+                >
+                <label
+                  ><input
+                    type="radio"
+                    name="estilo-maquiagem"
+                    value="Outro"
+                    required
+                  />
+                  Outro</label
+                >
+              </div>
+              <div class="buttons">
+                <button onclick="prevStep()">Voltar</button>
+                <button onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
 
-      <!-- Seção do Formulário 4 -->
-      <div id="step-4" class="section-container form-container">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
-          </div>
-          <h2>Qual a urgência do seu pedido?</h2>
-          <div class="service-list">
-              <select name="urgencia" id="urgencia" required>
-                  <option value="" disabled selected>Selecione uma opção</option>
+            <!-- Seção do Formulário 3 -->
+            <div id="step-3" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-3"></div>
+              </div>
+              <div class="subtitle">
+                <img src="https://via.placeholder.com/20" alt="Ícone" /> Você
+                está indo bem, agora falta pouco!
+              </div>
+              <h2>Onde você gostaria de ser atendido(a)?</h2>
+              <div class="service-list">
+                <label>
+                  <input
+                    type="radio"
+                    name="atendimento"
+                    value="em-casa"
+                    required
+                  />
+                  Em casa
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="atendimento"
+                    value="espaco-profissional"
+                    required
+                  />
+                  Espaço do Profissional
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="atendimento"
+                    value="sem-preferencia"
+                    required
+                  />
+                  Sem Preferência
+                </label>
+              </div>
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
+
+            <!-- Seção do Formulário 4 -->
+            <div id="step-4" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-4"></div>
+              </div>
+              <h2>Qual a urgência do seu pedido?</h2>
+              <div class="service-list">
+                <select name="urgencia" id="urgencia" required>
+                  <option value="" disabled selected>
+                    Selecione uma opção
+                  </option>
                   <option value="urgent">Urgente</option>
                   <option value="8horas">Próximas 8 horas</option>
                   <option value="12horas">Próximas 12 horas</option>
                   <option value="2dias">Próximas 2 dias</option>
                   <option value="semana">Próxima Semana</option>
                   <option value="not-urgent">Não Urgente</option>
-              </select>
-          </div>
-          <div class="buttons">
-              <button onclick="prevStep()">Voltar</button>
-              <button onclick="nextStep()">Continuar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
+                </select>
+              </div>
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
 
-      <!-- Seção do Formulário 5 -->
-      <div id="step-5" class="section-container form-container">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
-          </div>
-          <h2>Explique o que você precisa</h2>
-          <p>Você está indo bem, agora falta pouco!</p>
-          <textarea placeholder='Traga todos os detalhes do seu pedido. Tente "Preciso de ..."'></textarea>
-          <div class="hint">🛈 Quanto mais informações você fornecer, melhor será o seu pedido!</div>
-          <div class="buttons">
-              <button onclick="prevStep()">Voltar</button>
-              <button onclick="nextStep()">Continuar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
+            <!-- Seção do Formulário 5 -->
+            <div id="step-5" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-5"></div>
+              </div>
+              <h2>Explique o que você precisa</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <textarea
+                name="detalhes"
+                placeholder='Traga todos os detalhes do seu pedido. Tente "Preciso de..."'
+                required
+              ></textarea>
+              <div class="hint">
+                🛈 Quanto mais informações você fornecer, melhor será o seu
+                pedido!
+              </div>
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
 
-      <!-- Seção do Formulário 6 -->
-      <div id="step-6" class="section-container form-container">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
-          </div>
-          <h2>Informe seu CEP</h2>
-          <p>Você está indo bem, agora falta pouco!</p>
-          <label for="CEP">CEP:</label>
-          <input type="text" name="CEP" id="CEP" placeholder="12345-678" required>
-          <div class="buttons">
-              <button onclick="prevStep()">Voltar</button>
-              <button onclick="nextStep()">Continuar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
+            <!-- Seção do Formulário 6 -->
+            <div id="step-6" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-6"></div>
+              </div>
+              <h2>Informe seu CEP</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <label for="cep">CEP:</label>
+              <input
+                type="text"
+                name="cep"
+                id="cep"
+                placeholder="12345-678"
+                required
+              />
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
 
-      <!-- Seção do Formulário 7 -->
-      <div id="step-7" class="section-container form-container">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
-          </div>
-          <h2>Informe seu Nome</h2>
-          <p>Você está indo bem, agora falta pouco!</p>
-          <label for="Nome">Nome:</label>
-          <input type="text" name="Nome" id="Nome" placeholder="Digite seu Nome Completo" required>
-          <div class="buttons">
-              <button onclick="prevStep()">Voltar</button>
-              <button onclick="nextStep()">Continuar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
+            <!-- Seção do Formulário 7 -->
+            <div id="step-7" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-7"></div>
+              </div>
+              <h2>Informe seu Nome</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <label for="nome">Nome:</label>
+              <input
+                type="text"
+                name="nome"
+                id="nome"
+                placeholder="Digite seu Nome Completo"
+                required
+              />
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
 
-      <!-- Seção do Formulário 8 -->
-      <div id="step-8" class="section-container form-container">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
-          </div>
-          <h2>Informe seu Email</h2>
-          <p>Você está indo bem, agora falta pouco!</p>
-          <label for="Email">Email:</label>
-          <input type="email" name="Email" id="Email" placeholder="Digite seu Email" required>
-          <div class="buttons">
-              <button onclick="prevStep()">Voltar</button>
-              <button onclick="nextStep()">Continuar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
+            <!-- Seção do Formulário 8 -->
+            <div id="step-8" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-8"></div>
+              </div>
+              <h2>Informe seu E-mail</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <label for="email">E-mail:</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Digite seu E-mail"
+                required
+              />
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
 
-      <!-- Seção do Formulário 9 -->
-      <div id="step-9" class="section-container form-container">
-          <div class="progress-bar">
-              <div class="progress" id="progress-bar"></div>
-          </div>
-          <h2>Informe seu Telefone</h2>
-          <p>Você está indo bem, agora falta pouco!</p>
-          <label for="Telefone">Telefone:</label>
-          <input type="text" name="Telefone" id="Telefone" placeholder="Digite seu Telefone" required>
-          <div class="buttons">
-              <button onclick="prevStep()">Voltar</button>
-              <button onclick="submitForm()">Enviar</button>
-          </div>
-          <div class="footer-text">Orçamentos em até 60 minutos</div>
-      </div>
-      <!-- Seção de Sucesso -->
-      <div id="success" class="section-container form-container">
-        <h2>Obrigado!</h2>
-        <p>Seu formulário foi enviado com sucesso. Em breve, você receberá um orçamento.</p>
-        <a href="../../index.html" class="cta-button">Voltar para a Página Inicial</a>
-    </div>
-  </div>
-</section>
-      
-  </main>
+            <!-- Seção do Formulário 9 -->
+            <div id="step-9" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-9"></div>
+              </div>
+              <h2>Informe seu Telefone</h2>
+              <p>Você está indo bem, agora falta pouco!</p>
+              <label for="telefone">Telefone:</label>
+              <input
+                type="text"
+                name="telefone"
+                id="telefone"
+                placeholder="Digite seu Telefone"
+                required
+              />
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="nextStep()">Continuar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 footer-info">
-          <h3>Swan Shine</h3>
-          <p class="footer-text">© Swan Shine 2024. Todos os direitos reservados.</p>
+            <!-- Seção do Formulário 10 -->
+            <div id="step-10" class="section-container form-container">
+              <div class="progress-bar">
+                <div class="progress" id="progress-bar-10"></div>
+              </div>
+              <h2>Deseja enviar as informações?</h2>
+              <p>Você está quase lá! Revise seus dados antes de enviar.</p>
+              <div id="summary-container" style="display: none"></div>
+              <!-- Para mostrar um resumo das informações -->
+              <div class="buttons">
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="button" onclick="submitForm()">Enviar</button>
+              </div>
+              <div class="footer-text">Orçamentos em até 60 minutos</div>
+            </div>
+          </form>
+
+          <script>
+            // Variáveis globais
+            let currentStep = 0;
+            const steps = document.querySelectorAll(".section-container");
+            const progressBars = document.querySelectorAll(".progress");
+
+            function showStep(step) {
+              // Oculta todas as seções do formulário
+              steps.forEach((section, index) => {
+                section.style.display = index === step ? "block" : "none";
+              });
+
+              // Atualiza a barra de progresso
+              const progressPercent = ((step + 1) / steps.length) * 100;
+              progressBars.forEach((progress) => {
+                progress.style.width = `${progressPercent}%`;
+              });
+
+              // Atualiza o resumo das informações na última seção
+              if (step === steps.length - 1) {
+                updateSummary();
+              }
+            }
+
+            function nextStep() {
+              // Valida se todos os campos obrigatórios estão preenchidos
+              if (validateCurrentStep()) {
+                currentStep++;
+                if (currentStep >= steps.length) {
+                  currentStep = steps.length - 1; // Impede que o índice ultrapasse o número de etapas
+                }
+                showStep(currentStep);
+              }
+            }
+
+            function prevStep() {
+              if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+              }
+            }
+
+            function validateCurrentStep() {
+              const currentInputs = steps[currentStep].querySelectorAll(
+                "input, select, textarea"
+              );
+              let isValid = true;
+              currentInputs.forEach((input) => {
+                if (input.required && !input.value) {
+                  isValid = false;
+                  input.classList.add("input-error"); // Adiciona classe para estilizar o erro
+                } else {
+                  input.classList.remove("input-error"); // Remove classe se o campo está válido
+                }
+              });
+              return isValid;
+            }
+
+            function updateSummary() {
+              const summaryContainer =
+                document.getElementById("summary-container");
+              summaryContainer.innerHTML = ""; // Limpa o conteúdo anterior
+
+              // Coleta informações dos campos e gera um resumo
+              const fields = [
+                { name: "tipo", label: "Tipo de Serviço" },
+                { name: "estilo", label: "Estilo Desejado" },
+                { name: "atendimento", label: "Local de Atendimento" },
+                { name: "urgencia", label: "Urgência do Pedido" },
+                { name: "detalhes", label: "Detalhes do Pedido" },
+                { name: "cep", label: "CEP" },
+                { name: "nome", label: "Nome" },
+                { name: "email", label: "E-mail" },
+                { name: "telefone", label: "Telefone" },
+              ];
+
+              fields.forEach((field) => {
+                const inputValue = document.querySelector(
+                  `[name="${field.name}"]`
+                );
+                if (inputValue) {
+                  let value = inputValue.value;
+                  if (Array.isArray(value)) {
+                    value = value.join(", "); // Para checkboxes, junta os valores
+                  }
+                  summaryContainer.innerHTML += `<p><strong>${field.label}:</strong> ${value}</p>`;
+                }
+              });
+
+              summaryContainer.style.display = "block"; // Exibe o resumo
+            }
+
+            function submitForm() {
+              // Aqui você pode fazer mais validações ou processar o envio
+              const form = document.querySelector("form");
+              if (validateCurrentStep()) {
+                form.submit(); // Envia o formulário
+              }
+            }
+
+            // Inicializa o formulário mostrando o primeiro passo
+            showStep(currentStep);
+          </script>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 footer-info">
+            <h3>Swan Shine</h3>
+            <p class="footer-text">
+              © Swan Shine 2024. Todos os direitos reservados.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
-  <!-- JavaScript Files -->
-  <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../../assets/vendor/aos/aos.js"></script>
-  <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="../../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../../assets/vendor/quill/quill.min.js"></script>
-  <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <!-- JavaScript Files -->
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/aos/aos.js"></script>
+    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../assets/vendor/quill/quill.min.js"></script>
+    <script src="../../assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Main JavaScript -->
-  <script src="../../assets/js/main.js"></script>
-  <script src="../../assets/js/main1.js"></script>
-
-  <script>
-    let currentStep = 1; // Passo atual do formulário
-    const totalSteps = 9; // Total de passos no formulário (ajustado para 9)
-
-    // Função para atualizar a barra de progresso
-    function updateProgress() {
-        const progress = document.getElementById('progress-bar'); // Obtém a barra de progresso
-        const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100; // Calcula a porcentagem de progresso
-        progress.style.width = `${percentage}%`; // Define a largura da barra de progresso
-    }
-
-    // Função para exibir o passo atual do formulário
-    function showStep(step) {
-        const sections = document.querySelectorAll('.section-container'); // Obtém todas as seções do formulário
-        sections.forEach((section, index) => {
-            section.classList.toggle('active', index + 1 === step); // Mostra ou oculta seções baseadas no passo atual
-        });
-        updateProgress(); // Atualiza a barra de progresso
-    }
-
-    // Função para avançar para o próximo passo do formulário
-    function nextStep() {
-        if (isValidStep(currentStep)) { // Verifica se o passo atual é válido
-            if (currentStep === totalSteps) { // Se for o último passo
-                populateCard(); // Preenche o card com as informações inseridas
-                return; // Impede o avanço para o próximo passo
-            }
-            currentStep++; // Avança para o próximo passo
-            showStep(currentStep); // Mostra o próximo passo
-        } else {
-            alert('Por favor, preencha todos os campos obrigatórios.'); // Alerta se houver campos obrigatórios não preenchidos
-        }
-    }
-
-    // Função para voltar ao passo anterior do formulário
-    function prevStep() {
-        if (currentStep > 1) { // Verifica se não é o primeiro passo
-            currentStep--; // Volta um passo
-            showStep(currentStep); // Mostra o passo anterior
-        }
-    }
-
-    // Função para validar os campos do passo atual
-    function isValidStep(step) {
-        const currentSection = document.getElementById(`step-${step}`); // Obtém a seção do passo atual
-        const inputs = currentSection.querySelectorAll('input[required], textarea[required], select[required]'); // Obtém todos os campos obrigatórios
-        let valid = true; // Assume que o passo é válido
-        inputs.forEach(input => {
-            if (input.type === 'checkbox' || input.type === 'radio') {
-                const name = input.name;
-                const checkedInputs = document.querySelectorAll(`input[name="${name}"]:checked`); // Obtém os inputs selecionados do mesmo grupo
-                if (checkedInputs.length === 0) valid = false; // Se nenhum input está selecionado, o passo não é válido
-            } else {
-                if (input.value.trim() === '' || (input.type === 'email' && !validateEmail(input.value))) valid = false; // Verifica se os campos estão preenchidos e o e-mail é válido
-            }
-        });
-        return valid; // Retorna se o passo é válido ou não
-    }
-
-    // Função para validar o formato de um e-mail
-    function validateEmail(email) {
-        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Expressão regular para validação de e-mail
-        return re.test(email); // Retorna true se o e-mail for válido, false caso contrário
-    }
-
-    // Função para preencher o card com as informações inseridas
-    function populateCard() {
-        const cardContainer = document.getElementById('card-container'); // Obtém o container do card
-        cardContainer.innerHTML = ''; // Limpa o conteúdo do card
-
-        // Selecione todas as seções de entrada
-        const sections = document.querySelectorAll('.section-container'); // Obtém todas as seções do formulário
-        sections.forEach(section => {
-            const inputs = section.querySelectorAll('input, textarea, select'); // Obtém todos os campos dentro da seção
-            inputs.forEach(input => {
-                if (input.type !== 'checkbox' && input.type !== 'radio' || input.checked) {
-                    const label = document.querySelector(`label[for="${input.id}"]`); // Obtém o rótulo associado ao campo
-                    const value = input.type === 'select-one' ? input.options[input.selectedIndex].text : input.value; // Obtém o valor do campo
-                    const div = document.createElement('div'); // Cria um novo div para o item do card
-                    div.classList.add('card-item'); // Adiciona a classe card-item ao div
-                    div.innerHTML = `<strong>${label ? label.textContent : input.name}:</strong> ${value}`; // Define o conteúdo do div
-                    cardContainer.appendChild(div); // Adiciona o div ao container do card
-                }
-            });
-        });
-
-        showStep(totalSteps); // Mostra o passo final que exibe o card
-    }
-
-    // Função para enviar o formulário
-    function submitForm() {
-        showStep(10); // Mostra a seção de sucesso
-        // Aqui você pode adicionar a lógica para enviar o formulário
-        // Exemplo:
-        /*
-        fetch('/submit', {
-            method: 'POST',
-            body: new FormData(document.querySelector('form'))
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Erro:', error));
-        */
-    }
-
-    // Inicializar
-    document.addEventListener('DOMContentLoaded', function() {
-        showStep(currentStep); // Mostra o primeiro passo ao carregar a página
-
-        // Aplicar máscaras
-        const telefoneMask = new Inputmask('(99) 99999-9999'); // Máscara para telefone
-        telefoneMask.mask(document.getElementById('Telefone'));
-
-        const cepMask = new Inputmask('99999-999'); // Máscara para CEP
-        cepMask.mask(document.getElementById('CEP'));
-    });
-</script>
-</body>
-
+    <!-- Main JavaScript -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/main1.js"></script>
+  </body>
 </html>
