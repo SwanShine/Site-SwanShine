@@ -1,4 +1,3 @@
-
 <?php
 // Dados de conexão com o banco de dados
 $servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
@@ -15,19 +14,20 @@ if ($conn->connect_error) {
 }
 
 // Recebe os dados do formulário
-$services = isset($_POST['service']) ? implode(", ", $_POST['service']) : '';
+$servicos = isset($_POST['service']) ? implode(", ", $_POST['service']) : '';
+$tipo = $_POST['tipo'] ?? '';
 $estilo = $_POST['estilo'] ?? '';
 $atendimento = $_POST['atendimento'] ?? '';
 $urgencia = $_POST['urgencia'] ?? '';
 $detalhes = $_POST['detalhes'] ?? '';
-$CEP = $_POST['CEP'] ?? '';
+$cep = $_POST['CEP'] ?? '';
 $nome = $_POST['Nome'] ?? '';
 $email = $_POST['Email'] ?? '';
 $telefone = $_POST['Telefone'] ?? '';
 
 // Prepara e vincula
-$stmt = $conn->prepare("INSERT INTO pedidos (services, estilo, atendimento, urgencia, detalhes, CEP, nome, email, telefone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssssss", $services, $estilo, $atendimento, $urgencia, $detalhes, $CEP, $nome, $email, $telefone);
+$stmt = $conn->prepare("INSERT INTO pedidos (servicos, tipo, estilo, atendimento, urgencia, detalhes, cep, nome, email, telefone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("sssssssss", $servicos, $tipo $estilo, $atendimento, $urgencia, $detalhes, $cep, $nome, $email, $telefone);
 
 // Executa a inserção
 if ($stmt->execute()) {
