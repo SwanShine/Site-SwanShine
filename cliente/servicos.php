@@ -8,7 +8,7 @@
   <meta content="" name="keywords">
   
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/servicos/favicon.png" rel="icon">
   <link href="assets/img/favicon.png" rel="apple-touch-icon">
   
   <!-- Google Fonts -->
@@ -257,7 +257,7 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="100">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><img src="/assets/img/barbearia.png" alt="barbearia"></div>
+              <div class="icon flex-shrink-0"><img src="assets/img/servicos/barbearia.png" alt="barbearia"></div>
               <div>
                 <h4 class="title"><a href="servicos/barbeiro/barbeiro.html"
                     class="stretched-link">Barbeiro</a></h4>
@@ -269,7 +269,7 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="200">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><img src="/assets/img/maquiagem.png" alt="maquiagem"></div>
+              <div class="icon flex-shrink-0"><img src="assets/img/servicos/maquiagem.png" alt="maquiagem"></div>
               <div>
                 <h4 class="title"><a href="servicos/maquiagem/maquiagem.html"
                     class="stretched-link">Maquiagem</a></h4>
@@ -280,7 +280,7 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="300">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><img src="/assets/img/depilacao.png" alt="depilação"></div>
+              <div class="icon flex-shrink-0"><img src="assets/img/servicos/depilacao.png" alt="depilação"></div>
               <div>
                 <h4 class="title"><a href="servicos/depilacao/depilacao.html"
                     class="stretched-link">Depilação</a></h4>
@@ -291,7 +291,7 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="400">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><img src="/assets/img/nail_designer.png" alt="nail designer"></div>
+              <div class="icon flex-shrink-0"><img src="assets/img/servicos/nail_designer.png" alt="nail designer"></div>
               <div>
                 <h4 class="title"><a href="servicos/nail_designer/nail_designer.html"
                     class="stretched-link">Nail designer</a></h4>
@@ -314,7 +314,7 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="600">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><img src="/assets/img/cabelereira.png" alt="cabelereira"></div>
+              <div class="icon flex-shrink-0"><img src="assets/img/servicos/cabelereira.png" alt="cabelereira"></div>
               <div>
                 <h4 class="title"><a href="servicos/cabelereira/cabelereira.html"
                     class="stretched-link">Cabelereira</a></h4>
@@ -325,7 +325,7 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="600">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><img src="/assets/img/trancista.png" alt="trancista"></div>
+              <div class="icon flex-shrink-0"><img src="assets/img/servicos/trancista.png" alt="trancista"></div>
               <div>
                 <h4 class="title"><a href="servicos/trancista/trancista.html"
                     class="stretched-link">Trancista</a></h4>
@@ -336,7 +336,7 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="600">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><img src="/assets/img/esteticista.png" alt="esteticista"></div>
+              <div class="icon flex-shrink-0"><img src="assets/img/servicos/esteticista.png" alt="esteticista"></div>
               <div>
                 <h4 class="title"><a href="servicos/esteticista/esteticista.html"
                     class="stretched-link">Esteticista</a></h4>

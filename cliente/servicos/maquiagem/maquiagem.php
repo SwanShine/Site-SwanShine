@@ -14,16 +14,16 @@ if ($conn->connect_error) {
 }
 
 // Recebe os dados do formulário
-$servicos = "barbeiro"; // Valor fixo para serviços
+$servicos = "Maquiagem"; // Valor fixo para serviços
 $tipo = $_POST['tipo'] ?? ''; // Novo campo para tipo
 $estilo = $_POST['estilo'] ?? '';
 $atendimento = $_POST['atendimento'] ?? '';
 $urgencia = $_POST['urgencia'] ?? '';
 $detalhes = $_POST['detalhes'] ?? '';
-$cep = $_POST['CEP'] ?? '';
-$nome = $_POST['Nome'] ?? '';
-$email = $_POST['Email'] ?? '';
-$telefone = $_POST['Telefone'] ?? '';
+$cep = $_POST['cep'] ?? '';
+$nome = $_POST['nome'] ?? '';
+$email = $_POST['email'] ?? '';
+$telefone = $_POST['telefone'] ?? '';
 
 // Prepara e vincula
 $stmt = $conn->prepare("INSERT INTO pedidos (servicos, tipo, estilo, atendimento, urgencia, detalhes, cep, nome, email, telefone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");

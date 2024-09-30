@@ -362,6 +362,7 @@ if (isset($_SESSION['recusado'])) {
                         <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Exibe o status -->
                         <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
                         <div class="card-content">
+                            <p><strong>Tipo:</strong> <span><?= htmlspecialchars($pedido['tipo']) ?></span></p>
                             <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
                             <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
                             <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
