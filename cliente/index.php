@@ -101,74 +101,66 @@ $conn->close();
       background-color: white;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin: 20px;
-      width: 300px;
-      /* Define uma largura fixa para os cards */
-      padding: 20px;
+      margin: 10px;
+      /* Reduzi o espaçamento para telas menores */
+      width: 100%;
+      /* Ocupa toda a largura disponível */
+      max-width: 300px;
+      /* Limita o tamanho máximo dos cards */
+      padding: 15px;
+      /* Reduzi o padding para otimizar o espaço */
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
       transform: translateY(-10px);
-      /* Animação ao passar o mouse */
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-      /* Sombra mais forte no hover */
     }
 
     /* Estilo para o título dentro do card */
     .card h2 {
       color: #333;
-      margin: 0 0 10px;
-      font-size: 28px;
-      /* Aumenta o tamanho da fonte para o título */
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+      /* Ajusta o tamanho do título para telas menores */
     }
 
     /* Estilo para os parágrafos dentro do card */
     .card p {
       color: #777;
       margin: 0;
-      font-size: 18px;
-      /* Aumenta o tamanho da fonte dos textos */
+      font-size: 0.875rem;
+      /* Texto menor para se ajustar melhor a pequenas telas */
     }
 
     /* Estilização específica para os cards de serviço */
     .services {
       overflow-y: auto;
-      /* Permite rolagem vertical na section */
       max-height: 100vh;
-      /* Altura máxima da seção */
-      padding: 20px;
+      padding: 15px;
     }
 
     .services .section-title {
       text-align: center;
-      /* Centraliza o título dos serviços */
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .services .section-title h2 {
-      font-size: 32px;
+      font-size: 1.75rem;
+      /* Ajuste de título para telas menores */
       color: #333;
-    }
-
-    .services .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
     /* Estilização para os detalhes do card (separando por tópicos) */
     .card-details .field {
       border: 1px solid #ddd;
-      padding: 15px;
-      /* Aumenta o espaço interno */
-      margin-bottom: 15px;
-      /* Aumenta o espaçamento entre os tópicos */
+      padding: 12px;
+      /* Reduzi o padding para otimizar o espaço */
+      margin-bottom: 10px;
       border-radius: 5px;
-      font-size: 18px;
-      /* Aumenta o tamanho da fonte nos detalhes */
+      font-size: 0.875rem;
       text-align: left;
-      /* Alinha o texto à esquerda para melhor leitura */
     }
 
     /* Remove a margem inferior no último campo */
@@ -178,20 +170,17 @@ $conn->close();
 
     /* Estilo para o título do card */
     .card-title {
-      margin-bottom: 20px;
-      font-size: 24px;
+      margin-bottom: 15px;
+      font-size: 1.25rem;
     }
 
     /* Estilização para o botão dentro do card */
     .btn.card-button {
       display: block;
       width: 100%;
-      /* O botão ocupa toda a largura do card */
-      margin-top: 15px;
-      padding: 10px;
-      /* Aumenta o padding para maior clique */
-      font-size: 18px;
-      /* Aumenta o tamanho da fonte no botão */
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 1rem;
     }
 
     /* Garante que o conteúdo do card fique bem organizado */
@@ -199,26 +188,79 @@ $conn->close();
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      /* Espaça os elementos de forma consistente */
     }
 
     /* Gerenciamento de largura e organização dos cards em colunas */
     .services .row {
       display: flex;
       flex-wrap: wrap;
-      /* Cards vão quebrar de linha conforme necessário */
-      gap: 20px;
-      /* Espaçamento entre os cards */
+      gap: 10px;
+      /* Diminui o espaçamento entre os cards */
       justify-content: center;
-      /* Centraliza os cards */
     }
 
-    /* Estilo para garantir que o título do serviço seja centralizado */
-    .services .service-category {
-      text-align: center;
-      /* Centraliza o nome do serviço */
-      font-size: 24px;
-      margin-bottom: 20px;
+    /* Responsividade para telas menores (320px e abaixo) */
+    @media (max-width: 320px) {
+      .card {
+        width: 100%;
+        /* Ocupa toda a largura da tela em dispositivos pequenos */
+        max-width: 100%;
+        /* Remove o limite máximo para ajustar na tela */
+        margin: 5px;
+        /* Reduz ainda mais o espaçamento para pequenos dispositivos */
+        padding: 10px;
+        /* Reduz o padding */
+      }
+
+      .card h2 {
+        font-size: 1.25rem;
+        /* Diminui o tamanho do título */
+      }
+
+      .card p {
+        font-size: 0.75rem;
+        /* Diminui o tamanho do texto */
+      }
+
+      .card-details .field {
+        font-size: 0.75rem;
+        /* Diminui o tamanho do texto nos detalhes */
+        padding: 10px;
+      }
+
+      .btn.card-button {
+        font-size: 0.875rem;
+        /* Diminui o tamanho do botão */
+        padding: 8px;
+      }
+
+      .services .row {
+        flex-direction: column;
+        gap: 5px;
+        /* Diminui o espaço entre os cards */
+      }
+    }
+
+    /* Responsividade para telas médias */
+    @media (min-width: 321px) and (max-width: 768px) {
+      .card {
+        width: 100%;
+        max-width: 100%;
+        margin: 10px;
+      }
+    }
+
+    /* Responsividade para telas maiores */
+    @media (min-width: 769px) and (max-width: 1200px) {
+      .card {
+        width: calc(50% - 40px);
+      }
+    }
+
+    @media (min-width: 1201px) {
+      .card {
+        width: calc(33.33% - 40px);
+      }
     }
   </style>
 
