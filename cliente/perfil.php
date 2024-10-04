@@ -87,207 +87,210 @@ $conn->close();
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <style>
+    
+  </style>
 </head>
 
 <body>
 
-   <!-- ======= Header ======= -->
-   <header id="header" class="header fixed-top d-flex align-items-center">
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <a href="index.php" class="logo d-flex align-items-center">
-            <img src="assets/img/logo_preta.png" alt="" />
-            <span class="d-none d-lg-block">Swan Shine</span>
-        </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
+      <a href="index.php" class="logo d-flex align-items-center">
+        <img src="assets/img/logo_preta.png" alt="" />
+        <span class="d-none d-lg-block">SwanShine</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
 
     <nav class="header-nav ms-auto">
-        <ul class="d-flex align-items-center">
-            <!-- Notifications Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number">0</span>
-                </a>
+      <ul class="d-flex align-items-center">
+        <!-- Notifications Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">0</span>
+          </a>
 
-                <ul
-                    class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                    <li class="dropdown-header">
-                        Você tem 0 notificações
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-                    </li>
-                    <li class="dropdown-footer">
-                        <a href="#">Mostrar todas as notificações</a>
-                    </li>
-                </ul>
+          <ul
+            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              Você tem 0 notificações
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
             </li>
-
-            <!-- Messages Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-chat-left-text"></i>
-                    <span class="badge bg-success badge-number">0</span>
-                </a>
-
-                <ul
-                    class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                    <li class="dropdown-header">
-                        Você tem 0 mensagens
-                        <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li class="dropdown-footer">
-                        <a href="mensagem.html">Mostrar todas as mensagens</a>
-                    </li>
-                </ul>
+            <li class="dropdown-footer">
+              <a href="#">Mostrar todas as notificações</a>
             </li>
+          </ul>
+        </li>
 
-            <!-- Profile Dropdown -->
-            <li class="nav-item dropdown pe-3">
-                <a
-                    class="nav-link nav-profile d-flex align-items-center pe-0"
-                    href="perfil.php"
-                    data-bs-toggle="dropdown">
-                    <img
-                        src="assets/img/usuario.png"
-                        alt="Profile"
-                        class="rounded-circle" />
-                </a>
+        <!-- Messages Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">0</span>
+          </a>
 
-                <ul
-                    class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-
-                    <li>
-                        <a
-                            class="dropdown-item d-flex align-items-center"
-                            href="perfil.php">
-                            <i class="bi bi-person"></i>
-                            <span>Meu Perfil</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li>
-                        <a
-                            class="dropdown-item d-flex align-items-center"
-                            href="perfil.php">
-                            <i class="bi bi-gear"></i>
-                            <span>Configurações da Conta</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li>
-                        <a
-                            class="dropdown-item d-flex align-items-center"
-                            href="manutencao.html">
-                            <i class="bi bi-question-circle"></i>
-                            <span>Precisa de Ajuda?</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li>
-                        <a
-                            class="dropdown-item d-flex align-items-center"
-                            href="forms/log_out.php">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Sair</span>
-                        </a>
-                    </li>
-                </ul>
+          <ul
+            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              Você tem 0 mensagens
+              <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
             </li>
-        </ul>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li class="dropdown-footer">
+              <a href="mensagem.html">Mostrar todas as mensagens</a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Profile Dropdown -->
+        <li class="nav-item dropdown pe-3">
+          <a
+            class="nav-link nav-profile d-flex align-items-center pe-0"
+            href="perfil.php"
+            data-bs-toggle="dropdown">
+            <img
+              src="assets/img/usuario.png"
+              alt="Profile"
+              class="rounded-circle" />
+          </a>
+
+          <ul
+            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="perfil.php">
+                <i class="bi bi-person"></i>
+                <span>Meu Perfil</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="perfil.php">
+                <i class="bi bi-gear"></i>
+                <span>Configurações da Conta</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="manutencao.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Precisa de Ajuda?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="forms/log_out.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sair</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </nav>
-</header>
+  </header>
 
-<!-- ======= Barra Lateral ======= -->
-<aside id="sidebar" class="sidebar">
-  <ul class="sidebar-nav" id="sidebar-nav">
-    <li class="nav-item">
+  <!-- ======= Barra Lateral ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="index.php">
-            <i class="bi bi-grid"></i>
-            <span>Início</span>
+          <i class="bi bi-grid"></i>
+          <span>Início</span>
         </a>
-    </li>
+      </li>
 
-    <li class="nav-item">
+      <li class="nav-item">
         <a
-            class="nav-link collapsed"
-            data-bs-target="#components-nav"
-            data-bs-toggle="collapse"
-            href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+          class="nav-link collapsed"
+          data-bs-target="#components-nav"
+          data-bs-toggle="collapse"
+          href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul
-            id="components-nav"
-            class="nav-content collapse"
-            data-bs-parent="#sidebar-nav">
-            <li>
-                <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
-            </li>
-            <li>
-                <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
-            </li>
-            <li>
-                <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
-            </li>
-            <li>
-                <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
-            </li>
+          id="components-nav"
+          class="nav-content collapse"
+          data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+          </li>
+          <li>
+            <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+          </li>
+          <li>
+            <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+          </li>
+          <li>
+            <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+          </li>
         </ul>
-    </li>
+      </li>
 
-    <li class="nav-item">
+      <li class="nav-item">
         <a
-            class="nav-link collapsed"
-            data-bs-target="#components-nav"
-            data-bs-toggle="collapse"
-            href="#">
-            <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
+          class="nav-link collapsed"
+          data-bs-target="#components-nav"
+          data-bs-toggle="collapse"
+          href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul
-            id="components-nav"
-            class="nav-content collapse"
-            data-bs-parent="#sidebar-nav">
-            <li>
-                <a href="servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-            </li>
-            <li>
-                <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
-            </li>
+          id="components-nav"
+          class="nav-content collapse"
+          data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
+          </li>
         </ul>
-    </li>
+      </li>
 
-    <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="mensagens.html">
-            <i class="bi bi-envelope"></i>
-            <span>Mensagens</span>
+          <i class="bi bi-envelope"></i>
+          <span>Mensagens</span>
         </a>
-    </li>
+      </li>
 
-    <!-- Perfil -->
-    <li class="nav-item">
+      <!-- Perfil -->
+      <li class="nav-item">
         <a class="nav-link collapsed" href="perfil.php">
-            <i class="bi bi-person"></i>
-            <span>Perfil</span>
+          <i class="bi bi-person"></i>
+          <span>Perfil</span>
         </a>
-    </li>
+      </li>
 
-    <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="suporte.html">
-            <i class="bi bi-chat-dots"></i>
-            <span>Suporte</span>
+          <i class="bi bi-chat-dots"></i>
+          <span>Suporte</span>
         </a>
-    </li>
+      </li>
 
- </ul>
-</aside><!-- End Sidebar-->
+    </ul>
+  </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
@@ -295,7 +298,7 @@ $conn->close();
       <h1>Perfil</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item">Usuário</li>
           <li class="breadcrumb-item active">Perfil</li>
         </ol>
@@ -320,12 +323,12 @@ $conn->close();
           </div>
         </div> -->
         <div class="col-xl-4">
-        <div class="card">
+          <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
               <h2><?php echo htmlspecialchars($nome); ?></h2>
-              
+
             </div>
           </div>
         </div>
@@ -334,7 +337,7 @@ $conn->close();
             <div class="card-body pt-3">
               <!-- Abas com Bordas -->
               <ul class="nav nav-tabs nav-tabs-bordered">
-                
+
                 <li class="nav-item">
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Visão Geral</button>
                 </li>
@@ -342,14 +345,14 @@ $conn->close();
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
                 </li>
-                
+
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Mudar Senha</button>
                 </li>
 
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configurações</button>
-                </li> 
+                </li>
 
               </ul>
 
@@ -468,7 +471,7 @@ $conn->close();
                   </form>
                 </div><!-- Mudar Senha -->
 
-                <!-- Configurações --> 
+                <!-- Configurações -->
                 <div class="tab-pane fade pt-3" id="profile-settings">
                   <h5 class="card-title">Configurações</h5>
                   <form>
@@ -494,7 +497,7 @@ $conn->close();
                       <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </div>
                   </form>
-                </div> <!-- Configurações --> 
+                </div> <!-- Configurações -->
 
               </div>
             </div>
