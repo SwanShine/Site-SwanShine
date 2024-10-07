@@ -4,8 +4,8 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-  header('Location: ../home/forms/login/login.html');
-  exit();
+    header('Location: ../home/forms/login/login.html');
+    exit();
 }
 
 // Dados de conexão com o banco de dados
@@ -19,37 +19,59 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexão
 if ($conn->connect_error) {
-  die("Conexão falhou: " . $conn->connect_error);
+    die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Recuperar o email da sessão
+// Recuperar o email da sessão e obter o ID do cliente
 $email = $_SESSION['user_email'];
+$sql_cliente = "SELECT id FROM clientes WHERE email = '$email'";
+$result_cliente = $conn->query($sql_cliente);
+$row_cliente = $result_cliente->fetch_assoc();
+$id_cliente = $row_cliente['id'];
 
-// Consultar os dados dos profissionais
+// Obter o ID do profissional da URL
+$id_profissional = isset($_GET['profissional_id']) ? intval($_GET['profissional_id']) : 0;
+
+// Enviar nova mensagem via POST (AJAX)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $mensagem = $_POST['mensagem'];
+    $query = "INSERT INTO mensagens (id_cliente, id_profissional, mensagem, remetente)
+              VALUES ($id_cliente, $id_profissional, '$mensagem', 'cliente')";
+    $conn->query($query);
+
+    // Atualiza a tabela de conversas
+    $update_conversas = "INSERT INTO conversas (id_cliente, id_profissional, ultima_mensagem) 
+                         VALUES ($id_cliente, $id_profissional, NOW()) 
+                         ON DUPLICATE KEY UPDATE ultima_mensagem = NOW()";
+    $conn->query($update_conversas);
+    exit;
+}
+
+// Consultar os profissionais por serviço
 $sql = "SELECT * FROM profissionais";
 $result = $conn->query($sql);
 
 $profissionais = [
-  'Barbeiro' => [],
-  'Maquiagem' => [],
-  'Lash_Designer' => [],
-  'Nail_Designer' => [],
-  'Trancista' => [],
-  'Esteticista' => [],
-  'Cabeleireira' => [],
-  'Depilação' => []
+    'Barbeiro' => [],
+    'Maquiagem' => [],
+    'Lash_Designer' => [],
+    'Nail_Designer' => [],
+    'Trancista' => [],
+    'Esteticista' => [],
+    'Cabeleireira' => [],
+    'Depilação' => []
 ];
 
 if ($result->num_rows > 0) {
-  // Separar os profissionais por serviço
-  while ($row = $result->fetch_assoc()) {
-    $servico = $row['servicos'];
-    if (array_key_exists($servico, $profissionais)) {
-      $profissionais[$servico][] = $row;
+    // Separar os profissionais por serviço
+    while ($row = $result->fetch_assoc()) {
+        $servico = $row['servicos'];
+        if (array_key_exists($servico, $profissionais)) {
+            $profissionais[$servico][] = $row;
+        }
     }
-  }
 } else {
-  echo "Nenhum profissional encontrado.";
+    echo "Nenhum profissional encontrado.";
 }
 
 // Fechar conexão
@@ -57,297 +79,203 @@ $conn->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat com Profissional</title>
+    <style>
+        /* Estilos básicos para o chat */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-  <title>Swan Shine - Cliente</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+        .container {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <!-- Link para o favicon da página -->
-  <link href="assets/img/favicon.png" rel="apple-touch-icon">
-  <!-- Link para o ícone de toque da Apple -->
+        .chat-container {
+            display: flex;
+            width: 80%;
+            height: 80%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        .chat {
+            flex: 3;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+        }
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+        .chat-header {
+            background-color: #4CAF50;
+            padding: 15px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        .chat-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
 
+        .chat-footer {
+            display: flex;
+            padding: 10px;
+            background-color: #e9e9e9;
+        }
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/main.css" rel="stylesheet">
-  <link href="assets/css/services.css" rel="stylesheet">
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+        }
 
-  <style>
+        .chat-footer button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
 
-  </style>
+        .chat-footer button:hover {
+            background-color: #45a049;
+        }
 
+        .mensagem {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+        }
+
+        .mensagem-cliente {
+            background-color: #dfffd6;
+            align-self: flex-end;
+        }
+
+        .mensagem-profissional {
+            background-color: #ddd;
+            align-self: flex-start;
+        }
+
+        .conversas {
+            flex: 1;
+            background-color: #f1f1f1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .conversa-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .conversa-item:hover {
+            background-color: #ddd;
+        }
+
+        .conversa-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
-        <img src="assets/img/logo_preta.png" alt="" />
-        <span class="d-none d-lg-block">SwanShine</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+<div class="container">
+    <div class="chat-container">
+        <!-- Seção de mensagens -->
+        <div class="chat">
+            <div class="chat-header">
+                Chat com Profissional (ID: <?php echo $id_profissional; ?>)
+            </div>
+            <div class="chat-body" id="chat-body">
+                <!-- Carregar mensagens do banco de dados -->
+                <?php
+                $query = "SELECT * FROM mensagens WHERE id_cliente = $id_cliente AND id_profissional = $id_profissional ORDER BY data_envio ASC";
+                $result = $conn->query($query);
+
+                while ($row = $result->fetch_assoc()) {
+                    $classe = $row['remetente'] == 'cliente' ? 'mensagem-cliente' : 'mensagem-profissional';
+                    echo "<div class='mensagem $classe'><p>{$row['mensagem']}</p></div>";
+                }
+                ?>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="mensagem" placeholder="Digite sua mensagem...">
+                <button id="enviar">Enviar</button>
+            </div>
+        </div>
+
+        <!-- Seção de conversas recentes -->
+        <div class="conversas">
+            <h3>Conversas Recentes</h3>
+            <?php
+            $query = "SELECT profissionais.nome, profissionais.id FROM conversas
+                      JOIN profissionais ON conversas.id_profissional = profissionais.id
+                      WHERE conversas.id_cliente = $id_cliente ORDER BY conversas.ultima_mensagem DESC";
+            $result = $conn->query($query);
+
+            while ($row = $result->fetch_assoc()) {
+                echo "<div class='conversa-item' onclick='abrirConversa({$row['id']})'>";
+                echo "<p>{$row['nome']} (ID: {$row['id']})</p>";
+                echo "</div>";
+            }
+            ?>
+        </div>
     </div>
+</div>
 
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-        <!-- Notifications Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">0</span>
-          </a>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Função para enviar mensagem via AJAX
+    $('#enviar').on('click', function () {
+        var mensagem = $('#mensagem').val();
+        if (mensagem.trim() === '') return;
 
-          <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Você tem 0 notificações
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Mostrar todas as notificações</a>
-            </li>
-          </ul>
-        </li>
+        $.ajax({
+            url: 'mensagem.php?profissional_id=<?php echo $id_profissional; ?>',
+            type: 'POST',
+            data: {mensagem: mensagem},
+            success: function () {
+                $('#chat-body').append('<div class="mensagem mensagem-cliente"><p>' + mensagem + '</p></div>');
+                $('#mensagem').val('');
+                $('#chat-body').scrollTop($('#chat-body')[0].scrollHeight); // Scroll automático para a última mensagem
+            }
+        });
+    });
 
-        <!-- Messages Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">0</span>
-          </a>
+    // Função para abrir uma conversa com outro profissional
+    function abrirConversa(id_profissional) {
+        window.location.href = 'mensagem.php?profissional_id=' + id_profissional;
+    }
 
-          <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              Você tem 0 mensagens
-              <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li class="dropdown-footer">
-              <a href="mensagem.html">Mostrar todas as mensagens</a>
-            </li>
-          </ul>
-        </li>
-
-        <!-- Profile Dropdown -->
-        <li class="nav-item dropdown pe-3">
-          <a
-            class="nav-link nav-profile d-flex align-items-center pe-0"
-            href="perfil.php"
-            data-bs-toggle="dropdown">
-            <img
-              src="assets/img/usuario.png"
-              alt="Profile"
-              class="rounded-circle" />
-          </a>
-
-          <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="perfil.php">
-                <i class="bi bi-person"></i>
-                <span>Meu Perfil</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="perfil.php">
-                <i class="bi bi-gear"></i>
-                <span>Configurações da Conta</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="manutencao.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Precisa de Ajuda?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="forms/log_out.php">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sair</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- ======= Barra Lateral ======= -->
-  <aside id="sidebar" class="sidebar">
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
-          <i class="bi bi-grid"></i>
-          <span>Início</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          data-bs-target="#components-nav"
-          data-bs-toggle="collapse"
-          href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul
-          id="components-nav"
-          class="nav-content collapse"
-          data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
-          </li>
-          <li>
-            <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
-          </li>
-          <li>
-            <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
-          </li>
-          <li>
-            <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          data-bs-target="#components-nav"
-          data-bs-toggle="collapse"
-          href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul
-          id="components-nav"
-          class="nav-content collapse"
-          data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-          </li>
-          <li>
-            <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="mensagens.html">
-          <i class="bi bi-envelope"></i>
-          <span>Mensagens</span>
-        </a>
-      </li>
-
-      <!-- Perfil -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="perfil.php">
-          <i class="bi bi-person"></i>
-          <span>Perfil</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="suporte.html">
-          <i class="bi bi-chat-dots"></i>
-          <span>Suporte</span>
-        </a>
-      </li>
-
-    </ul>
-  </aside><!-- End Sidebar-->
-
-
-  <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Chat de conversa com Profissionais</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-          <li class="breadcrumb-item">Painel</li>
-          <li class="breadcrumb-item active">Chat</li>
-        </ol>
-      </nav>
-    </div>
-
-    <!-- Services Section -->
-    <section id="services" class="services section">
-     
-
-    </section><!-- /Services Section -->
-
-
-  </main>
-
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>SwanShine</span></strong>. Todos os Direitos Reservados
-    </div>
-  </footer><!-- Fim do Rodapé -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
-  <script src="assets/vendor/quill/quill.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+    // Função para atualizar mensagens em tempo real (polling)
+    setInterval(function () {
+        $('#chat-body').load('mensagem.php?profissional_id=<?php echo $id_profissional; ?> #chat-body');
+    }, 3000); // Atualiza a cada 3 segundos
+</script>
 
 </body>
-
 </html>
