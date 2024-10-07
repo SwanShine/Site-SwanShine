@@ -88,7 +88,7 @@ $conn->close();
   <link href="assets/css/style.css" rel="stylesheet">
 
   <style>
-    
+
   </style>
 </head>
 
@@ -113,8 +113,7 @@ $conn->close();
             <span class="badge bg-primary badge-number">0</span>
           </a>
 
-          <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
               Você tem 0 notificações
               <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
@@ -132,8 +131,7 @@ $conn->close();
             <span class="badge bg-success badge-number">0</span>
           </a>
 
-          <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
             <li class="dropdown-header">
               Você tem 0 mensagens
               <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
@@ -149,23 +147,14 @@ $conn->close();
 
         <!-- Profile Dropdown -->
         <li class="nav-item dropdown pe-3">
-          <a
-            class="nav-link nav-profile d-flex align-items-center pe-0"
-            href="perfil.php"
-            data-bs-toggle="dropdown">
-            <img
-              src="assets/img/usuario.png"
-              alt="Profile"
-              class="rounded-circle" />
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="perfil.php" data-bs-toggle="dropdown">
+            <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle" />
           </a>
 
-          <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 
             <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="perfil.php">
+              <a class="dropdown-item d-flex align-items-center" href="perfil.php">
                 <i class="bi bi-person"></i>
                 <span>Meu Perfil</span>
               </a>
@@ -174,9 +163,7 @@ $conn->close();
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="perfil.php">
+              <a class="dropdown-item d-flex align-items-center" href="perfil.php">
                 <i class="bi bi-gear"></i>
                 <span>Configurações da Conta</span>
               </a>
@@ -185,9 +172,7 @@ $conn->close();
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="manutencao.html">
+              <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
                 <i class="bi bi-question-circle"></i>
                 <span>Precisa de Ajuda?</span>
               </a>
@@ -196,9 +181,7 @@ $conn->close();
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="forms/log_out.php">
+              <a class="dropdown-item d-flex align-items-center" href="forms/log_out.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sair</span>
               </a>
@@ -220,17 +203,10 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          data-bs-target="#components-nav"
-          data-bs-toggle="collapse"
-          href="#">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul
-          id="components-nav"
-          class="nav-content collapse"
-          data-bs-parent="#sidebar-nav">
+        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
           </li>
@@ -247,17 +223,10 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          data-bs-target="#components-nav"
-          data-bs-toggle="collapse"
-          href="#">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul
-          id="components-nav"
-          class="nav-content collapse"
-          data-bs-parent="#sidebar-nav">
+        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a href="servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
           </li>
@@ -404,7 +373,7 @@ $conn->close();
                 <!-- Editar Perfil -->
                 <div class="tab-pane fade" id="profile-edit">
                   <h5 class="card-title">Editar Perfil</h5>
-                  <form action="form/atualizar_perfil.php" method="POST" onsubmit="return confirmUpdate();">
+                  <form action="form/atualizar_perfil.php" method="POST" enctype="multipart/form-data" onsubmit="return confirmUpdate();">
                     <div class="row mb-3">
                       <label for="fullName" class="col-lg-3 col-md-4 col-form-label">Nome Completo</label>
                       <div class="col-lg-9 col-md-8">
@@ -441,11 +410,19 @@ $conn->close();
                         <input name="gender" type="text" class="form-control" id="gender" value="<?php echo htmlspecialchars($genero); ?>">
                       </div>
                     </div>
+                    <div class="row mb-3">
+                      <label for="profileImage" class="col-lg-3 col-md-4 col-form-label">Imagem de Perfil</label>
+                      <div class="col-lg-9 col-md-8">
+                        <input name="profileImage" type="file" class="form-control" id="profileImage">
+                      </div>
+                    </div>
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </div>
                   </form>
                 </div><!-- Editar Perfil -->
+
+
 
                 <!-- Mudar Senha -->
                 <div class="tab-pane fade pt-3" id="profile-change-password">

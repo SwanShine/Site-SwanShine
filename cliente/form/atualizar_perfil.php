@@ -29,51 +29,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Atualizar os dados do perfil com base nos campos do formulário
     $nome = $_POST['fullName'] ?? '';
-    $celular = $_POST['celular'] ?? '';
-    $data_de_aniversario = $_POST['data_de_aniversario'] ?? '';
-    $genero = $_POST['genero'] ?? '';
-    $cep = $_POST['cep'] ?? '';
-    $rua = $_POST['rua'] ?? '';
-    $numero = $_POST['numero'] ?? '';
-    $complemento = $_POST['complemento'] ?? '';
-    $bairro = $_POST['bairro'] ?? '';
-    $cidade = $_POST['cidade'] ?? '';
-    $estado = $_POST['estado'] ?? '';
-    $servicos = $_POST['servicos'] ?? '';
+    $endereco = $_POST['address'] ?? ''; // Corrigido para capturar o endereço
+    $cpf = $_POST['cpf'] ?? '';
+    $telefone = $_POST['phone'] ?? '';
+    $genero = $_POST['gender'] ?? '';
 
-    // Redes sociais
-    $tiktok = $_POST['tiktok'] ?? '';
-    $facebook = $_POST['facebook'] ?? '';
-    $instagram = $_POST['instagram'] ?? '';
-    $linkedin = $_POST['linkedin'] ?? '';
-    $whatsapp = $_POST['whatsapp'] ?? '';
-
-    // Preparar a consulta SQL para atualizar os dados
-    $sql = "UPDATE profissionais 
-            SET nome = ?, celular = ?, data_de_aniversario = ?, genero = ?, cep = ?, rua = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, estado = ?, servicos = ?, tiktok = ?, facebook = ?, instagram = ?, linkedin = ?, whatsapp = ? 
+    // Preparar a consulta SQL para atualizar os dados na tabela clientes
+    $sql = "UPDATE clientes 
+            SET nome = ?, endereco = ?, cpf = ?, telefone = ?, genero = ? 
             WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
-    // Corrigir a string de tipo para corresponder ao número de variáveis
     if ($stmt) {
-        $stmt->bind_param("ssssssssssssssssss", 
-            $nome, 
-            $celular, 
-            $data_de_aniversario, 
-            $genero, 
-            $cep, 
-            $rua, 
-            $numero, 
-            $complemento, 
-            $bairro, 
-            $cidade, 
-            $estado, 
-            $servicos, 
-            $tiktok, 
-            $facebook, 
-            $instagram, 
-            $linkedin, 
-            $whatsapp, 
+        $stmt->bind_param(
+            "ssssss",
+            $nome,
+            $endereco,
+            $cpf,
+            $telefone,
+            $genero,
             $email
         );
 
@@ -82,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
                 $allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // Tipos permitidos
                 $fileType = mime_content_type($_FILES['profileImage']['tmp_name']);
-                
+
                 if (in_array($fileType, $allowedTypes)) {
                     $targetDir = "uploads/";
                     $targetFile = $targetDir . basename($_FILES["profileImage"]["name"]);
@@ -94,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $targetFile)) {
                         // Atualizar o caminho da imagem no banco de dados
-                        $sql = "UPDATE profissionais SET profileImage = ? WHERE email = ?";
+                        $sql = "UPDATE clientes SET profileImage = ? WHERE email = ?";
                         $stmt = $conn->prepare($sql);
                         $stmt->bind_param("ss", $targetFile, $email);
                         $stmt->execute();
@@ -104,12 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     echo "Tipo de arquivo não permitido. Apenas JPG, PNG e GIF são permitidos.";
                 }
-            } elseif (isset($_POST['removeImage'])) {
-                // Se o botão de remover imagem for clicado
-                $sql = "UPDATE profissionais SET profileImage = NULL WHERE email = ?";
-                $stmt = $conn->prepare($sql);
-                $stmt->bind_param("s", $email);
-                $stmt->execute();
             }
         } else {
             echo "Erro ao atualizar o perfil: " . $stmt->error;
@@ -130,4 +98,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "Método de solicitação inválido.";
 }
-?>

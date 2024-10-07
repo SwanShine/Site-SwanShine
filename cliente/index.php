@@ -63,7 +63,7 @@ $conn->close();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Swan Shine - Cliente</title>
+  <title>SwanShine - Cliente</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -460,7 +460,7 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="mensagens.html">
+        <a class="nav-link collapsed" href="mensagem.php">
           <i class="bi bi-envelope"></i>
           <span>Mensagens</span>
         </a>
