@@ -1,14 +1,10 @@
-Aqui está um README atualizado que reflete a estrutura da organização Swan Shine e os sistemas que ela oferece:
+# 🦢 Swan Shine - Plataforma de Conexão e Administração
 
----
-
-# 🦢 Swanshine - Plataforma de Conexão e Administração
-
-Bem-vindo ao **Swanshine**! Este repositório é a base para os dois principais sistemas da nossa organização: o **Site** e o **Aplicativo Desktop**. Juntos, eles proporcionam uma experiência integrada para clientes, profissionais e administradores.
+Bem-vindo a **Swan Shine**! Este repositório é a base para os dois principais sistemas da nossa organização: o **Site** e o **Aplicativo Desktop**. Juntos, eles proporcionam uma experiência integrada para clientes, profissionais e administradores.
 
 ## 🚀 O que é o Swanshine?
 
-A **Swanshine** é uma plataforma projetada para facilitar a comunicação entre clientes e profissionais, além de oferecer ferramentas para a administração eficaz dos colaboradores. Com uma interface amigável e recursos avançados, estamos comprometidos em criar um ambiente eficiente e produtivo.
+A **Swan Shine** é uma plataforma projetada para facilitar a comunicação entre clientes e profissionais, além de oferecer ferramentas para a administração eficaz dos colaboradores. Com uma interface amigável e recursos avançados, estamos comprometidos em criar um ambiente eficiente e produtivo.
 
 ### 🌟 Funcionalidades Principais:
 
@@ -54,4 +50,3 @@ Se você tiver alguma dúvida, não hesite em entrar em contato conosco através
 
 ---
 
-Sinta-se à vontade para personalizar ainda mais este README de acordo com suas necessidades!
