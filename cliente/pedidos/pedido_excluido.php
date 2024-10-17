@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
 $stmt->close();
 
 // Buscar os serviços recusados feitos pelo cliente
-$stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'concluido' ORDER BY data_pedido DESC");
+$stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'excluido' ORDER BY data_pedido DESC");
 if (!$stmt) {
     die("Erro na preparação da consulta de pedidos: " . $conn->error); // Exibe erro se a consulta falhar.
 }
@@ -201,22 +201,13 @@ $conn->close();
             transition: background-color 0.3s;
         }
 
-        .button.orcamento {
+        .button.voltar {
             background-color: #4caf50;
             color: white;
         }
 
-        .button.orcamento:hover {
+        .button.voltar:hover {
             background-color: #45a049;
-        }
-
-        .button.excluir {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .button.excluir:hover {
-            background-color: #e53935;
         }
 
         .no-pedidos {
@@ -614,12 +605,12 @@ $conn->close();
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Pedidos Concluidos</h1>
+            <h1>Pedidos Excluidos </h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
                     <li class="breadcrumb-item">Pedido</li>
-                    <li class="breadcrumb-item active">Pedidos Concluidos</li>
+                    <li class="breadcrumb-item active">Pedidos Excluidos</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -649,8 +640,7 @@ $conn->close();
                                     <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
                                 </div>
                                 <div class="buttons">
-                                    <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Visualizar Orçamento</button>
-                                    <button class="button excluir" data-id="<?= htmlspecialchars($pedido['id']) ?>">Excluir Pedido</button>
+                                    <button class="button voltar" data-id="<?= htmlspecialchars($pedido['id']) ?>">Voltar Pedido</button>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -667,19 +657,12 @@ $conn->close();
 
         <!-- JavaScript para lidar com os botões de orçamento e recusa -->
         <script>
-            document.querySelectorAll('.excluir').forEach(button => {
+            document.querySelectorAll('.voltar').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.getAttribute('data-id');
-                    if (confirm('Tem certeza que deseja excluir este pedido?')) {
-                        window.location.href = `../form/pedido/excluir_pedido.php?id=${id}`;
+                    if (confirm('Tem certeza que deseja Voltar este pedido?')) {
+                        window.location.href = `../form/pedido/voltar_pedido.php?id=${id}`;
                     }
-                });
-            });
-
-            document.querySelectorAll('.orcamento').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    window.location.href = `../form/pedido/orcamento/orcamento_pedido.php?id=${id}`;
                 });
             });
         </script>

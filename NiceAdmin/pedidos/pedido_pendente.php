@@ -276,34 +276,12 @@ if (isset($_SESSION['recusados'])) {
                     <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
                 </li>
                 <li>
-                    <a href="pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
-                </li>
-                <li>
                     <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
                 </li>
             </ul>
         </li>
 
-        <li class="nav-item">
-            <a
-                class="nav-link collapsed"
-                data-bs-target="#components-nav"
-                data-bs-toggle="collapse"
-                href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul
-                id="components-nav"
-                class="nav-content collapse"
-                data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="../servico/service.php"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
-                </li>
-                <li>
-                    <a href="../servico/service-cadastrado.php"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
-                </li>
-            </ul>
-        </li>
+    
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="../mensagens.html">

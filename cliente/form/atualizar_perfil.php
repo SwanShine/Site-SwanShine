@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Atualizar os dados do perfil com base nos campos do formulário
     $nome = $_POST['fullName'] ?? '';
-    $endereco = $_POST['address'] ?? ''; // Corrigido para capturar o endereço
+    $endereco = $_POST['address'] ?? ''; // Capturar o endereço corretamente
     $cpf = $_POST['cpf'] ?? '';
     $telefone = $_POST['phone'] ?? '';
     $genero = $_POST['gender'] ?? '';
@@ -52,23 +52,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if ($stmt->execute()) {
-            // Verificar se o formulário para upload ou remoção de imagem foi enviado
-            if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
+            // Verificar se o formulário para upload de imagem foi enviado
+            if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
                 $allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // Tipos permitidos
-                $fileType = mime_content_type($_FILES['profileImage']['tmp_name']);
+                $fileType = mime_content_type($_FILES['imagem']['tmp_name']);
 
                 if (in_array($fileType, $allowedTypes)) {
                     $targetDir = "uploads/";
-                    $targetFile = $targetDir . basename($_FILES["profileImage"]["name"]);
+                    $targetFile = $targetDir . basename($_FILES["imagem"]["name"]);
 
                     // Verificar se o diretório de uploads existe, caso contrário, criá-lo
                     if (!is_dir($targetDir)) {
                         mkdir($targetDir, 0755, true);
                     }
 
-                    if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $targetFile)) {
+                    if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $targetFile)) {
                         // Atualizar o caminho da imagem no banco de dados
-                        $sql = "UPDATE clientes SET profileImage = ? WHERE email = ?";
+                        $sql = "UPDATE clientes SET imagem = ? WHERE email = ?";
                         $stmt = $conn->prepare($sql);
                         $stmt->bind_param("ss", $targetFile, $email);
                         $stmt->execute();

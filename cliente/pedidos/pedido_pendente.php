@@ -4,8 +4,8 @@ session_start(); // Inicia uma sessão PHP para armazenar dados de usuário dura
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) { // Verifica se o email do usuário está salvo na sessão.
-    header('Location: ../../home/forms/login/login.html'); // Redireciona para a página de login.
-    exit(); // Interrompe a execução do script para garantir que o redirecionamento ocorra.
+  header('Location: ../../home/forms/login/login.html'); // Redireciona para a página de login.
+  exit(); // Interrompe a execução do script para garantir que o redirecionamento ocorra.
 }
 
 // Dados de conexão com o banco de dados
@@ -18,39 +18,36 @@ $dbname = "swanshine"; // Nome do banco de dados.
 $conn = new mysqli($servername, $username, $password, $dbname); // Cria uma nova conexão MySQL.
 
 if ($conn->connect_error) { // Verifica se a conexão falhou.
-    die("Conexão falhou: " . $conn->connect_error); // Exibe mensagem de erro.
+  die("Conexão falhou: " . $conn->connect_error); // Exibe mensagem de erro.
 }
 
 // Recuperar o email da sessão
 $email = $_SESSION['user_email']; // Obtém o email do usuário da sessão.
 
 // Verificar se o cliente existe na tabela "clientes"
-$stmt = $conn->prepare("SELECT id FROM clientes WHERE email = ?"); // Prepara a consulta.
-
+$stmt = $conn->prepare("SELECT * FROM clientes WHERE email = ?");
 if (!$stmt) {
-    die("Erro na preparação da consulta: " . $conn->error); // Exibe erro se a consulta falhar.
+  die("Erro na preparação da consulta: " . $conn->error); // Exibe erro se a consulta falhar.
 }
 
 $stmt->bind_param("s", $email); // Substitui "?" pelo email do cliente.
 $stmt->execute(); // Executa a consulta.
 $result = $stmt->get_result(); // Armazena o resultado.
 
-if ($result->num_rows > 0) { // Verifica se o cliente foi encontrado.
-    $cliente = $result->fetch_assoc(); // Obtém os dados do cliente.
-    $cliente_id = $cliente['id']; // Armazena o ID do cliente.
+if ($result->num_rows > 0) {
+  $cliente = $result->fetch_assoc(); // Obtém os dados do cliente.
 } else {
-    echo "Cliente não encontrado."; // Mensagem se o cliente não for encontrado.
-    exit(); // Encerra o script.
+  echo "Cliente não encontrado."; // Mensagem se o cliente não for encontrado.
+  exit(); // Encerra o script.
 }
 
 // Fechar a consulta do cliente
-$stmt->close(); // Fecha o comando de consulta ao banco de dados.
+$stmt->close();
 
 // Buscar os serviços pendentes feitos pelo cliente
 $stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'pendente' ORDER BY data_pedido DESC");
-
 if (!$stmt) {
-    die("Erro na preparação da consulta de pedidos: " . $conn->error); // Exibe erro se a consulta falhar.
+  die("Erro na preparação da consulta de pedidos: " . $conn->error); // Exibe erro se a consulta falhar.
 }
 
 $stmt->bind_param("s", $email); // Substitui "?" pelo email do cliente.
@@ -58,40 +55,21 @@ $stmt->execute(); // Executa a consulta.
 $result = $stmt->get_result(); // Armazena o resultado.
 
 // Verificar se o cliente tem pedidos pendentes
-$servicos_solicitados = []; // Cria um array para armazenar os serviços solicitados.
-
-if ($result->num_rows > 0) { // Verifica se foram encontrados pedidos pendentes.
-    while ($row = $result->fetch_assoc()) { // Percorre os resultados.
-        $servicos = explode(', ', $row['servicos']); // Divide os serviços em um array.
-        $servicos_solicitados = array_merge($servicos_solicitados, $servicos); // Adiciona os serviços ao array.
-    }
+$pedidos = [];
+if ($result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    $pedidos[] = $row; // Armazena cada pedido no array
+  }
 } else {
-    echo "Nenhum serviço pendente encontrado para este cliente."; // Mensagem se não houver pedidos pendentes.
-    exit(); // Encerra o script.
+  echo "<div>Nenhum serviço pendente encontrado para este cliente.</div>"; // Mensagem se não houver pedidos pendentes.
 }
 
 // Fechar a consulta de pedidos do cliente
-$stmt->close(); // Fecha o comando de consulta ao banco de dados.
-
-// Filtrar serviços duplicados
-$servicos_solicitados = array_unique($servicos_solicitados); // Remove duplicatas.
-
-// Mostrar os serviços solicitados
-echo "<h3>Serviços Pendentes</h3>"; // Título para os serviços solicitados.
-if (!empty($servicos_solicitados)) { // Verifica se o array de serviços não está vazio.
-    echo "<ul>"; // Inicia uma lista não ordenada.
-    foreach ($servicos_solicitados as $servico) { // Percorre o array de serviços.
-        echo "<li>" . htmlspecialchars($servico) . "</li>"; // Exibe cada serviço como um item de lista.
-    }
-    echo "</ul>"; // Fecha a lista.
-} else {
-    echo "Nenhum serviço encontrado."; // Mensagem se o array estiver vazio.
-}
+$stmt->close();
 
 // Fechar a conexão
-$conn->close(); // Fecha a conexão com o banco de dados.
+$conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -131,11 +109,225 @@ $conn->close(); // Fecha a conexão com o banco de dados.
   <link href="../assets/css/main.css" rel="stylesheet">
   <link href="../assets/css/services.css" rel="stylesheet">
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section.dashboard {
+      padding: 20px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .cabody {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section.dashboard {
+      padding: 20px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      /* Permite que os cartões se movam para a linha seguinte */
+    }
+
+    .card-container {
+      max-width: 1200px;
+      width: 100%;
+      padding: 10px;
+      /* Espaçamento lateral */
+    }
+
+    .titulo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 10px;
+      /* Margem ao redor dos cartões */
+      flex: 1 1 calc(30% - 20px);
+      /* Cada cartão ocupará cerca de 30% da largura, com espaçamento */
+      position: relative;
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .servico-destaque {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      margin: 5px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button.orcamento {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .button.orcamento:hover {
+      background-color: #45a049;
+    }
+
+    .button.excluir {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .button.excluir:hover {
+      background-color: #e53935;
+    }
+
+    .no-pedidos {
+      text-align: center;
+    }
+
+    .close-card {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 1200px) {
+      .card-container {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        padding: 15px;
+        flex: 1 1 calc(45% - 20px);
+        /* Ajusta a largura dos cartões em telas médias */
+      }
+
+      .servico-destaque {
+        font-size: 1.1em;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+        /* Botões ocupam toda a largura */
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 10px;
+        flex: 1 1 calc(50% - 20px);
+        /* Ajusta a largura dos cartões em telas menores */
+      }
+
+      .titulo {
+        font-size: 1.5em;
+      }
+
+      .servico-destaque {
+        font-size: 1em;
+      }
+
+      .button {
+        padding: 8px 16px;
+      }
+
+      .status {
+        font-size: 0.9em;
+      }
+    }
+
+    /* Estilos para 320px */
+    @media (max-width: 320px) {
+      .card {
+        padding: 8px;
+        flex: 1 1 calc(100% - 20px);
+        /* Ajusta para 1 cartão por linha em telas muito pequenas */
+      }
+
+      .titulo {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+
+      .servico-destaque {
+        font-size: 0.9em;
+      }
+
+      .card-content p {
+        font-size: 0.85em;
+        margin: 3px 0;
+      }
+
+      .button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+      }
+
+      .status {
+        font-size: 0.85em;
+      }
+
+      .buttons {
+        gap: 5px;
+      }
+
+      .close-card {
+        font-size: 0.8em;
+        top: 8px;
+        right: 8px;
+      }
+    }
+  </style>
 
 </head>
 
 <body>
-    
+
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
     <!-- Cabeçalho com ID "header", classe para fixar no topo e aplicar estilo flex para alinhamento dos itens. -->
@@ -320,7 +512,7 @@ $conn->close(); // Fecha a conexão com o banco de dados.
             <li>
               <a
                 class="dropdown-item d-flex align-items-center"
-                href="forms/log_out.php">
+                href="form/log_out.php">
                 <!-- Link para a página de logout com ícone e texto alinhados. -->
 
                 <i class="bi bi-box-arrow-right"></i>
@@ -366,7 +558,7 @@ $conn->close(); // Fecha a conexão com o banco de dados.
             <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
           </li>
           <li>
-            <a href="pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+            <a href="pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
           </li>
           <li>
             <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
@@ -388,9 +580,6 @@ $conn->close(); // Fecha a conexão com o banco de dados.
           data-bs-parent="#sidebar-nav">
           <li>
             <a href="../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-          </li>
-          <li>
-            <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
           </li>
         </ul>
       </li>
@@ -420,7 +609,7 @@ $conn->close(); // Fecha a conexão com o banco de dados.
     </ul>
   </aside><!-- End Sidebar-->
 
-    <main id="main" class="main">
+  <main id="main" class="main">
     <div class="pagetitle">
       <h1>Pedidos Pendentes</h1>
       <nav>
@@ -433,95 +622,94 @@ $conn->close(); // Fecha a conexão com o banco de dados.
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
-    <div class="row">
+      <div class="row">
         <div class="card-container">
-
-            <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
-                <div class="card notification-card">
-                    <h3>Pedido Recusado</h3>
-                    <p>O pedido foi recusado com sucesso.</p>
-                    <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
+          <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido Excluido com sucesso'): ?>
+            <div class="card notification-card">
+              <h3>Pedido Excluido</h3>
+              <p>O pedido foi excluido com sucesso.</p>
+              <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
+            </div>
+          <?php elseif (!empty($pedidos)): ?>
+            <?php foreach ($pedidos as $pedido): ?>
+              <div class="card pedido-card">
+                <div class="status <?= htmlspecialchars($pedido['status']) ?>"><?= htmlspecialchars($pedido['status']) ?></div>
+                <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
+                <div class="card-content">
+                  <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
+                  <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
+                  <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
+                  <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
+                  <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
+                  <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
+                  <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
+                  <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
                 </div>
-            <?php elseif (!empty($pedidos)): ?>
-                <?php foreach ($pedidos as $pedido): ?>
-                    <div class="card">
-                        <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Novo elemento para o status -->
-                        <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
-                        <div class="card-content">
-                            <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
-                            <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
-                            <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
-                            <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
-                            <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
-                            <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
-                            <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
-                            <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
-                        </div>
-                        <div class="buttons">
-                            <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Orçamento</button>
-                            <button class="button recusar" data-id="<?= htmlspecialchars($pedido['id']) ?>">Recusar</button>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="card no-pedidos">
-                    <h3>Nenhum serviço solicitado</h3>
-                    <p>Atualmente, não há nenhum pedido disponível para os serviços oferecidos.</p>
-                    <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
+                <div class="buttons">
+                  <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Visualizar Orçamento</button>
+                  <button class="button excluir" data-id="<?= htmlspecialchars($pedido['id']) ?>">Excluir Pedido</button>
                 </div>
-            <?php endif; ?>
+              </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <div class="card no-pedidos">
+              <h3>Nenhum serviço solicitado</h3>
+              <p>Atualmente, não há nenhum pedido disponível para os serviços oferecidos.</p>
+              <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
+            </div>
+          <?php endif; ?>
         </div>
+      </div>
+    </section>
+
+    <!-- JavaScript para lidar com os botões de orçamento e recusa -->
+    <script>
+      document.querySelectorAll('.excluir').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          if (confirm('Tem certeza que deseja excluir este pedido?')) {
+            window.location.href = `../form/pedido/excluir_pedido.php?id=${id}`;
+          }
+        });
+      });
+
+      document.querySelectorAll('.orcamento').forEach(button => {
+        button.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          window.location.href = `../form/pedido/orcamento/orcamento_pedido.php?id=${id}`;
+        });
+      });
+    </script>
+
+
+  </main>
+  <!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Swan Shine</span></strong>. Todos os Diretos Reservados.
     </div>
-</section>
+  </footer>
 
-        <!-- JavaScript para lidar com os botões de orçamento e recusa -->
-        <script>
-            document.querySelectorAll('.recusar').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    if (confirm('Tem certeza que deseja recusar este pedido?')) {
-                        window.location.href = `../forms/pedido/recusar_pedido.php?id=${id}`;
-                    }
-                });
-            });
+  <a
+    href="#"
+    class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i>
+  </a>
 
-            document.querySelectorAll('.orcamento').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    window.location.href = `../forms/pedido/orcamento/orcamento_pedido.php?id=${id}`;
-                });
-            });
-        </script>
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="../assets/vendor/echarts/echarts.min.js"></script>
+  <script src="../assets/vendor/quill/quill.js"></script>
+  <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
 
-
-    </main>
-    <!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>Swan Shine</span></strong>. Todos os Diretos Reservados.
-        </div>
-    </footer>
-
-    <a
-        href="#"
-        class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i>
-    </a>
-
-    <!-- Vendor JS Files -->
-    <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="../assets/vendor/echarts/echarts.min.js"></script>
-    <script src="../assets/vendor/quill/quill.js"></script>
-    <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
-    <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
-    <script src="../assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/main1.js"></script>
+  <!-- Template Main JS File -->
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/main1.js"></script>
 </body>
 
 </html>

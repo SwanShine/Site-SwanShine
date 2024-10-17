@@ -25,49 +25,25 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
-// Buscar os serviços oferecidos pelo profissional logado
-$stmt = $conn->prepare("SELECT servicos FROM profissionais WHERE email = ?");
+// Buscar o nome e serviços oferecidos pelo profissional logado
+$stmt = $conn->prepare("SELECT nome, servicos FROM profissionais WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Verificar se o profissional foi encontrado e possui serviços
+// Verificar se encontrou o profissional
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $servicos_oferecidos = explode(', ', $row['servicos']); // Serviços oferecidos convertidos em array
-} else {
-    echo "Nenhum serviço encontrado para este profissional.";
-    exit();
+
+    // Salvar o nome do profissional na sessão
+    $_SESSION['nome'] = $row['nome'];
+    $servicos = $row['servicos']; // Usar se necessário
 }
 
-// Fechar a consulta de serviços do profissional
-$stmt->close();
-
-// Consultar os pedidos que correspondem aos serviços oferecidos pelo profissional e com status "pendente"
-$placeholders = implode(', ', array_fill(0, count($servicos_oferecidos), '?')); // Gerar placeholders
-$types = str_repeat('s', count($servicos_oferecidos)); // Tipo para bind_param
-
-$query = "SELECT * FROM pedidos WHERE servicos IN ($placeholders) AND status = 'pendente' ORDER BY data_pedido DESC";
-$stmt = $conn->prepare($query);
-$stmt->bind_param($types, ...$servicos_oferecidos); // Inserir serviços no bind_param
-$stmt->execute();
-
-// Obter os pedidos
-$result = $stmt->get_result();
-$pedidos = $result->fetch_all(MYSQLI_ASSOC); // Obter todos os pedidos como array associativo
-
-// Fechar a conexão
+// Fechar a consulta e conexão
 $stmt->close();
 $conn->close();
-
-// Filtrar pedidos recusados para o usuário atual
-if (isset($_SESSION['recusados'])) {
-    $pedidos = array_filter($pedidos, function ($pedido) {
-        return !in_array($pedido['id'], $_SESSION['recusados']);
-    });
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -249,86 +225,65 @@ if (isset($_SESSION['recusados'])) {
 
     <!-- ======= Barra Lateral ======= -->
     <aside id="sidebar" class="sidebar">
-      <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="index.php">
-                <i class="bi bi-grid"></i>
-                <span>Início</span>
-            </a>
-        </li>
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="index.php">
+                    <i class="bi bi-grid"></i>
+                    <span>Início</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a
-                class="nav-link collapsed"
-                data-bs-target="#components-nav"
-                data-bs-toggle="collapse"
-                href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul
-                id="components-nav"
-                class="nav-content collapse"
-                data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
-                </li>
-                <li>
-                    <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
-                </li>
-                <li>
-                    <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
-                </li>
-                <li>
-                    <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
-                </li>
-            </ul>
-        </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link collapsed"
+                    data-bs-target="#components-nav"
+                    data-bs-toggle="collapse"
+                    href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul
+                    id="components-nav"
+                    class="nav-content collapse"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+                    </li>
+                    <li>
+                        <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+                    </li>
+                   
+                    <li>
+                        <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                    </li>
+                </ul>
+            </li>
 
-        <li class="nav-item">
-            <a
-                class="nav-link collapsed"
-                data-bs-target="#components-nav"
-                data-bs-toggle="collapse"
-                href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul
-                id="components-nav"
-                class="nav-content collapse"
-                data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="servico/service.php"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
-                </li>
-                <li>
-                    <a href="servico/service-cadastrado.html"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
-                </li>
-            </ul>
-        </li>
+            
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="mensagens.html">
-                <i class="bi bi-envelope"></i>
-                <span>Mensagens</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="mensagens.html">
+                    <i class="bi bi-envelope"></i>
+                    <span>Mensagens</span>
+                </a>
+            </li>
 
-        <!-- Perfil -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="perfil.php">
-                <i class="bi bi-person"></i>
-                <span>Perfil</span>
-            </a>
-        </li>
+            <!-- Perfil -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="perfil.php">
+                    <i class="bi bi-person"></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="suporte.html">
-                <i class="bi bi-chat-dots"></i>
-                <span>Suporte</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="suporte.html">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>Suporte</span>
+                </a>
+            </li>
 
-     </ul>
-   </aside><!-- End Sidebar-->
+        </ul>
+    </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
         <div class="pagetitle">
@@ -345,71 +300,22 @@ if (isset($_SESSION['recusados'])) {
         <section class="section dashboard">
             <div class="row">
                 <div class="card-container">
-                    <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
-                        <div class="card notification-card">
-                            <h3>Pedido Recusado</h3>
-                            <p>O pedido foi recusado com sucesso.</p>
-                            <a href="index.php" class="back-link">&#8592; Voltar para os serviços</a>
-                        </div>
-                    <?php elseif (!empty($pedidos)): ?>
-                        <?php foreach ($pedidos as $pedido): ?>
-                            <div class="card">
-                                <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Novo elemento para o status -->
-                                <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
-                                <div class="card-content">
-                                    <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
-                                    <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
-                                    <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
-                                    <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
-                                    <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
-                                    <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
-                                    <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
-                                    <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
-                                </div>
-                                <div class="buttons">
-                                    <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Orçamento</button>
-                                    <button class="button recusar" data-id="<?= htmlspecialchars($pedido['id']) ?>">Recusar</button>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="card no-pedidos">
-                            <h3>Nenhum serviço solicitado</h3>
-                            <p>Atualmente, não há nenhum pedido disponível para os serviços oferecidos.</p>
-                            <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
+                    <?php if (isset($_SESSION['nome'])): ?>
+                        <div class="card welcome-card">
+                            <h3>Bem-vindo de volta, <?= htmlspecialchars($_SESSION['nome']) ?>!</h3>
+                            <p>Estamos felizes em tê-lo(a) de volta.</p>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
         </section>
-
-        <!-- JavaScript para lidar com os botões de orçamento e recusa -->
-        <script>
-            document.querySelectorAll('.recusar').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    if (confirm('Tem certeza que deseja recusar este pedido?')) {
-                        window.location.href = `forms/recusar_pedido.php?id=${id}`;
-                    }
-                });
-            });
-
-            document.querySelectorAll('.orcamento').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    window.location.href = `forms/orcamento/orcamento_pedido.php?id=${id}`;
-                });
-            });
-        </script>
-
-
     </main>
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>Swan Shine</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Swan Shine</span></strong>. Todos os direitos Reservados
         </div>
     </footer>
 

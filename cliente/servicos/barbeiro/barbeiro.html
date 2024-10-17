@@ -324,7 +324,7 @@
               <li>
                 <a
                   class="dropdown-item d-flex align-items-center"
-                  href="../../forms/log_out.php"
+                  href="../../form/log_out.php"
                 >
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sair</span>
@@ -373,8 +373,8 @@
               >
             </li>
             <li>
-              <a href="../../pedidos/pedido_recusado.php"
-                ><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a
+              <a href="../../pedidos/pedido_excluido.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a
               >
             </li>
             <li>
@@ -404,9 +404,6 @@
               <a href="../../servicos.php"
                 ><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a
               >
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
             </li>
           </ul>
         </li>
@@ -854,15 +851,15 @@
 
               // Coleta informações dos campos e gera um resumo
               const fields = [
-                { name: "tipo", label: "Tipo de Serviço" },
-                { name: "estilo", label: "Estilo Desejado" },
+                { name: "Tipo", label: "Tipo de Serviço" },
+                { name: "Estilo", label: "Estilo Desejado" },
                 { name: "atendimento", label: "Local de Atendimento" },
-                { name: "urgencia", label: "Urgência do Pedido" },
-                { name: "detalhes", label: "Detalhes do Pedido" },
-                { name: "cep", label: "CEP" },
-                { name: "nome", label: "Nome" },
-                { name: "email", label: "E-mail" },
-                { name: "telefone", label: "Telefone" },
+                { name: "Urgencia", label: "Urgência do Pedido" },
+                { name: "Detalhes", label: "Detalhes do Pedido" },
+                { name: "Cep", label: "CEP" },
+                { name: "Nome", label: "Nome" },
+                { name: "Email", label: "E-mail" },
+                { name: "Telefone", label: "Telefone" },
               ];
 
               fields.forEach((field) => {
@@ -925,6 +922,35 @@
                 }
                 e.target.value = value;
               });
+
+              function validateCurrentStep() {
+                // Seleciona os campos input (incluindo checkbox e radio), select e textarea da etapa atual
+                const currentInputs = steps[currentStep].querySelectorAll("input[type='text'], input[type='checkbox'], input[type='radio'], select, textarea");
+                let isValid = false; // Inicialmente, assumimos que não há valores válidos
+              
+                currentInputs.forEach((input) => {
+                  // Se o campo é obrigatório e está vazio, adiciona a classe de erro
+                  if (input.required && !input.value) {
+                    input.classList.add("input-error"); // Adiciona classe para estilizar o erro
+                  } else {
+                    input.classList.remove("input-error"); // Remove classe se o campo está válido
+                  }
+              
+                  // Para campos de checkbox ou radio, verificar se estão marcados
+                  if ((input.type === 'checkbox' || input.type === 'radio') && input.checked) {
+                    isValid = true;
+                  }
+              
+                  // Verifica se algum campo de texto, select ou textarea tem valor (não vazio)
+                  if (input.value) {
+                    isValid = true;
+                  }
+                });
+              
+                return isValid; // Retorna true apenas se pelo menos um campo tiver valor
+              }
+              
+              
           </script>
         </div>
       </section>

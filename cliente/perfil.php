@@ -25,8 +25,30 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
+// Processar o upload da imagem
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['imagem'])) {
+  if ($_FILES['imagem']['error'] == 0) {
+    // Ler o conteúdo da imagem
+    $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
+
+    // Usar prepared statements para atualizar a imagem do cliente pelo email
+    $stmt = $conn->prepare("UPDATE clientes SET imagem = ? WHERE email = ?");
+    $stmt->bind_param("bs", $imagem, $email); // "b" para BLOB
+    $stmt->execute();
+
+    // Verificar se a atualização foi bem-sucedida
+    if ($stmt->affected_rows > 0) {
+      echo "Imagem enviada com sucesso!";
+    } else {
+      echo "Erro ao atualizar a imagem.";
+    }
+  } else {
+    echo "Erro ao enviar a imagem.";
+  }
+}
+
 // Usar prepared statements para buscar o cliente pelo email
-$stmt = $conn->prepare("SELECT nome, endereco, email, cpf, telefone, genero FROM clientes WHERE email = ?");
+$stmt = $conn->prepare("SELECT nome, endereco, email, cpf, telefone, genero, imagem FROM clientes WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 
@@ -42,14 +64,17 @@ if ($result->num_rows > 0) {
   $cpf = $row['cpf'];
   $telefone = $row['telefone'];
   $genero = $row['genero'];
+  $imagem = $row['imagem']; // Obter a imagem como BLOB
 } else {
   $nome = $endereco = $email = $cpf = $telefone = $genero = "Não encontrado";
+  $imagem = null; // Imagem padrão caso não haja
 }
 
 // Fechar a conexão
 $stmt->close();
 $conn->close();
 ?>
+
 
 
 <!DOCTYPE html>
@@ -181,7 +206,7 @@ $conn->close();
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="forms/log_out.php">
+              <a class="dropdown-item d-flex align-items-center" href="form/log_out.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sair</span>
               </a>
@@ -203,10 +228,17 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <a
+          class="nav-link collapsed"
+          data-bs-target="#components-nav"
+          data-bs-toggle="collapse"
+          href="#">
           <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <ul
+          id="components-nav"
+          class="nav-content collapse"
+          data-bs-parent="#sidebar-nav">
           <li>
             <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
           </li>
@@ -214,7 +246,7 @@ $conn->close();
             <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
           </li>
           <li>
-            <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+            <a href="pedidos/pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
           </li>
           <li>
             <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
@@ -223,10 +255,17 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <a
+          class="nav-link collapsed"
+          data-bs-target="#components-nav"
+          data-bs-toggle="collapse"
+          href="#">
           <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <ul
+          id="components-nav"
+          class="nav-content collapse"
+          data-bs-parent="#sidebar-nav">
           <li>
             <a href="servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
           </li>
@@ -237,7 +276,7 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="mensagens.html">
+        <a class="nav-link collapsed" href="mensagem.php">
           <i class="bi bi-envelope"></i>
           <span>Mensagens</span>
         </a>
@@ -295,10 +334,16 @@ $conn->close();
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
+              <?php if ($imagem): ?>
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($imagem); ?>" alt="Profile" class="rounded-circle">
+              <?php else: ?>
+                <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
+              <?php endif; ?>
+
               <h2><?php echo htmlspecialchars($nome); ?></h2>
 
             </div>
+
           </div>
         </div>
         <div class="col-xl-8">
@@ -326,6 +371,7 @@ $conn->close();
               </ul>
 
               <div class="tab-content pt-2">
+
                 <!-- Visão Geral -->
                 <div class="tab-pane fade show active" id="profile-overview">
 
@@ -380,49 +426,54 @@ $conn->close();
                         <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($nome); ?>">
                       </div>
                     </div>
+
                     <div class="row mb-3">
                       <label for="address" class="col-lg-3 col-md-4 col-form-label">Endereço</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="address" type="text" class="form-control" id="address" value="<?php echo htmlspecialchars($endereco); ?>">
                       </div>
                     </div>
+
                     <div class="row mb-3">
                       <label for="email" class="col-lg-3 col-md-4 col-form-label">Email</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="email" type="email" class="form-control" id="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
                       </div>
                     </div>
+
                     <div class="row mb-3">
                       <label for="cpf" class="col-lg-3 col-md-4 col-form-label">CPF</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="cpf" type="text" class="form-control" id="cpf" value="<?php echo htmlspecialchars($cpf); ?>">
                       </div>
                     </div>
+
                     <div class="row mb-3">
                       <label for="phone" class="col-lg-3 col-md-4 col-form-label">Telefone</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="phone" type="text" class="form-control" id="phone" value="<?php echo htmlspecialchars($telefone); ?>">
                       </div>
                     </div>
+
                     <div class="row mb-3">
                       <label for="gender" class="col-lg-3 col-md-4 col-form-label">Gênero</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="gender" type="text" class="form-control" id="gender" value="<?php echo htmlspecialchars($genero); ?>">
                       </div>
                     </div>
+
                     <div class="row mb-3">
-                      <label for="profileImage" class="col-lg-3 col-md-4 col-form-label">Imagem de Perfil</label>
+                      <label for="imagem" class="col-lg-3 col-md-4 col-form-label">Imagem de Perfil</label>
                       <div class="col-lg-9 col-md-8">
-                        <input name="profileImage" type="file" class="form-control" id="profileImage">
+                        <input name="imagem" type="file" class="form-control" id="imagem">
                       </div>
                     </div>
+
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </div>
                   </form>
                 </div><!-- Editar Perfil -->
-
-
 
                 <!-- Mudar Senha -->
                 <div class="tab-pane fade pt-3" id="profile-change-password">
@@ -451,29 +502,49 @@ $conn->close();
                 <!-- Configurações -->
                 <div class="tab-pane fade pt-3" id="profile-settings">
                   <h5 class="card-title">Configurações</h5>
-                  <form>
-                    <div class="row mb-3">
-                      <label for="notifications" class="col-md-4 col-lg-3 col-form-label">Notificações por Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                          <label class="form-check-label" for="changesMade">Alterações feitas na sua conta</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                          <label class="form-check-label" for="newProducts">Informações sobre novos produtos e serviços</label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="proOffers">
-                          <label class="form-check-label" for="proOffers">Ofertas e promoções especiais</label>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                    </div>
-                  </form>
+                  <div class="text-center">
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Deletar Conta</button>
+                  </div>
+
+                  <script>
+                    function confirmDelete() {
+                      // Pergunta ao usuário se ele realmente deseja deletar a conta
+                      const confirmation = confirm("Tem certeza de que deseja deletar sua conta? Esta ação não pode ser desfeita.");
+
+                      // Se o usuário confirmar, faz a requisição para deletar a conta
+                      if (confirmation) {
+                        // Substitua 'ID_DO_USUÁRIO_AQUI' pelo ID do usuário que deseja deletar
+                        const userId = '$id';
+
+                        fetch('deletar_conta.php', {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                              user_id: userId
+                            }),
+                          })
+                          .then(response => {
+                            if (!response.ok) {
+                              throw new Error('Erro ao deletar a conta');
+                            }
+                            return response.json();
+                          })
+                          .then(data => {
+                            // Ação após a exclusão bem-sucedida
+                            alert('Conta deletada com sucesso!');
+                            // Redirecionar ou atualizar a página, se necessário
+                            // window.location.reload();
+                          })
+                          .catch(error => {
+                            console.error('Erro:', error);
+                            alert('Não foi possível deletar a conta. Tente novamente mais tarde.');
+                          });
+                      }
+                    }
+                  </script>
                 </div> <!-- Configurações -->
 
               </div>
@@ -496,7 +567,7 @@ $conn->close();
       }
 
       function confirmUpdate() {
-        return confirm('Tem certeza de que deseja atualizar sua senha?');
+        return confirm('Tem certeza que deseja alterar?');
       }
 
       function togglePassword(id) {

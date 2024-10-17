@@ -362,7 +362,7 @@ $conn->close();
             <li>
               <a
                 class="dropdown-item d-flex align-items-center"
-                href="forms/log_out.php">
+                href="form/log_out.php">
                 <!-- Link para a página de logout com ícone e texto alinhados. -->
 
                 <i class="bi bi-box-arrow-right"></i>
@@ -408,7 +408,7 @@ $conn->close();
             <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
           </li>
           <li>
-            <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+            <a href="pedidos/pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
           </li>
           <li>
             <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
@@ -430,9 +430,6 @@ $conn->close();
           data-bs-parent="#sidebar-nav">
           <li>
             <a href="servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-          </li>
-          <li>
-            <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
           </li>
         </ul>
       </li>
