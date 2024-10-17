@@ -1,69 +1,73 @@
 <?php
 // Iniciar a sessão
-session_start();
+session_start(); // Inicia uma sessão PHP para armazenar dados de usuário durante a navegação.
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['user_email'])) {
-    header('Location: ../../home/forms/login/login.html');
-    exit();
+if (!isset($_SESSION['user_email'])) { // Verifica se o email do usuário está salvo na sessão (indicando que o usuário está logado).
+    header('Location: ../../home/forms/login/login.html'); // Se o usuário não estiver logado, redireciona para a página de login.
+    exit(); // Interrompe a execução do script para garantir que o redirecionamento ocorra.
 }
 
 // Dados de conexão com o banco de dados
-$servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
-$username = "admin";
-$password = "gLAHqWkvUoaxwBnm9wKD";
-$dbname = "swanshine";
+$servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com"; // Nome do servidor do banco de dados MySQL.
+$username = "admin"; // Nome de usuário do banco de dados.
+$password = "gLAHqWkvUoaxwBnm9wKD"; // Senha do banco de dados.
+$dbname = "swanshine"; // Nome do banco de dados.
 
 // Criar conexão
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname); // Cria uma nova conexão MySQL com os parâmetros fornecidos.
 
 // Verificar conexão
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+if ($conn->connect_error) { // Verifica se a conexão falhou.
+    die("Conexão falhou: " . $conn->connect_error); // Exibe uma mensagem de erro e encerra o script se a conexão falhar.
 }
 
 // Recuperar o email da sessão
-$email = $_SESSION['user_email'];
+$email = $_SESSION['email']; // Obtém o email do usuário que está salvo na sessão.
 
 // Buscar os pedidos feitos pelo cliente
-$stmt = $conn->prepare("SELECT servicos FROM pedidos WHERE email = ? AND status = 'em análise' ORDER BY data_pedido DESC");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
+$stmt = $conn->prepare("SELECT servicos FROM pedidos WHERE email = ? AND status = 'em análise' ORDER BY data_pedido DESC"); 
+// Prepara uma consulta SQL para selecionar os serviços dos pedidos do cliente com status 'em análise', ordenados por data de pedido.
+
+// Substitui o "?" pelo email do usuário, prevenindo ataques de injeção SQL.
+$stmt->bind_param("s", $email); 
+$stmt->execute(); // Executa a consulta.
+$result = $stmt->get_result(); // Armazena o resultado da consulta.
 
 // Verificar se o cliente tem pedidos
-if ($result->num_rows > 0) {
-    $servicos_solicitados = [];
-    while ($row = $result->fetch_assoc()) {
-        $servicos = explode(', ', $row['servicos']); // Serviços solicitados convertidos em array
-        $servicos_solicitados = array_merge($servicos_solicitados, $servicos); // Adicionar aos serviços solicitados
+if ($result->num_rows > 0) { // Verifica se foram encontrados pedidos no banco de dados.
+    $servicos_solicitados = []; // Cria um array para armazenar os serviços solicitados.
+    while ($row = $result->fetch_assoc()) { // Percorre os resultados da consulta.
+        $servicos = explode(', ', $row['servicos']); // Divide os serviços em um array (os serviços estão separados por vírgula).
+        $servicos_solicitados = array_merge($servicos_solicitados, $servicos); // Adiciona os serviços ao array de serviços solicitados.
     }
-} else {
-    echo "Nenhum serviço encontrado para este cliente.";
-    exit();
+} else { // Se nenhum pedido for encontrado:
+    echo "Nenhum serviço encontrado para este cliente."; // Exibe uma mensagem para o cliente informando que não há pedidos.
+    exit(); // Encerra o script.
 }
 
 // Fechar a consulta de pedidos do cliente
-$stmt->close();
+$stmt->close(); // Fecha o comando de consulta ao banco de dados.
 
 // Filtrar serviços duplicados
-$servicos_solicitados = array_unique($servicos_solicitados);
+$servicos_solicitados = array_unique($servicos_solicitados); // Remove serviços duplicados do array.
 
 // Mostrar os serviços solicitados
-echo "<h3>Serviços Solicitados</h3>";
-if (!empty($servicos_solicitados)) {
-    echo "<ul>";
-    foreach ($servicos_solicitados as $servico) {
-        echo "<li>" . htmlspecialchars($servico) . "</li>";
+echo "<h3>Serviços Solicitados</h3>"; // Exibe o título para os serviços solicitados.
+if (!empty($servicos_solicitados)) { // Verifica se o array de serviços não está vazio.
+    echo "<ul>"; // Inicia uma lista não ordenada.
+    foreach ($servicos_solicitados as $servico) { // Percorre o array de serviços solicitados.
+        echo "<li>" . htmlspecialchars($servico) . "</li>"; // Exibe cada serviço como um item de lista, protegendo contra ataques XSS.
     }
-    echo "</ul>";
+    echo "</ul>"; // Fecha a lista.
 } else {
-    echo "Nenhum serviço encontrado.";
+    echo "Nenhum serviço encontrado."; // Caso o array esteja vazio, exibe a mensagem informando que nenhum serviço foi encontrado.
 }
 
 // Fechar a conexão
-$conn->close();
+$conn->close(); // Fecha a conexão com o banco de dados.
 ?>
+
 
 
 
@@ -410,7 +414,7 @@ $conn->close();
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>Swan Shine</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Swan Shine</span></strong>. Todos os Direitos Reservados
         </div>
     </footer>
 
