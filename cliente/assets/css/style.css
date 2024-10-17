@@ -232,7 +232,6 @@ h6 {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-
 /* Estilo para o container do logo */
 .logo {
   line-height: 1.2; /* Ajusta o espaçamento entre as linhas para manter a proporção */
@@ -267,14 +266,12 @@ h6 {
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1); /* Adiciona uma sombra suave ao cabeçalho */
   background-color: #fff; /* Cor de fundo branca para o cabeçalho */
   padding-left: 20px; /* Espaçamento à esquerda do conteúdo do cabeçalho */
-  /* Toggle Sidebar Button */
-  /* Search Bar */
 }
 
 /* Estilo para o botão de alternância da barra lateral */
 .header .toggle-sidebar-btn {
   font-size: 32px; /* Define o tamanho da fonte para o ícone do botão */
-  margin-left: -50px; /* Espaçamento à esquerda para o ícone do botão */
+  margin-left: 0px; /* Espaçamento à esquerda para o ícone do botão */
   cursor: pointer; /* Altera o cursor para 'pointer' quando o usuário passa o mouse */
   color: #000; /* Cor padrão do ícone */
   transition: color 0.3s; /* Transição suave para mudança de cor ao passar o mouse */
@@ -288,141 +285,364 @@ h6 {
 # Header Nav
 --------------------------------------------------------------*/
 .header-nav ul {
-  list-style: none;
+  list-style: none; /* Remove o estilo padrão de lista */
 }
 
 .header-nav>ul {
-  margin: 0;
-  padding: 0;
+  margin: 0; /* Remove margens */
+  padding: 0; /* Remove espaçamentos internos */
 }
 
+/* Estilo para os ícones da barra de navegação */
 .header-nav .nav-icon {
-  font-size: 22px;
-  color: #012970;
-  margin-right: 25px;
-  position: relative;
+  font-size: 22px; /* Define o tamanho dos ícones */
+  color: #012970; /* Cor padrão dos ícones */
+  margin-right: 25px; /* Espaçamento à direita dos ícones */
+  position: relative; /* Torna possível o uso do badge (número) */
 }
 
+/* Estilo para o ícone de perfil na barra de navegação */
 .header-nav .nav-profile {
-  color: #012970;
+  color: #012970; /* Cor do ícone de perfil */
 }
 
 .header-nav .nav-profile img {
-  max-height: 36px;
+  max-height: 36px; /* Define a altura máxima da imagem de perfil */
 }
 
+/* Estilo para o nome do perfil */
 .header-nav .nav-profile span {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 14px; /* Tamanho da fonte */
+  font-weight: 600; /* Peso da fonte */
 }
 
+/* Estilo para o badge que mostra o número de notificações/mensagens */
 .header-nav .badge-number {
-  position: absolute;
-  inset: -2px -5px auto auto;
-  font-weight: normal;
-  font-size: 12px;
-  padding: 3px 6px;
+  position: absolute; /* Permite posicionamento absoluto */
+  inset: -2px -5px auto auto; /* Posiciona o badge no canto superior direito do ícone */
+  font-weight: normal; /* Peso da fonte padrão */
+  font-size: 12px; /* Tamanho da fonte */
+  padding: 3px 6px; /* Espaçamento interno */
 }
 
-.header-nav .notifications {
-  inset: 8px -15px auto auto !important;
-}
-
-.header-nav .notifications .notification-item {
-  display: flex;
-  align-items: center;
-  padding: 15px 10px;
-  transition: 0.3s;
-}
-
-.header-nav .notifications .notification-item i {
-  margin: 0 20px 0 10px;
-  font-size: 24px;
-}
-
-.header-nav .notifications .notification-item h4 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.header-nav .notifications .notification-item p {
-  font-size: 13px;
-  margin-bottom: 3px;
-  color: #919191;
-}
-
-.header-nav .notifications .notification-item:hover {
-  background-color: #f6f9ff;
-}
-
+/* Ajustes para a localização dos dropdowns de notificações e mensagens */
+.header-nav .notifications,
 .header-nav .messages {
-  inset: 8px -15px auto auto !important;
+  inset: 8px -15px auto auto !important; /* Posiciona o menu suspenso no canto superior direito */
 }
 
+/* Estilo para o item de notificação */
+.header-nav .notifications .notification-item {
+  display: flex; /* Exibe os itens em linha */
+  align-items: center; /* Alinha verticalmente os itens */
+  padding: 15px 10px; /* Espaçamento interno */
+  transition: 0.3s; /* Transição suave para hover */
+}
+
+/* Ícones dentro dos itens de notificação */
+.header-nav .notifications .notification-item i {
+  margin: 0 20px 0 10px; /* Espaçamento lateral do ícone */
+  font-size: 24px; /* Tamanho do ícone */
+}
+
+/* Título da notificação */
+.header-nav .notifications .notification-item h4 {
+  font-size: 16px; /* Tamanho da fonte do título */
+  font-weight: 600; /* Peso da fonte */
+  margin-bottom: 5px; /* Espaçamento inferior */
+}
+
+/* Descrição da notificação */
+.header-nav .notifications .notification-item p {
+  font-size: 13px; /* Tamanho da fonte */
+  margin-bottom: 3px; /* Espaçamento inferior */
+  color: #919191; /* Cor do texto */
+}
+
+/* Estilo para hover sobre os itens de notificação */
+.header-nav .notifications .notification-item:hover {
+  background-color: #f6f9ff; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para os itens de mensagem */
 .header-nav .messages .message-item {
-  padding: 15px 10px;
-  transition: 0.3s;
+  padding: 15px 10px; /* Espaçamento interno */
+  transition: 0.3s; /* Transição suave para hover */
 }
 
+/* Layout flexível para os links dentro dos itens de mensagem */
 .header-nav .messages .message-item a {
-  display: flex;
+  display: flex; /* Exibe os itens em linha */
 }
 
+/* Ajuste de tamanho da imagem dentro das mensagens */
 .header-nav .messages .message-item img {
-  margin: 0 20px 0 10px;
-  max-height: 40px;
+  margin: 0 20px 0 10px; /* Espaçamento lateral da imagem */
+  max-height: 40px; /* Define a altura máxima da imagem */
 }
 
+/* Estilo do título das mensagens */
 .header-nav .messages .message-item h4 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 5px;
-  color: #444444;
+  font-size: 16px; /* Tamanho da fonte */
+  font-weight: 600; /* Peso da fonte */
+  margin-bottom: 5px; /* Espaçamento inferior */
+  color: #444444; /* Cor do título */
 }
 
+/* Estilo para o texto das mensagens */
 .header-nav .messages .message-item p {
-  font-size: 13px;
-  margin-bottom: 3px;
-  color: #919191;
+  font-size: 13px; /* Tamanho da fonte */
+  margin-bottom: 3px; /* Espaçamento inferior */
+  color: #919191; /* Cor do texto */
 }
 
+/* Estilo para hover sobre os itens de mensagem */
 .header-nav .messages .message-item:hover {
-  background-color: #f6f9ff;
+  background-color: #f6f9ff; /* Cor de fundo ao passar o mouse */
 }
 
+/* Estilos específicos para o dropdown de perfil */
 .header-nav .profile {
-  min-width: 240px;
-  padding-bottom: 0;
-  top: 8px !important;
+  min-width: 240px; /* Define a largura mínima */
+  padding-bottom: 0; /* Remove o espaçamento inferior */
+  top: 8px !important; /* Posiciona o dropdown */
 }
 
+/* Estilo para o cabeçalho do dropdown de perfil */
 .header-nav .profile .dropdown-header h6 {
-  font-size: 18px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #444444;
+  font-size: 18px; /* Tamanho da fonte */
+  margin-bottom: 0; /* Remove a margem inferior */
+  font-weight: 600; /* Peso da fonte */
+  color: #444444; /* Cor do texto */
 }
 
+/* Estilo para o subtítulo no cabeçalho do dropdown */
 .header-nav .profile .dropdown-header span {
-  font-size: 14px;
+  font-size: 14px; /* Tamanho da fonte */
 }
 
+/* Estilo para os itens dentro do dropdown de perfil */
 .header-nav .profile .dropdown-item {
-  font-size: 14px;
-  padding: 10px 15px;
-  transition: 0.3s;
+  font-size: 14px; /* Tamanho da fonte */
+  padding: 10px 15px; /* Espaçamento interno */
+  transition: 0.3s; /* Transição suave para hover */
 }
 
+/* Ícones dentro do dropdown de perfil */
 .header-nav .profile .dropdown-item i {
-  margin-right: 10px;
-  font-size: 18px;
-  line-height: 0;
+  margin-right: 10px; /* Espaçamento à direita do ícone */
+  font-size: 18px; /* Tamanho do ícone */
+  line-height: 0; /* Define a altura da linha */
 }
 
+/* Efeito de hover sobre os itens do dropdown de perfil */
 .header-nav .profile .dropdown-item:hover {
-  background-color: #f6f9ff;
+  background-color: #f6f9ff; /* Cor de fundo ao passar o mouse */
 }
+/*--------------------------------------------------------------
+# Responsividade para telas de 320px
+--------------------------------------------------------------*/
+
+/* Ajustes para telas menores ou iguais a 320px */
+@media (max-width: 320px) {
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    width: auto;
+  }
+
+  .logo img {
+    max-height: 20px;
+  }
+
+  .logo span {
+    font-size: 18px;
+  }
+
+  /* Header */
+  .header {
+    height: 50px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Botão de alternância da barra lateral */
+  .header .toggle-sidebar-btn {
+    display: block;
+    font-size: 28px;
+    margin-left: 0;
+    color: #000;
+  }
+
+  /* Ícones de navegação */
+  .header-nav .nav-icon {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  /* Ajustes de perfil e notificações */
+  .header-nav .nav-profile span {
+    font-size: 12px;
+  }
+
+  .header-nav .notifications .notification-item h4,
+  .header-nav .messages .message-item h4 {
+    font-size: 14px;
+  }
+
+  .header-nav .notifications .notification-item p,
+  .header-nav .messages .message-item p {
+    font-size: 12px;
+  }
+}
+
+/* Ajustes para telas entre 321px e 768px (tablets e smartphones maiores) */
+@media (min-width: 321px) and (max-width: 768px) {
+  /* Logo */
+  .logo {
+    width: auto;
+  }
+
+  .logo img {
+    max-height: 22px;
+  }
+
+  .logo span {
+    font-size: 20px;
+  }
+
+  /* Header */
+  .header {
+    height: 55px;
+    padding-left: 15px;
+  }
+
+  /* Botão de alternância da barra lateral */
+  .header .toggle-sidebar-btn {
+    font-size: 30px;
+    margin-left: 0;
+  }
+
+  /* Ícones de navegação */
+  .header-nav .nav-icon {
+    font-size: 20px;
+  }
+
+  /* Ajustes de perfil e notificações */
+  .header-nav .nav-profile span {
+    font-size: 14px;
+  }
+
+  .header-nav .notifications .notification-item h4,
+  .header-nav .messages .message-item h4 {
+    font-size: 15px;
+  }
+
+  .header-nav .notifications .notification-item p,
+  .header-nav .messages .message-item p {
+    font-size: 13px;
+  }
+}
+
+/* Ajustes para telas entre 769px e 1200px (desktops menores e tablets maiores) */
+@media (min-width: 769px) and (max-width: 1200px) {
+  /* Logo */
+  .logo {
+    width: auto;
+  }
+
+  .logo img {
+    max-height: 24px;
+  }
+
+  .logo span {
+    font-size: 22px;
+  }
+
+  /* Header */
+  .header {
+    height: 60px;
+    padding-left: 20px;
+  }
+
+  /* Botão de alternância da barra lateral */
+  .header .toggle-sidebar-btn {
+    font-size: 32px;
+    margin-left: 0;
+  }
+
+  /* Ícones de navegação */
+  .header-nav .nav-icon {
+    font-size: 22px;
+  }
+
+  /* Ajustes de perfil e notificações */
+  .header-nav .nav-profile span {
+    font-size: 16px;
+  }
+
+  .header-nav .notifications .notification-item h4,
+  .header-nav .messages .message-item h4 {
+    font-size: 16px;
+  }
+
+  .header-nav .notifications .notification-item p,
+  .header-nav .messages .message-item p {
+    font-size: 14px;
+  }
+}
+
+/* Ajustes para telas maiores que 1200px (desktops grandes) */
+@media (min-width: 1201px) {
+  /* Logo */
+  .logo {
+    width: 280px;
+  }
+
+  .logo img {
+    max-height: 26px;
+  }
+
+  .logo span {
+    font-size: 26px;
+  }
+
+  /* Header */
+  .header {
+    height: 60px;
+    padding-left: 20px;
+  }
+
+  /* Botão de alternância da barra lateral */
+  .header .toggle-sidebar-btn {
+    font-size: 32px;
+    margin-left: 0px;
+  }
+
+  /* Ícones de navegação */
+  .header-nav .nav-icon {
+    font-size: 22px;
+  }
+
+  /* Ajustes de perfil e notificações */
+  .header-nav .nav-profile span {
+    font-size: 16px;
+  }
+
+  .header-nav .notifications .notification-item h4,
+  .header-nav .messages .message-item h4 {
+    font-size: 16px;
+  }
+
+  .header-nav .notifications .notification-item p,
+  .header-nav .messages .message-item p {
+    font-size: 14px;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Sidebar
