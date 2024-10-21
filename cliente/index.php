@@ -191,7 +191,7 @@ $conn->close();
         <img src="assets/img/logo_preta.png" alt="" />
         <!-- Imagem do logo com o caminho "assets/img/logo_preta.png". O atributo "alt" está vazio. -->
 
-        <span class="d-none d-lg-block">SwanShine</span>
+        <span class="d-none d-lg-block">Swan Shine</span>
         <!-- Texto "SwanShine" que só aparece em telas grandes, escondido em telas menores. -->
       </a>
 

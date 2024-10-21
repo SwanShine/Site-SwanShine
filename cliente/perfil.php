@@ -4,8 +4,8 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-  header('Location: ../home/forms/login/login.html');
-  exit();
+    header('Location: ../home/forms/login/login.html');
+    exit();
 }
 
 // Dados de conexão com o banco de dados
@@ -19,7 +19,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexão
 if ($conn->connect_error) {
-  die("Conexão falhou: " . $conn->connect_error);
+    die("Conexão falhou: " . $conn->connect_error);
 }
 
 // Recuperar o email da sessão
@@ -27,24 +27,30 @@ $email = $_SESSION['user_email'];
 
 // Processar o upload da imagem
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['imagem'])) {
-  if ($_FILES['imagem']['error'] == 0) {
-    // Ler o conteúdo da imagem
-    $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
+    if ($_FILES['imagem']['error'] == 0) {
+        $upload_dir = 'form/uploads/';
+        $imagem_nome = basename($_FILES['imagem']['name']);
+        $target_file = $upload_dir . $imagem_nome;
 
-    // Usar prepared statements para atualizar a imagem do cliente pelo email
-    $stmt = $conn->prepare("UPDATE clientes SET imagem = ? WHERE email = ?");
-    $stmt->bind_param("bs", $imagem, $email); // "b" para BLOB
-    $stmt->execute();
+        // Mover a imagem para o diretório de uploads
+        if (move_uploaded_file($_FILES['imagem']['tmp_name'], $target_file)) {
+            // Usar prepared statements para atualizar o caminho da imagem do cliente pelo email
+            $stmt = $conn->prepare("UPDATE clientes SET imagem = ? WHERE email = ?");
+            $stmt->bind_param("ss", $target_file, $email);
+            $stmt->execute();
 
-    // Verificar se a atualização foi bem-sucedida
-    if ($stmt->affected_rows > 0) {
-      echo "Imagem enviada com sucesso!";
+            // Verificar se a atualização foi bem-sucedida
+            if ($stmt->affected_rows > 0) {
+                echo "Imagem enviada com sucesso!";
+            } else {
+                echo "Erro ao atualizar a imagem.";
+            }
+        } else {
+            echo "Erro ao mover o arquivo para o diretório de uploads.";
+        }
     } else {
-      echo "Erro ao atualizar a imagem.";
+        echo "Erro ao enviar a imagem.";
     }
-  } else {
-    echo "Erro ao enviar a imagem.";
-  }
 }
 
 // Usar prepared statements para buscar o cliente pelo email
@@ -57,25 +63,23 @@ $result = $stmt->get_result();
 
 // Verificar se retornou algum resultado
 if ($result->num_rows > 0) {
-  $row = $result->fetch_assoc();
-  $nome = $row['nome'];
-  $endereco = $row['endereco'];
-  $email = $row['email'];
-  $cpf = $row['cpf'];
-  $telefone = $row['telefone'];
-  $genero = $row['genero'];
-  $imagem = $row['imagem']; // Obter a imagem como BLOB
+    $row = $result->fetch_assoc();
+    $nome = $row['nome'];
+    $endereco = $row['endereco'];
+    $email = $row['email'];
+    $cpf = $row['cpf'];
+    $telefone = $row['telefone'];
+    $genero = $row['genero'];
+    $imagem = $row['imagem']; // Obter o caminho da imagem
 } else {
-  $nome = $endereco = $email = $cpf = $telefone = $genero = "Não encontrado";
-  $imagem = null; // Imagem padrão caso não haja
+    $nome = $endereco = $email = $cpf = $telefone = $genero = "Não encontrado";
+    $imagem = null; // Imagem padrão caso não haja
 }
 
 // Fechar a conexão
 $stmt->close();
 $conn->close();
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -332,7 +336,7 @@ $conn->close();
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <?php if ($imagem): ?>
-                <img src="data:image/jpeg;base64,<?php echo base64_encode($imagem); ?>" alt="Profile" class="rounded-circle">
+                <img src="<?= htmlspecialchars($imagem) ?>" alt="Imagem do Cliente" style="max-width: 200px; max-height: 200px;">
               <?php else: ?>
                 <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
               <?php endif; ?>
@@ -512,7 +516,7 @@ $conn->close();
                       // Se o usuário confirmar, faz a requisição para deletar a conta
                       if (confirmation) {
                         // Substitua 'ID_DO_USUÁRIO_AQUI' pelo ID do usuário que deseja deletar
-                        const userId = '$id';
+                        const userId = '$nome';
 
                         fetch('deletar_conta.php', {
                             method: 'POST',

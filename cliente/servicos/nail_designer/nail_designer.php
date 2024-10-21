@@ -31,7 +31,9 @@ $stmt->bind_param("ssssssssss", $servicos, $tipo, $estilo, $atendimento, $urgenc
 
 // Executa a inserção
 if ($stmt->execute()) {
-    echo "Pedido inserido com sucesso!";
+    // Redireciona para a página de pedidos pendentes
+    header('Location: ../../pedidos/pedidos_pendentes.php');
+    exit();
 } else {
     echo "Erro: " . $stmt->error;
 }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>SwanShine - Cliente</title>
+    <title>Swan Shine - Cliente</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -60,160 +60,113 @@
 
       /* Estiliza os contêineres das seções, inicialmente escondidos */
       .section-container {
-        display: none;
-        /* Oculta a seção por padrão */
-        position: relative;
-        /* Permite o posicionamento relativo dos elementos internos */
-        padding: 20px;
-        /* Espaçamento interno */
-        background-color: #fff;
-        /* Cor de fundo branca */
-        border-radius: 10px;
-        /* Bordas arredondadas */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        /* Sombra suave */
+        display: none; /* Oculta a seção por padrão */
+        position: relative; /* Permite o posicionamento relativo dos elementos internos */
+        padding: 20px; /* Espaçamento interno */
+        background-color: #fff; /* Cor de fundo branca */
+        border-radius: 10px; /* Bordas arredondadas */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
       }
 
       /* Torna a seção visível quando a classe 'active' é adicionada */
       .active {
-        display: block;
-        /* Exibe a seção */
+        display: block; /* Exibe a seção */
       }
 
       /* Estiliza a barra de progresso */
       .progress-bar {
-        position: relative;
-        /* Permite o posicionamento relativo da barra de progresso interna */
-        height: 10px;
-        /* Altura da barra de progresso */
-        background: #f0f0f0;
-        /* Cor de fundo da barra */
-        border-radius: 5px;
-        /* Bordas arredondadas */
-        margin-bottom: 20px;
-        /* Espaçamento inferior */
+        position: relative; /* Permite o posicionamento relativo da barra de progresso interna */
+        height: 10px; /* Altura da barra de progresso */
+        background: #f0f0f0; /* Cor de fundo da barra */
+        border-radius: 5px; /* Bordas arredondadas */
+        margin-bottom: 20px; /* Espaçamento inferior */
       }
 
       /* Estiliza a parte preenchida da barra de progresso */
       .progress {
-        height: 100%;
-        /* Altura total da barra de progresso */
-        width: 0;
-        /* Largura inicial da parte preenchida (ajustada dinamicamente) */
-        background: #ff66c4;
-        /* Cor de fundo da parte preenchida */
-        border-radius: 5px;
-        /* Bordas arredondadas */
-        transition: width 0.3s ease;
-        /* Transição suave para a mudança de largura */
+        height: 100%; /* Altura total da barra de progresso */
+        width: 0; /* Largura inicial da parte preenchida (ajustada dinamicamente) */
+        background: #ff66c4; /* Cor de fundo da parte preenchida */
+        border-radius: 5px; /* Bordas arredondadas */
+        transition: width 0.3s ease; /* Transição suave para a mudança de largura */
       }
 
       /* Estiliza o contêiner do formulário */
       .form-container {
-        text-align: center;
-        /* Centraliza o texto dentro do contêiner */
+        text-align: center; /* Centraliza o texto dentro do contêiner */
       }
 
       /* Estiliza o título dentro do contêiner do formulário */
       .form-container h2 {
-        margin-bottom: 10px;
-        /* Espaçamento inferior */
+        margin-bottom: 10px; /* Espaçamento inferior */
       }
 
       /* Estiliza a lista de serviços dentro do contêiner do formulário */
       .form-container .service-list {
-        margin-bottom: 20px;
-        /* Espaçamento inferior */
+        margin-bottom: 20px; /* Espaçamento inferior */
       }
 
       /* Estiliza a seção de botões dentro do contêiner do formulário */
       .form-container .buttons {
-        margin-top: 20px;
-        /* Espaçamento superior */
-        display: flex;
-        /* Utiliza Flexbox para layout dos botões */
+        margin-top: 20px; /* Espaçamento superior */
+        display: flex; /* Utiliza Flexbox para layout dos botões */
       }
 
       /* Estiliza os botões dentro da seção de botões */
       .form-container .buttons button {
-        padding: 10px 20px;
-        /* Espaçamento interno do botão */
-        border: none;
-        /* Remove a borda padrão */
-        background-color: #ffbd59;
-        /* Cor de fundo laranja */
-        color: #fff;
-        /* Cor do texto */
-        border-radius: 5px;
-        /* Bordas arredondadas */
-        cursor: pointer;
-        /* Cursor em forma de mão para indicar clicável */
-        margin-right: 10px;
-        /* Espaçamento à direita entre os botões */
+        padding: 10px 20px; /* Espaçamento interno do botão */
+        border: none; /* Remove a borda padrão */
+        background-color: #ffbd59; /* Cor de fundo laranja */
+        color: #fff; /* Cor do texto */
+        border-radius: 5px; /* Bordas arredondadas */
+        cursor: pointer; /* Cursor em forma de mão para indicar clicável */
+        margin-right: 10px; /* Espaçamento à direita entre os botões */
       }
 
       /* Remove a margem direita do último botão */
       .form-container .buttons button:last-child {
-        margin-right: 0;
-        /* Remove a margem direita do último botão */
+        margin-right: 0; /* Remove a margem direita do último botão */
       }
 
       /* Estiliza o texto de rodapé dentro do contêiner do formulário */
       .form-container .footer-text {
-        margin-top: 20px;
-        /* Espaçamento superior */
-        color: #777;
-        /* Cor do texto cinza claro */
+        margin-top: 20px; /* Espaçamento superior */
+        color: #777; /* Cor do texto cinza claro */
       }
 
       /* Estiliza as dicas informativas dentro do contêiner do formulário */
       .form-container .hint {
-        margin-top: 10px;
-        /* Espaçamento superior */
-        color: #000;
-        /* Cor do texto cinza */
+        margin-top: 10px; /* Espaçamento superior */
+        color: #000; /* Cor do texto cinza */
       }
 
       /* Estiliza o contêiner de Call to Action (CTA) */
       .cta-container {
-        text-align: center;
-        /* Centraliza o texto dentro do contêiner */
-        margin-bottom: 20px;
-        /* Espaçamento inferior */
+        text-align: center; /* Centraliza o texto dentro do contêiner */
+        margin-bottom: 20px; /* Espaçamento inferior */
       }
 
       /* Estiliza o título da seção de CTA */
       .cta-title {
-        font-size: 24px;
-        /* Tamanho da fonte */
-        margin-bottom: 10px;
-        /* Espaçamento inferior */
+        font-size: 24px; /* Tamanho da fonte */
+        margin-bottom: 10px; /* Espaçamento inferior */
       }
 
       /* Estiliza o subtítulo da seção de CTA */
       .cta-subtitle {
-        font-size: 18px;
-        /* Tamanho da fonte */
-        margin-bottom: 20px;
-        /* Espaçamento inferior */
+        font-size: 18px; /* Tamanho da fonte */
+        margin-bottom: 20px; /* Espaçamento inferior */
       }
 
       /* Estiliza o botão da seção de CTA */
       .cta-button {
-        padding: 10px 20px;
-        /* Espaçamento interno do botão */
-        border: none;
-        /* Remove a borda padrão */
-        background-color: #ff66c4;
-        /* Cor de fundo verde */
-        color: #fff;
-        /* Cor do texto */
-        border-radius: 5px;
-        /* Bordas arredondadas */
-        text-decoration: none;
-        /* Remove o sublinhado */
-        font-size: 16px;
-        /* Tamanho da fonte */
+        padding: 10px 20px; /* Espaçamento interno do botão */
+        border: none; /* Remove a borda padrão */
+        background-color: #ff66c4; /* Cor de fundo verde */
+        color: #fff; /* Cor do texto */
+        border-radius: 5px; /* Bordas arredondadas */
+        text-decoration: none; /* Remove o sublinhado */
+        font-size: 16px; /* Tamanho da fonte */
       }
 
       /* Estiliza os campos de entrada e área de texto */
@@ -222,18 +175,12 @@
       input[type="email"],
       textarea,
       select {
-        width: 100%;
-        /* Largura total */
-        padding: 10px;
-        /* Espaçamento interno */
-        border: 1px solid #ddd;
-        /* Borda cinza clara */
-        border-radius: 5px;
-        /* Bordas arredondadas */
-        margin-top: 5px;
-        /* Espaçamento superior */
-        box-sizing: border-box;
-        /* Inclui padding e border na largura total */
+        width: 100%; /* Largura total */
+        padding: 10px; /* Espaçamento interno */
+        border: 1px solid #ddd; /* Borda cinza clara */
+        border-radius: 5px; /* Bordas arredondadas */
+        margin-top: 5px; /* Espaçamento superior */
+        box-sizing: border-box; /* Inclui padding e border na largura total */
       }
 
       /* Estiliza o texto do placeholder dos campos de entrada */
@@ -241,8 +188,7 @@
       input[type="tel"]::placeholder,
       input[type="email"]::placeholder,
       textarea::placeholder {
-        color: #aaa;
-        /* Cor do texto do placeholder */
+        color: #aaa; /* Cor do texto do placeholder */
       }
 
       .card-container {
@@ -259,233 +205,233 @@
   </head>
 
   <body>
-<!-- ======= Header ======= -->
-<header id="header" class="header fixed-top d-flex align-items-center">
-  <div class="d-flex align-items-center justify-content-between">
-    <a href="../../index.php" class="logo d-flex align-items-center">
-      <img src="../../assets/img/logo_preta.png" alt="" />
-      <span class="d-none d-lg-block">Swan Shine</span>
-    </a>
-    <i class="bi bi-list toggle-sidebar-btn"></i>
-  </div>
-
-  <nav class="header-nav ms-auto">
-    <ul class="d-flex align-items-center">
-      <!-- Notifications Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <i class="bi bi-bell"></i>
-          <span class="badge bg-primary badge-number">0</span>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="../../index.php" class="logo d-flex align-items-center">
+          <img src="../../assets/img/logo_preta.png" alt="" />
+          <span class="d-none d-lg-block">Swan Shine</span>
         </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
 
-        <ul
-          class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
-        >
-          <li class="dropdown-header">
-            Você tem 0 notificações
-            <a href="#"
-              ><span class="badge rounded-pill bg-primary p-2 ms-2"
-                >Ver todas</span
-              ></a
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <!-- Notifications Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-bell"></i>
+              <span class="badge bg-primary badge-number">0</span>
+            </a>
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
             >
+              <li class="dropdown-header">
+                Você tem 0 notificações
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Ver todas</span
+                  ></a
+                >
+              </li>
+              <li class="dropdown-footer">
+                <a href="#">Mostrar todas as notificações</a>
+              </li>
+            </ul>
           </li>
-          <li class="dropdown-footer">
-            <a href="#">Mostrar todas as notificações</a>
-          </li>
-        </ul>
-      </li>
 
-      <!-- Messages Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <i class="bi bi-chat-left-text"></i>
-          <span class="badge bg-success badge-number">0</span>
-        </a>
+          <!-- Messages Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="badge bg-success badge-number">0</span>
+            </a>
 
-        <ul
-          class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
-        >
-          <li class="dropdown-header">
-            Você tem 0 mensagens
-            <a href="../../mensagem.html"
-              ><span class="badge rounded-pill bg-primary p-2 ms-2"
-                >Ver todas</span
-              ></a
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
             >
+              <li class="dropdown-header">
+                Você tem 0 mensagens
+                <a href="../../mensagem.php"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Ver todas</span
+                  ></a
+                >
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li class="dropdown-footer">
+                <a href="../../mensagem.php">Mostrar todas as mensagens</a>
+              </li>
+            </ul>
           </li>
-          <li>
-            <hr class="dropdown-divider" />
-          </li>
-          <li class="dropdown-footer">
-            <a href="../../mensagem.html">Mostrar todas as mensagens</a>
-          </li>
-        </ul>
-      </li>
 
-      <!-- Profile Dropdown -->
-      <li class="nav-item dropdown pe-3">
-        <a
-          class="nav-link nav-profile d-flex align-items-center pe-0"
-          href="../../perfil.php"
-          data-bs-toggle="dropdown"
-        >
-          <img
-            src="../../assets/img/usuario.png"
-            alt="Profile"
-            class="rounded-circle"
-          />
-        </a>
-
-        <ul
-          class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
-        >
-          <li>
+          <!-- Profile Dropdown -->
+          <li class="nav-item dropdown pe-3">
             <a
-              class="dropdown-item d-flex align-items-center"
+              class="nav-link nav-profile d-flex align-items-center pe-0"
               href="../../perfil.php"
+              data-bs-toggle="dropdown"
             >
-              <i class="bi bi-person"></i>
-              <span>Meu Perfil</span>
+              <img
+                src="../../assets/img/usuario.png"
+                alt="Profile"
+                class="rounded-circle"
+              />
             </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider" />
-          </li>
-          <li>
-            <a
-              class="dropdown-item d-flex align-items-center"
-              href="../../perfil.php"
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
-              <i class="bi bi-gear"></i>
-              <span>Configurações da Conta</span>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider" />
-          </li>
-          <li>
-            <a
-              class="dropdown-item d-flex align-items-center"
-              href="../../manutencao.html"
-            >
-              <i class="bi bi-question-circle"></i>
-              <span>Precisa de Ajuda?</span>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider" />
-          </li>
-          <li>
-            <a
-              class="dropdown-item d-flex align-items-center"
-              href="../../form/log_out.php"
-            >
-              <i class="bi bi-box-arrow-right"></i>
-              <span>Sair</span>
-            </a>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../perfil.php"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>Meu Perfil</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../perfil.php"
+                >
+                  <i class="bi bi-gear"></i>
+                  <span>Configurações da Conta</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../suporte.php"
+                >
+                  <i class="bi bi-question-circle"></i>
+                  <span>Precisa de Ajuda?</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  href="../../form/log_out.php"
+                >
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sair</span>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
-      </li>
-    </ul>
-  </nav>
-</header>
+      </nav>
+    </header>
 
-<!-- ======= Barra Lateral ======= -->
-<aside id="sidebar" class="sidebar">
-  <ul class="sidebar-nav" id="sidebar-nav">
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="../../index.php">
-        <i class="bi bi-grid"></i>
-        <span>Início</span>
-      </a>
-    </li>
+    <!-- ======= Barra Lateral ======= -->
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../index.php">
+            <i class="bi bi-grid"></i>
+            <span>Início</span>
+          </a>
+        </li>
 
-    <li class="nav-item">
-      <a
-        class="nav-link collapsed"
-        data-bs-target="#components-nav"
-        data-bs-toggle="collapse"
-        href="#"
-      >
-        <i class="bi bi-menu-button-wide"></i><span>Pedidos</span
-        ><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul
-        id="components-nav"
-        class="nav-content collapse"
-        data-bs-parent="#sidebar-nav"
-      >
-        <li>
-          <a href="../../pedidos/pedido_pendente.php"
-            ><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#components-nav"
+            data-bs-toggle="collapse"
+            href="#"
           >
+            <i class="bi bi-menu-button-wide"></i><span>Serviços</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="components-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="../../servicos.php"
+                ><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a
+              >
+            </li>
+          </ul>
         </li>
-        <li>
-          <a href="../../pedidos/pedido_andamento.php"
-            ><i class="bi bi-circle"></i
-            ><span>Pedidos Em Andamento</span></a
+
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#components-nav"
+            data-bs-toggle="collapse"
+            href="#"
           >
+            <i class="bi bi-menu-button-wide"></i><span>Pedidos</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="components-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a href="../../pedidos/pedido_pendente.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a
+              >
+            </li>
+            <li>
+              <a href="../../pedidos/pedido_andamento.php"
+                ><i class="bi bi-circle"></i
+                ><span>Pedidos Em Andamento</span></a
+              >
+            </li>
+            <li>
+              <a href="../../pedidos/pedido_excluido.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a
+              >
+            </li>
+            <li>
+              <a href="../../pedidos/pedido_concluido.php"
+                ><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a
+              >
+            </li>
+          </ul>
         </li>
-        <li>
-          <a href="../../pedidos/pedido_excluido.php"
-            ><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a
-          >
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../mensagem.php">
+            <i class="bi bi-envelope"></i>
+            <span>Mensagens</span>
+          </a>
         </li>
-        <li>
-          <a href="../../pedidos/pedido_concluido.php"
-            ><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a
-          >
+
+        <!-- Perfil -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../perfil.php">
+            <i class="bi bi-person"></i>
+            <span>Perfil</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="../../suporte.php">
+            <i class="bi bi-chat-dots"></i>
+            <span>Suporte</span>
+          </a>
         </li>
       </ul>
-    </li>
-
-    <li class="nav-item">
-      <a
-        class="nav-link collapsed"
-        data-bs-target="#components-nav"
-        data-bs-toggle="collapse"
-        href="#"
-      >
-        <i class="bi bi-menu-button-wide"></i><span>Serviços</span
-        ><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul
-        id="components-nav"
-        class="nav-content collapse"
-        data-bs-parent="#sidebar-nav"
-      >
-        <li>
-          <a href="../../servicos.php"
-            ><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a
-          >
-        </li>
-      </ul>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="../../mensagens.html">
-        <i class="bi bi-envelope"></i>
-        <span>Mensagens</span>
-      </a>
-    </li>
-
-    <!-- Perfil -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="../../perfil.php">
-        <i class="bi bi-person"></i>
-        <span>Perfil</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="../../suporte.html">
-        <i class="bi bi-chat-dots"></i>
-        <span>Suporte</span>
-      </a>
-    </li>
-  </ul>
-</aside>
-<!-- End Sidebar-->
+    </aside>
+    <!-- End Sidebar-->
 
     <!-- Main Content -->
     <main id="main" class="main">

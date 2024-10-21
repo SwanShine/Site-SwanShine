@@ -42,10 +42,11 @@ if ($result->num_rows === 0) {
     exit();
 }
 
-// Atualizar o status do pedido para "excluído"
-$update_query = "UPDATE pedidos SET status = 'excluido' WHERE id = ?";
+// Atualizar o pedido para "excluído" e limpar valor_orcamento e detalhes_orcamento
+$update_query = "UPDATE pedidos SET status = 'excluido', valor_orcamento = NULL, detalhes_orcamento = NULL WHERE id = ?";
 $stmt_update = $conn->prepare($update_query);
 $stmt_update->bind_param('i', $id_pedido);
+
 if ($stmt_update->execute()) {
     // Redirecionar de volta à página principal com uma mensagem de sucesso
     header('Location: ../../pedidos/pedido_excluido.php?message=Pedido excluído com sucesso');
@@ -58,6 +59,7 @@ $stmt->close();
 $stmt_update->close();
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">

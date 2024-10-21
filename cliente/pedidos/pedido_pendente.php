@@ -335,7 +335,7 @@ $conn->close();
         <div class="d-flex align-items-center justify-content-between">
             <!-- Div que alinha os itens de forma flexível e justifica o conteúdo entre os elementos. -->
 
-            <a href="index.php" class="logo d-flex align-items-center">
+            <a href="../index.php" class="logo d-flex align-items-center">
                 <!-- Link que redireciona para a página "index.php" com a classe "logo", exibindo logo e texto. -->
 
                 <img src="../assets/img/logo_preta.png" alt="" />
@@ -414,7 +414,7 @@ $conn->close();
                             Você tem 0 mensagens
                             <!-- Texto informando o número de mensagens. -->
 
-                            <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+                            <a href="mensagem.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                             <!-- Link para ver todas as mensagens com uma badge arredondada ao lado do texto. -->
                         </li>
 
@@ -426,7 +426,7 @@ $conn->close();
                         <li class="dropdown-footer">
                             <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
 
-                            <a href="../mensagem.html">Mostrar todas as mensagens</a>
+                            <a href="../mensagem.php">Mostrar todas as mensagens</a>
                             <!-- Link para mostrar todas as mensagens. -->
                         </li>
                     </ul>
@@ -533,7 +533,7 @@ $conn->close();
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link collapsed" href="../index.php">
           <i class="bi bi-grid"></i>
           <span>Início</span>
         </a>

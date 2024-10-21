@@ -24,40 +24,33 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
-// Verificar se o cliente existe na tabela "clientes"
-$stmt = $conn->prepare("SELECT * FROM clientes WHERE email = ?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
+// Verificar se um ID de pedido foi passado
+if (isset($_GET['id'])) {
+    $pedido_id = $_GET['id']; // Usar 'id' como parâmetro
 
-if ($result->num_rows > 0) {
-    $cliente = $result->fetch_assoc();
+    // Buscar o orçamento do pedido específico
+    $stmt = $conn->prepare("SELECT * FROM pedidos WHERE id = ? AND email = ?");
+    $stmt->bind_param("is", $pedido_id, $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $pedido = $result->fetch_assoc();
+    } else {
+        echo "Pedido não encontrado ou não pertence a este cliente.";
+        exit();
+    }
+
+    $stmt->close();
 } else {
-    echo "Cliente não encontrado.";
+    echo "Nenhum pedido selecionado.";
     exit();
 }
 
-$stmt->close();
-
-// Buscar todos os dados dos pedidos pendentes
-$stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'em análise' ORDER BY data_pedido DESC");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Verificar se o cliente tem pedidos pendentes
-$pedidos = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $pedidos[] = $row;
-    }
-} else {
-    echo "<div>Nenhum serviço pendente encontrado para este cliente.</div>";
-}
-
-$stmt->close();
 $conn->close();
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -112,109 +105,87 @@ $conn->close();
     <!-- Link para o arquivo CSS -->
 
     <style>
-        /* Estilo do contêiner dos cartões */
-        .card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            /* Bordas arredondadas */
-            padding: 1.5rem;
-            margin: 1rem 0;
-            /* Margem vertical entre os cartões */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            /* Sombra suave */
-            transition: transform 0.2s ease;
-            /* Efeito ao passar o mouse */
-        }
+/* Estilo do contêiner dos cartões */
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 1.5rem;
+    margin: 1rem 0; /* Margem vertical entre os cartões */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    transition: transform 0.2s ease; /* Efeito ao passar o mouse */
+}
 
-        /* Efeito ao passar o mouse sobre o cartão */
-        .card:hover {
-            transform: translateY(40px);
-            /* Leve elevação */
-        }
+/* Efeito ao passar o mouse sobre o cartão */
+.card:hover {
+    transform: translateY(-4px); /* Leve elevação */
+}
 
-        /* Estilo do título do serviço */
-        .card h3 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
+/* Estilo do título do serviço */
+.card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
 
-        /* Estilo do ID do pedido */
-        .card h3 span {
-            font-size: 0.75em;
-            /* Tamanho menor para o ID */
-            color: #666;
-            /* Cor mais clara */
-        }
+/* Estilo do ID do pedido */
+.card h3 span {
+    font-size: 0.75em; /* Tamanho menor para o ID */
+    color: #666; /* Cor mais clara */
+}
 
-        /* Estilo dos parágrafos dentro do cartão */
-        .card p {
-            margin: 0.5rem 0;
-            /* Margem vertical entre os parágrafos */
-            color: #000;
-            /* Cor de texto padrão */
-        }
+/* Estilo dos parágrafos dentro do cartão */
+.card p {
+    margin: 0.5rem 0; /* Margem vertical entre os parágrafos */
+    color: #000; /* Cor de texto padrão */
+}
 
-        /* Estilo do grupo de botões */
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            /* Distribui espaço entre os botões */
-            margin-top: 1rem;
-            /* Espaço acima dos botões */
-        }
+/* Estilo do grupo de botões */
+.button-group {
+    display: flex;
+    justify-content: space-between; /* Distribui espaço entre os botões */
+    margin-top: 1rem; /* Espaço acima dos botões */
+}
 
-        /* Estilo dos botões */
-        .button-group button {
-            padding: 0.75rem 1.2rem;
-            border: none;
-            border-radius: 5px;
-            /* Bordas arredondadas */
-            color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            /* Transições suaves */
-        }
+/* Estilo dos botões */
+.button-group button {
+    padding: 0.5rem 0.8rem; /* Diminuindo o padding */
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    color: #fff;
+    font-size: 0.9rem; /* Diminuindo o tamanho da fonte */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+}
 
-        /* Estilo do botão Aceitar */
-        .button-group .accept {
-            background-color: #28a745;
-            /* Verde */
-        }
+/* Estilo do botão Aceitar */
+.button-group .accept {
+    background-color: #28a745; /* Verde */
+}
 
-        .button-group .accept:hover {
-            background-color: #218838;
-            /* Verde escuro */
-            transform: scale(1.05);
-            /* Leve aumento ao passar o mouse */
-        }
+.button-group .accept:hover {
+    background-color: #218838; /* Verde escuro */
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
 
-        /* Estilo do botão Recusar */
-        .button-group .reject {
-            background-color: #dc3545;
-            /* Vermelho */
-        }
+/* Estilo do botão Recusar */
+.button-group .reject {
+    background-color: #dc3545; /* Vermelho */
+}
 
-        .button-group .reject:hover {
-            background-color: #c82333;
-            /* Vermelho escuro */
-            transform: scale(1.05);
-            /* Leve aumento ao passar o mouse */
-        }
+.button-group .reject:hover {
+    background-color: #c82333; /* Vermelho escuro */
+    transform: scale(1.05); /* Leve aumento ao passar o mouse */
+}
 
-        /* Estilo da mensagem quando não há pedidos */
-        .no-orders {
-            text-align: center;
-            /* Centraliza o texto */
-            color: #999;
-            /* Cor mais clara para mensagem */
-            font-size: 1.2rem;
-            /* Tamanho de fonte maior */
-            margin: 2rem 0;
-            /* Margem vertical */
-        }
+/* Estilo da mensagem quando não há pedidos */
+.no-orders {
+    text-align: center; /* Centraliza o texto */
+    color: #999; /* Cor mais clara para mensagem */
+    font-size: 1.2rem; /* Tamanho de fonte maior */
+    margin: 2rem 0; /* Margem vertical */
+}
+
     </style>
 
 </head>
@@ -338,7 +309,7 @@ $conn->close();
                 </a>
                 <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="../../../servico.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
+                        <a href="../../../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
                     </li>
                 </ul>
             </li>
@@ -397,7 +368,7 @@ $conn->close();
             <h1>Painel</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="../../../index.php">Home</a></li>
                     <li class="breadcrumb-item">Pedido</li>
                     <li class="breadcrumb-item active">Visualizar Orçamento</li>
                 </ol>
@@ -408,31 +379,28 @@ $conn->close();
         <section class="section dashboard">
             <div class="row">
                 <div class="card-container">
-                    <?php if (!empty($pedidos)): ?>
-                        <?php foreach ($pedidos as $pedido): ?>
-                            <div class="card">
-                                <h3>
-                                    <?= htmlspecialchars($pedido['servicos']) ?>
-                                    <span style="font-size: 0.5em; color: #666;">(ID:
-                                        <?= htmlspecialchars($pedido['id']) ?>)</span>
-                                </h3>
-                                <p><strong>Valor Orçamento:</strong> R$ <?= htmlspecialchars($pedido['valor_orcamento']) ?></p>
-                                <p><strong>Detalhes:</strong> <?= htmlspecialchars($pedido['detalhes']) ?></p>
+                    <?php if (isset($pedido)): ?>
+                        <div class="card">
+                            <h3>
+                                <?= htmlspecialchars($pedido['servicos']) ?>
+                                <span style="font-size: 0.5em; color: #666;">(ID:
+                                    <?= htmlspecialchars($pedido['id']) ?>)</span>
+                            </h3>
+                            <p><strong>Valor Orçamento:</strong> R$
+                                <?= htmlspecialchars(number_format($pedido['valor_orcamento'], 2, ',', '.')) ?></p>
+                            <p><strong>Detalhes:</strong> <?= htmlspecialchars($pedido['detalhes']) ?></p>
 
-                                <div class="button-group">
-                                    <form action="aceitar.php" method="post">
-                                        <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
-                                        <button type="submit" class="accept">Aceitar</button>
-                                    </form>
-                                    <form action="recusar.php" method="post">
-                                        <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
-                                        <button type="submit" class="reject">Recusar</button>
-                                    </form>
-                                </div>
+                            <div class="button-group">
+                                <form action="aceitar.php" method="post">
+                                    <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
+                                    <button type="submit" class="accept">Aceitar</button>
+                                </form>
+                                <form action="recusar.php" method="post">
+                                    <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
+                                    <button type="submit" class="reject">Recusar</button>
+                                </form>
                             </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="no-orders">Nenhum serviço pendente encontrado para este cliente.</div>
+                        </div>
                     <?php endif; ?>
 
 
