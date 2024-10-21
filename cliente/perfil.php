@@ -84,7 +84,7 @@ $conn->close();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SwanShine - Perfil</title>
+  <title>Swan Shine - Perfil</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -124,7 +124,7 @@ $conn->close();
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo_preta.png" alt="" />
-        <span class="d-none d-lg-block">SwanShine</span>
+        <span class="d-none d-lg-block">Swan Shine</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
@@ -233,6 +233,24 @@ $conn->close();
           data-bs-target="#components-nav"
           data-bs-toggle="collapse"
           href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul
+          id="components-nav"
+          class="nav-content collapse"
+          data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          data-bs-target="#components-nav"
+          data-bs-toggle="collapse"
+          href="#">
           <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul
@@ -255,27 +273,6 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          data-bs-target="#components-nav"
-          data-bs-toggle="collapse"
-          href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul
-          id="components-nav"
-          class="nav-content collapse"
-          data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-          </li>
-          <li>
-            <a href="#"><i class="bi bi-circle"></i><span>...</span></a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item">
         <a class="nav-link collapsed" href="mensagem.php">
           <i class="bi bi-envelope"></i>
           <span>Mensagens</span>
@@ -291,7 +288,7 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="suporte.html">
+        <a class="nav-link collapsed" href="suporte.php">
           <i class="bi bi-chat-dots"></i>
           <span>Suporte</span>
         </a>

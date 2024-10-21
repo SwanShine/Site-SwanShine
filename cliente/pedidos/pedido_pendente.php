@@ -78,7 +78,7 @@ $conn->close();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SwanShine - Cliente</title>
+  <title>Swan Shine - Cliente</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -328,215 +328,233 @@ $conn->close();
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-    <!-- Cabeçalho com ID "header", classe para fixar no topo e aplicar estilo flex para alinhamento dos itens. -->
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <!-- Cabeçalho com ID "header", classe para fixar no topo e aplicar estilo flex para alinhamento dos itens. -->
 
-    <div class="d-flex align-items-center justify-content-between">
-      <!-- Div que alinha os itens de forma flexível e justifica o conteúdo entre os elementos. -->
+        <div class="d-flex align-items-center justify-content-between">
+            <!-- Div que alinha os itens de forma flexível e justifica o conteúdo entre os elementos. -->
 
-      <a href="index.php" class="logo d-flex align-items-center">
-        <!-- Link que redireciona para a página "index.php" com a classe "logo", exibindo logo e texto. -->
+            <a href="index.php" class="logo d-flex align-items-center">
+                <!-- Link que redireciona para a página "index.php" com a classe "logo", exibindo logo e texto. -->
 
-        <img src="../assets/img/logo_preta.png" alt="" />
-        <!-- Imagem do logo com o caminho "../assets/img/logo_preta.png". O atributo "alt" está vazio. -->
+                <img src="../assets/img/logo_preta.png" alt="" />
+                <!-- Imagem do logo com o caminho "../assets/img/logo_preta.png". O atributo "alt" está vazio. -->
 
-        <span class="d-none d-lg-block">SwanShine</span>
-        <!-- Texto "SwanShine" que só aparece em telas grandes, escondido em telas menores. -->
-      </a>
+                <span class="d-none d-lg-block">Swan Shine</span>
+                <!-- Texto "SwanShine" que só aparece em telas grandes, escondido em telas menores. -->
+            </a>
 
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-      <!-- Ícone do Bootstrap Icons para alternar o sidebar. -->
-    </div>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+            <!-- Ícone do Bootstrap Icons para alternar o sidebar. -->
+        </div>
 
-    <nav class="header-nav ms-auto">
-      <!-- Barra de navegação à direita (margem esquerda automática para empurrar conteúdo). -->
+        <nav class="header-nav ms-auto">
+            <!-- Barra de navegação à direita (margem esquerda automática para empurrar conteúdo). -->
 
-      <ul class="d-flex align-items-center">
-        <!-- Lista não ordenada com itens alinhados ao centro, usando display flex. -->
+            <ul class="d-flex align-items-center">
+                <!-- Lista não ordenada com itens alinhados ao centro, usando display flex. -->
 
-        <!-- Notifications Dropdown -->
-        <li class="nav-item dropdown">
-          <!-- Item da lista que contém o dropdown de notificações. -->
+                <!-- Notifications Dropdown -->
+                <li class="nav-item dropdown">
+                    <!-- Item da lista que contém o dropdown de notificações. -->
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <!-- Link com ícone de sino que abre o menu suspenso de notificações ao clicar. -->
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <!-- Link com ícone de sino que abre o menu suspenso de notificações ao clicar. -->
 
-            <i class="bi bi-bell"></i>
-            <!-- Ícone de sino representando as notificações. -->
+                        <i class="bi bi-bell"></i>
+                        <!-- Ícone de sino representando as notificações. -->
 
-            <span class="badge bg-primary badge-number">0</span>
-            <!-- Badge com o número de notificações (aqui definido como 0) com fundo azul. -->
-          </a>
+                        <span class="badge bg-primary badge-number">0</span>
+                        <!-- Badge com o número de notificações (aqui definido como 0) com fundo azul. -->
+                    </a>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <!-- Menu suspenso alinhado à direita (end) com uma seta indicativa, contendo notificações. -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <!-- Menu suspenso alinhado à direita (end) com uma seta indicativa, contendo notificações. -->
 
-            <li class="dropdown-header">
-              <!-- Cabeçalho do dropdown que exibe a contagem de notificações. -->
+                        <li class="dropdown-header">
+                            <!-- Cabeçalho do dropdown que exibe a contagem de notificações. -->
 
-              Você tem 0 notificações
-              <!-- Texto que informa o número de notificações. -->
+                            Você tem 0 notificações
+                            <!-- Texto que informa o número de notificações. -->
 
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-              <!-- Link para ver todas as notificações com uma badge arredondada ao lado do texto. -->
-            </li>
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+                            <!-- Link para ver todas as notificações com uma badge arredondada ao lado do texto. -->
+                        </li>
 
-            <li class="dropdown-footer">
-              <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as notificações. -->
+                        <li class="dropdown-footer">
+                            <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as notificações. -->
 
-              <a href="#">Mostrar todas as notificações</a>
-              <!-- Link para mostrar todas as notificações. -->
-            </li>
-          </ul>
-        </li>
+                            <a href="#">Mostrar todas as notificações</a>
+                            <!-- Link para mostrar todas as notificações. -->
+                        </li>
+                    </ul>
+                </li>
 
-        <!-- Messages Dropdown -->
-        <li class="nav-item dropdown">
-          <!-- Item da lista que contém o dropdown de mensagens. -->
+                <!-- Messages Dropdown -->
+                <li class="nav-item dropdown">
+                    <!-- Item da lista que contém o dropdown de mensagens. -->
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <!-- Link com ícone de chat que abre o menu suspenso de mensagens ao clicar. -->
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <!-- Link com ícone de chat que abre o menu suspenso de mensagens ao clicar. -->
 
-            <i class="bi bi-chat-left-text"></i>
-            <!-- Ícone de chat para representar mensagens. -->
+                        <i class="bi bi-chat-left-text"></i>
+                        <!-- Ícone de chat para representar mensagens. -->
 
-            <span class="badge bg-success badge-number">0</span>
-            <!-- Badge com o número de mensagens (aqui definido como 0) com fundo verde. -->
-          </a>
+                        <span class="badge bg-success badge-number">0</span>
+                        <!-- Badge com o número de mensagens (aqui definido como 0) com fundo verde. -->
+                    </a>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo mensagens. -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                        <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo mensagens. -->
 
-            <li class="dropdown-header">
-              <!-- Cabeçalho do dropdown que exibe a contagem de mensagens. -->
+                        <li class="dropdown-header">
+                            <!-- Cabeçalho do dropdown que exibe a contagem de mensagens. -->
 
-              Você tem 0 mensagens
-              <!-- Texto informando o número de mensagens. -->
+                            Você tem 0 mensagens
+                            <!-- Texto informando o número de mensagens. -->
 
-              <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-              <!-- Link para ver todas as mensagens com uma badge arredondada ao lado do texto. -->
-            </li>
+                            <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+                            <!-- Link para ver todas as mensagens com uma badge arredondada ao lado do texto. -->
+                        </li>
 
-            <li>
-              <hr class="dropdown-divider" />
-              <!-- Linha divisória dentro do dropdown. -->
-            </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                            <!-- Linha divisória dentro do dropdown. -->
+                        </li>
 
-            <li class="dropdown-footer">
-              <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
+                        <li class="dropdown-footer">
+                            <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
 
-              <a href="mensagem.html">Mostrar todas as mensagens</a>
-              <!-- Link para mostrar todas as mensagens. -->
-            </li>
-          </ul>
-        </li>
+                            <a href="../mensagem.html">Mostrar todas as mensagens</a>
+                            <!-- Link para mostrar todas as mensagens. -->
+                        </li>
+                    </ul>
+                </li>
 
-        <!-- Profile Dropdown -->
-        <li class="nav-item dropdown pe-3">
-          <!-- Item da lista que contém o dropdown de perfil. O "pe-3" aplica padding à direita. -->
+                <!-- Profile Dropdown -->
+                <li class="nav-item dropdown pe-3">
+                    <!-- Item da lista que contém o dropdown de perfil. O "pe-3" aplica padding à direita. -->
 
-          <a
-            class="nav-link nav-profile d-flex align-items-center pe-0"
-            href="perfil.php"
-            data-bs-toggle="dropdown">
-            <!-- Link com imagem de perfil que abre o menu suspenso do perfil ao clicar. -->
+                    <a
+                        class="nav-link nav-profile d-flex align-items-center pe-0"
+                        href="../perfil.php"
+                        data-bs-toggle="dropdown">
+                        <!-- Link com imagem de perfil que abre o menu suspenso do perfil ao clicar. -->
 
-            <img
-              src="../assets/img/usuario.png"
-              alt="Profile"
-              class="rounded-circle" />
-            <!-- Imagem de perfil (usuário) em formato circular. -->
-          </a>
+                        <img
+                            src="../assets/img/usuario.png"
+                            alt="Profile"
+                            class="rounded-circle" />
+                        <!-- Imagem de perfil (usuário) em formato circular. -->
+                    </a>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo opções de perfil. -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo opções de perfil. -->
 
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="perfil.php">
-                <!-- Link para a página de perfil com ícone e texto alinhados. -->
+                        <li>
+                            <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="../perfil.php">
+                                <!-- Link para a página de perfil com ícone e texto alinhados. -->
 
-                <i class="bi bi-person"></i>
-                <!-- Ícone de pessoa (perfil). -->
+                                <i class="bi bi-person"></i>
+                                <!-- Ícone de pessoa (perfil). -->
 
-                <span>Meu Perfil</span>
-                <!-- Texto "Meu Perfil". -->
-              </a>
-            </li>
+                                <span>Meu Perfil</span>
+                                <!-- Texto "Meu Perfil". -->
+                            </a>
+                        </li>
 
-            <li>
-              <hr class="dropdown-divider" />
-              <!-- Linha divisória dentro do dropdown. -->
-            </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                            <!-- Linha divisória dentro do dropdown. -->
+                        </li>
 
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="perfil.php">
-                <!-- Link para configurações da conta com ícone e texto alinhados. -->
+                        <li>
+                            <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="../perfil.php">
+                                <!-- Link para configurações da conta com ícone e texto alinhados. -->
 
-                <i class="bi bi-gear"></i>
-                <!-- Ícone de engrenagem (configurações). -->
+                                <i class="bi bi-gear"></i>
+                                <!-- Ícone de engrenagem (configurações). -->
 
-                <span>Configurações da Conta</span>
-                <!-- Texto "Configurações da Conta". -->
-              </a>
-            </li>
+                                <span>Configurações da Conta</span>
+                                <!-- Texto "Configurações da Conta". -->
+                            </a>
+                        </li>
 
-            <li>
-              <hr class="dropdown-divider" />
-              <!-- Linha divisória dentro do dropdown. -->
-            </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                            <!-- Linha divisória dentro do dropdown. -->
+                        </li>
 
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="manutencao.html">
-                <!-- Link para a página de ajuda com ícone e texto alinhados. -->
+                        <li>
+                            <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="../suporte.php">
+                                <!-- Link para a página de ajuda com ícone e texto alinhados. -->
 
-                <i class="bi bi-question-circle"></i>
-                <!-- Ícone de círculo com ponto de interrogação (ajuda). -->
+                                <i class="bi bi-question-circle"></i>
+                                <!-- Ícone de círculo com ponto de interrogação (ajuda). -->
 
-                <span>Precisa de Ajuda?</span>
-                <!-- Texto "Precisa de Ajuda?". -->
-              </a>
-            </li>
+                                <span>Precisa de Ajuda?</span>
+                                <!-- Texto "Precisa de Ajuda?". -->
+                            </a>
+                        </li>
 
-            <li>
-              <hr class="dropdown-divider" />
-              <!-- Linha divisória dentro do dropdown. -->
-            </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                            <!-- Linha divisória dentro do dropdown. -->
+                        </li>
 
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="form/log_out.php">
-                <!-- Link para a página de logout com ícone e texto alinhados. -->
+                        <li>
+                            <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="../form/log_out.php">
+                                <!-- Link para a página de logout com ícone e texto alinhados. -->
 
-                <i class="bi bi-box-arrow-right"></i>
-                <!-- Ícone de seta saindo de uma caixa (sair/logout). -->
+                                <i class="bi bi-box-arrow-right"></i>
+                                <!-- Ícone de seta saindo de uma caixa (sair/logout). -->
 
-                <span>Sair</span>
-                <!-- Texto "Sair". -->
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>
+                                <span>Sair</span>
+                                <!-- Texto "Sair". -->
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
 
   <!-- ======= Barra Lateral ======= -->
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link collapsed" href="../index.php">
+        <a class="nav-link collapsed" href="index.php">
           <i class="bi bi-grid"></i>
           <span>Início</span>
         </a>
+      </li>
+
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          data-bs-target="#components-nav"
+          data-bs-toggle="collapse"
+          href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul
+          id="components-nav"
+          class="nav-content collapse"
+          data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
+          </li>
+        </ul>
       </li>
 
       <li class="nav-item">
@@ -567,24 +585,6 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          data-bs-target="#components-nav"
-          data-bs-toggle="collapse"
-          href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul
-          id="components-nav"
-          class="nav-content collapse"
-          data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item">
         <a class="nav-link collapsed" href="../mensagem.php">
           <i class="bi bi-envelope"></i>
           <span>Mensagens</span>
@@ -600,7 +600,7 @@ $conn->close();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="../suporte.html">
+        <a class="nav-link collapsed" href="../suporte.php">
           <i class="bi bi-chat-dots"></i>
           <span>Suporte</span>
         </a>

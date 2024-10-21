@@ -48,7 +48,7 @@ $stmt_update = $conn->prepare($update_query);
 $stmt_update->bind_param('i', $id_pedido);
 if ($stmt_update->execute()) {
     // Redirecionar de volta à página principal com uma mensagem de sucesso
-    header('Location: ../../index.php?message=Pedido excluído com sucesso');
+    header('Location: ../../pedidos/pedido_excluido.php?message=Pedido excluído com sucesso');
 } else {
     echo "Erro ao excluir o pedido: " . $conn->error;
 }

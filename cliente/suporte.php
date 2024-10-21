@@ -25,34 +25,31 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
-// Consultar os dados dos profissionais
-$sql = "SELECT * FROM profissionais";
-$result = $conn->query($sql);
+// Usar prepared statements para buscar o cliente pelo email
+$stmt = $conn->prepare("SELECT nome, endereco, email, cpf, telefone, genero, imagem FROM clientes WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
 
-$profissionais = [
-  'Barbeiro' => [],
-  'Maquiagem' => [],
-  'Lash_Designer' => [],
-  'Nail_Designer' => [],
-  'Trancista' => [],
-  'Esteticista' => [],
-  'Cabeleireira' => [],
-  'Depilação' => []
-];
+// Obter o resultado da consulta
+$result = $stmt->get_result();
 
+// Verificar se retornou algum resultado
 if ($result->num_rows > 0) {
-  // Separar os profissionais por serviço
-  while ($row = $result->fetch_assoc()) {
-    $servico = $row['servicos'];
-    if (array_key_exists($servico, $profissionais)) {
-      $profissionais[$servico][] = $row;
-    }
-  }
+  $row = $result->fetch_assoc();
+  $nome = $row['nome'];
+  $endereco = $row['endereco'];
+  $email = $row['email'];
+  $cpf = $row['cpf'];
+  $telefone = $row['telefone'];
+  $genero = $row['genero'];
+  $imagem = $row['imagem']; // Obter a imagem como BLOB
 } else {
-  echo "Nenhum profissional encontrado.";
+  $nome = $endereco = $email = $cpf = $telefone = $genero = "Não encontrado";
+  $imagem = null; // Imagem padrão caso não haja
 }
 
-// Fechar conexão
+// Fechar a conexão
+$stmt->close();
 $conn->close();
 ?>
 
@@ -191,7 +188,7 @@ $conn->close();
         <img src="assets/img/logo_preta.png" alt="" />
         <!-- Imagem do logo com o caminho "assets/img/logo_preta.png". O atributo "alt" está vazio. -->
 
-        <span class="d-none d-lg-block">SwanShine</span>
+        <span class="d-none d-lg-block">Swan Shine</span>
         <!-- Texto "SwanShine" que só aparece em telas grandes, escondido em telas menores. -->
       </a>
 
@@ -461,81 +458,27 @@ $conn->close();
 
   <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Veja e Contrate os Melhores Profissionais</h1>
+      <h1>Seja Bem vindo! <?php echo htmlspecialchars($nome); ?></h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item">Painel</li>
-          <li class="breadcrumb-item active">Veja e Contrate</li>
+          <li class="breadcrumb-item active">Suporte</li>
         </ol>
       </nav>
     </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services section">
+        <!-- Services Section -->
+        <section id="services" class="services section">
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Serviços</h2>
-        <p>Procure por seus serviços e encontre os melhores profissionais.</p>
+        <h2>Suporte</h2>
+        <p>Entre em contato e tire suas duvidas aqui no SAC.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
         <div class="row gy-4">
-          <?php foreach ($profissionais as $servico => $lista): ?>
-            <div class="col-md-12">
-              <h2 class="service-category text-center mb-4"><?php echo ucfirst($servico); ?></h2>
-              <div class="row">
-                <?php if (count($lista) > 0): ?>
-                  <?php foreach ($lista as $profissional): ?>
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
-                      <div class="service-card card mb-4 shadow-sm">
-                        <div class="card-body">
-                          <h3 class="card-title"><?php echo htmlspecialchars($profissional['nome']); ?></h3>
-                          <div class="card-details">
-                            <p><strong>Email:</strong> <?php echo htmlspecialchars($profissional['email']); ?></p>
-                            <p><strong>Celular:</strong> <?php echo htmlspecialchars($profissional['celular']); ?></p>
-                            <p><strong>Data de Aniversário:</strong> <?php echo htmlspecialchars($profissional['data_de_aniversario']); ?></p>
-                            <p><strong>Gênero:</strong> <?php echo htmlspecialchars($profissional['genero']); ?></p>
-                            <p><strong>Endereço:</strong> <?php echo htmlspecialchars($profissional['rua']); ?>, <?php echo htmlspecialchars($profissional['numero']); ?>, <?php echo htmlspecialchars($profissional['complemento']); ?> - <?php echo htmlspecialchars($profissional['bairro']); ?>, <?php echo htmlspecialchars($profissional['cidade']); ?>/<?php echo htmlspecialchars($profissional['estado']); ?> - <?php echo htmlspecialchars($profissional['cep']); ?></p>
-                            <p><strong>CPF:</strong> <?php echo htmlspecialchars($profissional['cpf']); ?></p>
-                            <p><strong>Redes Sociais:</strong></p>
-                            <p>
-                              <?php if (!empty($profissional['tiktok'])): ?>
-                                TikTok: <a href="<?php echo htmlspecialchars($profissional['tiktok']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['tiktok']); ?></a><br>
-                              <?php endif; ?>
-                              <?php if (!empty($profissional['instagram'])): ?>
-                                Instagram: <a href="<?php echo htmlspecialchars($profissional['instagram']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['instagram']); ?></a><br>
-                              <?php endif; ?>
-                              <?php if (!empty($profissional['facebook'])): ?>
-                                Facebook: <a href="<?php echo htmlspecialchars($profissional['facebook']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['facebook']); ?></a><br>
-                              <?php endif; ?>
-                              <?php if (!empty($profissional['linkedin'])): ?>
-                                LinkedIn: <a href="<?php echo htmlspecialchars($profissional['linkedin']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['linkedin']); ?></a><br>
-                              <?php endif; ?>
-                              <?php if (!empty($profissional['whatsapp'])): ?>
-                                WhatsApp: <a href="https://wa.me/<?php echo htmlspecialchars($profissional['whatsapp']); ?>" target="_blank"><?php echo htmlspecialchars($profissional['whatsapp']); ?></a><br>
-                              <?php endif; ?>
-                            </p>
-                          </div>
-                          <a href="mensagem.php?id=<?php echo urlencode($profissional['id']); ?>" class="btn btn-primary card-button">
-                            <i class="fas fa-envelope"></i> Enviar Mensagem
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  <?php endforeach; ?>
-                <?php else: ?>
-                  <div class="col-md-12">
-                    <div class="service-card card mb-4 shadow-sm">
-                      <div class="card-body text-center">
-                        <p class="text-muted">Nenhum profissional disponível para <?php echo htmlspecialchars($servico); ?>.</p>
-                      </div>
-                    </div>
-                  </div>
-                <?php endif; ?>
-              </div>
-            </div>
-          <?php endforeach; ?>
+         
         </div>
       </div>
 

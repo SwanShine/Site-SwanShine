@@ -48,7 +48,7 @@ $stmt_update = $conn->prepare($update_query);
 $stmt_update->bind_param('i', $id_pedido);
 if ($stmt_update->execute()) {
     // Redirecionar de volta à página principal com uma mensagem de sucesso
-    header('Location: ../../index.php?message=Pedido voltado com sucesso');
+    header('Location: ../../pedidos/pedido_pendente.php?message=Pedido voltado com sucesso');
 } else {
     echo "Erro ao atualizar o pedido: " . $conn->error;
 }

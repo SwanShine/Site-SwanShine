@@ -80,7 +80,7 @@ $conn->close();
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>SwanShine - Cliente</title>
+    <title>Swan Shine - Cliente</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -343,7 +343,7 @@ $conn->close();
                 <img src="../assets/img/logo_preta.png" alt="" />
                 <!-- Imagem do logo com o caminho "../assets/img/logo_preta.png". O atributo "alt" está vazio. -->
 
-                <span class="d-none d-lg-block">SwanShine</span>
+                <span class="d-none d-lg-block">Swan Shine</span>
                 <!-- Texto "SwanShine" que só aparece em telas grandes, escondido em telas menores. -->
             </a>
 
@@ -428,7 +428,7 @@ $conn->close();
                         <li class="dropdown-footer">
                             <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
 
-                            <a href="mensagem.html">Mostrar todas as mensagens</a>
+                            <a href="../mensagem.html">Mostrar todas as mensagens</a>
                             <!-- Link para mostrar todas as mensagens. -->
                         </li>
                     </ul>
@@ -440,7 +440,7 @@ $conn->close();
 
                     <a
                         class="nav-link nav-profile d-flex align-items-center pe-0"
-                        href="perfil.php"
+                        href="../perfil.php"
                         data-bs-toggle="dropdown">
                         <!-- Link com imagem de perfil que abre o menu suspenso do perfil ao clicar. -->
 
@@ -457,7 +457,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="perfil.php">
+                                href="../perfil.php">
                                 <!-- Link para a página de perfil com ícone e texto alinhados. -->
 
                                 <i class="bi bi-person"></i>
@@ -476,7 +476,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="perfil.php">
+                                href="../perfil.php">
                                 <!-- Link para configurações da conta com ícone e texto alinhados. -->
 
                                 <i class="bi bi-gear"></i>
@@ -495,7 +495,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="manutencao.html">
+                                href="../suporte.php">
                                 <!-- Link para a página de ajuda com ícone e texto alinhados. -->
 
                                 <i class="bi bi-question-circle"></i>
@@ -514,7 +514,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="form/log_out.php">
+                                href="../form/log_out.php">
                                 <!-- Link para a página de logout com ícone e texto alinhados. -->
 
                                 <i class="bi bi-box-arrow-right"></i>
@@ -531,85 +531,85 @@ $conn->close();
     </header>
 
 
-    <!-- ======= Barra Lateral ======= -->
-    <aside id="sidebar" class="sidebar">
-        <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../index.php">
-                    <i class="bi bi-grid"></i>
-                    <span>Início</span>
-                </a>
-            </li>
+  <!-- ======= Barra Lateral ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.php">
+          <i class="bi bi-grid"></i>
+          <span>Início</span>
+        </a>
+      </li>
 
-            <li class="nav-item">
-                <a
-                    class="nav-link collapsed"
-                    data-bs-target="#components-nav"
-                    data-bs-toggle="collapse"
-                    href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul
-                    id="components-nav"
-                    class="nav-content collapse"
-                    data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
-                    </li>
-                    <li>
-                        <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
-                    </li>
-                    <li>
-                        <a href="pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
-                    </li>
-                    <li>
-                        <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a
-                    class="nav-link collapsed"
-                    data-bs-target="#components-nav"
-                    data-bs-toggle="collapse"
-                    href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul
-                    id="components-nav"
-                    class="nav-content collapse"
-                    data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../mensagem.php">
-                    <i class="bi bi-envelope"></i>
-                    <span>Mensagens</span>
-                </a>
-            </li>
-
-            <!-- Perfil -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../perfil.php">
-                    <i class="bi bi-person"></i>
-                    <span>Perfil</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../suporte.html">
-                    <i class="bi bi-chat-dots"></i>
-                    <span>Suporte</span>
-                </a>
-            </li>
-
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          data-bs-target="#components-nav"
+          data-bs-toggle="collapse"
+          href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul
+          id="components-nav"
+          class="nav-content collapse"
+          data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
+          </li>
         </ul>
-    </aside><!-- End Sidebar-->
+      </li>
+
+      <li class="nav-item">
+        <a
+          class="nav-link collapsed"
+          data-bs-target="#components-nav"
+          data-bs-toggle="collapse"
+          href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul
+          id="components-nav"
+          class="nav-content collapse"
+          data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+          </li>
+          <li>
+            <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+          </li>
+          <li>
+            <a href="pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
+          </li>
+          <li>
+            <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../mensagem.php">
+          <i class="bi bi-envelope"></i>
+          <span>Mensagens</span>
+        </a>
+      </li>
+
+      <!-- Perfil -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../perfil.php">
+          <i class="bi bi-person"></i>
+          <span>Perfil</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../suporte.php">
+          <i class="bi bi-chat-dots"></i>
+          <span>Suporte</span>
+        </a>
+      </li>
+
+    </ul>
+  </aside><!-- End Sidebar-->
 
 
     <main id="main" class="main">
