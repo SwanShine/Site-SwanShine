@@ -50,9 +50,6 @@ if (isset($_GET['id'])) {
 $conn->close();
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -62,7 +59,7 @@ $conn->close();
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <!-- Configura a viewport para garantir que a página seja renderizada corretamente em diferentes dispositivos -->
 
-    <title>Swan Shine - Profissional</title>
+    <title>Swan Shine - Cliente</title>
     <!-- Define o título da página -->
     <meta content="" name="description" />
     <!-- Meta tag para a descrição da página (vazia neste exemplo) -->
@@ -105,87 +102,111 @@ $conn->close();
     <!-- Link para o arquivo CSS -->
 
     <style>
-/* Estilo do contêiner dos cartões */
-.card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px; /* Bordas arredondadas */
-    padding: 1.5rem;
-    margin: 1rem 0; /* Margem vertical entre os cartões */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.2s ease; /* Efeito ao passar o mouse */
-}
+        /* Estilo do contêiner dos cartões */
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            /* Bordas arredondadas */
+            padding: 1.5rem;
+            margin: 1rem 0;
+            /* Margem vertical entre os cartões */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* Sombra suave */
+            transition: transform 0.2s ease;
+            /* Efeito ao passar o mouse */
+        }
 
-/* Efeito ao passar o mouse sobre o cartão */
-.card:hover {
-    transform: translateY(-4px); /* Leve elevação */
-}
+        /* Efeito ao passar o mouse sobre o cartão */
+        .card:hover {
+            transform: translateY(-4px);
+            /* Leve elevação */
+        }
 
-/* Estilo do título do serviço */
-.card h3 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 0.5rem;
-}
+        /* Estilo do título do serviço */
+        .card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
 
-/* Estilo do ID do pedido */
-.card h3 span {
-    font-size: 0.75em; /* Tamanho menor para o ID */
-    color: #666; /* Cor mais clara */
-}
+        /* Estilo do ID do pedido */
+        .card h3 span {
+            font-size: 0.75em;
+            /* Tamanho menor para o ID */
+            color: #666;
+            /* Cor mais clara */
+        }
 
-/* Estilo dos parágrafos dentro do cartão */
-.card p {
-    margin: 0.5rem 0; /* Margem vertical entre os parágrafos */
-    color: #000; /* Cor de texto padrão */
-}
+        /* Estilo dos parágrafos dentro do cartão */
+        .card p {
+            margin: 0.5rem 0;
+            /* Margem vertical entre os parágrafos */
+            color: #000;
+            /* Cor de texto padrão */
+        }
 
-/* Estilo do grupo de botões */
-.button-group {
-    display: flex;
-    justify-content: space-between; /* Distribui espaço entre os botões */
-    margin-top: 1rem; /* Espaço acima dos botões */
-}
+        /* Estilo do grupo de botões */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            /* Distribui espaço entre os botões */
+            margin-top: 1rem;
+            /* Espaço acima dos botões */
+        }
 
-/* Estilo dos botões */
-.button-group button {
-    padding: 0.5rem 0.8rem; /* Diminuindo o padding */
-    border: none;
-    border-radius: 5px; /* Bordas arredondadas */
-    color: #fff;
-    font-size: 0.9rem; /* Diminuindo o tamanho da fonte */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
-}
+        /* Estilo dos botões */
+        .button-group button {
+            padding: 0.5rem 0.8rem;
+            /* Diminuindo o padding */
+            border: none;
+            border-radius: 5px;
+            /* Bordas arredondadas */
+            color: #fff;
+            font-size: 0.9rem;
+            /* Diminuindo o tamanho da fonte */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            /* Transições suaves */
+        }
 
-/* Estilo do botão Aceitar */
-.button-group .accept {
-    background-color: #28a745; /* Verde */
-}
+        /* Estilo do botão Aceitar */
+        .button-group .accept {
+            background-color: #28a745;
+            /* Verde */
+        }
 
-.button-group .accept:hover {
-    background-color: #218838; /* Verde escuro */
-    transform: scale(1.05); /* Leve aumento ao passar o mouse */
-}
+        .button-group .accept:hover {
+            background-color: #218838;
+            /* Verde escuro */
+            transform: scale(1.05);
+            /* Leve aumento ao passar o mouse */
+        }
 
-/* Estilo do botão Recusar */
-.button-group .reject {
-    background-color: #dc3545; /* Vermelho */
-}
+        /* Estilo do botão Recusar */
+        .button-group .reject {
+            background-color: #dc3545;
+            /* Vermelho */
+        }
 
-.button-group .reject:hover {
-    background-color: #c82333; /* Vermelho escuro */
-    transform: scale(1.05); /* Leve aumento ao passar o mouse */
-}
+        .button-group .reject:hover {
+            background-color: #c82333;
+            /* Vermelho escuro */
+            transform: scale(1.05);
+            /* Leve aumento ao passar o mouse */
+        }
 
-/* Estilo da mensagem quando não há pedidos */
-.no-orders {
-    text-align: center; /* Centraliza o texto */
-    color: #999; /* Cor mais clara para mensagem */
-    font-size: 1.2rem; /* Tamanho de fonte maior */
-    margin: 2rem 0; /* Margem vertical */
-}
-
+        /* Estilo da mensagem quando não há pedidos */
+        .no-orders {
+            text-align: center;
+            /* Centraliza o texto */
+            color: #999;
+            /* Cor mais clara para mensagem */
+            font-size: 1.2rem;
+            /* Tamanho de fonte maior */
+            margin: 2rem 0;
+            /* Margem vertical */
+        }
     </style>
 
 </head>
@@ -379,31 +400,29 @@ $conn->close();
         <section class="section dashboard">
             <div class="row">
                 <div class="card-container">
-                    <?php if (isset($pedido)): ?>
-                        <div class="card">
-                            <h3>
-                                <?= htmlspecialchars($pedido['servicos']) ?>
-                                <span style="font-size: 0.5em; color: #666;">(ID:
-                                    <?= htmlspecialchars($pedido['id']) ?>)</span>
-                            </h3>
-                            <p><strong>Valor Orçamento:</strong> R$
-                                <?= htmlspecialchars(number_format($pedido['valor_orcamento'], 2, ',', '.')) ?></p>
-                            <p><strong>Detalhes:</strong> <?= htmlspecialchars($pedido['detalhes']) ?></p>
+                <?php if (isset($pedido)): ?>
+    <div class="card">
+        <h3>
+            <?= htmlspecialchars($pedido['servicos']) ?>
+            <span style="font-size: 0.5em; color: #666;">(ID:
+                <?= htmlspecialchars($pedido['id']) ?>)</span>
+        </h3>
+        <p><strong>Valor Orçamento:</strong> R$
+            <?= htmlspecialchars(number_format($pedido['valor_orcamento'], 3, ',', '.')) ?></p>
+        <p><strong>Detalhes:</strong> <?= htmlspecialchars($pedido['detalhes_orcamento']) ?></p>
 
-                            <div class="button-group">
-                                <form action="aceitar.php" method="post">
-                                    <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
-                                    <button type="submit" class="accept">Aceitar</button>
-                                </form>
-                                <form action="recusar.php" method="post">
-                                    <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
-                                    <button type="submit" class="reject">Recusar</button>
-                                </form>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-
-
+        <div class="button-group">
+            <form action="aceitar.php" method="post">
+                <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
+                <button type="submit" class="accept">Aceitar</button>
+            </form>
+            <form action="recusar.php" method="post">
+                <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
+                <button type="submit" class="reject">Recusar</button>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>
 
                 </div>
             </div>
@@ -426,7 +445,7 @@ $conn->close();
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>Swan Shine</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Swan Shine</span></strong>. Todos os Direitos Reservados
         </div>
     </footer>
 

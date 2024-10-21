@@ -225,7 +225,7 @@ if (isset($_SESSION['recusados'])) {
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="../manutencao.html">
+                                href="../suporte.html">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Precisa de Ajuda?</span>
                             </a>
@@ -284,7 +284,7 @@ if (isset($_SESSION['recusados'])) {
     
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="../mensagens.html">
+            <a class="nav-link collapsed" href="../mensagem.html">
                 <i class="bi bi-envelope"></i>
                 <span>Mensagens</span>
             </a>
@@ -323,7 +323,7 @@ if (isset($_SESSION['recusados'])) {
         <section class="section dashboard">
             <div class="row">
                 <div class="card-container">
-                    <h1 class="titulo" style="text-align: center;">Seus Pedidos Pendentes</h1>
+                    
                     <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
                         <div class="card notification-card">
                             <h3>Pedido Recusado</h3>

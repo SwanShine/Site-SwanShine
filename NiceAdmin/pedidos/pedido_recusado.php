@@ -226,7 +226,7 @@ if (isset($_SESSION['recusado'])) {
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="../manutencao.html">
+                                href="../suporte.html">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Precisa de Ajuda?</span>
                             </a>
@@ -285,7 +285,7 @@ if (isset($_SESSION['recusado'])) {
     
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="../mensagens.html">
+            <a class="nav-link collapsed" href="../mensagem.html">
                 <i class="bi bi-envelope"></i>
                 <span>Mensagens</span>
             </a>

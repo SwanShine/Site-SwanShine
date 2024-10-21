@@ -60,16 +60,16 @@ if ($result->num_rows === 0) {
     exit();
 }
 
-// Armazenar o ID do pedido recusado na sessão
-if (!isset($_SESSION['recusados'])) {
-    $_SESSION['recusados'] = [];
-}
-$_SESSION['recusados'][] = $id_pedido;
+// Atualizar o campo 'recusado' do pedido para indicar que ele foi recusado
+$update_stmt = $conn->prepare("UPDATE pedidos SET recusado = 1 WHERE id = ?");
+$update_stmt->bind_param("i", $id_pedido);
+$update_stmt->execute();
 
 // Redirecionar de volta à página principal com uma mensagem de sucesso
 header('Location: ../../index.php?message=Pedido recusado com sucesso');
 
 // Fechar a conexão
+$update_stmt->close();
 $stmt->close();
 $conn->close();
 ?>

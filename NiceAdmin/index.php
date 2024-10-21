@@ -302,7 +302,7 @@ $conn->close();
                 <div class="card-container">
                     <?php if (isset($_SESSION['nome'])): ?>
                         <div class="card welcome-card">
-                            <h3>Bem-vindo de volta, <?= htmlspecialchars($_SESSION['nome']) ?>!</h3>
+                            <h3>Bem-vindo, <?= htmlspecialchars($_SESSION['nome']) ?>!</h3>
                             <p>Estamos felizes em tê-lo(a) de volta.</p>
                         </div>
                     <?php endif; ?>
