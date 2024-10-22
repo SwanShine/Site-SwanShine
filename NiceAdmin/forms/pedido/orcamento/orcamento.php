@@ -41,6 +41,7 @@ $pedido = $result->fetch_assoc();
 $stmt->close();
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -93,17 +94,16 @@ $conn->close();
     <style>
         /* Estilo do contêiner do formulário */
         .form-container {
-            max-width: 100%;
-            /* Garante que o contêiner use toda a largura disponível */
+            max-width: 600px;
+            /* Largura máxima do contêiner */
             margin: 2rem auto;
-            /* Margem automática centraliza o contêiner e define a margem superior e inferior */
+            /* Centraliza horizontalmente */
             padding: 2rem;
-            /* Espaçamento interno do contêiner */
             background: #fff;
             /* Cor de fundo branca */
             border-radius: 8px;
             /* Bordas arredondadas */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             /* Sombra suave */
             box-sizing: border-box;
             /* Inclui padding e borda no cálculo da largura e altura */
@@ -111,37 +111,31 @@ $conn->close();
 
         /* Estilo do título */
         h2 {
-            margin-top: 0;
-            /* Remove a margem superior */
+            margin: 0 0 1rem;
+            /* Margem inferior para espaço */
             color: #333;
             /* Cor do texto */
-            font-size: 1.5rem;
+            font-size: 2rem;
             /* Tamanho da fonte */
+            text-align: center;
+            /* Centraliza o texto */
         }
 
         /* Estilo do formulário */
         form {
             display: flex;
-            /* Exibe os elementos do formulário em uma coluna */
             flex-direction: column;
-            /* Alinha os itens na vertical por padrão */
         }
 
         /* Estilo dos grupos de campos */
         .form-group {
             margin-bottom: 1rem;
             /* Espaçamento abaixo de cada grupo de campo */
-            display: flex;
-            /* Exibe os itens dentro do grupo de campos em linha */
-            flex-wrap: wrap;
-            /* Permite que os itens se movam para a linha seguinte se não houver espaço suficiente */
-            gap: 1rem;
-            /* Espaçamento entre os itens */
         }
 
         /* Estilo dos rótulos dos campos */
         .form-group label {
-            flex: 1 1 100%;
+            display: block;
             /* Faz com que o rótulo ocupe toda a largura disponível */
             margin-bottom: 0.5rem;
             /* Espaçamento abaixo do rótulo */
@@ -154,8 +148,8 @@ $conn->close();
         /* Estilo dos campos de entrada e áreas de texto */
         .form-group input,
         .form-group textarea {
-            flex: 1 1 calc(50% - 1rem);
-            /* Ajusta os campos para ocuparem metade da largura menos o espaçamento */
+            width: 100%;
+            /* Ocupa 100% da largura do contêiner */
             padding: 0.75rem;
             /* Espaçamento interno dos campos */
             border: 1px solid #ccc;
@@ -164,8 +158,8 @@ $conn->close();
             /* Bordas arredondadas */
             box-sizing: border-box;
             /* Inclui padding e borda no cálculo da largura e altura */
-            transition: border-color 0.3s ease;
-            /* Transição suave para a cor da borda */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            /* Transições suaves */
         }
 
         /* Estilo dos campos quando estão em foco */
@@ -173,6 +167,8 @@ $conn->close();
         .form-group textarea:focus {
             border-color: #007bff;
             /* Cor da borda quando o campo está em foco */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            /* Sombra suave ao foco */
             outline: none;
             /* Remove o contorno padrão do navegador */
         }
@@ -187,9 +183,7 @@ $conn->close();
 
         /* Estilo dos botões */
         .form-group button {
-            flex: 1 1 calc(50% - 1rem);
-            /* Ajusta os botões para ocuparem metade da largura menos o espaçamento */
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem;
             /* Espaçamento interno dos botões */
             border: none;
             /* Remove a borda padrão */
@@ -205,6 +199,8 @@ $conn->close();
             /* Alterar o cursor para uma mãozinha quando passar sobre o botão */
             transition: background-color 0.3s ease, transform 0.3s ease;
             /* Transição suave para a cor de fundo e transformação */
+            width: 100%;
+            /* Ocupa 100% da largura do contêiner */
         }
 
         /* Estilo dos botões quando o mouse está sobre eles */
@@ -213,12 +209,6 @@ $conn->close();
             /* Cor de fundo azul escuro quando o botão é hover */
             transform: scale(1.05);
             /* Aumenta levemente o tamanho do botão */
-        }
-
-        /* Estilo dos botões quando são pressionados */
-        .form-group button:active {
-            background-color: #00408d;
-            /* Cor de fundo ainda mais escura quando o botão é pressionado */
         }
 
         /* Estilo do link de voltar */
@@ -246,54 +236,99 @@ $conn->close();
         /* Estilos para tornar o formulário responsivo */
         @media (max-width: 768px) {
             .form-container {
+                margin-left: 100px;
                 padding: 1rem;
                 /* Reduz o padding em telas menores */
             }
 
-            .form-group {
-                flex-direction: column;
-                /* Empilha os itens verticalmente em telas menores */
-                margin-bottom: 0.75rem;
-                /* Reduz o espaçamento entre os grupos de campos */
+            h2 {
+                font-size: 1.75rem;
+                /* Tamanho do título em telas menores */
+            }
+
+            .form-group button {
+                font-size: 0.875rem;
+                /* Tamanho da fonte dos botões em telas menores */
+            }
+        }
+
+        /* Estilos para telas de 425px ou menores */
+        @media (max-width: 425px) {
+            .form-container {
+                margin-left: 100px;
+                padding: 0.5rem;
+                /* Reduz ainda mais o padding */
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                /* Tamanho do título em telas pequenas */
             }
 
             .form-group input,
-            .form-group textarea,
-            .form-group button {
-                flex: 1 1 100%;
-                /* Ajusta os campos e botões para ocupar 100% da largura disponível */
+            .form-group textarea {
+                padding: 0.5rem;
+                /* Ajusta o padding dos campos */
             }
 
             .form-group button {
-                padding: 0.5rem 1rem;
+                padding: 0.5rem;
                 /* Ajusta o padding dos botões */
                 font-size: 0.875rem;
                 /* Ajusta o tamanho da fonte dos botões */
             }
         }
 
-        @media (max-width: 480px) {
+        /* Estilos para telas de 375px ou menores */
+        @media (max-width: 375px) {
             .form-container {
-                padding: 0.5rem;
-                /* Reduz ainda mais o padding para telas muito pequenas */
+                margin-left: 60px;
+                padding: 0.25rem;
+                /* Reduz o padding ainda mais */
             }
 
-            .form-group {
-                margin-bottom: 0.5rem;
-                /* Reduz o espaçamento entre os grupos de campos */
+            h2 {
+                font-size: 1.25rem;
+                /* Tamanho do título em telas menores */
             }
 
             .form-group input,
-            .form-group textarea,
-            .form-group button {
-                flex: 1 1 100%;
-                /* Ajusta os campos e botões para ocupar 100% da largura disponível */
+            .form-group textarea {
+                padding: 0.4rem;
+                /* Ajusta o padding dos campos */
             }
 
             .form-group button {
-                padding: 0.5rem;
+                padding: 0.4rem;
                 /* Ajusta o padding dos botões */
                 font-size: 0.75rem;
+                /* Ajusta o tamanho da fonte dos botões */
+            }
+        }
+
+        /* Estilos para telas de 320px ou menores */
+        @media (max-width: 320px) {
+            .form-container {
+                margin-left: 40px;
+                padding: 0.2rem;
+                /* Reduz o padding ainda mais */
+            }
+
+            h2 {
+                font-size: 1.125rem;
+                /* Tamanho do título em telas muito pequenas */
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 0.3rem;
+                /* Ajusta o padding dos campos */
+            }
+
+            .form-group button {
+                padding: 0.3rem;
+                /* Ajusta o padding dos botões */
+                font-size: 0.65rem;
                 /* Ajusta o tamanho da fonte dos botões */
             }
         }
@@ -306,7 +341,7 @@ $conn->close();
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="../../../index.php" class="logo d-flex align-items-center">
                 <img src="../../../assets/img/logo_preta.png" alt="" />
                 <span class="d-none d-lg-block">Swan Shine</span>
             </a>
@@ -345,13 +380,13 @@ $conn->close();
                         class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                         <li class="dropdown-header">
                             Você tem 0 mensagens
-                            <a href="../../../mensagens.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+                            <a href="../../../mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
                         <li class="dropdown-footer">
-                            <a href="../../../mensagens.html">Mostrar todas as mensagens</a>
+                            <a href="../../../mensagem.html">Mostrar todas as mensagens</a>
                         </li>
                     </ul>
                 </li>
@@ -396,7 +431,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="../../../manutencao.html">
+                                href="../../../suporte.html">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Precisa de Ajuda?</span>
                             </a>
@@ -420,128 +455,113 @@ $conn->close();
 
     <!-- ======= Barra Lateral ======= -->
     <aside id="sidebar" class="sidebar">
-      <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../../../index.php">
-                <i class="bi bi-grid"></i>
-                <span>Início</span>
-            </a>
-        </li>
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../../../index.php">
+                    <i class="bi bi-grid"></i>
+                    <span>Início</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a
-                class="nav-link collapsed"
-                data-bs-target="#components-nav"
-                data-bs-toggle="collapse"
-                href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul
-                id="components-nav"
-                class="nav-content collapse"
-                data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="../../../pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
-                </li>
-                <li>
-                    <a href="../../../pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
-                </li>
-                <li>
-                    <a href="../../../pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
-                </li>
-            </ul>
-        </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link collapsed"
+                    data-bs-target="#components-nav"
+                    data-bs-toggle="collapse"
+                    href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul
+                    id="components-nav"
+                    class="nav-content collapse"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="../../../pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+                    </li>
+                    <li>
+                        <a href="../../../pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+                    </li>
+                    <li>
+                        <a href="../../../pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                    </li>
+                    <li>
+                        <a href="../../../pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+                    </li>
+                </ul>
+            </li>
 
-        <li class="nav-item">
-            <a
-                class="nav-link collapsed"
-                data-bs-target="#components-nav"
-                data-bs-toggle="collapse"
-                href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul
-                id="components-nav"
-                class="nav-content collapse"
-                data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="../../../servico/"><i class="bi bi-circle"></i><span>Cadastre Seu Serviço</span></a>
-                </li>
-                <li>
-                    <a href="../../../servico/"><i class="bi bi-circle"></i><span>Serviços Cadastrados</span></a>
-                </li>
-            </ul>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../../../mensagem.html">
+                    <i class="bi bi-envelope"></i>
+                    <span>Mensagens</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../../../mensagens.html">
-                <i class="bi bi-envelope"></i>
-                <span>Mensagens</span>
-            </a>
-        </li>
+            <!-- Perfil -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../../../perfil.php">
+                    <i class="bi bi-person"></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
 
-        <!-- Perfil -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../../../perfil.php">
-                <i class="bi bi-person"></i>
-                <span>Perfil</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../../../suporte.html">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>Suporte</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../../../suporte.html">
-                <i class="bi bi-chat-dots"></i>
-                <span>Suporte</span>
-            </a>
-        </li>
-
-     </ul>
-   </aside><!-- End Sidebar-->
+        </ul>
+    </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Painel</h1>
+            <h1>Orçamento</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../../../index.php">Home</a></li>
-                    <li class="breadcrumb-item active">Painel</li>
+                    <li class="breadcrumb-item active">Pedido</li>
+                    <li class="breadcrumb-item active">Orçamento</li>
                 </ol>
             </nav>
         </div>
         <!-- End Page Title -->
 
         <section class="section dashboard">
-    <div class="row">
-        <div class="form-container">
-            <h2>Enviar Orçamento</h2>
-            <form action="processar_orcamento.php" method="post">
-                <input type="hidden" name="id_pedido" value="<?= htmlspecialchars($id_pedido) ?>">
-                <div class="form-group">
-                    <label for="valor">Valor:</label>
-                    <input type="text" id="valor" name="valor" required oninput="formatarValor(this)">
+            <div class="row">
+                <div class="form-container">
+                    <h2>Enviar Orçamento</h2>
+                    <form action="processar_orcamento.php" method="post">
+                        <input type="hidden" name="id_pedido" value="<?= htmlspecialchars($id_pedido) ?>">
+                        <div class="form-group">
+                            <label for="valor">Valor:</label>
+                            <input type="text" id="valor" name="valor" required oninput="formatarValor(this)">
+                        </div>
+                        <div class="form-group">
+                            <label for="detalhes">Detalhes:</label>
+                            <textarea id="detalhes" name="detalhes" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Enviar Orçamento</button>
+                        </div>
+                        <a href="../../../index.php" class="back-link">&#8592; Voltar para os serviços</a>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="detalhes">Detalhes:</label>
-                    <textarea id="detalhes" name="detalhes" required></textarea>
-                </div>
-                <div class="form-group">
-                    <button type="submit">Enviar Orçamento</button>
-                </div>
-                <a href="../../../index.php" class="back-link">&#8592; Voltar para os serviços</a>
-            </form>
-        </div>
-    </div>
-</section>
+            </div>
+        </section>
 
-<script>
-    // Função para formatar o valor com o prefixo "R$"
-    function formatarValor(campo) {
-        let valor = campo.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-        valor = (valor / 100).toFixed(2); // Divide por 100 e formata para duas casas decimais
-        valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona pontos para separação de milhar
-        campo.value = `R$ ${valor.replace('.', ',')}`; // Adiciona o prefixo "R$" e substitui o ponto por vírgula
-    }
-</script>
+
+        <script>
+            // Função para formatar o valor com o prefixo "R$"
+            function formatarValor(campo) {
+                let valor = campo.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+                valor = (valor / 100).toFixed(2); // Divide por 100 e formata para duas casas decimais
+                valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona pontos para separação de milhar
+                campo.value = `R$ ${valor.replace('.', ',')}`; // Adiciona o prefixo "R$" e substitui o ponto por vírgula
+            }
+        </script>
+
 
     </main>
     <!-- End #main -->
@@ -549,7 +569,7 @@ $conn->close();
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>Swan Shine</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Swan Shine</span></strong>. Todos os Direitos Reservados
         </div>
     </footer>
 

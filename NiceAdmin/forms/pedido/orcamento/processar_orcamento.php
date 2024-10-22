@@ -8,15 +8,20 @@ if (!isset($_SESSION['user_email'])) {
     exit();
 }
 
-// Verificar se os dados do orçamento foram fornecidos
-if (!isset($_POST['id_pedido']) || !isset($_POST['valor']) || !isset($_POST['detalhes'])) {
-    echo "Dados do orçamento não fornecidos.";
+// Verificar se o ID do pedido foi fornecido
+if (!isset($_POST['id_pedido']) || empty($_POST['id_pedido'])) {
+    echo "ID do pedido não fornecido.";
     exit();
 }
 
 $id_pedido = intval($_POST['id_pedido']); // Sanitizar o ID do pedido
-$valor = $_POST['valor']; // Sanitizar o valor do orçamento
-$detalhes = $_POST['detalhes']; // Sanitizar os detalhes do orçamento
+
+// Obter os valores do orçamento do formulário
+$valor_orcamento = $_POST['valor'];
+$detalhes_orcamento = $_POST['detalhes'];
+
+// Remover a formatação do valor
+$valor_orcamento = str_replace(['R$', '.', ','], ['', '', '.'], $valor_orcamento); // Corrigido para usar $valor_orcamento
 
 // Dados de conexão com o banco de dados
 $servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
@@ -32,18 +37,18 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Atualizar o pedido com o orçamento
-$stmt = $conn->prepare("UPDATE pedidos SET valor_orcamento = ?, detalhes_orcamento = ?, status = 'em análise' WHERE id = ?");
-$stmt->bind_param("dsi", $valor, $detalhes, $id_pedido);
+// Atualizar os campos valor_orcamento e detalhes_orcamento na tabela pedidos
+$stmt = $conn->prepare("UPDATE pedidos SET valor_orcamento = ?, detalhes_orcamento = ? WHERE id = ?");
+$stmt->bind_param("ssi", $valor_orcamento, $detalhes_orcamento, $id_pedido);
 
 if ($stmt->execute()) {
     // Redirecionar de volta à página principal com uma mensagem de sucesso
-    header('Location: ../../../index.php?message=Orçamento enviado com sucesso');
+    header('Location: ../../../pedidos/pedido_andamento.php');
 } else {
     echo "Erro ao enviar o orçamento: " . $stmt->error;
 }
 
-// Fechar a conexão
+// Fechar as conexões
 $stmt->close();
 $conn->close();
 ?>

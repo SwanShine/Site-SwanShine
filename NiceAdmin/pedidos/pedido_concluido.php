@@ -278,6 +278,9 @@ if (isset($_SESSION['recusados'])) {
                 <li>
                     <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
                 </li>
+                <li>
+                    <a href="pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+                </li>
             </ul>
         </li>
 
@@ -306,16 +309,16 @@ if (isset($_SESSION['recusados'])) {
         </li>
 
      </ul>
-   </aside><!-- End Sidebar-->
+    </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
     <div class="pagetitle">
-      <h1>Pedidos Pendentes</h1>
+      <h1>Pedidos Concluidos</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
           <li class="breadcrumb-item">Pedido</li>
-          <li class="breadcrumb-item active">Pedidos Pendentes</li>
+          <li class="breadcrumb-item active">Pedidos Concluidos</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -323,7 +326,7 @@ if (isset($_SESSION['recusados'])) {
         <section class="section dashboard">
             <div class="row">
                 <div class="card-container">
-                    <h1 class="titulo" style="text-align: center;">Seus Pedidos Pendentes</h1>
+                   
                     <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
                         <div class="card notification-card">
                             <h3>Pedido Recusado</h3>
@@ -347,8 +350,8 @@ if (isset($_SESSION['recusados'])) {
                                     <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
                                 </div>
                                 <div class="buttons">
-                                    <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Orçamento</button>
-                                    <button class="button recusar" data-id="<?= htmlspecialchars($pedido['id']) ?>">Recusar</button>
+                                    <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Enviar Mensagem</button>
+                                    
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -365,19 +368,10 @@ if (isset($_SESSION['recusados'])) {
 
         <!-- JavaScript para lidar com os botões de orçamento e recusa -->
         <script>
-            document.querySelectorAll('.recusar').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    if (confirm('Tem certeza que deseja recusar este pedido?')) {
-                        window.location.href = `../forms/pedido/recusar_pedido.php?id=${id}`;
-                    }
-                });
-            });
-
             document.querySelectorAll('.orcamento').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.getAttribute('data-id');
-                    window.location.href = `../forms/pedido/orcamento/orcamento_pedido.php?id=${id}`;
+                    window.location.href = `../mensagem.html?id=${id}`;
                 });
             });
         </script>

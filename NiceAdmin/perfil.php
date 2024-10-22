@@ -27,7 +27,7 @@ $email = $_SESSION['user_email'];
 
 // Usar prepared statements para buscar o profissional pelo email
 $stmt = $conn->prepare("
-    SELECT nome, email, celular, data_de_aniversario, genero, cep, rua, numero, complemento, referencia, bairro, cidade, estado, servicos, cpf, tiktok, facebook, instagram, linkedin, whatsapp 
+    SELECT id, nome, email, celular, data_de_aniversario, genero, cep, rua, numero, complemento, referencia, bairro, cidade, estado, servicos, cpf, tiktok, facebook, instagram, linkedin, whatsapp 
     FROM profissionais 
     WHERE email = ?
 ");
@@ -40,6 +40,7 @@ $result = $stmt->get_result();
 // Verificar se retornou algum resultado
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    $id = $row['id']; // Agora estamos buscando o ID
     $nome = $row['nome'];
     $email = $row['email'];
     $celular = $row['celular'];
@@ -69,6 +70,7 @@ if ($result->num_rows > 0) {
 $stmt->close();
 $conn->close();
 ?>
+
 
 
 
@@ -107,7 +109,20 @@ $conn->close();
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
-
+    <style>
+        .bordered-field {
+            border: 1px solid #000;
+            /* Cor da borda */
+            padding: 10px;
+            /* Espaçamento interno */
+            border-radius: 5px;
+            /* Bordas arredondadas (opcional) */
+            background-color: #fff;
+            /* Cor de fundo (opcional) */
+            margin: 20px 0;
+            /* Margem superior e inferior para espaçamento entre os campos */
+        }
+    </style>
 
 </head>
 
@@ -117,15 +132,14 @@ $conn->close();
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.php" class="logo d-flex align-items-center">
-                <img src="assets/img/logo_preta.png" alt="">
-                <span class="d-none d-lg-block">SwanShine</span>
+                <img src="assets/img/logo_preta.png" alt="" />
+                <span class="d-none d-lg-block">Swan Shine</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
-
                 <!-- Notifications Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -133,7 +147,8 @@ $conn->close();
                         <span class="badge bg-primary badge-number">0</span>
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    <ul
+                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                         <li class="dropdown-header">
                             Você tem 0 notificações
                             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
@@ -151,13 +166,14 @@ $conn->close();
                         <span class="badge bg-success badge-number">0</span>
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <ul
+                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                         <li class="dropdown-header">
                             Você tem 0 mensagens
                             <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                         </li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class="dropdown-divider" />
                         </li>
                         <li class="dropdown-footer">
                             <a href="mensagem.html">Mostrar todas as mensagens</a>
@@ -167,40 +183,56 @@ $conn->close();
 
                 <!-- Profile Dropdown -->
                 <li class="nav-item dropdown pe-3">
-                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
+                    <a
+                        class="nav-link nav-profile d-flex align-items-center pe-0"
+                        href="perfil.php"
+                        data-bs-toggle="dropdown">
+                        <img
+                            src="assets/img/usuario.png"
+                            alt="Profile"
+                            class="rounded-circle" />
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <ul
+                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="perfil.php">
+                            <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="perfil.php">
                                 <i class="bi bi-person"></i>
                                 <span>Meu Perfil</span>
                             </a>
                         </li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="perfil.php">
+                            <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="perfil.php">
                                 <i class="bi bi-gear"></i>
                                 <span>Configurações da Conta</span>
                             </a>
                         </li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
+                            <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="suporte.html">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Precisa de Ajuda?</span>
                             </a>
                         </li>
                         <li>
-                            <hr class="dropdown-divider">
+                            <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="../index.html">
+                            <a
+                                class="dropdown-item d-flex align-items-center"
+                                href="forms/log_out.php">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sair</span>
                             </a>
@@ -239,17 +271,21 @@ $conn->close();
                     <li>
                         <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
                     </li>
-                   
+
                     <li>
                         <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                    </li>
+
+                    <li>
+                        <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
                     </li>
                 </ul>
             </li>
 
-            
+
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="mensagens.html">
+                <a class="nav-link collapsed" href="mensagem.html">
                     <i class="bi bi-envelope"></i>
                     <span>Mensagens</span>
                 </a>
@@ -301,7 +337,7 @@ $conn->close();
                                 <a href="<?php echo htmlspecialchars($instagram); ?>" class="instagram" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
                                 <a href="<?php echo htmlspecialchars($linkedin); ?>" class="linkedin" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
                                 <a href="<?php echo htmlspecialchars($whatsapp); ?>" class="whatsapp" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                            
+
                             </div>
 
                         </div>
@@ -333,151 +369,169 @@ $conn->close();
                                 </li>
 
                             </ul>
+
                             <div class="tab-content pt-2">
 
+                                <!-- Visão Geral-->
                                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-
-
                                     <h5 class="card-title">Detalhes do Perfil</h5>
 
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Nome Completo</div>
-                                        <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars($nome); ?></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Email</div>
-                                        <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars($email); ?></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Celular</div>
-                                        <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars($celular); ?></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Data de Nascimento</div>
-                                        <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars($data_de_aniversario); ?></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Gênero</div>
-                                        <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars($genero); ?></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">CPF</div>
-                                        <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars($cpf); ?></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Endereço</div>
-                                        <div class="col-lg-9 col-md-8">
-                                            <?php echo htmlspecialchars($rua); ?>, <?php echo htmlspecialchars($numero); ?>, <?php echo htmlspecialchars($complemento); ?> <br>
-                                            <?php echo htmlspecialchars($bairro); ?>, <?php echo htmlspecialchars($cidade); ?> - <?php echo htmlspecialchars($estado); ?>, <?php echo htmlspecialchars($cep); ?>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Serviços</div>
-                                        <div class="col-lg-9 col-md-8"><?php echo htmlspecialchars($servicos); ?></div>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="tab-pane fade profile-edit pt-3" id="profile-edit"><!-- Formulário de Edição do Perfil -->
-                                    <form action="forms/atualizar_perfil.php" method="POST">
-                                        <div class="row mb-3">
-                                            <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nome Completo</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($nome); ?>">
+                                    <div style="max-height: 300px; overflow-y: auto;"> <!-- Adicione esta div para scroll -->
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Nome Completo</div>
+                                            <div class="col-lg-9 col-md-8">
+                                                <div class="bordered-field"><?php echo htmlspecialchars($nome); ?></div>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
-                                            <label for="celular" class="col-md-4 col-lg-3 col-form-label">Celular</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="celular" type="text" class="form-control" id="celular" value="<?php echo htmlspecialchars($celular); ?>">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Email</div>
+                                            <div class="col-lg-9 col-md-8">
+                                                <div class="bordered-field"><?php echo htmlspecialchars($email); ?></div>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
-                                            <label for="data_de_aniversario" class="col-md-4 col-lg-3 col-form-label">Data de Nascimento</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="data_de_aniversario" type="date" class="form-control" id="data_de_aniversario" value="<?php echo htmlspecialchars($data_de_aniversario); ?>">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Celular</div>
+                                            <div class="col-lg-9 col-md-8">
+                                                <div class="bordered-field"><?php echo htmlspecialchars($celular); ?></div>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
-                                            <label for="genero" class="col-md-4 col-lg-3 col-form-label">Gênero</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <select name="genero" id="genero" class="form-control">
-                                                    <option value="Masculino" <?php echo $genero === 'Masculino' ? 'selected' : ''; ?>>Masculino</option>
-                                                    <option value="Feminino" <?php echo $genero === 'Feminino' ? 'selected' : ''; ?>>Feminino</option>
-                                                    <option value="Outro" <?php echo $genero === 'Outro' ? 'selected' : ''; ?>>Outro</option>
-                                                </select>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Data de Nascimento</div>
+                                            <div class="col-lg-9 col-md-8">
+                                                <div class="bordered-field"><?php echo htmlspecialchars($data_de_aniversario); ?></div>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
-                                            <label for="cep" class="col-md-4 col-lg-3 col-form-label">CEP</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="cep" type="text" class="form-control" id="cep" value="<?php echo htmlspecialchars($cep); ?>">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Gênero</div>
+                                            <div class="col-lg-9 col-md-8">
+                                                <div class="bordered-field"><?php echo htmlspecialchars($genero); ?></div>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
-                                            <label for="rua" class="col-md-4 col-lg-3 col-form-label">Rua</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="rua" type="text" class="form-control" id="rua" value="<?php echo htmlspecialchars($rua); ?>">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">CPF</div>
+                                            <div class="col-lg-9 col-md-8">
+                                                <div class="bordered-field"><?php echo htmlspecialchars($cpf); ?></div>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
-                                            <label for="numero" class="col-md-4 col-lg-3 col-form-label">Número</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="numero" type="text" class="form-control" id="numero" value="<?php echo htmlspecialchars($numero); ?>">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Endereço</div>
+                                            <div class="col-lg-9 col-md-8">
+                                                <div class="bordered-field">
+                                                    <?php echo htmlspecialchars($rua); ?>, <?php echo htmlspecialchars($numero); ?>, <?php echo htmlspecialchars($complemento); ?> <br>
+                                                    <?php echo htmlspecialchars($bairro); ?>, <?php echo htmlspecialchars($cidade); ?> - <?php echo htmlspecialchars($estado); ?>, <?php echo htmlspecialchars($cep); ?>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
-                                            <label for="complemento" class="col-md-4 col-lg-3 col-form-label">Complemento</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="complemento" type="text" class="form-control" id="complemento" value="<?php echo htmlspecialchars($complemento); ?>">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label">Serviços</div>
+                                            <div class="col-lg-9 col-md-8">
+                                                <div class="bordered-field"><?php echo htmlspecialchars($servicos); ?></div>
                                             </div>
                                         </div>
+                                    </div> <!-- Fecha a div para scroll -->
+                                </div><!-- Visão Geral-->
 
-                                        <div class="row mb-3">
-                                            <label for="bairro" class="col-md-4 col-lg-3 col-form-label">Bairro</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="bairro" type="text" class="form-control" id="bairro" value="<?php echo htmlspecialchars($bairro); ?>">
+                                <!-- Editar perfil -->
+                                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                                    <div style="max-height: 400px; overflow-y: auto;">
+                                        <!-- Formulário de Edição do Perfil -->
+                                        <form action="forms/atualizar_perfil.php" method="POST">
+                                            <div class="row mb-3">
+                                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nome Completo</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($nome); ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label for="cidade" class="col-md-4 col-lg-3 col-form-label">Cidade</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="cidade" type="text" class="form-control" id="cidade" value="<?php echo htmlspecialchars($cidade); ?>">
+                                            <div class="row mb-3">
+                                                <label for="celular" class="col-md-4 col-lg-3 col-form-label">Celular</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="celular" type="text" class="form-control" id="celular" value="<?php echo htmlspecialchars($celular); ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="estado" type="text" class="form-control" id="estado" value="<?php echo htmlspecialchars($estado); ?>">
+                                            <div class="row mb-3">
+                                                <label for="data_de_aniversario" class="col-md-4 col-lg-3 col-form-label">Data de Nascimento</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="data_de_aniversario" type="date" class="form-control" id="data_de_aniversario" value="<?php echo htmlspecialchars($data_de_aniversario); ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label for="servicos" class="col-md-4 col-lg-3 col-form-label">Serviços</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <textarea name="servicos" class="form-control" id="servicos" style="height: 100px"><?php echo htmlspecialchars($servicos); ?></textarea>
+                                            <div class="row mb-3">
+                                                <label for="genero" class="col-md-4 col-lg-3 col-form-label">Gênero</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <select name="genero" id="genero" class="form-control">
+                                                        <option value="Masculino" <?php echo $genero === 'Masculino' ? 'selected' : ''; ?>>Masculino</option>
+                                                        <option value="Feminino" <?php echo $genero === 'Feminino' ? 'selected' : ''; ?>>Feminino</option>
+                                                        <option value="Outro" <?php echo $genero === 'Outro' ? 'selected' : ''; ?>>Outro</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <!-- Redes Sociais -->
-                                        <div class="row mb-3">
+                                            <div class="row mb-3">
+                                                <label for="cep" class="col-md-4 col-lg-3 col-form-label">CEP</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="cep" type="text" class="form-control" id="cep" value="<?php echo htmlspecialchars($cep); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label for="rua" class="col-md-4 col-lg-3 col-form-label">Rua</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="rua" type="text" class="form-control" id="rua" value="<?php echo htmlspecialchars($rua); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label for="numero" class="col-md-4 col-lg-3 col-form-label">Número</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="numero" type="text" class="form-control" id="numero" value="<?php echo htmlspecialchars($numero); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label for="complemento" class="col-md-4 col-lg-3 col-form-label">Complemento</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="complemento" type="text" class="form-control" id="complemento" value="<?php echo htmlspecialchars($complemento); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label for="bairro" class="col-md-4 col-lg-3 col-form-label">Bairro</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="bairro" type="text" class="form-control" id="bairro" value="<?php echo htmlspecialchars($bairro); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label for="cidade" class="col-md-4 col-lg-3 col-form-label">Cidade</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="cidade" type="text" class="form-control" id="cidade" value="<?php echo htmlspecialchars($cidade); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="estado" type="text" class="form-control" id="estado" value="<?php echo htmlspecialchars($estado); ?>">
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label for="servicos" class="col-md-4 col-lg-3 col-form-label">Serviços</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="servicos" type="text" class="form-control" id="servicos" value="<?php echo htmlspecialchars($servicos); ?>">
+                                                </div>
+                                            </div>
+
+                                            <!-- Redes Sociais -->
                                             <div class="row mb-3">
                                                 <label for="tiktok" class="col-md-4 col-lg-3 col-form-label">TikTok</label>
                                                 <div class="col-md-8 col-lg-9">
@@ -485,41 +539,41 @@ $conn->close();
                                                 </div>
                                             </div>
 
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="facebook" class="col-md-4 col-lg-3 col-form-label">Facebook</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="facebook" type="text" class="form-control" id="facebook" value="<?php echo htmlspecialchars($facebook); ?>">
+                                            <div class="row mb-3">
+                                                <label for="facebook" class="col-md-4 col-lg-3 col-form-label">Facebook</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="facebook" type="text" class="form-control" id="facebook" value="<?php echo htmlspecialchars($facebook); ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label for="instagram" class="col-md-4 col-lg-3 col-form-label">Instagram</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="instagram" type="text" class="form-control" id="instagram" value="<?php echo htmlspecialchars($instagram); ?>">
+                                            <div class="row mb-3">
+                                                <label for="instagram" class="col-md-4 col-lg-3 col-form-label">Instagram</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="instagram" type="text" class="form-control" id="instagram" value="<?php echo htmlspecialchars($instagram); ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label for="linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="linkedin" type="text" class="form-control" id="linkedin" value="<?php echo htmlspecialchars($linkedin); ?>">
+                                            <div class="row mb-3">
+                                                <label for="linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="linkedin" type="text" class="form-control" id="linkedin" value="<?php echo htmlspecialchars($linkedin); ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label for="whatsapp" class="col-md-4 col-lg-3 col-form-label">WhatsApp</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="whatsapp" type="text" class="form-control" id="whatsapp" value="<?php echo htmlspecialchars($whatsapp); ?>">
+                                            <div class="row mb-3">
+                                                <label for="whatsapp" class="col-md-4 col-lg-3 col-form-label">WhatsApp</label>
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input name="whatsapp" type="text" class="form-control" id="whatsapp" value="<?php echo htmlspecialchars($whatsapp); ?>">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                                        </div>
-                                    </form>
-                                </div><!-- Formulário de Edição do Perfil -->
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-primary" onclick="return confirmProfileUpdate();">Salvar Alterações</button>
+                                            </div>
+                                        </form>
+                                    </div><!-- Formulário de Edição do Perfil -->
+                                </div><!-- Editar perfil -->
+
 
                                 <!-- Mudar Senha -->
                                 <div class="tab-pane fade pt-3" id="profile-change-password">
@@ -549,37 +603,49 @@ $conn->close();
                                 <div class="tab-pane fade pt-3" id="profile-settings">
                                     <h5 class="card-title">Configurações</h5>
 
-                                    <form>
-                                        <div class="row mb-3">
-                                            <label for="notifications" class="col-md-4 col-lg-3 col-form-label">Notificações por Email</label>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Deletar Conta</button>
+                                    </div>
 
-                                            <div class="col-md-8 col-lg-9">
+                                    <script>
+                                        function confirmDelete() {
+                                            // Pergunta ao usuário se ele realmente deseja deletar a conta
+                                            const confirmation = confirm("Tem certeza de que deseja deletar sua conta? Esta ação não pode ser desfeita.");
 
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="changesMade" checked>
-                                                    <label class="form-check-label" for="changesMade">Alterações feitas na sua conta</label>
-                                                </div>
+                                            // Se o usuário confirmar, faz a requisição para deletar a conta
+                                            if (confirmation) {
+                                                // Obtenha o ID do usuário corretamente
+                                                const userId = <?php echo json_encode($id); ?>; // Certifique-se de que $id esteja definido e contém o ID do usuário
 
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="newProducts" checked>
-                                                    <label class="form-check-label" for="newProducts">Informações sobre novos produtos e serviços</label>
-                                                </div>
-
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="proOffers">
-                                                    <label class="form-check-label" for="proOffers">Ofertas e promoções especiais</label>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                                        </div>
-
-                                    </form>
+                                                fetch('forms/deletar_conta.php', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json',
+                                                        },
+                                                        body: JSON.stringify({
+                                                            user_id: userId
+                                                        }),
+                                                    })
+                                                    .then(response => {
+                                                        if (!response.ok) {
+                                                            throw new Error('Erro ao deletar a conta');
+                                                        }
+                                                        return response.json();
+                                                    })
+                                                    .then(data => {
+                                                        // Ação após a exclusão bem-sucedida
+                                                        alert('Conta deletada com sucesso!');
+                                                        // Redirecionar ou atualizar a página, se necessário
+                                                        // window.location.reload();
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Erro:', error);
+                                                        alert('Não foi possível deletar a conta. Tente novamente mais tarde.');
+                                                    });
+                                            }
+                                        }
+                                    </script>
                                 </div> <!-- Configurações -->
-
                             </div><!-- Final das Abas -->
 
                         </div>

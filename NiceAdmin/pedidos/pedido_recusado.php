@@ -25,16 +25,17 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
-// Buscar os serviços oferecidos pelo profissional logado
-$stmt = $conn->prepare("SELECT servicos FROM profissionais WHERE email = ?");
+// Buscar o ID do profissional logado e os serviços oferecidos
+$stmt = $conn->prepare("SELECT id, servicos FROM profissionais WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
 // Verificar se o profissional foi encontrado e possui serviços
 if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $servicos_oferecidos = explode(', ', $row['servicos']); // Serviços oferecidos convertidos em array
+    $profissional = $result->fetch_assoc();
+    $profissional_id = $profissional['id'];
+    $servicos_oferecidos = explode(', ', $profissional['servicos']); // Converter os serviços oferecidos em array
 } else {
     echo "Nenhum serviço encontrado para este profissional.";
     exit();
@@ -43,32 +44,46 @@ if ($result->num_rows > 0) {
 // Fechar a consulta de serviços do profissional
 $stmt->close();
 
-// Consultar todos os pedidos correspondentes aos serviços oferecidos pelo profissional
+// Consultar os pedidos recusados pelo profissional logado
 $placeholders = implode(', ', array_fill(0, count($servicos_oferecidos), '?')); // Gerar placeholders
-$types = str_repeat('s', count($servicos_oferecidos)); // Tipo para bind_param
+$types = str_repeat('s', count($servicos_oferecidos)) . 'i'; // Tipo para bind_param (strings e inteiro)
 
-$query = "SELECT * FROM pedidos WHERE servicos IN ($placeholders) ORDER BY data_pedido DESC";
+// Preparar a consulta
+$query = "
+    SELECT p.*
+    FROM pedidos p
+    JOIN recusas_profissionais rp ON p.id = rp.pedido_id
+    WHERE p.servicos IN ($placeholders)
+    AND rp.profissional_id = ?
+    ORDER BY p.data_pedido DESC
+";
 $stmt = $conn->prepare($query);
-$stmt->bind_param($types, ...$servicos_oferecidos); // Inserir serviços no bind_param
+
+// Criar um array com os serviços oferecidos e adicionar o ID do profissional no final
+$params = array_merge($servicos_oferecidos, [$profissional_id]);
+
+// Vincular os parâmetros usando call_user_func_array
+$bind_names[] = &$types;
+foreach ($params as $key => $value) {
+    $bind_names[] = &$params[$key];
+}
+
+call_user_func_array([$stmt, 'bind_param'], $bind_names);
+
+// Executar a consulta
 $stmt->execute();
 
-// Obter os pedidos
+// Obter os pedidos recusados
 $result = $stmt->get_result();
-$pedidos = $result->fetch_all(MYSQLI_ASSOC); // Obter todos os pedidos como array associativo
+$pedidos_recusados = $result->fetch_all(MYSQLI_ASSOC); // Obter todos os pedidos recusados como array associativo
 
 // Fechar a conexão
 $stmt->close();
 $conn->close();
 
-// Filtrar apenas os pedidos recusados
-$pedidos_recusados = [];
-if (isset($_SESSION['recusado'])) {
-    $pedidos_recusados = array_filter($pedidos, function ($pedido) {
-        return in_array($pedido['id'], $_SESSION['recusado']); // Exibe somente os pedidos recusados
-    });
-}
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -250,129 +265,132 @@ if (isset($_SESSION['recusado'])) {
 
     <!-- ======= Barra Lateral ======= -->
     <aside id="sidebar" class="sidebar">
-      <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../index.php">
-                <i class="bi bi-grid"></i>
-                <span>Início</span>
-            </a>
-        </li>
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../index.php">
+                    <i class="bi bi-grid"></i>
+                    <span>Início</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a
-                class="nav-link collapsed"
-                data-bs-target="#components-nav"
-                data-bs-toggle="collapse"
-                href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul
-                id="components-nav"
-                class="nav-content collapse"
-                data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
-                </li>
-                <li>
-                    <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
-                </li>
-                <li>
-                    <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
-                </li>
-            </ul>
-        </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link collapsed"
+                    data-bs-target="#components-nav"
+                    data-bs-toggle="collapse"
+                    href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul
+                    id="components-nav"
+                    class="nav-content collapse"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+                    </li>
+                </ul>
+            </li>
 
-    
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../mensagem.html">
-                <i class="bi bi-envelope"></i>
-                <span>Mensagens</span>
-            </a>
-        </li>
 
-        <!-- Perfil -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../perfil.php">
-                <i class="bi bi-person"></i>
-                <span>Perfil</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../mensagem.html">
+                    <i class="bi bi-envelope"></i>
+                    <span>Mensagens</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../suporte.html">
-                <i class="bi bi-chat-dots"></i>
-                <span>Suporte</span>
-            </a>
-        </li>
+            <!-- Perfil -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../perfil.php">
+                    <i class="bi bi-person"></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
 
-     </ul>
-   </aside><!-- End Sidebar-->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../suporte.html">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>Suporte</span>
+                </a>
+            </li>
+
+        </ul>
+    </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Pedidos Recusado</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-          <li class="breadcrumb-item">Pedido</li>
-          <li class="breadcrumb-item active">Pedidos Recusado</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+        <div class="pagetitle">
+            <h1>Pedidos Recusado</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+                    <li class="breadcrumb-item">Pedido</li>
+                    <li class="breadcrumb-item active">Pedidos Recusado</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
 
-    <section class="section dashboard">
-    <div class="row">
-        <div class="card-container">
-            <h1 class="titulo" style="text-align: center;">Seus Pedidos Recusados</h1> <!-- Título atualizado -->
-            <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
-                <div class="card notification-card">
-                    <h3>Pedido Recusado</h3>
-                    <p>O pedido foi recusado com sucesso.</p>
-                    <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
-                </div>
-            <?php elseif (!empty($pedidos_recusados)): ?> <!-- Usando $pedidos_recusados -->
-                <?php foreach ($pedidos_recusados as $pedido): ?> <!-- Usando $pedidos_recusados -->
-                    <div class="card">
-                        <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Exibe o status -->
-                        <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
-                        <div class="card-content">
-                            <p><strong>Tipo:</strong> <span><?= htmlspecialchars($pedido['tipo']) ?></span></p>
-                            <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
-                            <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
-                            <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
-                            <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
-                            <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
-                            <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
-                            <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
-                            <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
+        <section class="section dashboard">
+            <div class="row">
+                <div class="card-container">
+                   
+                    <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
+                        <div class="card notification-card">
+                            <h3>Pedido Recusado</h3>
+                            <p>O pedido foi recusado com sucesso.</p>
+                            <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
                         </div>
-                        <div class="buttons">
-                            <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Orçamento</button>
-                            <!-- Removendo o botão "Recusar" pois o pedido já foi recusado -->
+                    <?php elseif (!empty($pedidos_recusados)): ?> <!-- Usando $pedidos_recusados -->
+                        <?php foreach ($pedidos_recusados as $pedido): ?> <!-- Usando $pedidos_recusados -->
+                            <div class="card">
+                                <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Exibe o status -->
+                                <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
+                                <div class="card-content">
+                                    <p><strong>Tipo:</strong> <span><?= htmlspecialchars($pedido['tipo']) ?></span></p>
+                                    <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
+                                    <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
+                                    <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
+                                    <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
+                                    <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
+                                    <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
+                                    <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
+                                    <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
+                                </div>
+                                <div class="buttons">
+                                    <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Enviar Mensagem</button>
+                                    <!-- Removendo o botão "Recusar" pois o pedido já foi recusado -->
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="card no-pedidos">
+                            <h3>Nenhum pedido Recusado</h3> <!-- Mensagem atualizada -->
+                            <p>Atualmente, não há nenhum pedido Recusado para os serviços oferecidos.</p>
+                            <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="card no-pedidos">
-                    <h3>Nenhum pedido Recusado</h3> <!-- Mensagem atualizada -->
-                    <p>Atualmente, não há nenhum pedido Recusado para os serviços oferecidos.</p>
-                    <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
+                    <?php endif; ?>
                 </div>
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
+            </div>
+        </section>
 
-<!-- JavaScript para lidar com os botões de orçamento -->
-<script>
-    document.querySelectorAll('.orcamento').forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            window.location.href = `../forms/pedido/orcamento/orcamento_pedido.php?id=${id}`;
-        });
-    });
-</script>
+        <!-- JavaScript para lidar com os botões de orçamento -->
+        <script>
+            document.querySelectorAll('.orcamento').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    window.location.href = `../mensagem.php?id=${id}`;
+                });
+            });
+        </script>
 
 
 

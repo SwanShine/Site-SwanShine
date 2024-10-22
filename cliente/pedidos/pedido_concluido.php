@@ -649,8 +649,7 @@ $conn->close();
                                     <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
                                 </div>
                                 <div class="buttons">
-                                    <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Visualizar Orçamento</button>
-                                    <button class="button excluir" data-id="<?= htmlspecialchars($pedido['id']) ?>">Excluir Pedido</button>
+                                    <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Refazer Pedido</button>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -667,19 +666,10 @@ $conn->close();
 
         <!-- JavaScript para lidar com os botões de orçamento e recusa -->
         <script>
-            document.querySelectorAll('.excluir').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    if (confirm('Tem certeza que deseja excluir este pedido?')) {
-                        window.location.href = `../form/pedido/excluir_pedido.php?id=${id}`;
-                    }
-                });
-            });
-
             document.querySelectorAll('.orcamento').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.getAttribute('data-id');
-                    window.location.href = `../form/pedido/orcamento/orcamento_pedido.php?id=${id}`;
+                    window.location.href = `../form/pedido/voltar_pedido.php?id=${id}`;
                 });
             });
         </script>

@@ -25,16 +25,17 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
-// Buscar os serviços oferecidos pelo profissional logado
-$stmt = $conn->prepare("SELECT servicos FROM profissionais WHERE email = ?");
+// Buscar o ID do profissional logado
+$stmt = $conn->prepare("SELECT id, servicos FROM profissionais WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Verificar se o profissional foi encontrado e possui serviços
+// Verificar se o profissional foi encontrado
 if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $servicos_oferecidos = explode(', ', $row['servicos']); // Serviços oferecidos convertidos em array
+    $profissional = $result->fetch_assoc();
+    $profissional_id = $profissional['id'];
+    $servicos_oferecidos = explode(', ', $profissional['servicos']); // Serviços oferecidos convertidos em array
 } else {
     echo "Nenhum serviço encontrado para este profissional.";
     exit();
@@ -43,13 +44,24 @@ if ($result->num_rows > 0) {
 // Fechar a consulta de serviços do profissional
 $stmt->close();
 
-// Consultar os pedidos que correspondem aos serviços oferecidos pelo profissional e com status "pendente"
+// Consultar os pedidos pendentes que correspondem aos serviços oferecidos pelo profissional,
+// e que não foram recusados por esse profissional específico
 $placeholders = implode(', ', array_fill(0, count($servicos_oferecidos), '?')); // Gerar placeholders
 $types = str_repeat('s', count($servicos_oferecidos)); // Tipo para bind_param
 
-$query = "SELECT * FROM pedidos WHERE servicos IN ($placeholders) AND status = 'pendente' ORDER BY data_pedido DESC";
+$query = "
+    SELECT p.*
+    FROM pedidos p
+    LEFT JOIN recusas_profissionais rp ON p.id = rp.pedido_id AND rp.profissional_id = ?
+    WHERE p.servicos IN ($placeholders)
+    AND p.status = 'pendente'
+    AND rp.pedido_id IS NULL
+    ORDER BY p.data_pedido DESC
+";
 $stmt = $conn->prepare($query);
-$stmt->bind_param($types, ...$servicos_oferecidos); // Inserir serviços no bind_param
+
+// Bind params: primeiro o ID do profissional, depois os serviços oferecidos
+$stmt->bind_param('i' . $types, $profissional_id, ...$servicos_oferecidos);
 $stmt->execute();
 
 // Obter os pedidos
@@ -59,14 +71,8 @@ $pedidos = $result->fetch_all(MYSQLI_ASSOC); // Obter todos os pedidos como arra
 // Fechar a conexão
 $stmt->close();
 $conn->close();
-
-// Filtrar pedidos recusados para o usuário atual
-if (isset($_SESSION['recusados'])) {
-    $pedidos = array_filter($pedidos, function ($pedido) {
-        return !in_array($pedido['id'], $_SESSION['recusados']);
-    });
-}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -278,6 +284,9 @@ if (isset($_SESSION['recusados'])) {
                 <li>
                     <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
                 </li>
+                <li>
+                    <a href="pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+                </li>
             </ul>
         </li>
 
@@ -306,7 +315,7 @@ if (isset($_SESSION['recusados'])) {
         </li>
 
      </ul>
-   </aside><!-- End Sidebar-->
+    </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
     <div class="pagetitle">
