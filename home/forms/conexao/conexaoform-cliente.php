@@ -82,7 +82,7 @@ if ($stmt = $conn->prepare($sql)) {
         $conn->close();
 
         // Redirecionar para a página do cliente (no diretório "cliente")
-        header("Location: ../../../cliente/index.html");
+        header("Location: ../../../cliente/index.php");
         exit();
     } else {
         echo "Erro ao executar a consulta: " . $stmt->error;
