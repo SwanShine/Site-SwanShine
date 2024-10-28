@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwanShine - Cliente</title>
+    <title>Swan Shine - Cliente</title>
     <link rel="stylesheet" href="form_cliente.css">
     <link rel="shortcut icon" href="../../assets/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -20,13 +20,13 @@
         <form id="clienteForm" action="../conexao/conexaoform-cliente.php" method="post">
             <div class="form-row">
                 <div class="input-group">
-                    <label for="Nome">Nome Completo</label>
+                    <label for="Nome">Nome Completo:</label>
                     <input type="text" id="Nome" name="Nome" placeholder="Digite o seu nome completo" required>
                 </div>
                 
                 <div class="input-group">
-                    <label for="Endereço">Endereço</label>
-                    <input type="text" id="Endereço" name="Endereço" placeholder="Digite seu endereço" required>
+                    <label for="Endereço">Endereço:</label>
+                    <input type="text" id="Endereço" name="Endereço" placeholder="Ex: Rua , 0, casa, 00000-000" required>
                 </div>
             </div>
         
@@ -60,13 +60,20 @@
             <div class="form-row">
                 <div class="input-group">
                     <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                    <div class="password-container">
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                        <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label for="confirmar_senha">Confirmar Senha</label>
-                    <input type="password" id="confirmar_senha" name="Confirmar_senha" placeholder="Confirme a senha" required>
-                </div>
+                    <div class="password-container">
+                        <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme a senha" required>
+                        <i class="far fa-eye" id="toggleConfirmPassword" style="cursor: pointer;"></i>
+                    </div>
+                </div>                
             </div>
+            
         
             <div class="input-group">
                 <button type="submit">Cadastrar</button>
@@ -93,6 +100,29 @@
                 event.preventDefault(); // Impede o envio do formulário
             }
         });
+    });
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('senha');
+
+    togglePassword.addEventListener('click', function () {
+        // Alterna o tipo de entrada
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        
+        // Alterna o ícone
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPasswordInput = document.getElementById('confirmar_senha');
+
+    toggleConfirmPassword.addEventListener('click', function () {
+        // Alterna o tipo de entrada
+        const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        confirmPasswordInput.setAttribute('type', type);
+        
+        // Alterna o ícone
+        this.classList.toggle('fa-eye-slash');
     });
     </script>
 </body>

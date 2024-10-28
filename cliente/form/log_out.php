@@ -18,6 +18,6 @@ if (isset($_SESSION['user_email'])) {
 }
 
 // Redirecionar para a página de login
-header('Location: ../../home/forms/login/login.html');
+header('Location: ../../index.html');
 exit();
 ?>

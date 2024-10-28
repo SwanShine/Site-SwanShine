@@ -24,7 +24,7 @@ $cpf = trim($_POST['cpf']);
 $telefone = trim($_POST['Telefone']);
 $genero = trim($_POST['genero']);
 $senha = trim($_POST['senha']);
-$confirmar_senha = trim($_POST['Confirmar_senha']);
+$confirmar_senha = isset($_POST['confirmar_senha']) ? trim($_POST['confirmar_senha']) : '';
 
 // Validar dados
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -34,6 +34,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 if ($senha !== $confirmar_senha) {
     die("As senhas não coincidem.");
 }
+
 
 // Verificar se o e-mail já existe
 $email_check_sql = "SELECT COUNT(*) FROM clientes WHERE email = ?";

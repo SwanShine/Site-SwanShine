@@ -40,7 +40,7 @@ body {
 
 /* Estiliza o link dentro da breadcrumb */
 .breadcrumb p a {
-    color: #ff64cc; /* Define a cor do link */
+    color: #ff66c4; /* Define a cor do link */
     text-decoration: none; /* Remove o sublinhado do link */
 }
 
@@ -110,7 +110,7 @@ body {
 /* Estiliza os campos de entrada e seleção quando estão em foco */
 .form-group input:focus,
 .form-group select:focus {
-    border-color: #ff008869; /* Define a cor da borda quando o campo está em foco */
+    border-color: #ff66c4; /* Define a cor da borda quando o campo está em foco */
 }
 
 /* Estiliza os campos de entrada tipo checkbox e radio */
@@ -122,7 +122,7 @@ body {
 
 /* Estiliza o botão de envio */
 .submit-button {
-    background-color: #FF64cc; /* Define a cor de fundo do botão */
+    background-color: #ff66c4; /* Define a cor de fundo do botão */
     color: white; /* Define a cor do texto do botão */
     padding: 10px 20px; /* Adiciona preenchimento interno */
     border: none; /* Remove a borda padrão */
@@ -135,7 +135,7 @@ body {
 
 /* Estiliza o botão de envio quando o mouse passa sobre ele */
 .submit-button:hover {
-    background-color: #ff64cc; /* Define a cor de fundo do botão ao passar o mouse */
+    background-color: #ff66c4; /* Define a cor de fundo do botão ao passar o mouse */
 }
 
 /* CSS para tornar o formulário responsivo em todas as telas */
@@ -181,4 +181,16 @@ body {
     font-size: 24px;
     color: #000; /* Ou qualquer cor que você preferir */
     text-decoration: none;
+}
+.password-container {
+    position: relative;
+}
+
+.password-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000; /* Ajuste a cor conforme necessário */
+    cursor: pointer; /* Adiciona um cursor de ponteiro para indicar que é clicável */
 }

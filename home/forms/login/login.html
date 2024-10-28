@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwanShine - Login</title>
+    <title>Swan Shine - Login</title>
     <link rel="stylesheet" href="login.css">
     <link rel="shortcut icon" href="../../assets/img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -42,21 +42,25 @@
         <form action="../conexao/conexaoform-login.php" method="post">
             <div class="form-row">
                 <div class="input-group">
-                    <label for="email">E-mail</label>
+                    <label for="email">Email:</label>
                     <input type="email" id="email" name="email" placeholder="Digite o seu email" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="input-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                    <label for="senha">Senha:</label>
+                    <div class="password-container">
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                        <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                    </div>
                 </div>
             </div>
-
+        
             <div class="input-group">
                 <button type="submit">Entrar</button>
             </div>
         </form>
+        
     </div>
 
     </div>
