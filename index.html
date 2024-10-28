@@ -1,1255 +1,1229 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Swan Shine</title>
-    <meta content name="description" />
-    <meta content name="keywords" />
 
-    <!-- Favicons -->
-    <link href="home/assets/img/favicon.png" rel="icon" />
-    <link href="home/assets/img/favicon.png" rel="apple-touch-icon" />
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Swan Shine</title>
+  <meta content name="description" />
+  <meta content name="keywords" />
 
-    <!-- Fonts -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;600&display=swap"
-    />
+  <!-- Favicons -->
+  <link href="home/assets/img/favicon.png" rel="icon" />
+  <link href="home/assets/img/favicon.png" rel="apple-touch-icon" />
 
-    <!-- Vendor CSS Files -->
-    <link
-      href="home/assets/vendor/bootstrap/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="home/assets/vendor/bootstrap-icons/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link href="home/assets/vendor/aos/aos.css" rel="stylesheet" />
-    <link
-      href="home/assets/vendor/glightbox/css/glightbox.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="home/assets/vendor/swiper/swiper-bundle.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+  <!-- Fonts -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;600&display=swap" />
 
-    <!-- Main CSS File -->
-    <link href="home/assets/css/main.css" rel="stylesheet" />
-  </head>
+  <!-- Vendor CSS Files -->
+  <link href="home/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="home/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="home/assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="home/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="home/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-  <body class="index-page">
-    <header id="header" class="header d-flex align-items-center fixed-top">
-      <div
-        class="container-fluid position-relative d-flex align-items-center justify-content-between"
-      >
-        <a
-          href="index.html"
-          class="logo d-flex align-items-center me-auto me-xl-0"
-        >
-          <!-- Descomente a linha abaixo se você também deseja usar um logotipo de imagem -->
-          <img src="home/assets/img/logo_preta.png" alt="logo" />
-          <h1 class="sitename">Swan Shine</h1>
-        </a>
+  <!-- Main CSS File -->
+  <link href="home/assets/css/main.css" rel="stylesheet" />
+</head>
 
-        <nav id="navmenu" class="navmenu">
-          <ul>
-            <li><a href="index.html#hero" class>Home</a></li>
-            <li><a href="index.html#about">Sobre</a></li>
-            <li><a href="index.html#services">Serviços</a></li>
-            <li><a href="index.html#features">Sistemas</a></li>
-            <li><a href="index.html#team">Time</a></li>
-          </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
+<body class="index-page">
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Descomente a linha abaixo se você também deseja usar um logotipo de imagem -->
+        <img src="home/assets/img/logo_preta.png" alt="logo" />
+        <h1 class="sitename">Swan Shine</h1>
+      </a>
 
-        <!-- Botão de Cadastro -->
-        <a class="btn-getstarted" href="#" onclick="openPopup()">Cadastre-se</a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html#hero" class>Home</a></li>
+          <li><a href="index.html#about">Sobre</a></li>
+          <li><a href="index.html#services">Serviços</a></li>
+          <li><a href="index.html#features">Sistemas</a></li>
+          <li><a href="index.html#team">Time</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
 
-        <!-- Pop-up -->
-        <div id="popup" class="popup">
-          <div class="popup-content">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-            <div class="card-container">
-              <div class="card">
-                <h2>Cliente</h2>
-                <p>Informações sobre cadastro de cliente.</p>
-                <a href="home/forms/form_cliente/form_cliente.html"
-                  ><button>Cadastre-se como Cliente</button></a
-                >
-              </div>
-              <div class="card">
-                <h2>Profissional</h2>
-                <p>Informações sobre cadastro de profissional.</p>
-                <a href="home/forms/form_profissional/form_profissional.html"
-                  ><button>Cadastre-se como Profissional</button></a
-                >
-              </div>
+      <!-- Botão de Cadastro -->
+      <a class="btn-getstarted" href="#" onclick="openPopup()">Cadastre-se</a>
+
+      <!-- Pop-up -->
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="close-btn" onclick="closePopup()">&times;</span>
+          <div class="card-container">
+            <div class="card">
+              <h2>Cliente</h2>
+              <p>Informações sobre cadastro de cliente.</p>
+              <a href="home/forms/form_cliente/form_cliente.html"><button>Cadastre-se como Cliente</button></a>
+            </div>
+            <div class="card">
+              <h2>Profissional</h2>
+              <p>Informações sobre cadastro de profissional.</p>
+              <a href="home/forms/form_profissional/form_profissional.html"><button>Cadastre-se como
+                  Profissional</button></a>
             </div>
           </div>
         </div>
-        <!-- CSS -->
-        <style>
-          /* Botão de Cadastro */
-          .btn-getstarted {
-            padding: 10px 20px; /* Espaçamento interno do botão (topo e fundo, esquerda e direita) */
-            background-color: #ff66c4; /* Cor de fundo do botão */
-            color: #ff66c4; /* Cor do texto do botão */
-            font-weight: bold; /* Texto em negrito */
-            border: none; /* Remove borda padrão do botão */
-            border-radius: 20px; /* Bordas arredondadas do botão */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
-            text-decoration: none; /* Remove sublinhado do texto (se for um link) */
-          }
+      </div>
+      <!-- CSS -->
+      <style>
+        /* Botão de Cadastro */
+        .btn-getstarted {
+          padding: 10px 20px;
+          /* Espaçamento interno do botão (topo e fundo, esquerda e direita) */
+          background-color: #ff66c4;
+          /* Cor de fundo do botão */
+          color: #ff66c4;
+          /* Cor do texto do botão */
+          font-weight: bold;
+          /* Texto em negrito */
+          border: none;
+          /* Remove borda padrão do botão */
+          border-radius: 20px;
+          /* Bordas arredondadas do botão */
+          cursor: pointer;
+          /* Muda o cursor para indicar que é clicável */
+          text-decoration: none;
+          /* Remove sublinhado do texto (se for um link) */
+        }
 
-          .btn-getstarted:hover {
-            background-color: #ff66c4; /* Cor de fundo do botão ao passar o mouse */
-          }
+        .btn-getstarted:hover {
+          background-color: #ff66c4;
+          /* Cor de fundo do botão ao passar o mouse */
+        }
 
-          /* Estilos do pop-up */
-          .popup {
-            display: none; /* Inicialmente oculta o pop-up */
-            position: fixed; /* Fixa o pop-up na tela */
-            z-index: 10; /* Garante que o pop-up fique acima de outros elementos */
-            left: 0; /* Alinha à esquerda da tela */
-            top: 0; /* Alinha ao topo da tela */
-            width: 100%; /* Largura total da tela */
-            height: 100%; /* Altura total da tela */
-            background-color: rgba(
+        /* Estilos do pop-up */
+        .popup {
+          display: none;
+          /* Inicialmente oculta o pop-up */
+          position: fixed;
+          /* Fixa o pop-up na tela */
+          z-index: 10;
+          /* Garante que o pop-up fique acima de outros elementos */
+          left: 0;
+          /* Alinha à esquerda da tela */
+          top: 0;
+          /* Alinha ao topo da tela */
+          width: 100%;
+          /* Largura total da tela */
+          height: 100%;
+          /* Altura total da tela */
+          background-color: rgba(0,
               0,
               0,
-              0,
-              0.6
-            ); /* Fundo semi-transparente escuro */
-            backdrop-filter: blur(8px); /* Desfoque do fundo */
-            justify-content: center; /* Centraliza o conteúdo horizontalmente */
-            align-items: center; /* Centraliza o conteúdo verticalmente */
-            pointer-events: none; /* Impede interações com elementos atrás do pop-up */
-          }
+              0.6);
+          /* Fundo semi-transparente escuro */
+          backdrop-filter: blur(8px);
+          /* Desfoque do fundo */
+          justify-content: center;
+          /* Centraliza o conteúdo horizontalmente */
+          align-items: center;
+          /* Centraliza o conteúdo verticalmente */
+          pointer-events: none;
+          /* Impede interações com elementos atrás do pop-up */
+        }
 
-          .popup-content {
-            background-color: rgba(
+        .popup-content {
+          background-color: rgba(255,
               255,
               255,
+              0.95);
+          /* Fundo semi-transparente branco */
+          padding: 20px;
+          /* Espaçamento interno do conteúdo do pop-up */
+          width: 90%;
+          /* Largura do conteúdo (90% da largura do pop-up) */
+          max-width: 600px;
+          /* Largura máxima do conteúdo */
+          border-radius: 15px;
+          /* Bordas arredondadas do conteúdo */
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          /* Sombra ao redor do conteúdo */
+          position: relative;
+          /* Posiciona o conteúdo em relação ao pop-up */
+          pointer-events: auto;
+          /* Permite interações dentro do pop-up */
+        }
+
+        .close-btn {
+          color: #000;
+          /* Cor do texto do botão de fechar */
+          position: absolute;
+          /* Posiciona o botão de fechar em relação ao pai */
+          top: 20px;
+          /* Distância do topo */
+          right: 15px;
+          /* Distância da direita */
+          font-size: 36px;
+          /* Tamanho da fonte do botão de fechar */
+          font-weight: bold;
+          /* Texto em negrito */
+          cursor: pointer;
+          /* Muda o cursor para indicar que é clicável */
+        }
+
+        .close-btn:hover {
+          color: #333;
+          /* Cor do texto do botão de fechar ao passar o mouse */
+        }
+
+        /* Estilos do card */
+        .card-container {
+          display: flex;
+          /* Usa flexbox para o container dos cards */
+          gap: 30px;
+          /* Espaço entre os cards */
+          margin: 20px auto;
+          /* Margem superior e inferior de 20px, centralizado horizontalmente */
+          flex-wrap: wrap;
+          /* Permite que os cards quebrem para a próxima linha se não houver espaço */
+          justify-content: center;
+          /* Centraliza os cards no container */
+        }
+
+        .card {
+          background-color: rgba(255,
               255,
-              0.95
-            ); /* Fundo semi-transparente branco */
-            padding: 20px; /* Espaçamento interno do conteúdo do pop-up */
-            width: 90%; /* Largura do conteúdo (90% da largura do pop-up) */
-            max-width: 600px; /* Largura máxima do conteúdo */
-            border-radius: 15px; /* Bordas arredondadas do conteúdo */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra ao redor do conteúdo */
-            position: relative; /* Posiciona o conteúdo em relação ao pop-up */
-            pointer-events: auto; /* Permite interações dentro do pop-up */
-          }
+              255,
+              0.7);
+          /* Fundo semi-transparente branco */
+          padding: 20px;
+          /* Espaçamento interno do card */
+          border: 1px solid #ddd;
+          /* Borda cinza clara */
+          border-radius: 20px;
+          /* Bordas arredondadas do card */
+          width: 40%;
+          /* Largura do card (40% do container) */
+          max-width: 280px;
+          /* Largura máxima do card */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          /* Sombra ao redor do card */
+          text-align: center;
+          /* Centraliza o texto dentro do card */
+          backdrop-filter: blur(10px);
+          /* Desfoque do fundo do card */
+          margin: 15px;
+          /* Margem ao redor do card */
+        }
 
-          .close-btn {
-            color: #000; /* Cor do texto do botão de fechar */
-            position: absolute; /* Posiciona o botão de fechar em relação ao pai */
-            top: 20px; /* Distância do topo */
-            right: 15px; /* Distância da direita */
-            font-size: 36px; /* Tamanho da fonte do botão de fechar */
-            font-weight: bold; /* Texto em negrito */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
-          }
+        .card h2 {
+          margin-bottom: 15px;
+          /* Margem inferior do título */
+          font-size: 24px;
+          /* Tamanho da fonte do título */
+          color: #ff66c4;
+          font-weight: bold;
+        }
 
-          .close-btn:hover {
-            color: #333; /* Cor do texto do botão de fechar ao passar o mouse */
-          }
+        .card p {
+          margin-bottom: 20px;
+          /* Margem inferior do parágrafo */
+          font-weight: bold;
+          /* Texto em negrito */
+          color: #000;
+          /* Cor do texto */
+        }
 
-          /* Estilos do card */
+        .card button {
+          padding: 10px 20px;
+          /* Espaçamento interno do botão no card */
+          background-color: #ff66c4;
+          /* Cor de fundo do botão no card */
+          color: black;
+          /* Cor do texto do botão no card */
+          font-weight: bold;
+          /* Texto em negrito */
+          border: none;
+          /* Remove borda padrão do botão */
+          border-radius: 20px;
+          /* Bordas arredondadas do botão */
+          cursor: pointer;
+          /* Muda o cursor para indicar que é clicável */
+        }
+
+        .card button:hover {
+          background-color: #ff66c4;
+          /* Cor de fundo do botão no card ao passar o mouse */
+        }
+
+        /* Media Queries para responsividade */
+        @media (max-width: 768px) {
+
+          /* Para telas com largura máxima de 768px */
           .card-container {
-            display: flex; /* Usa flexbox para o container dos cards */
-            gap: 30px; /* Espaço entre os cards */
-            margin: 20px auto; /* Margem superior e inferior de 20px, centralizado horizontalmente */
-            flex-wrap: wrap; /* Permite que os cards quebrem para a próxima linha se não houver espaço */
-            justify-content: center; /* Centraliza os cards no container */
+            gap: 20px;
+            /* Diminui o espaço entre os cards */
           }
 
           .card {
-            background-color: rgba(
-              255,
-              255,
-              255,
-              0.7
-            ); /* Fundo semi-transparente branco */
-            padding: 20px; /* Espaçamento interno do card */
-            border: 1px solid #ddd; /* Borda cinza clara */
-            border-radius: 20px; /* Bordas arredondadas do card */
-            width: 40%; /* Largura do card (40% do container) */
-            max-width: 280px; /* Largura máxima do card */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ao redor do card */
-            text-align: center; /* Centraliza o texto dentro do card */
-            backdrop-filter: blur(10px); /* Desfoque do fundo do card */
-            margin: 15px; /* Margem ao redor do card */
+            width: 80%;
+            /* Aumenta a largura do card para 80% do container */
+            max-width: 350px;
+            /* Aumenta a largura máxima do card */
+          }
+
+          .close-btn {
+            font-size: 32px;
+            /* Diminui o tamanho da fonte do botão de fechar */
+          }
+        }
+
+        @media (max-width: 480px) {
+
+          /* Para telas com largura máxima de 480px */
+          .popup-content {
+            padding: 15px;
+            /* Diminui o espaçamento interno do pop-up */
+            width: 85%;
+            /* Aumenta a largura do conteúdo do pop-up */
           }
 
           .card h2 {
-            margin-bottom: 15px; /* Margem inferior do título */
-            font-size: 24px; /* Tamanho da fonte do título */
-            color: #ff66c4;
-            font-weight: bold;
-          }
-
-          .card p {
-            margin-bottom: 20px; /* Margem inferior do parágrafo */
-            font-weight: bold; /* Texto em negrito */
-            color: #000; /* Cor do texto */
+            font-size: 20px;
+            /* Diminui o tamanho da fonte do título no card */
           }
 
           .card button {
-            padding: 10px 20px; /* Espaçamento interno do botão no card */
-            background-color: #ff66c4; /* Cor de fundo do botão no card */
-            color: black; /* Cor do texto do botão no card */
-            font-weight: bold; /* Texto em negrito */
-            border: none; /* Remove borda padrão do botão */
-            border-radius: 20px; /* Bordas arredondadas do botão */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+            font-size: 14px;
+            /* Diminui o tamanho da fonte do botão no card */
+            padding: 8px 16px;
+            /* Diminui o espaçamento interno do botão no card */
           }
 
-          .card button:hover {
-            background-color: #ff66c4; /* Cor de fundo do botão no card ao passar o mouse */
+          .close-btn {
+            font-size: 28px;
+            /* Diminui o tamanho da fonte do botão de fechar */
+          }
+        }
+
+        /* Ajustes específicos para telas de 320px */
+        @media (max-width: 320px) {
+
+          /* Para telas com largura máxima de 320px */
+          .popup-content {
+            padding: 10px;
+            /* Diminui o espaçamento interno do pop-up */
+            width: 95%;
+            /* Aumenta a largura do conteúdo do pop-up */
           }
 
-          /* Media Queries para responsividade */
-          @media (max-width: 768px) {
-            /* Para telas com largura máxima de 768px */
-            .card-container {
-              gap: 20px; /* Diminui o espaço entre os cards */
-            }
-            .card {
-              width: 80%; /* Aumenta a largura do card para 80% do container */
-              max-width: 350px; /* Aumenta a largura máxima do card */
-            }
-            .close-btn {
-              font-size: 32px; /* Diminui o tamanho da fonte do botão de fechar */
-            }
+          .card-container {
+            gap: 15px;
+            /* Diminui o espaço entre os cards */
           }
 
-          @media (max-width: 480px) {
-            /* Para telas com largura máxima de 480px */
-            .popup-content {
-              padding: 15px; /* Diminui o espaçamento interno do pop-up */
-              width: 85%; /* Aumenta a largura do conteúdo do pop-up */
-            }
-            .card h2 {
-              font-size: 20px; /* Diminui o tamanho da fonte do título no card */
-            }
-            .card button {
-              font-size: 14px; /* Diminui o tamanho da fonte do botão no card */
-              padding: 8px 16px; /* Diminui o espaçamento interno do botão no card */
-            }
-            .close-btn {
-              font-size: 28px; /* Diminui o tamanho da fonte do botão de fechar */
-            }
+          .card {
+            width: 100%;
+            /* Aumenta a largura do card para 100% do container */
+            max-width: 280px;
+            /* Largura máxima do card */
           }
 
-          /* Ajustes específicos para telas de 320px */
-          @media (max-width: 320px) {
-            /* Para telas com largura máxima de 320px */
-            .popup-content {
-              padding: 10px; /* Diminui o espaçamento interno do pop-up */
-              width: 95%; /* Aumenta a largura do conteúdo do pop-up */
-            }
-            .card-container {
-              gap: 15px; /* Diminui o espaço entre os cards */
-            }
-            .card {
-              width: 100%; /* Aumenta a largura do card para 100% do container */
-              max-width: 280px; /* Largura máxima do card */
-            }
-            .card h2 {
-              font-size: 18px; /* Diminui o tamanho da fonte do título no card */
-            }
-            .card p {
-              font-size: 14px; /* Diminui o tamanho da fonte do parágrafo no card */
-            }
-            .card button {
-              font-size: 12px; /* Diminui o tamanho da fonte do botão no card */
-              padding: 6px 12px; /* Diminui o espaçamento interno do botão no card */
-            }
-            .close-btn {
-              font-size: 26px; /* Diminui o tamanho da fonte do botão de fechar */
-            }
+          .card h2 {
+            font-size: 18px;
+            /* Diminui o tamanho da fonte do título no card */
           }
 
-          /* Ajustes para telas de 375px */
-          @media (max-width: 375px) {
-            /* Para telas com largura máxima de 375px */
-            .popup-content {
-              padding: 15px; /* Diminui o espaçamento interno do pop-up */
-              width: 90%; /* Aumenta a largura do conteúdo do pop-up */
-            }
-            .card-container {
-              gap: 20px; /* Diminui o espaço entre os cards */
-            }
-            .card {
-              width: 90%; /* Aumenta a largura do card para 90% do container */
-              max-width: 300px; /* Largura máxima do card */
-            }
-            .close-btn {
-              font-size: 28px; /* Diminui o tamanho da fonte do botão de fechar */
-            }
+          .card p {
+            font-size: 14px;
+            /* Diminui o tamanho da fonte do parágrafo no card */
           }
 
-          /* Ajustes para telas de 425px */
-          @media (max-width: 425px) {
-            /* Para telas com largura máxima de 425px */
-            .popup-content {
-              padding: 20px; /* Aumenta o espaçamento interno do pop-up */
-              width: 90%; /* Aumenta a largura do conteúdo do pop-up */
-            }
-            .card-container {
-              gap: 25px; /* Diminui o espaço entre os cards */
-            }
-            .card {
-              width: 95%; /* Aumenta a largura do card para 95% do container */
-              max-width: 320px; /* Largura máxima do card */
-            }
-            .close-btn {
-              margin-top: 30px; /* Rebaixa ainda mais o botão de fechar */
-              font-size: 32px; /* Aumenta o tamanho da fonte do botão de fechar */
-            }
-          }
-        </style>
-
-        <!-- JavaScript -->
-        <script>
-          function openPopup() {
-            document.getElementById("popup").style.display = "flex";
+          .card button {
+            font-size: 12px;
+            /* Diminui o tamanho da fonte do botão no card */
+            padding: 6px 12px;
+            /* Diminui o espaçamento interno do botão no card */
           }
 
-          function closePopup() {
-            document.getElementById("popup").style.display = "none";
+          .close-btn {
+            font-size: 26px;
+            /* Diminui o tamanho da fonte do botão de fechar */
           }
-        </script>
-      </div>
-    </header>
+        }
 
-    <main class="main">
-      
-      <!-- Hero Section -->
-      <section id="hero" class="hero section">
-        <img src="home/assets/img/hero-bg.jpg" alt data-aos="fade-in" />
+        /* Ajustes para telas de 375px */
+        @media (max-width: 375px) {
 
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-10">
-              <h2 data-aos="fade-up" data-aos-delay="100">Seja Bem Vindo!</h2>
-              <p data-aos="fade-up" data-aos-delay="200">
-                Entre e aproveite de nossos serviços.
-              </p>
+          /* Para telas com largura máxima de 375px */
+          .popup-content {
+            padding: 15px;
+            /* Diminui o espaçamento interno do pop-up */
+            width: 90%;
+            /* Aumenta a largura do conteúdo do pop-up */
+          }
 
-              <form
-                action="home/forms/conexao/conexaoform-index.php"
-                method="post"
-                class="form-container"
-              >
-                <div class="form-row">
-                  <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Digite o seu email"
-                      required
-                    />
-                  </div>
-                  <div class="input-group">
-                    <label for="senha">Senha:</label>
-                    <div class="password-container">
-                      <input
-                        type="password"
-                        id="senha"
-                        name="senha"
-                        placeholder="Digite sua senha"
-                        required
-                      />
-                      <i
-                        class="far fa-eye"
-                        id="togglePassword"
-                        style="cursor: pointer"
-                      ></i>
-                    </div>
-                  </div>
-                  <div class="input-group">
-                    <button type="submit" class="btn-entrar">Entrar</button>
+          .card-container {
+            gap: 20px;
+            /* Diminui o espaço entre os cards */
+          }
+
+          .card {
+            width: 90%;
+            /* Aumenta a largura do card para 90% do container */
+            max-width: 300px;
+            /* Largura máxima do card */
+          }
+
+          .close-btn {
+            font-size: 28px;
+            /* Diminui o tamanho da fonte do botão de fechar */
+          }
+        }
+
+        /* Ajustes para telas de 425px */
+        @media (max-width: 425px) {
+
+          /* Para telas com largura máxima de 425px */
+          .popup-content {
+            padding: 20px;
+            /* Aumenta o espaçamento interno do pop-up */
+            width: 90%;
+            /* Aumenta a largura do conteúdo do pop-up */
+          }
+
+          .card-container {
+            gap: 25px;
+            /* Diminui o espaço entre os cards */
+          }
+
+          .card {
+            width: 95%;
+            /* Aumenta a largura do card para 95% do container */
+            max-width: 320px;
+            /* Largura máxima do card */
+          }
+
+          .close-btn {
+            margin-top: 30px;
+            /* Rebaixa ainda mais o botão de fechar */
+            font-size: 32px;
+            /* Aumenta o tamanho da fonte do botão de fechar */
+          }
+        }
+      </style>
+
+      <!-- JavaScript -->
+      <script>
+        function openPopup() {
+          document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+          document.getElementById("popup").style.display = "none";
+        }
+      </script>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+      <img src="home/assets/img/hero-bg.jpg" alt data-aos="fade-in" />
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10">
+            <h2 data-aos="fade-up" data-aos-delay="100">Seja Bem Vindo!</h2>
+            <p data-aos="fade-up" data-aos-delay="200">
+              Entre e aproveite de nossos serviços.
+            </p>
+
+            <form action="home/forms/conexao/conexaoform-index.php" method="post" class="form-container">
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" placeholder="Digite o seu email" required />
+                </div>
+
+                <div class="input-group">
+                  <label for="senha">Senha:</label>
+                  <div class="password-container">
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required />
+                    <i class="far fa-eye" id="togglePassword" style="cursor: pointer"></i>
                   </div>
                 </div>
-              </form>
 
-              <style>
-                /* Estiliza o contêiner principal do formulário */
+                <div class="input-group">
+                  <button type="submit" class="btn-entrar">Entrar</button>
+                </div>
+              </div>
+            </form>
+            <style>
+              /* Container principal do formulário */
+              .form-container {
+                display: flex;
+                /* Usa flexbox para layout */
+                flex-direction: column;
+                /* Coloca os itens na coluna */
+                gap: 20px;
+                /* Espaço entre os elementos */
+                max-width: 800px;
+                /* Largura máxima do formulário */
+                margin: 20px;
+                /* Centraliza o formulário horizontalmente */
+                padding: 20px;
+                /* Adiciona padding interno */
+                border-radius: 10px;
+                /* Cantos arredondados do contêiner */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                /* Sombra para o contêiner */
+                background-color: #fff;
+                /* Cor de fundo do contêiner */
+              }
+
+              /* Estilo para cada linha do formulário */
+              .form-row {
+                display: flex;
+                /* Usa flexbox para layout */
+                flex-direction: column;
+                /* Coloca os campos um embaixo do outro */
+                gap: 20px;
+                /* Espaço entre os campos */
+              }
+
+              /* Grupo de entradas */
+              .input-group {
+                flex: 1;
+                /* Permite que o grupo de entradas cresça */
+              }
+
+              /* Estilo do rótulo das entradas */
+              .input-group label {
+                display: block;
+                /* Faz o rótulo ocupar toda a largura do contêiner */
+                margin-bottom: 5px;
+                /* Espaço entre o rótulo e o campo */
+                color: #ff66c4;
+                /* Cor do texto do rótulo */
+                font-weight: bold;
+                /* Texto em negrito */
+              }
+
+              /* Estilo dos campos de entrada */
+              .input-group input {
+                display: block;
+                /* Garante que o input seja um elemento de bloco */
+                width: 100%;
+                /* Faz o campo ocupar 100% da largura do grupo */
+                padding: 10px;
+                /* Espaço interno do campo */
+                border: 2px solid #ccc;
+                /* Borda cinza clara */
+                border-radius: 5px;
+                /* Cantos arredondados */
+                transition: border-color 0.3s;
+                /* Transição suave para mudança de cor da borda */
+              }
+
+              /* Estilo do campo de entrada quando em foco */
+              .input-group input:focus {
+                border-color: #ff66c4;
+                /* Muda a cor da borda ao focar */
+              }
+
+              /* Container específico para senhas (com ícone) */
+              .password-container {
+                position: relative;
+                /* Permite o posicionamento absoluto do ícone dentro do campo */
+              }
+
+              /* Estilo do ícone dentro do campo de senha */
+              .password-container i {
+                position: absolute;
+                /* Posiciona o ícone de forma absoluta dentro do container */
+                right: 10px;
+                /* Espaçamento à direita do campo de entrada */
+                top: 50%;
+                /* Centraliza verticalmente o ícone */
+                transform: translateY(-50%);
+                /* Ajusta para centralização exata */
+                color: #000;
+                /* Cor do ícone */
+              }
+
+              /* Estilo do botão de entrada */
+              .btn-entrar {
+                padding: 10px;
+                /* Espaço interno do botão */
+                background-color: #ff66c4;
+                /* Cor de fundo do botão */
+                border: none;
+                /* Remove a borda padrão */
+                border-radius: 5px;
+                /* Cantos arredondados */
+                color: #fff;
+                /* Cor do texto do botão */
+                font-weight: bold;
+                /* Texto em negrito */
+                cursor: pointer;
+                /* Muda o cursor ao passar sobre o botão */
+                transition: background-color 0.3s;
+                /* Transição suave para mudança de cor de fundo */
+                width: 100%;
+                /* Largura do botão igual à largura do input */
+                height: 50px;
+                /* Define uma altura fixa para o botão */
+              }
+
+              .btn-entrar:hover {
+                background-color: #e54e9e;
+                /* Efeito de hover com cor ligeiramente mais escura */
+              }
+
+              /* Media Queries para Responsividade */
+              @media (max-width: 425px) {
                 .form-container {
-                  display: flex; /* Define o layout como flexbox */
-                  flex-direction: column; /* Organiza os elementos em coluna */
-                  gap: 20px; /* Espaço entre os elementos do formulário */
-                  max-width: 800px; /* Largura máxima do formulário ajustada */
-                  margin: 20px; /* Centraliza o formulário horizontalmente */
+                  margin: 60px;
+                  /* Aumenta a margem em telas menores */
                 }
+              }
 
-                /* Estiliza a linha que contém os campos de entrada */
+              @media (max-width: 375px) {
+                .form-container {
+                  margin: 30px;
+                  /* Ajusta a margem para telas ainda menores */
+                }
+              }
+
+              @media (max-width: 320px) {
+                .form-container {
+                  margin: 10px;
+                  /* Margem mínima para telas muito pequenas */
+                }
+              }
+
+              /* Estilo para telas maiores que 768px */
+              @media (min-width: 768px) {
                 .form-row {
-                  display: flex; /* Usar flexbox para dispor os campos lado a lado */
-                  align-items: center; /* Alinha verticalmente os itens ao centro */
-                  gap: 20px; /* Espaço entre os campos */
+                  margin-left: 20px;
+                  flex-direction: row;
+                  /* Muda a direção para linha (horizontal) */
+                  gap: 20px;
+                  /* Espaço entre os campos em linha */
                 }
 
-                /* Estiliza cada grupo de entrada (input) */
-                .input-group {
-                  flex: 1; /* Permite que os campos se expandam igualmente para ocupar espaço disponível */
-                }
-
-                /* Estiliza o rótulo (label) dos campos */
-                .input-group label {
-                  display: block; /* Faz o rótulo ocupar toda a largura do seu contêiner */
-                  margin-bottom: 5px; /* Espaço entre o rótulo e o campo */
-                  color: #ff66c4; /* Cor do texto do rótulo */
-                  font-weight: bold; /* Texto em negrito */
-                }
-
-                /* Estiliza os campos de entrada (input) */
-                .input-group input {
-                  width: 100%; /* Faz o campo ocupar 100% da largura do grupo */
-                  padding: 10px; /* Espaço interno do campo */
-                  border: 2px solid #ccc; /* Borda padrão do campo */
-                  border-radius: 5px; /* Borda arredondada */
-                  transition: border-color 0.3s; /* Transição suave para a cor da borda */
-                }
-
-                /* Estiliza o campo de entrada quando está em foco */
-                .input-group input:focus {
-                  border-color: #ff66c4; /* Cor da borda ao focar no campo */
-                }
-
-                /* Estiliza o contêiner da senha para permitir a colocação do ícone de visualização */
-                .password-container {
-                  position: relative; /* Necessário para posicionar o ícone de visualizar a senha */
-                }
-
-                /* Estiliza o ícone de visualizar a senha */
-                .password-container i {
-                  position: absolute; /* Permite o posicionamento absoluto do ícone */
-                  right: 10px; /* Espaçamento à direita do campo de entrada */
-                  top: 50%; /* Centraliza verticalmente o ícone */
-                  transform: translateY(
-                    -50%
-                  ); /* Ajusta a posição do ícone para realmente estar centralizado */
-                  color: #000; /* Cor do ícone */
-                }
-
-                /* Estiliza o botão de entrar */
                 .btn-entrar {
-                  padding: 10px 20px; /* Espaçamento interno do botão */
-                  background-color: #ff66c4; /* Cor de fundo do botão */
-                  border: none; /* Remove a borda padrão do botão */
-                  border-radius: 5px; /* Bordas arredondadas do botão */
-                  color: #fff; /* Cor do texto do botão */
-                  font-weight: bold; /* Texto em negrito */
-                  cursor: pointer; /* Indica que o botão é clicável */
-                  transition: background-color 0.3s; /* Transição suave para a cor de fundo ao passar o mouse */
-                  min-width: 100px; /* Largura mínima do botão para melhor aparência */
                   margin-top: 30px;
-                  margin-left: -55px;
                 }
 
-                /* Estiliza o botão ao passar o mouse */
-                .btn-entrar:hover {
-                  background-color: #ff66c4; /* Cor de fundo ao passar o mouse sobre o botão */
+                .input-group {
+                  flex: 1;
+                  /* Faz cada campo ocupar espaço igual na linha */
                 }
-              </style>
+              }
+            </style>
 
-              <script>
-                document
-                  .getElementById("togglePassword")
-                  .addEventListener("click", function () {
-                    const passwordInput = document.getElementById("senha");
-                    const icon = this;
 
-                    // Alterna o tipo do campo entre 'password' e 'text'
-                    if (passwordInput.type === "password") {
-                      passwordInput.type = "text";
-                      icon.classList.remove("far", "fa-eye");
-                      icon.classList.add("far", "fa-eye-slash");
-                    } else {
-                      passwordInput.type = "password";
-                      icon.classList.remove("far", "fa-eye-slash");
-                      icon.classList.add("far", "fa-eye");
-                    }
-                  });
-              </script>
+            <script>
+              document
+                .getElementById("togglePassword")
+                .addEventListener("click", function () {
+                  const passwordInput = document.getElementById("senha");
+                  const icon = this;
 
+                  if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    icon.classList.remove("far", "fa-eye");
+                    icon.classList.add("far", "fa-eye-slash");
+                  } else {
+                    passwordInput.type = "password";
+                    icon.classList.remove("far", "fa-eye-slash");
+                    icon.classList.add("far", "fa-eye");
+                  }
+                });
+            </script>
+
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-xl-center gy-5">
+          <div class="col-xl-5 content">
+            <h3>Sobre Nós</h3>
+            <h2>Entre no Universo Swanshine</h2>
+            <p>
+              Nossos sistemas são definitivos para a contratação de serviços
+              de estética, projetado para oferecer uma experiência de alta
+              qualidade aos seus usuários. Nossa plataforma foi desenvolvida
+              com o objetivo de proporcionar máxima credibilidade e rapidez em
+              todas as etapas do processo de agendamento de serviços de beleza
+              e bem-estar.
+            </p>
+            <a href="sobre.html" class="read-more"><span>Saiba mais</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+
+          <div class="col-xl-7">
+            <div class="row gy-4 icon-boxes">
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box">
+                  <i class="bi bi-clipboard-check"></i>
+                  <h3>Missão</h3>
+                  <p>
+                    Na SwanShine, nossa missão é facilitar a vida de duas
+                    grandes massas que se dividem entre profissionais da área
+                    de cuidados estéticos e usuários que precisam solicitar
+                    serviços de forma totalmente online e com ótimos preços.
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Box -->
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-box">
+                  <i class="bi bi-bullseye"></i>
+                  <h3>Visão</h3>
+                  <p>
+                    Com o passar do tempo e o aumento dos usuários a
+                    portabilidade dos sistemas também serão aumentadas com o
+                    objetivo de trazer mais fluidez e comodidade aos usuários
+                    finais.
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Box -->
+
+              <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon-box">
+                  <i class="bi bi-gem"></i>
+                  <h3>Valores</h3>
+                  <p>
+                    <li>Empatia com os usuários</li>
+                    <li>Inovação e visão</li>
+                    <li>Qualidade</li>
+                    <li>Sistemas fluídos</li>
+                    <li>Contribuição social positiva</li>
+                  </p>
+                </div>
+              </div>
+              <!-- End Icon Box -->
             </div>
           </div>
         </div>
-      </section>
-      <!-- /Hero Section -->
+      </div>
+    </section>
+    <!-- /About Section -->
 
-      <!-- About Section -->
-      <section id="about" class="about section">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row align-items-xl-center gy-5">
-            <div class="col-xl-5 content">
-              <h3>Sobre Nós</h3>
-              <h2>Entre no Universo Swanshine</h2>
-              <p>
-                Nossos sistemas são definitivos para a contratação de serviços
-                de estética, projetado para oferecer uma experiência de alta
-                qualidade aos seus usuários. Nossa plataforma foi desenvolvida
-                com o objetivo de proporcionar máxima credibilidade e rapidez em
-                todas as etapas do processo de agendamento de serviços de beleza
-                e bem-estar.
-              </p>
-              <a href="sobre.html" class="read-more"
-                ><span>Saiba mais</span><i class="bi bi-arrow-right"></i
-              ></a>
-            </div>
+    <!-- Services Section -->
+    <section id="services" class="services section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Serviços</h2>
+        <p>Procure por seus serviços e encontre os melhores profissionais.</p>
+      </div>
+      <!-- End Section Title -->
 
-            <div class="col-xl-7">
-              <div class="row gy-4 icon-boxes">
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                  <div class="icon-box">
-                    <i class="bi bi-clipboard-check"></i>
-                    <h3>Missão</h3>
-                    <p>
-                      Na SwanShine, nossa missão é facilitar a vida de duas
-                      grandes massas que se dividem entre profissionais da área
-                      de cuidados estéticos e usuários que precisam solicitar
-                      serviços de forma totalmente online e com ótimos preços.
-                    </p>
-                  </div>
-                </div>
-                <!-- End Icon Box -->
-
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                  <div class="icon-box">
-                    <i class="bi bi-bullseye"></i>
-                    <h3>Visão</h3>
-                    <p>
-                      Com o passar do tempo e o aumento dos usuários a
-                      portabilidade dos sistemas também serão aumentadas com o
-                      objetivo de trazer mais fluidez e comodidade aos usuários
-                      finais.
-                    </p>
-                  </div>
-                </div>
-                <!-- End Icon Box -->
-
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-                  <div class="icon-box">
-                    <i class="bi bi-gem"></i>
-                    <h3>Valores</h3>
-                    <p>
-                      <li>Empatia com os usuários</li>
-                      <li>Inovação e visão</li>
-                      <li>Qualidade</li>
-                      <li>Sistemas fluídos</li>
-                      <li>Contribuição social positiva</li>
-                    </p>
-                  </div>
-                </div>
-                <!-- End Icon Box -->
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0">
+                <img src="home/assets/img/barbearia.png" alt="barbearia" />
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- /About Section -->
-
-      <!-- Services Section -->
-      <section id="services" class="services section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Serviços</h2>
-          <p>Procure por seus serviços e encontre os melhores profissionais.</p>
-        </div>
-        <!-- End Section Title -->
-
-        <div class="container">
-          <div class="row gy-4">
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-              <div class="service-item d-flex">
-                <div class="icon flex-shrink-0">
-                  <img src="home/assets/img/barbearia.png" alt="barbearia" />
-                </div>
-                <div>
-                  <h4 class="title">
-                    <a href="home/forms/login/login.html" class="stretched-link"
-                      >Barbeiro</a
-                    >
-                  </h4>
-                  <p class="description">
-                    O barbeiro transforma cada corte de cabelo e barba em uma
-                    obra-prima personalizada, oferecendo uma experiência única
-                    de cuidado e estilo.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End Service Item -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-              <div class="service-item d-flex">
-                <div class="icon flex-shrink-0">
-                  <img src="home/assets/img/maquiagem.png" alt="maquiagem" />
-                </div>
-                <div>
-                  <h4 class="title">
-                    <a href="home/forms/login/login.html" class="stretched-link"
-                      >Maquiagem</a
-                    >
-                  </h4>
-                  <p class="description">
-                    O maquiador realça sua beleza natural com técnicas
-                    personalizadas, proporcionando uma experiência única de
-                    cuidado e estilo para elevar sua confiança.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End Service Item -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-              <div class="service-item d-flex">
-                <div class="icon flex-shrink-0">
-                  <img src="home/assets/img/depilacao.png" alt="depilação" />
-                </div>
-                <div>
-                  <h4 class="title">
-                    <a href="home/forms/login/login.html" class="stretched-link"
-                      >Depilação</a
-                    >
-                  </h4>
-                  <p class="description">
-                    O depilador oferece uma experiência de cuidado e suavidade,
-                    garantindo resultados impecáveis e confortáveis que elevam
-                    sua confiança.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End Service Item -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-              <div class="service-item d-flex">
-                <div class="icon flex-shrink-0">
-                  <img
-                    src="home/assets/img/nail_designer.png"
-                    alt="nail designer"
-                  />
-                </div>
-                <div>
-                  <h4 class="title">
-                    <a href="home/forms/login/login.html" class="stretched-link"
-                      >Nail designer</a
-                    >
-                  </h4>
-                  <p class="description">
-                    O nail designer cria verdadeiras obras de arte nas suas
-                    unhas, oferecendo uma experiência única de cuidado e estilo
-                    que eleva sua confiança.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End Service Item -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
-              <div class="service-item d-flex">
-                <div class="icon flex-shrink-0">
-                  <i class="bi bi-brightness-high"></i>
-                </div>
-                <div>
-                  <h4 class="title">
-                    <a href="home/forms/login/login.html" class="stretched-link"
-                      >Lash Designer</a
-                    >
-                  </h4>
-                  <p class="description">
-                    O designer de sobrancelhas esculpe suas sobrancelhas com
-                    precisão artística, proporcionando uma experiência única de
-                    cuidado e estilo que realça sua beleza natural.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End Service Item -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
-              <div class="service-item d-flex">
-                <div class="icon flex-shrink-0">
-                  <img
-                    src="home/assets/img/cabelereira.png"
-                    alt="cabelereira"
-                  />
-                </div>
-                <div>
-                  <h4 class="title">
-                    <a href="home/forms/login/login.html" class="stretched-link"
-                      >Cabelereira</a
-                    >
-                  </h4>
-                  <p class="description">
-                    A cabeleireira transforma seu cabelo com talento e
-                    criatividade, oferecendo uma experiência única de cuidado e
-                    estilo que realça sua beleza e confiança.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End Service Item -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
-              <div class="service-item d-flex">
-                <div class="icon flex-shrink-0">
-                  <img src="home/assets/img/trancista.png" alt="trancista" />
-                </div>
-                <div>
-                  <h4 class="title">
-                    <a href="home/forms/login/login.html" class="stretched-link"
-                      >Trancista</a
-                    >
-                  </h4>
-                  <p class="description">
-                    A trancista cria penteados únicos e artísticos,
-                    proporcionando uma experiência de cuidado e estilo que
-                    destaca sua individualidade e beleza.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End Service Item -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
-              <div class="service-item d-flex">
-                <div class="icon flex-shrink-0">
-                  <img
-                    src="home/assets/img/esteticista.png"
-                    alt="esteticista"
-                  />
-                </div>
-                <div>
-                  <h4 class="title">
-                    <a href="home/forms/login/login.html" class="stretched-link"
-                      >Esteticista</a
-                    >
-                  </h4>
-                  <p class="description">
-                    A esteticista cuida da sua pele com expertise, oferecendo
-                    uma experiência de cuidado e beleza que realça sua confiança
-                    e bem-estar.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- End Service Item -->
-          </div>
-        </div>
-      </section>
-      <!-- /Services Section -->
-
-      <!-- Features Section -->
-      <section id="features" class="features section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Nossos Sistemas</h2>
-          <p>Cliente e Profissional juntos em um só lugar!</p>
-        </div>
-        <!-- End Section Title -->
-
-        <div class="container">
-          <div class="row gy-4 align-items-center features-item">
-            <div
-              class="col-lg-5 order-2 order-lg-1"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <h3>Torne-se um Cliente Swan Shine</h3>
-              <p>
-                Você pode se tornar um cliente da SwanShine e ter acesso a
-                inúmeras funcionalidades como: Ver os melhores profissionais da
-                sua região, cotar valores e solicitar um ou mais serviços.
-                Cadastre-se e saiba mais.
-              </p>
-              <a
-                href="home/forms/form_cliente/form_cliente.html"
-                class="btn btn-get-started"
-                >Saiba Mais</a
-              >
-            </div>
-            <div
-              class="col-lg-7 order-1 order-lg-2 d-flex align-items-center"
-              data-aos="zoom-out"
-              data-aos-delay="100"
-            >
-              <div class="image-stack">
-                <img
-                  src="home/assets/img/cliente1.jpg"
-                  alt
-                  class="stack-front"
-                />
-                <img
-                  src="home/assets/img/cliente2.jpg"
-                  alt
-                  class="stack-back"
-                />
-              </div>
-            </div>
-          </div>
-          <!-- Features Item -->
-
-          <div
-            class="row gy-4 align-items-stretch justify-content-between features-item"
-          >
-            <div
-              class="col-lg-6 d-flex align-items-center features-img-bg"
-              data-aos="zoom-out"
-            >
-              <img
-                src="home/assets/img/features-light-3.jpg"
-                class="img-fluid"
-                alt
-              />
-            </div>
-            <div
-              class="col-lg-5 d-flex justify-content-center flex-column"
-              data-aos="fade-up"
-            >
-              <h3>Seja um Profissional Swan Shine</h3>
-              <p>
-                Você também pode se tornar um profissional da Swan Shine e
-                explorar diversas possibilidades de mostrar os seus serviços
-                para o mundo e ampliar a sua clientela usando de sistemas
-                fluidos e confiáveis para ajudar na sua jornada rumo ao sucesso
-                profissional.
-                <br />
-                <br />
-                <a
-                  href="home/forms/form_profissional/form_profissional.html"
-                  class="btn btn-get-started align-self-start"
-                  >Saiba Mais</a
-                >
-              </p>
-            </div>
-          </div>
-          <!-- Features Item -->
-        </div>
-      </section>
-      <!-- /Features Section -->
-
-      <!-- Faq Section -->
-      <section id="faq" class="faq section">
-        <div class="container">
-          <div class="row gy-4">
-            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-              <div class="content px-xl-5">
-                <h3><span>Perguntas</span> <strong>Frequentes</strong></h3>
-                <p>
-                  Respondendo algumas das principais e recorrentes perguntas
-                  feita a nós da Swan Shine.
+              <div>
+                <h4 class="title">
+                  <a href="home/forms/login/login.html" class="stretched-link">Barbeiro</a>
+                </h4>
+                <p class="description">
+                  O barbeiro transforma cada corte de cabelo e barba em uma
+                  obra-prima personalizada, oferecendo uma experiência única
+                  de cuidado e estilo.
                 </p>
               </div>
             </div>
+          </div>
+          <!-- End Service Item -->
 
-            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-              <div class="faq-container">
-                <div class="faq-item faq-active">
-                  <h3>
-                    <span class="num">1.</span>
-                    <span>Por que devo confiar na Swan Shine?</span>
-                  </h3>
-                  <div class="faq-content">
-                    <p>
-                      Todos os nossos sistemas são desenvolvidos com total
-                      atenção aos usuários finais e por consequência a segurança
-                      é um dos nossos pilares mais importantes.
-                    </p>
-                  </div>
-                  <i class="faq-toggle bi bi-chevron-right"></i>
-                </div>
-                <!-- End Faq item-->
-
-                <div class="faq-item">
-                  <h3>
-                    <span class="num">2.</span>
-                    <span
-                      >Como faço para ter acesso aos sistemas da Swan
-                      Shine?</span
-                    >
-                  </h3>
-                  <div class="faq-content">
-                    <p>
-                      Assim que os sistemas forem lançados os usuários poderão
-                      utilizar a Swan Shine tanto no website quanto no app
-                      mobile que estará disponível na loja correspondente do seu
-                      celular.
-                    </p>
-                  </div>
-                  <i class="faq-toggle bi bi-chevron-right"></i>
-                </div>
-                <!-- End Faq item-->
-
-                <div class="faq-item">
-                  <h3>
-                    <span class="num">3.</span>
-                    <span
-                      >Como saber se o profissional é realmente seguro?</span
-                    >
-                  </h3>
-                  <div class="faq-content">
-                    <p>
-                      Todo profissional cadastrado na Swan Shine passa por uma
-                      pré avaliação de segurança para garantir a integridade do
-                      mesmo e dos clientes.
-                    </p>
-                  </div>
-                  <i class="faq-toggle bi bi-chevron-right"></i>
-                </div>
-                <!-- End Faq item-->
-
-                <div class="faq-item">
-                  <h3>
-                    <span class="num">4.</span>
-                    <span>Como fazer pagamentos pela plataforma?</span>
-                  </h3>
-                  <div class="faq-content">
-                    <p>
-                      Em sua versão final a Swan Shine terá um sistema chamado
-                      Swan pay que nada mais é do que a nossa própria carteira
-                      digital, desenvolvida para gerar maior rapidez e segurança
-                      às transações financeiras.
-                    </p>
-                  </div>
-                  <i class="faq-toggle bi bi-chevron-right"></i>
-                </div>
-                <!-- End Faq item-->
-
-                <div class="faq-item">
-                  <h3>
-                    <span class="num">5.</span>
-                    <span>Quando será o lançamento da Swan Shine?</span>
-                  </h3>
-                  <div class="faq-content">
-                    <p>
-                      Temos previsão de lançamento para 23 de novembro de 2024
-                      🚀
-                    </p>
-                  </div>
-                  <i class="faq-toggle bi bi-chevron-right"></i>
-                </div>
-                <!-- End Faq item-->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0">
+                <img src="home/assets/img/maquiagem.png" alt="maquiagem" />
+              </div>
+              <div>
+                <h4 class="title">
+                  <a href="home/forms/login/login.html" class="stretched-link">Maquiagem</a>
+                </h4>
+                <p class="description">
+                  O maquiador realça sua beleza natural com técnicas
+                  personalizadas, proporcionando uma experiência única de
+                  cuidado e estilo para elevar sua confiança.
+                </p>
               </div>
             </div>
           </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0">
+                <img src="home/assets/img/depilacao.png" alt="depilação" />
+              </div>
+              <div>
+                <h4 class="title">
+                  <a href="home/forms/login/login.html" class="stretched-link">Depilação</a>
+                </h4>
+                <p class="description">
+                  O depilador oferece uma experiência de cuidado e suavidade,
+                  garantindo resultados impecáveis e confortáveis que elevam
+                  sua confiança.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0">
+                <img src="home/assets/img/nail_designer.png" alt="nail designer" />
+              </div>
+              <div>
+                <h4 class="title">
+                  <a href="home/forms/login/login.html" class="stretched-link">Nail designer</a>
+                </h4>
+                <p class="description">
+                  O nail designer cria verdadeiras obras de arte nas suas
+                  unhas, oferecendo uma experiência única de cuidado e estilo
+                  que eleva sua confiança.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-brightness-high"></i>
+              </div>
+              <div>
+                <h4 class="title">
+                  <a href="home/forms/login/login.html" class="stretched-link">Lash Designer</a>
+                </h4>
+                <p class="description">
+                  O designer de sobrancelhas esculpe suas sobrancelhas com
+                  precisão artística, proporcionando uma experiência única de
+                  cuidado e estilo que realça sua beleza natural.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0">
+                <img src="home/assets/img/cabelereira.png" alt="cabelereira" />
+              </div>
+              <div>
+                <h4 class="title">
+                  <a href="home/forms/login/login.html" class="stretched-link">Cabelereira</a>
+                </h4>
+                <p class="description">
+                  A cabeleireira transforma seu cabelo com talento e
+                  criatividade, oferecendo uma experiência única de cuidado e
+                  estilo que realça sua beleza e confiança.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0">
+                <img src="home/assets/img/trancista.png" alt="trancista" />
+              </div>
+              <div>
+                <h4 class="title">
+                  <a href="home/forms/login/login.html" class="stretched-link">Trancista</a>
+                </h4>
+                <p class="description">
+                  A trancista cria penteados únicos e artísticos,
+                  proporcionando uma experiência de cuidado e estilo que
+                  destaca sua individualidade e beleza.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item d-flex">
+              <div class="icon flex-shrink-0">
+                <img src="home/assets/img/esteticista.png" alt="esteticista" />
+              </div>
+              <div>
+                <h4 class="title">
+                  <a href="home/forms/login/login.html" class="stretched-link">Esteticista</a>
+                </h4>
+                <p class="description">
+                  A esteticista cuida da sua pele com expertise, oferecendo
+                  uma experiência de cuidado e beleza que realça sua confiança
+                  e bem-estar.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- End Service Item -->
         </div>
-      </section>
-      <!-- /Faq Section -->
+      </div>
+    </section>
+    <!-- /Services Section -->
 
-      <!-- Team Section -->
-      <section id="team" class="team section light-background">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-          <h2>Time</h2>
-          <p>
-            Conheça um pouco sobre os administradores responsáveis que fizeram e
-            fazem o sistema da Swan Shine.
-          </p>
-        </div>
-        <!-- End Section Title -->
+    <!-- Features Section -->
+    <section id="features" class="features section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Nossos Sistemas</h2>
+        <p>Cliente e Profissional juntos em um só lugar!</p>
+      </div>
+      <!-- End Section Title -->
 
-        <div class="container">
-          <div class="row gy-4">
-            <div
-              class="col-lg-3 col-md-6 d-flex align-items-stretch"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <div class="team-member">
-                <div class="member-img">
-                  <img
-                    src="home/assets/img/team/lino.jpg"
-                    class="img-fluid"
-                    alt
-                  />
-                  <div class="social">
-                    <a href="https://github.com/LinuzX7" target="_blank"
-                      ><i class="bi bi-github"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com/liino_jr/"
-                      target="_blank"
-                      ><i class="bi bi-instagram"></i
-                    ></a>
-                    <a href="#" target="_blank"
-                      ><i class="bi bi-linkedin"></i
-                    ></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Lino Junior</h4>
-                  <span>Diretor Geral</span>
-                </div>
-              </div>
+      <div class="container">
+        <div class="row gy-4 align-items-center features-item">
+          <div class="col-lg-5 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+            <h3>Torne-se um Cliente Swan Shine</h3>
+            <p>
+              Você pode se tornar um cliente da SwanShine e ter acesso a
+              inúmeras funcionalidades como: Ver os melhores profissionais da
+              sua região, cotar valores e solicitar um ou mais serviços.
+              Cadastre-se e saiba mais.
+            </p>
+            <a href="home/forms/form_cliente/form_cliente.html" class="btn btn-get-started">Saiba Mais</a>
+          </div>
+          <div class="col-lg-7 order-1 order-lg-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
+            <div class="image-stack">
+              <img src="home/assets/img/cliente1.jpg" alt class="stack-front" />
+              <img src="home/assets/img/cliente2.jpg" alt class="stack-back" />
             </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-3 col-md-6 d-flex align-items-stretch"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <div class="team-member">
-                <div class="member-img">
-                  <img
-                    src="home/assets/img/team/wellington.jpg"
-                    class="img-fluid"
-                    alt
-                  />
-                  <div class="social">
-                    <a href="https://github.com/Wlayres" target="_blank"
-                      ><i class="bi bi-github"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com/Well_ayres_/"
-                      target="_blank"
-                      ><i class="bi bi-instagram"></i
-                    ></a>
-                    <a href="#" target="_blank"
-                      ><i class="bi bi-linkedin"></i
-                    ></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Wellington Ayres</h4>
-                  <span>Diretor de Operações</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-3 col-md-6 d-flex align-items-stretch"
-              data-aos="fade-up"
-              data-aos-delay="300"
-            >
-              <div class="team-member">
-                <div class="member-img">
-                  <img
-                    src="home/assets/img/team/thiago.jpg"
-                    class="img-fluid"
-                    alt=""
-                  />
-                  <div class="social">
-                    <a
-                      href="https://github.com/ThiagoNicolasSantosdaSilva"
-                      target="_blank"
-                      ><i class="bi bi-github"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com/thiago11nicolas/"
-                      target="_blank"
-                      ><i class="bi bi-instagram"></i
-                    ></a>
-                    <a
-                      href="https://www.linkedin.com/in/thiago-nicolas-s-da-silva-516711231/"
-                      target="_blank"
-                      ><i class="bi bi-linkedin"></i
-                    ></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Thiago Nicolas</h4>
-                  <span>Diretor de Tecnologia</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-3 col-md-6 d-flex align-items-stretch"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <div class="team-member">
-                <div class="member-img">
-                  <img
-                    src="home/assets/img/team/britto.jpg"
-                    class="img-fluid"
-                    alt
-                  />
-                  <div class="social">
-                    <a href="#" target="_blank"><i class="bi bi-github"></i></a>
-                    <a
-                      href="https://www.instagram.com/gustavo07britto/"
-                      target="_blank"
-                      ><i class="bi bi-instagram"></i
-                    ></a>
-                    <a href="#" target="_blank"
-                      ><i class="bi bi-linkedin"></i
-                    ></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Gustavo Britto</h4>
-                  <span>Diretor de Marketing</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-3 col-md-6 d-flex align-items-stretch"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <div class="team-member">
-                <div class="member-img">
-                  <img
-                    src="home/assets/img/team/marcos.jpg"
-                    class="img-fluid"
-                    alt
-                  />
-                  <div class="social">
-                    <a href="https://github.com/Marquinsx" target="_blank"
-                      ><i class="bi bi-github"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com/mouuramarcos?igsh=cHh0MjN1dTRqYmdt"
-                      ><i class="bi bi-instagram" target="_blank"></i
-                    ></a>
-                    <a
-                      href="https://www.linkedin.com/in/marcos-vinicius-moura-904705330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                      target="_blank"
-                      ><i class="bi bi-linkedin"></i
-                    ></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Marcos Vinicius Moura</h4>
-                  <span>Designer</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-3 col-md-6 d-flex align-items-stretch"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <div class="team-member">
-                <div class="member-img">
-                  <img
-                    src="home/assets/img/team/vitor.jpg"
-                    class="img-fluid"
-                    alt
-                  />
-                  <div class="social">
-                    <a href="https://github.com/Mourarb" target="_blank"
-                      ><i class="bi bi-github"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com/vitor_hg_moura/"
-                      target="_blank"
-                      ><i class="bi bi-instagram"></i
-                    ></a>
-                    <a href="#" target="_blank"
-                      ><i class="bi bi-linkedin"></i
-                    ></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Vitor Hugo Moura</h4>
-                  <span>Auxiliar de Designer</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Team Member -->
-
-            <div
-              class="col-lg-3 col-md-6 d-flex align-items-stretch"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
-              <div class="team-member">
-                <div class="member-img">
-                  <img
-                    src="home/assets/img/team/breno.jpg"
-                    class="img-fluid"
-                    alt
-                  />
-                  <div class="social">
-                    <a href="https://github.com/Brenin021" target="_blank"
-                      ><i class="bi bi-github"></i
-                    ></a>
-                    <a
-                      href="https://www.instagram.com/breno_santiagotkd/profilecard/?igsh=MXVtNWp6MW85Z3Bpeg=="
-                      target="_blank"
-                      ><i class="bi bi-instagram"></i
-                    ></a>
-                    <a
-                      href="https://www.linkedin.com/in/breno-santiago-609643258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-                      target="_blank"
-                      ><i class="bi bi-linkedin"></i
-                    ></a>
-                  </div>
-                </div>
-                <div class="member-info">
-                  <h4>Breno Santiago</h4>
-                  <span>Analista de Dados</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Team Member -->
           </div>
         </div>
-      </section>
-      <!-- /Team Section -->
-    </main>
+        <!-- Features Item -->
 
-    <footer id="footer" class="footer position-relative">
-      <div class="container footer-top">
+        <div class="row gy-4 align-items-stretch justify-content-between features-item">
+          <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
+            <img src="home/assets/img/features-light-3.jpg" class="img-fluid" alt />
+          </div>
+          <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
+            <h3>Seja um Profissional Swan Shine</h3>
+            <p>
+              Você também pode se tornar um profissional da Swan Shine e
+              explorar diversas possibilidades de mostrar os seus serviços
+              para o mundo e ampliar a sua clientela usando de sistemas
+              fluidos e confiáveis para ajudar na sua jornada rumo ao sucesso
+              profissional.
+              <br />
+              <br />
+              <a href="home/forms/form_profissional/form_profissional.html"
+                class="btn btn-get-started align-self-start">Saiba Mais</a>
+            </p>
+          </div>
+        </div>
+        <!-- Features Item -->
+      </div>
+    </section>
+    <!-- /Features Section -->
+
+    <!-- Faq Section -->
+    <section id="faq" class="faq section">
+      <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-5 col-md-12 footer-about">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <span class="sitename">Swan Shine</span>
-            </a>
-            <p>...</p>
-            <div class="social-links d-flex mt-4">
-              <a href="https://github.com/swanshine" target="_blank"
-                ><i class="bi bi-github"></i
-              ></a>
-              <a href="https://www.instagram.com/swanshinne/" target="_blank"
-                ><i class="bi bi-instagram"></i
-              ></a>
-              <a href="https://www.youtube.com/@SwanShinne" target="_blank"
-                ><i class="bi bi-youtube"></i
-              ></a>
-              <a
-                href="https://whatsapp.com/channel/0029VacDYoUCsU9I23FF3i0V"
-                target="_blank"
-                ><i class="bi bi-whatsapp"></i
-              ></a>
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="content px-xl-5">
+              <h3><span>Perguntas</span> <strong>Frequentes</strong></h3>
+              <p>
+                Respondendo algumas das principais e recorrentes perguntas
+                feita a nós da Swan Shine.
+              </p>
             </div>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Principal</h4>
-            <ul>
-              <li><a href="home/manutencao.html">Termos de Serviços</a></li>
-              <li>
-                <a href="home/manutencao.html">Política de Privacidade</a>
-              </li>
-            </ul>
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="faq-container">
+              <div class="faq-item faq-active">
+                <h3>
+                  <span class="num">1.</span>
+                  <span>Por que devo confiar na Swan Shine?</span>
+                </h3>
+                <div class="faq-content">
+                  <p>
+                    Todos os nossos sistemas são desenvolvidos com total
+                    atenção aos usuários finais e por consequência a segurança
+                    é um dos nossos pilares mais importantes.
+                  </p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div>
+              <!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>
+                  <span class="num">2.</span>
+                  <span>Como faço para ter acesso aos sistemas da Swan
+                    Shine?</span>
+                </h3>
+                <div class="faq-content">
+                  <p>
+                    Assim que os sistemas forem lançados os usuários poderão
+                    utilizar a Swan Shine tanto no website quanto no app
+                    mobile que estará disponível na loja correspondente do seu
+                    celular.
+                  </p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div>
+              <!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>
+                  <span class="num">3.</span>
+                  <span>Como saber se o profissional é realmente seguro?</span>
+                </h3>
+                <div class="faq-content">
+                  <p>
+                    Todo profissional cadastrado na Swan Shine passa por uma
+                    pré avaliação de segurança para garantir a integridade do
+                    mesmo e dos clientes.
+                  </p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div>
+              <!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>
+                  <span class="num">4.</span>
+                  <span>Como fazer pagamentos pela plataforma?</span>
+                </h3>
+                <div class="faq-content">
+                  <p>
+                    Em sua versão final a Swan Shine terá um sistema chamado
+                    Swan pay que nada mais é do que a nossa própria carteira
+                    digital, desenvolvida para gerar maior rapidez e segurança
+                    às transações financeiras.
+                  </p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div>
+              <!-- End Faq item-->
+
+              <div class="faq-item">
+                <h3>
+                  <span class="num">5.</span>
+                  <span>Quando será o lançamento da Swan Shine?</span>
+                </h3>
+                <div class="faq-content">
+                  <p>
+                    Temos previsão de lançamento para 23 de novembro de 2024
+                    🚀
+                  </p>
+                </div>
+                <i class="faq-toggle bi bi-chevron-right"></i>
+              </div>
+              <!-- End Faq item-->
+            </div>
           </div>
-          <!--
+        </div>
+      </div>
+    </section>
+    <!-- /Faq Section -->
+
+    <!-- Team Section -->
+    <section id="team" class="team section light-background">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Time</h2>
+        <p>
+          Conheça um pouco sobre os administradores responsáveis que fizeram e
+          fazem o sistema da Swan Shine.
+        </p>
+      </div>
+      <!-- End Section Title -->
+
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="home/assets/img/team/lino.jpg" class="img-fluid" alt />
+                <div class="social">
+                  <a href="https://github.com/LinuzX7" target="_blank"><i class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/liino_jr/" target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Lino Junior</h4>
+                <span>Diretor Geral</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="home/assets/img/team/wellington.jpg" class="img-fluid" alt />
+                <div class="social">
+                  <a href="https://github.com/Wlayres" target="_blank"><i class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/Well_ayres_/" target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Wellington Ayres</h4>
+                <span>Diretor de Operações</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="home/assets/img/team/thiago.jpg" class="img-fluid" alt="" />
+                <div class="social">
+                  <a href="https://github.com/ThiagoNicolasSantosdaSilva" target="_blank"><i
+                      class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/thiago11nicolas/" target="_blank"><i
+                      class="bi bi-instagram"></i></a>
+                  <a href="https://www.linkedin.com/in/thiago-nicolas-s-da-silva-516711231/" target="_blank"><i
+                      class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Thiago Nicolas</h4>
+                <span>Diretor de Tecnologia</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="home/assets/img/team/britto.jpg" class="img-fluid" alt />
+                <div class="social">
+                  <a href="#" target="_blank"><i class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/gustavo07britto/" target="_blank"><i
+                      class="bi bi-instagram"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Gustavo Britto</h4>
+                <span>Diretor de Marketing</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="home/assets/img/team/marcos.jpg" class="img-fluid" alt />
+                <div class="social">
+                  <a href="https://github.com/Marquinsx" target="_blank"><i class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/mouuramarcos?igsh=cHh0MjN1dTRqYmdt"><i class="bi bi-instagram"
+                      target="_blank"></i></a>
+                  <a href="https://www.linkedin.com/in/marcos-vinicius-moura-904705330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Marcos Vinicius Moura</h4>
+                <span>Designer</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="home/assets/img/team/vitor.jpg" class="img-fluid" alt />
+                <div class="social">
+                  <a href="https://github.com/Mourarb" target="_blank"><i class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/vitor_hg_moura/" target="_blank"><i
+                      class="bi bi-instagram"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Vitor Hugo Moura</h4>
+                <span>Auxiliar de Designer</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Team Member -->
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="home/assets/img/team/breno.jpg" class="img-fluid" alt />
+                <div class="social">
+                  <a href="https://github.com/Brenin021" target="_blank"><i class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/breno_santiagotkd/profilecard/?igsh=MXVtNWp6MW85Z3Bpeg=="
+                    target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="https://www.linkedin.com/in/breno-santiago-609643258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+                    target="_blank"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Breno Santiago</h4>
+                <span>Analista de Dados</span>
+              </div>
+            </div>
+          </div>
+          <!-- End Team Member -->
+        </div>
+      </div>
+    </section>
+    <!-- /Team Section -->
+  </main>
+
+  <footer id="footer" class="footer position-relative">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">Swan Shine</span>
+          </a>
+          <p>...</p>
+          <div class="social-links d-flex mt-4">
+            <a href="https://github.com/swanshine" target="_blank"><i class="bi bi-github"></i></a>
+            <a href="https://www.instagram.com/swanshinne/" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.youtube.com/@SwanShinne" target="_blank"><i class="bi bi-youtube"></i></a>
+            <a href="https://whatsapp.com/channel/0029VacDYoUCsU9I23FF3i0V" target="_blank"><i
+                class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4>Principal</h4>
+          <ul>
+            <li><a href="home/manutencao.html">Termos de Serviços</a></li>
+            <li>
+              <a href="home/manutencao.html">Política de Privacidade</a>
+            </li>
+          </ul>
+        </div>
+        <!--
             <div class="col-lg-2 col-6 footer-links">
               <h4>Serviços</h4>
               <ul>
@@ -1264,51 +1238,46 @@
               </ul>
             </div> -->
 
-          <div
-            class="col-lg-3 col-md-12 footer-contact text-center text-md-start"
-          >
-            <h4>Contate-Nos</h4>
-            <p>Colégio Seice</p>
-            <p>Campos Elísios, RJ 25225-660</p>
-            <p>Rio de Janeiro</p>
-            <p class="mt-4">
-              <strong>Telefone:</strong> <span>+55 (21)9 8055-6251</span>
-            </p>
-            <p><strong>Email:</strong> <span>central@swanshine.com.br</span></p>
-          </div>
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4>Contate-Nos</h4>
+          <p>Colégio Seice</p>
+          <p>Campos Elísios, RJ 25225-660</p>
+          <p>Rio de Janeiro</p>
+          <p class="mt-4">
+            <strong>Telefone:</strong> <span>+55 (21)9 8055-6251</span>
+          </p>
+          <p><strong>Email:</strong> <span>central@swanshine.com.br</span></p>
         </div>
       </div>
+    </div>
 
-      <div class="container copyright text-center mt-4">
-        <p>
-          © <span>Copyright</span> <strong class="sitename">Swan Shine</strong>
-          <span>Todos os Direitos Reservados</span>
-        </p>
-      </div>
-    </footer>
+    <div class="container copyright text-center mt-4">
+      <p>
+        © <span>Copyright</span> <strong class="sitename">Swan Shine</strong>
+        <span>Todos os Direitos Reservados</span>
+      </p>
+    </div>
+  </footer>
 
-    <!-- Scroll Top -->
-    <a
-      href="#"
-      id="scroll-top"
-      class="scroll-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Preloader -->
-    <div id="preloader"></div>
+  <!-- Preloader -->
+  <div id="preloader"></div>
 
-    <!-- Vendor JS Files -->
-    <script src="home/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="home/assets/vendor/php-email-form/validate.js"></script>
-    <script src="home/assets/vendor/aos/aos.js"></script>
-    <script src="home/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="home/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="home/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="home/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="home/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="home/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="home/assets/vendor/php-email-form/validate.js"></script>
+  <script src="home/assets/vendor/aos/aos.js"></script>
+  <script src="home/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="home/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="home/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="home/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="home/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-    <!-- Main JS File -->
-    <script src="home/assets/js/main.js"></script>
-  </body>
+  <!-- Main JS File -->
+  <script src="home/assets/js/main.js"></script>
+</body>
+
 </html>
