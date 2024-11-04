@@ -257,7 +257,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="assets/img/servicos/barbearia.png" alt="barbearia"></div>
               <div>
-                <h4 class="title"><a href="servicos/barbeiro/barbeiro.html"
+                <h4 class="title"><a href="servicos/barbeiro/barbeiro.php"
                     class="stretched-link">Barbeiro</a></h4>
                 <p class="description">O barbeiro transforma cada corte de cabelo e barba em uma obra-prima personalizada, oferecendo uma experiência única de cuidado e estilo.</p>
               </div>
