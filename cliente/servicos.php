@@ -269,7 +269,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="assets/img/servicos/maquiagem.png" alt="maquiagem"></div>
               <div>
-                <h4 class="title"><a href="servicos/maquiagem/maquiagem.html"
+                <h4 class="title"><a href="servicos/maquiagem/maquiagem.php"
                     class="stretched-link">Maquiagem</a></h4>
                 <p class="description">O maquiador realça sua beleza natural com técnicas personalizadas, proporcionando uma experiência única de cuidado e estilo para elevar sua confiança.</p>
               </div>
@@ -280,7 +280,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="assets/img/servicos/depilacao.png" alt="depilação"></div>
               <div>
-                <h4 class="title"><a href="servicos/depilacao/depilacao.html"
+                <h4 class="title"><a href="servicos/depilacao/depilacao.php"
                     class="stretched-link">Depilação</a></h4>
                 <p class="description">O depilador oferece uma experiência de cuidado e suavidade, garantindo resultados impecáveis e confortáveis que elevam sua confiança.</p>
               </div>
@@ -291,7 +291,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="assets/img/servicos/nail_designer.png" alt="nail designer"></div>
               <div>
-                <h4 class="title"><a href="servicos/nail_designer/nail_designer.html"
+                <h4 class="title"><a href="servicos/nail_designer/nail_designer.php"
                     class="stretched-link">Nail designer</a></h4>
                 <p class="description">O nail designer cria verdadeiras obras de arte nas suas unhas, oferecendo uma experiência única de cuidado e estilo que eleva sua confiança.</p>
               </div>
@@ -303,7 +303,7 @@
               <div class="icon flex-shrink-0"><i
                   class="bi bi-brightness-high"></i></div>
               <div>
-                <h4 class="title"><a href="servicos/lash_designer/lash_designer.html"
+                <h4 class="title"><a href="servicos/lash_designer/lash_designer.php"
                     class="stretched-link">Lash Designer</a></h4>
                 <p class="description">O designer de sobrancelhas esculpe suas sobrancelhas com precisão artística, proporcionando uma experiência única de cuidado e estilo que realça sua beleza natural.</p>
               </div>
@@ -314,7 +314,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="assets/img/servicos/cabelereira.png" alt="cabelereira"></div>
               <div>
-                <h4 class="title"><a href="servicos/cabelereira/cabelereira.html"
+                <h4 class="title"><a href="servicos/cabelereira/cabelereira.php"
                     class="stretched-link">Cabelereira</a></h4>
                 <p class="description">A cabeleireira transforma seu cabelo com talento e criatividade, oferecendo uma experiência única de cuidado e estilo que realça sua beleza e confiança.</p>
               </div>
@@ -325,7 +325,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="assets/img/servicos/trancista.png" alt="trancista"></div>
               <div>
-                <h4 class="title"><a href="servicos/trancista/trancista.html"
+                <h4 class="title"><a href="servicos/trancista/trancista.php"
                     class="stretched-link">Trancista</a></h4>
                 <p class="description">A trancista cria penteados únicos e artísticos, proporcionando uma experiência de cuidado e estilo que destaca sua individualidade e beleza.</p>
               </div>
@@ -336,7 +336,7 @@
             <div class="service-item d-flex">
               <div class="icon flex-shrink-0"><img src="assets/img/servicos/esteticista.png" alt="esteticista"></div>
               <div>
-                <h4 class="title"><a href="servicos/esteticista/esteticista.html"
+                <h4 class="title"><a href="servicos/esteticista/esteticista.php"
                     class="stretched-link">Esteticista</a></h4>
                 <p class="description">A esteticista cuida da sua pele com expertise, oferecendo uma experiência de cuidado e beleza que realça sua confiança e bem-estar.</p>
               </div>

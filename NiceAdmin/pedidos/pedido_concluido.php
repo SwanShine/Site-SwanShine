@@ -174,13 +174,13 @@ if (isset($_SESSION['recusados'])) {
                         class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                         <li class="dropdown-header">
                             Você tem 0 mensagens
-                            <a href="../mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+                            <a href="../mensagem.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
                         <li class="dropdown-footer">
-                            <a href="../mensagem.html">Mostrar todas as mensagens</a>
+                            <a href="../mensagem.php">Mostrar todas as mensagens</a>
                         </li>
                     </ul>
                 </li>
@@ -225,7 +225,7 @@ if (isset($_SESSION['recusados'])) {
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="../suporte.html">
+                                href="../suporte.php">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Precisa de Ajuda?</span>
                             </a>
@@ -287,7 +287,7 @@ if (isset($_SESSION['recusados'])) {
     
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="../mensagem.html">
+            <a class="nav-link collapsed" href="../mensagem.php">
                 <i class="bi bi-envelope"></i>
                 <span>Mensagens</span>
             </a>
@@ -302,7 +302,7 @@ if (isset($_SESSION['recusados'])) {
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="../suporte.html">
+            <a class="nav-link collapsed" href="../suporte.php">
                 <i class="bi bi-chat-dots"></i>
                 <span>Suporte</span>
             </a>
@@ -371,7 +371,7 @@ if (isset($_SESSION['recusados'])) {
             document.querySelectorAll('.orcamento').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.getAttribute('data-id');
-                    window.location.href = `../mensagem.html?id=${id}`;
+                    window.location.href = `../mensagem.php?id=${id}`;
                 });
             });
         </script>

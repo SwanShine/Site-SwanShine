@@ -19,6 +19,7 @@ if ($conn->connect_error) {
 // Obter e sanitizar dados do formulário
 $nome = trim($_POST['Nome']);
 $endereco = trim($_POST['Endereço']);
+$cep = trim($_POST['cep']);
 $email = filter_var(trim($_POST['Email']), FILTER_SANITIZE_EMAIL);
 $cpf = trim($_POST['cpf']);
 $telefone = trim($_POST['Telefone']);
@@ -69,10 +70,10 @@ if ($cpf_check_stmt = $conn->prepare($cpf_check_sql)) {
 }
 
 // Preparar e executar a inserção
-$sql = "INSERT INTO clientes (nome, endereco, email, cpf, telefone, genero, senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO clientes (nome, endereco, cep, email, cpf, telefone, genero, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 if ($stmt = $conn->prepare($sql)) {
-    $stmt->bind_param("sssssss", $nome, $endereco, $email, $cpf, $telefone, $genero, $senha);
+    $stmt->bind_param("ssssssss", $nome, $endereco, $cep, $email, $cpf, $telefone, $genero, $senha);
 
     if ($stmt->execute()) {
         // Armazenar o email na sessão

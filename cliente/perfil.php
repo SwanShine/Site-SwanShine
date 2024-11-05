@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['imagem'])) {
 }
 
 // Usar prepared statements para buscar o cliente pelo email
-$stmt = $conn->prepare("SELECT nome, endereco, email, cpf, telefone, genero, imagem FROM clientes WHERE email = ?");
+$stmt = $conn->prepare("SELECT nome, endereco, email, cpf, telefone, genero, imagem, cep FROM clientes WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 
@@ -71,8 +71,9 @@ if ($result->num_rows > 0) {
     $telefone = $row['telefone'];
     $genero = $row['genero'];
     $imagem = $row['imagem']; // Obter o caminho da imagem
+    $cep = $row['cep'];
 } else {
-    $nome = $endereco = $email = $cpf = $telefone = $genero = "Não encontrado";
+    $nome = $endereco = $email = $cpf = $telefone = $genero = $cep = "Não encontrado";
     $imagem = null; // Imagem padrão caso não haja
 }
 
@@ -115,9 +116,11 @@ $conn->close();
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/services.css" rel="stylesheet">
 
   <style>
-
+      
   </style>
 </head>
 
@@ -391,6 +394,12 @@ $conn->close();
                       </div>
                     </div>
                     <div class="row mb-3">
+                      <label for="cep" class="col-lg-3 col-md-4 col-form-label profile-label">CEP:</label>
+                      <div class="col-lg-9 col-md-8">
+                        <input name="cep" type="text" class="form-control profile-input" id="cep" value="<?php echo htmlspecialchars($cep); ?>" readonly>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
                       <label for="email" class="col-lg-3 col-md-4 col-form-label profile-label">Email</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="email" type="email" class="form-control profile-input" id="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
@@ -432,6 +441,13 @@ $conn->close();
                       <label for="address" class="col-lg-3 col-md-4 col-form-label">Endereço</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="address" type="text" class="form-control" id="address" value="<?php echo htmlspecialchars($endereco); ?>">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="cep" class="col-lg-3 col-md-4 col-form-label">CEP:</label>
+                      <div class="col-lg-9 col-md-8">
+                        <input name="cep" type="text" class="form-control" id="cep" value="<?php echo htmlspecialchars($cep); ?>">
                       </div>
                     </div>
 
@@ -505,20 +521,20 @@ $conn->close();
                   <h5 class="card-title">Configurações</h5>
 
                   <div class="text-center">
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Deletar Conta</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Desativar Conta</button>
                   </div>
 
                   <script>
                     function confirmDelete() {
-                      // Pergunta ao usuário se ele realmente deseja deletar a conta
-                      const confirmation = confirm("Tem certeza de que deseja deletar sua conta? Esta ação não pode ser desfeita.");
+                      // Pergunta ao usuário se ele realmente deseja Desativar a conta
+                      const confirmation = confirm("Tem certeza de que deseja Desativar sua conta? Esta ação não pode ser desfeita.");
 
-                      // Se o usuário confirmar, faz a requisição para deletar a conta
+                      // Se o usuário confirmar, faz a requisição para Desativar a conta
                       if (confirmation) {
-                        // Substitua 'ID_DO_USUÁRIO_AQUI' pelo ID do usuário que deseja deletar
+                        // Substitua 'ID_DO_USUÁRIO_AQUI' pelo ID do usuário que deseja Desativar
                         const userId = '$nome';
 
-                        fetch('deletar_conta.php', {
+                        fetch('form/Desativar_conta.php', {
                             method: 'POST',
                             headers: {
                               'Content-Type': 'application/json',
@@ -529,19 +545,19 @@ $conn->close();
                           })
                           .then(response => {
                             if (!response.ok) {
-                              throw new Error('Erro ao deletar a conta');
+                              throw new Error('Erro ao Desativar a conta');
                             }
                             return response.json();
                           })
                           .then(data => {
                             // Ação após a exclusão bem-sucedida
-                            alert('Conta deletada com sucesso!');
+                            alert('Conta desativada com sucesso!');
                             // Redirecionar ou atualizar a página, se necessário
                             // window.location.reload();
                           })
                           .catch(error => {
                             console.error('Erro:', error);
-                            alert('Não foi possível deletar a conta. Tente novamente mais tarde.');
+                            alert('Não foi possível Desativar a conta. Tente novamente mais tarde.');
                           });
                       }
                     }

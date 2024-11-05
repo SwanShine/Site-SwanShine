@@ -52,9 +52,6 @@ $cep = $cliente['cep']; // Agora referenciando o campo 'cep'
 $conn->close();
 ?>
 
-
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -525,31 +522,31 @@ $conn->close();
                             <h2>Qual tipo de serviço de barbeiro você procura?</h2>
                             <div class="service-list">
                                 <label>
-                                    <input type="checkbox" name="tipo[]" value="Corte de Cabelo Masculino" />
+                                    <input type="checkbox" name="tipo" value="Corte de Cabelo Masculino" />
                                     Corte de Cabelo Masculino
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="tipo[]" value="Barba" />
+                                    <input type="checkbox" name="tipo" value="Barba" />
                                     Barba
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="tipo[]" value="Desenho de Barba" />
+                                    <input type="checkbox" name="tipo" value="Desenho de Barba" />
                                     Desenho de Barba
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="tipo[]" value="Corte de Cabelo com Máquina" />
+                                    <input type="checkbox" name="tipo" value="Corte de Cabelo com Máquina" />
                                     Corte de Cabelo com Máquina
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="tipo[]" value="Corte de Cabelo e Barba" />
+                                    <input type="checkbox" name="tipo" value="Corte de Cabelo e Barba" />
                                     Corte de Cabelo e Barba
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="tipo[]" value="Tratamento Capilar Masculino" />
+                                    <input type="checkbox" name="tipo" value="Tratamento Capilar Masculino" />
                                     Tratamento Capilar Masculino
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="tipo[]" value="Outro" />
+                                    <input type="checkbox" name="tipo" value="Outro" />
                                     Outro
                                 </label>
                             </div>
@@ -596,30 +593,32 @@ $conn->close();
                             </div>
                         </div>
                         <!-- Seção do Formulário 3 -->
-                        <div id="step-3" class="section-container form-container">
-                        <div class="progress-bar">
-                            <div class="progress" id="progress-bar-3"></div>
-                        </div>
-                        <h2>Onde você gostaria de ser atendido(a)?</h2>
-                        <div class="service-list">
-                            <label>
-                                <input type="radio" name="atendimento" value="em-casa" required />
-                                Em casa
-                            </label>
-                            <label>
-                                <input type="radio" name="atendimento" value="espaco-profissional" required />
-                                Espaço do Profissional
-                            </label>
-                            <label>
-                                <input type="radio" name="atendimento" value="sem-preferencia" required />
-                                Sem Preferência
-                            </label>
-                        </div>
-                        <div class="buttons">
-                            <button type="button" onclick="prevStep()">Voltar</button>
-                            <button type="button" onclick="nextStep()">Continuar</button>
-                        </div>
-                        </div>
+          <div id="step-3" class="section-container form-container">
+            <div class="progress-bar">
+              <div class="progress" id="progress-bar-3"></div>
+            </div>
+            
+            <h2>Onde você gostaria de ser atendido(a)?</h2>
+            <div class="service-list">
+              <label>
+                <input type="radio" name="atendimento" value="Em Casa" required />
+                Em casa
+              </label>
+              <label>
+                <input type="radio" name="atendimento" value="Espaço Profissional" required />
+                Espaço do Profissional
+              </label>
+              <label>
+                <input type="radio" name="atendimento" value="Sem Preferencia" required />
+                Sem Preferência
+              </label>
+            </div>
+            <div class="buttons">
+              <button type="button" onclick="prevStep()">Voltar</button>
+              <button type="button" onclick="nextStep()">Continuar</button>
+            </div>
+            
+          </div>
                         <!-- Seção do Formulário 4 -->
                         <div id="step-4" class="section-container form-container">
                         <div class="progress-bar">
@@ -629,12 +628,12 @@ $conn->close();
                         <div class="service-list">
                             <select name="urgencia" id="urgencia" required>
                                 <option value="" disabled selected>Selecione uma opção</option>
-                                <option value="urgent">Urgente</option>
-                                <option value="8horas">Próximas 8 horas</option>
-                                <option value="12horas">Próximas 12 horas</option>
-                                <option value="2dias">Próximas 2 dias</option>
-                                <option value="semana">Próxima Semana</option>
-                                <option value="not-urgent">Não Urgente</option>
+                                <option value="Urgente">Urgente</option>
+                                <option value="8 horas">Próximas 8 horas</option>
+                                <option value="12 horas">Próximas 12 horas</option>
+                                <option value="2 dias">Próximas 2 dias</option>
+                                <option value="Semana">Próxima Semana</option>
+                                <option value="Não Urgente">Não Urgente</option>
                             </select>
                         </div>
                         <div class="buttons">
@@ -675,6 +674,7 @@ $conn->close();
         type="text"
         name="cep"
         id="cep"
+        value="<?php echo htmlspecialchars($cep); ?>" 
         placeholder="Digite seu CEP"
         required
         pattern="\d{5}-\d{3}" 

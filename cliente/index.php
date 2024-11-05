@@ -32,8 +32,8 @@ $result = $conn->query($sql);
 $profissionais = [
   'Barbeiro' => [],
   'Maquiagem' => [],
-  'Lash_Designer' => [],
-  'Nail_Designer' => [],
+  'Lash Designer' => [],
+  'Nail Designer' => [],
   'Trancista' => [],
   'Esteticista' => [],
   'Cabeleireira' => [],
@@ -52,9 +52,21 @@ if ($result->num_rows > 0) {
   echo "Nenhum profissional encontrado.";
 }
 
+// Selecionar apenas 3 profissionais aleatórios por categoria
+$profissionais_selecionados = [];
+foreach ($profissionais as $servico => $lista) {
+  if (count($lista) > 3) {
+    shuffle($lista); // Embaralha os profissionais
+    $profissionais_selecionados[$servico] = array_slice($lista, 0, 3); // Pega os 3 primeiros após embaralhar
+  } else {
+    $profissionais_selecionados[$servico] = $lista;
+  }
+}
+
 // Fechar conexão
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -572,7 +584,28 @@ $conn->close();
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    // Função para mostrar um perfil de cada vez
+    let currentIndex = 0;
+    const perfis = document.querySelectorAll('.perfil');
 
+    function showNextPerfil() {
+      // Esconde o perfil atual
+      perfis[currentIndex].style.display = 'none';
+
+      // Calcula o próximo perfil
+      currentIndex = (currentIndex + 1) % perfis.length;
+
+      // Exibe o próximo perfil
+      perfis[currentIndex].style.display = 'block';
+    }
+
+    // Inicia mostrando o primeiro perfil
+    perfis[currentIndex].style.display = 'block';
+
+    // Alterna os perfis a cada 90 segundos (90000 milissegundos)
+    setInterval(showNextPerfil, 90000);
+  </script>
 </body>
 
 </html>

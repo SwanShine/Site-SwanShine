@@ -66,7 +66,7 @@ $tipo = isset($_POST['tipo']) ? (is_array($_POST['tipo']) ? implode(', ', $_POST
 
 insertOrder(
     $conn,
-    "Barbeiro", // Valor fixo para serviços
+    "Lash Designer", // Valor fixo para serviços
     $tipo, // Tipo de serviço
     $_POST['estilo'] ?? '', // Estilo, caso exista
     $_POST['atendimento'] ?? '', // Atendimento, caso exista

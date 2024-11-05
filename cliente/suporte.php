@@ -26,7 +26,7 @@ if ($conn->connect_error) {
 $email = $_SESSION['user_email'];
 
 // Usar prepared statements para buscar o cliente pelo email
-$stmt = $conn->prepare("SELECT nome, endereco, email, cpf, telefone, genero, imagem FROM clientes WHERE email = ?");
+$stmt = $conn->prepare("SELECT nome, endereco, email, cpf, telefone, genero, imagem, cep FROM clientes WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 
@@ -43,8 +43,9 @@ if ($result->num_rows > 0) {
   $telefone = $row['telefone'];
   $genero = $row['genero'];
   $imagem = $row['imagem']; // Obter a imagem como BLOB
+  $cep = $row['cep'];
 } else {
-  $nome = $endereco = $email = $cpf = $telefone = $genero = "Não encontrado";
+  $nome = $endereco = $email = $cpf = $telefone = $genero = $cep = "Não encontrado";
   $imagem = null; // Imagem padrão caso não haja
 }
 

@@ -33,21 +33,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cpf = $_POST['cpf'] ?? '';
     $telefone = $_POST['phone'] ?? '';
     $genero = $_POST['gender'] ?? '';
+    $cep = $_POST['cep'] ?? '';
 
     // Preparar a consulta SQL para atualizar os dados na tabela clientes
     $sql = "UPDATE clientes 
-            SET nome = ?, endereco = ?, cpf = ?, telefone = ?, genero = ? 
+            SET nome = ?, endereco = ?, cpf = ?, telefone = ?, genero = ?, cep = ?  
             WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
         $stmt->bind_param(
-            "ssssss",
+            "sssssss",
             $nome,
             $endereco,
             $cpf,
             $telefone,
             $genero,
+            $cep,
             $email
         );
 

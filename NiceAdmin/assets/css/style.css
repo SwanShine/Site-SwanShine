@@ -7,18 +7,18 @@
 }
 
 body {
-  font-family: "Montserrat","Inter", sans-serif;
+  font-family:"Inter", "Montserrat", "Poppins", sans-serif;
   background: #f6f9ff;
   color: #444444;
 }
 
 a {
-  color: #ff66c4;
+  color: #ff6a7e;
   text-decoration: none;
 }
 
 a:hover {
-  color: #ffde59;
+  color: #ff6a7e;
   text-decoration: none;
 }
 
@@ -28,7 +28,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Montserrat", "Inter", sans-serif;
+  font-family:"Inter", "Montserrat", "Poppins", sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -124,7 +124,7 @@ h6 {
 }
 
 .dropdown-menu .dropdown-divider {
-  color: #ff66c4;
+  color: #ff6a7e;
   margin: 0;
 }
 
@@ -185,7 +185,7 @@ h6 {
 .card-footer {
   border-color: #ebeef4;
   background-color: #fff;
-  color: #ff66c4;
+  color: #ff6a7e;
   padding: 15px;
 }
 
@@ -193,12 +193,12 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #000;
-  font-family: "Montserrat","Inter", sans-serif;
+  color: #012970;
+  font-family: "Inter", "Montserrat", "Poppins", sans-serif;
 }
 
 .card-title span {
-  color: #ff66c4;
+  color: #ff6a7e;
   font-size: 14px;
   font-weight: 400;
 }
@@ -214,7 +214,7 @@ h6 {
 /* Alerts */
 .alert-heading {
   font-weight: 500;
-  font-family:  "Montserrat", "Inter", sans-serif;
+  font-family: "Inter", "Montserrat", "Poppins", sans-serif;
   font-size: 20px;
 }
 
@@ -227,7 +227,6 @@ h6 {
   outline: 0;
   box-shadow: none;
 }
-
 
 
 /*--------------------------------------------------------------
@@ -256,7 +255,7 @@ h6 {
   font-size: 26px; /* Tamanho da fonte do texto do logo */
   font-weight: 700; /* Define o peso da fonte para deixá-la mais grossa */
   color: #ff66c4; /* Cor do texto do logo */
-  font-family:  "Montserrat", "Inter", sans-serif; /* Fonte específica para o texto do logo */
+  font-family: "Inter", "Montserrat", "Poppins", sans-serif; /* Fonte específica para o texto do logo */
 }
 
 /* Estilo para o container do cabeçalho */
@@ -279,7 +278,7 @@ h6 {
 }
 
 .header .toggle-sidebar-btn:hover {
-  color: #ff66c4; /* Altera a cor do ícone ao passar o mouse */
+  color: #012970; /* Altera a cor do ícone ao passar o mouse */
 }
 
 /*--------------------------------------------------------------
@@ -297,14 +296,14 @@ h6 {
 /* Estilo para os ícones da barra de navegação */
 .header-nav .nav-icon {
   font-size: 22px; /* Define o tamanho dos ícones */
-  color: #ff66c4; /* Cor padrão dos ícones */
+  color: #012970; /* Cor padrão dos ícones */
   margin-right: 25px; /* Espaçamento à direita dos ícones */
   position: relative; /* Torna possível o uso do badge (número) */
 }
 
 /* Estilo para o ícone de perfil na barra de navegação */
 .header-nav .nav-profile {
-  color: #ff66c4; /* Cor do ícone de perfil */
+  color: #012970; /* Cor do ícone de perfil */
 }
 
 .header-nav .nav-profile img {
@@ -735,7 +734,7 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #ff66c4;
+  color: #4154f1;
   transition: 0.3;
   background: #f6f9ff;
   padding: 10px 15px;
@@ -745,11 +744,11 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #ff66c4;
+  color: #4154f1;
 }
 
 .sidebar-nav .nav-link.collapsed {
-  color: #ff66c4;
+  color: #012970;
   background: #fff;
 }
 
@@ -786,7 +785,7 @@ h6 {
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #ff66c4;
+  color: #012970;
   transition: 0.3;
   padding: 10px 0 10px 40px;
   transition: 0.3s;
@@ -801,13 +800,20 @@ h6 {
 
 .sidebar-nav .nav-content a:hover,
 .sidebar-nav .nav-content a.active {
-  color: #ff66c4;
+  color: #4154f1;
 }
 
 .sidebar-nav .nav-content a.active i {
-  background-color: #ff66c4;
+  background-color: #4154f1;
 }
 
+/*--------------------------------------------------------------
+# Dashboard
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Icons list page
+--------------------------------------------------------------*/
 /*--------------------------------------------------------------
 # General Styles for All Devices
 --------------------------------------------------------------*/
@@ -885,7 +891,7 @@ h6 {
 
 /* Estilo para os campos de entrada ao passar o mouse ou focar */
 .profile-input:focus {
-  border-color: #ff66c4; /* Cor da borda quando o campo de entrada está em foco */
+  border-color: #007bff; /* Cor da borda quando o campo de entrada está em foco */
 }
 
 /* Estilo para a área de texto "Sobre" */
@@ -901,7 +907,7 @@ h6 {
 
 /* Estilo para o botão de ação ao passar o mouse */
 .btn-primary:hover {
-  background-color: #ff66c4; /* Cor de fundo do botão ao passar o mouse */
+  background-color: #0056b3; /* Cor de fundo do botão ao passar o mouse */
 }
 
 
@@ -1068,6 +1074,18 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# F.A.Q Page
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Error 404
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 .footer {
@@ -1079,9 +1097,241 @@ h6 {
 
 .footer .copyright {
   text-align: center;
-  color: #ff66c4;
+  color: #012970;
 }
 
+/*--------------------------------------------------------------
+# Cadastre seu Serviço
+--------------------------------------------------------------*/
+
+/* Estilo para o layout do formulário e da tabela */
+.section {
+  display: flex; /* Utiliza o Flexbox para layout flexível */
+  flex-wrap: wrap; /* Permite que os itens quebrem linha se necessário */
+  gap: 20px; /* Espaço entre os itens */
+  padding: 10px; /* Espaçamento interno da seção */
+}
+
+/* Estilo para o contêiner do formulário */
+.form-container {
+  flex: 1; /* Permite que o contêiner ocupe a largura disponível */
+  padding: 20px; /* Espaçamento interno do contêiner do formulário */
+  background-color: #f9f9f9; /* Cor de fundo do contêiner do formulário */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+/* Estilo para o contêiner da tabela */
+.table-container {
+  flex: 1; /* Permite que o contêiner ocupe a largura disponível */
+  padding: 20px; /* Espaçamento interno do contêiner da tabela */
+}
+
+/* Define o estilo do container que agrupa os campos do formulário */
+.form-row {
+  display: flex; /* Utiliza o Flexbox para alinhamento horizontal */
+  flex-wrap: wrap; /* Permite que os itens quebrem linha conforme necessário */
+  gap: 20px; /* Espaço entre os itens do Flexbox */
+  margin-bottom: 20px; /* Espaço abaixo dos grupos de entrada */
+}
+
+/* Define o estilo para grupos de entrada (label e input/select juntos) */
+.input-group {
+  flex: 1; /* Permite que o grupo de entrada ocupe a largura disponível */
+  display: flex; /* Utiliza Flexbox para alinhamento horizontal */
+  flex-direction: column; /* Alinha os itens verticalmente em telas pequenas */
+  align-items: flex-start; /* Alinha os itens ao início do eixo principal */
+  width: 100%; /* Faz o grupo de entrada ocupar toda a largura disponível */
+  margin-bottom: 20px; /* Espaço abaixo do grupo de entrada */
+}
+
+/* Estilo das labels dentro dos grupos de entrada */
+.input-group label {
+  margin-bottom: 15px; /* Espaço abaixo da label */
+  color: #000; /* Cor do texto da label */
+  font-weight: bold; /* Texto em negrito */
+  font-size: 1.25rem; /* Tamanho da fonte da label (20px) */
+}
+
+/* Estilo para inputs e selects dentro dos grupos de entrada */
+.input-group input,
+.input-group select {
+  width: 100%; /* Faz o input/select ocupar toda a largura disponível */
+  height: 2.5rem; /* Altura dos inputs/selects (40px) */
+  padding: 0.5rem; /* Espaçamento interno dos inputs/selects (8px) */
+  font-size: 1rem; /* Tamanho da fonte dos inputs/selects (16px) */
+  border-radius: 5px; /* Bordas arredondadas */
+  border: 2px solid #FF008A; /* Aumenta a espessura e cor da borda dos inputs/selects */
+  transition: border-color 0.3s ease; /* Transição suave na mudança de cor da borda */
+}
+
+/* Estilo para inputs/selects quando estão focados */
+.input-group input:focus,
+.input-group select:focus {
+  border-color: #FF008A; /* Cor da borda ao focar no input/select */
+  outline: none; /* Remove o contorno padrão ao focar */
+}
+
+/* Estilo para o botão dentro dos grupos de entrada */
+.input-group button {
+  width: 100%; /* Largura do botão */
+  height: 2.5rem; /* Altura do botão (40px) */
+  background-color: #FF008A; /* Cor de fundo do botão */
+  color: #fff; /* Cor do texto do botão */
+  border: none; /* Remove a borda padrão do botão */
+  border-radius: 50px; /* Bordas arredondadas do botão */
+  cursor: pointer; /* Cursor de ponteiro ao passar sobre o botão */
+  font-size: 1rem; /* Tamanho da fonte do botão (16px) */
+  transition: background-color 0.3s ease; /* Transição suave na mudança de cor do fundo */
+}
+
+/* Estilo para o botão ao passar o mouse sobre ele */
+.input-group button:hover {
+  background-color: #e6007e; /* Cor de fundo do botão ao passar o mouse */
+}
+
+/* Media queries para telas menores */
+@media (max-width: 575px) {
+  .input-group {
+    flex-direction: column; /* Alinha os itens verticalmente em telas menores */
+  }
+
+  .input-group label {
+    width: 100%; /* Largura total para labels em telas menores */
+    margin-right: 0; /* Remove o espaço à direita da label */
+  }
+
+  .input-group button {
+    margin-left: 0; /* Remove o espaço à esquerda do botão em telas menores */
+  }
+}
+
+/* Media queries para telas maiores */
+@media (min-width: 576px) {
+  .input-group {
+    flex-direction: row; /* Alinha os itens horizontalmente em telas maiores */
+    align-items: center; /* Alinha os itens ao centro do eixo principal */
+  }
+
+  .input-group label {
+    width: 130px; /* Largura fixa para as labels em telas maiores */
+    margin-right: 15px; /* Espaço à direita da label */
+    margin-bottom: 0; /* Remove o espaço abaixo da label */
+  }
+
+  .input-group button {
+    width: auto; /* Largura automática para o botão em telas maiores */
+    margin-left: 10px; /* Espaço à esquerda do botão */
+  }
+}
+
+/* Estilo para garantir que o form e a tabela fiquem lado a lado em telas grandes */
+@media (min-width: 992px) {
+  .form-container, .table-container {
+    flex: 0 0 50%; /* Define a largura dos contêineres como 50% do pai */
+    max-width: 50%; /* Define a largura máxima dos contêineres como 50% do pai */
+  }
+}
+
+/*--------------------------------------------------------------
+# Serviço Cadastrado
+--------------------------------------------------------------*/
+
+/* Estilo geral para o container dos serviços */
+#servicos-container {
+  display: flex; /* Utiliza Flexbox para layout flexível */
+  flex-wrap: wrap; /* Permite que os cards quebrem linha se necessário */
+  gap: 15px; /* Espaço entre os cards */
+}
+
+/* Estilo para os cards individuais */
+.card {
+  background-color: #fff; /* Cor de fundo do card */
+  border: 2px solid #000; /* Borda leve ao redor do card */
+  border-radius: 10px; /* Bordas arredondadas */
+  overflow: hidden; /* Esconde o conteúdo que ultrapassa as bordas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  transition: box-shadow 0.3s ease; /* Transição suave na sombra */
+  position: relative; /* Para posicionamento dos botões de edição e exclusão */
+}
+
+/* Estilo para a imagem do card */
+.card-img-top {
+  width: 100%; /* Largura total da imagem */
+  height: 200px; /* Altura fixa da imagem */
+  object-fit: cover; /* Cobre a área do card */
+}
+
+/* Estilo para o corpo do card */
+.card-body {
+  padding: 15px; /* Espaçamento interno do corpo do card */
+}
+
+/* Estilo para o título do card */
+.card-title {
+  font-size: 1.25rem; /* Tamanho da fonte do título */
+  margin-bottom: 10px; /* Espaço abaixo do título */
+}
+
+/* Estilo para o texto do card */
+.card-text {
+  font-size: 1rem; /* Tamanho da fonte do texto */
+  color: #333; /* Cor do texto */
+  margin-bottom: 10px; /* Espaço abaixo do texto */
+}
+
+/* Estilo para o contêiner dos botões de edição e exclusão */
+.card-body .d-flex {
+  margin-top: 15px; /* Espaço acima dos botões */
+}
+
+/* Estilo dos botões de edição e exclusão */
+.card-body .btn {
+  font-size: 0.875rem; /* Tamanho da fonte dos botões */
+  padding: 5px 10px; /* Espaçamento interno dos botões */
+  border-radius: 5px; /* Bordas arredondadas dos botões */
+  transition: background-color 0.3s ease; /* Transição suave na cor de fundo */
+}
+
+/* Cor do botão de editar */
+.btn-warning {
+  background-color: #f0ad4e; /* Cor de fundo do botão de editar */
+  border: none; /* Remove a borda padrão */
+  color: #fff; /* Cor do texto do botão */
+}
+
+/* Cor do botão de excluir */
+.btn-danger {
+  background-color: #d9534f; /* Cor de fundo do botão de excluir */
+  border: none; /* Remove a borda padrão */
+  color: #fff; /* Cor do texto do botão */
+}
+
+/* Estilo para o botão de editar ao passar o mouse */
+.btn-warning:hover {
+  background-color: #ec971f; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para o botão de excluir ao passar o mouse */
+.btn-danger:hover {
+  background-color: #c9302c; /* Cor de fundo ao passar o mouse */
+}
+
+/* Media queries para telas menores */
+@media (max-width: 575px) {
+  /* Ajusta o layout dos cards para telas pequenas */
+  .card {
+    width: 100%; /* Largura total do card */
+    margin-bottom: 15px; /* Espaço abaixo dos cards */
+  }
+}
+
+/* Media queries para telas maiores */
+@media (min-width: 576px) {
+  .card {
+    width: 100%; /* Largura dos cards em telas maiores */
+  }
+}
 
 /*PEDIDOS*/
 
@@ -1119,7 +1369,7 @@ h6 {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #ff66c4; /* Cor de fundo azul */
+  background: #007bff; /* Cor de fundo azul */
   color: #fff;
   padding: 5px 10px;
   border-radius: 5px;
@@ -1159,7 +1409,7 @@ h6 {
 
 /* Estilos para os botões */
 .button {
-  background-color: #ff66c4; /* Cor azul */
+  background-color: #007bff; /* Cor azul */
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -1172,11 +1422,11 @@ h6 {
 }
 
 .button:hover {
-  background-color: #ff66c4; /* Azul mais escuro ao passar o mouse */
+  background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
 }
 
 .button:active {
-  background-color: #ff66c4; /* Azul ainda mais escuro ao clicar */
+  background-color: #003f7f; /* Azul ainda mais escuro ao clicar */
 }
 
 /* Estilos para os campos do card */
@@ -1211,3 +1461,4 @@ h6 {
     padding: 15px;
   }
 }
+
