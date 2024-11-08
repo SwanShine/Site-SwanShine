@@ -131,6 +131,208 @@ $conn->close();
     <!-- Link para o arquivo CSS -->
 
     <style>
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.section.dashboard {
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Cartões */
+.card-container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 10px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 calc(30% - 20px);
+    position: relative;
+}
+
+.status {
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.servico-destaque {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    margin: 5px 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    margin-top: 10px;
+    margin-bottom: 90px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button.orcamento {
+    background-color: #4caf50;
+    color: white;
+}
+
+.button.orcamento:hover {
+    background-color: #45a049;
+}
+
+.button.recusar {
+    background-color: #f44336;
+    color: white;
+}
+
+.button.recusar:hover {
+    background-color: #e53935;
+}
+
+/* Estilos para telas pequenas (320px) */
+@media (max-width: 320px) {
+    .card {
+        padding: 8px;
+        flex: 1 1 calc(100% - 20px); /* 1 cartão por linha */
+    }
+
+    .titulo {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    .servico-destaque {
+        font-size: 1em;
+    }
+
+    .card-content p {
+        font-size: 0.85em;
+        margin: 3px 0;
+    }
+
+    .button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+
+    .status {
+        font-size: 0.85em;
+    }
+
+    .buttons {
+        gap: 5px;
+    }
+
+    .close-card {
+        font-size: 0.8em;
+        top: 8px;
+        right: 8px;
+    }
+}
+
+/* Estilos para 375px */
+@media (max-width: 375px) {
+    .card {
+        padding: 10px;
+        flex: 1 1 calc(100% - 20px); /* 1 cartão por linha */
+    }
+
+    .titulo {
+        font-size: 1.3em;
+    }
+
+    .servico-destaque {
+        font-size: 1.1em;
+    }
+
+    .card-content p {
+        font-size: 0.9em;
+        margin: 4px 0;
+    }
+
+    .button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+    .status {
+        font-size: 0.9em;
+    }
+
+    .buttons {
+        gap: 8px;
+    }
+
+    .close-card {
+        font-size: 0.9em;
+    }
+}
+
+/* Estilos para 425px */
+@media (max-width: 425px) {
+    .card {
+        padding: 12px;
+        flex: 1 1 calc(50% - 20px); /* 2 cartões por linha */
+    }
+
+    .titulo {
+        font-size: 1.4em;
+    }
+
+    .servico-destaque {
+        font-size: 1.1em;
+    }
+
+    .card-content p {
+        font-size: 1em;
+        margin: 5px 0;
+    }
+
+    .button {
+        padding: 10px 18px;
+        font-size: 1em;
+    }
+
+    .status {
+        font-size: 1em;
+    }
+
+    .buttons {
+        gap: 10px;
+    }
+
+    .close-card {
+        font-size: 1em;
+    }
+}
 
     </style>
 

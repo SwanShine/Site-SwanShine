@@ -110,219 +110,207 @@ $conn->close();
   <link href="../assets/css/services.css" rel="stylesheet">
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
 
-    .section.dashboard {
-      padding: 20px;
-    }
+.section.dashboard {
+    padding: 20px;
+}
 
-    .row {
-      display: flex;
-      justify-content: center;
-    }
+.row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que os cartões se movam para a linha seguinte */
+}
 
-    .cabody {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
+.card-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px;
+}
 
-    .section.dashboard {
-      padding: 20px;
-    }
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    .row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      /* Permite que os cartões se movam para a linha seguinte */
-    }
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 min(30%, 300px); /* Melhor controle de largura */
+    position: relative;
+}
 
+.status {
+    font-weight: bold;
+    padding: 8px 12px; /* Reduz o padding */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 1em; /* Reduz o tamanho da fonte */
+}
+
+.servico-destaque {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    margin: 5px 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button.orcamento {
+    background-color: #4caf50;
+    color: white;
+}
+
+.button.orcamento:hover {
+    background-color: #45a049;
+}
+
+.button.excluir {
+    background-color: #f44336;
+    color: white;
+}
+
+.button.excluir:hover {
+    background-color: #e53935;
+}
+
+.no-pedidos {
+    text-align: center;
+}
+
+.close-card {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Estilos responsivos */
+@media (max-width: 1200px) {
     .card-container {
-      max-width: 1200px;
-      width: 100%;
-      padding: 10px;
-      /* Espaçamento lateral */
-    }
-
-    .titulo {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin: 10px;
-      /* Margem ao redor dos cartões */
-      flex: 1 1 calc(30% - 20px);
-      /* Cada cartão ocupará cerca de 30% da largura, com espaçamento */
-      position: relative;
-    }
-
-    .status {
-      font-weight: bold;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      display: inline-block;
-    }
-
-    .servico-destaque {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .card-content p {
-      margin: 5px 0;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    .button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .button.orcamento {
-      background-color: #4caf50;
-      color: white;
-    }
-
-    .button.orcamento:hover {
-      background-color: #45a049;
-    }
-
-    .button.excluir {
-      background-color: #f44336;
-      color: white;
-    }
-
-    .button.excluir:hover {
-      background-color: #e53935;
-    }
-
-    .no-pedidos {
-      text-align: center;
-    }
-
-    .close-card {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-    }
-
-    /* Estilos responsivos */
-    @media (max-width: 1200px) {
-      .card-container {
         max-width: 100%;
-      }
     }
+}
 
-    @media (max-width: 768px) {
-      .card {
+@media (max-width: 768px) {
+    .card {
         padding: 15px;
         flex: 1 1 calc(45% - 20px);
-        /* Ajusta a largura dos cartões em telas médias */
-      }
-
-      .servico-destaque {
-        font-size: 1.1em;
-      }
-
-      .buttons {
-        flex-direction: column;
-      }
-
-      .button {
-        width: 100%;
-        /* Botões ocupam toda a largura */
-        text-align: center;
-      }
     }
+    .buttons {
+        flex-direction: column;
+    }
+}
 
-    @media (max-width: 480px) {
-      .card {
+@media (max-width: 480px) {
+    .card {
         padding: 10px;
         flex: 1 1 calc(50% - 20px);
-        /* Ajusta a largura dos cartões em telas menores */
-      }
-
-      .titulo {
-        font-size: 1.5em;
-      }
-
-      .servico-destaque {
-        font-size: 1em;
-      }
-
-      .button {
-        padding: 8px 16px;
-      }
-
-      .status {
-        font-size: 0.9em;
-      }
     }
+    .titulo {
+        font-size: 1.5em;
+    }
+}
 
-    /* Estilos para 320px */
-    @media (max-width: 320px) {
-      .card {
+@media (max-width: 425px) {
+    .card {
+        padding: 12px;
+        flex: 1 1 calc(50% - 20px); /* Ajusta para 2 cartões por linha */
+    }
+    .titulo {
+        font-size: 1.4em;
+    }
+    .servico-destaque {
+        font-size: 1.1em;
+    }
+    .status {
+        font-size: 0.95em; /* Menor para telas menores */
+        padding: 6px 10px; /* Reduz ainda mais o padding */
+    }
+    .button {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 375px) {
+    .card {
+        padding: 10px;
+        flex: 1 1 calc(100% - 20px); /* Ajusta para 1 cartão por linha */
+    }
+    .titulo {
+        font-size: 1.3em;
+    }
+    .servico-destaque {
+        font-size: 1em;
+    }
+    .status {
+        font-size: 0.9em; /* Tamanho de fonte menor */
+        padding: 5px 8px; /* Ajuste o padding para se ajustar à tela */
+    }
+    .button {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 320px) {
+    .card {
         padding: 8px;
-        flex: 1 1 calc(100% - 20px);
-        /* Ajusta para 1 cartão por linha em telas muito pequenas */
-      }
-
-      .titulo {
+        flex: 1 1 calc(100% - 20px); /* Ajusta para 1 cartão por linha em telas muito pequenas */
+    }
+    .titulo {
         font-size: 1.2em;
-        margin-bottom: 10px;
-      }
-
-      .servico-destaque {
+    }
+    .servico-destaque {
         font-size: 0.9em;
-      }
-
-      .card-content p {
+    }
+    .card-content p {
         font-size: 0.85em;
         margin: 3px 0;
-      }
-
-      .button {
+    }
+    .button {
         padding: 6px 12px;
         font-size: 0.85em;
-      }
-
-      .status {
+    }
+    .status {
         font-size: 0.85em;
-      }
-
-      .buttons {
+        padding: 4px 6px; /* Padding bem reduzido */
+    }
+    .buttons {
         gap: 5px;
-      }
-
-      .close-card {
+    }
+    .close-card {
         font-size: 0.8em;
         top: 8px;
         right: 8px;
-      }
     }
-  </style>
+}
+
+    </style>
+
 
 </head>
 

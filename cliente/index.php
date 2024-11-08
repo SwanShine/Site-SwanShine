@@ -529,7 +529,7 @@ $conn->close();
                               <?php endif; ?>
                             </p>
                           </div>
-                          <a href="mensagem.php?id=<?php echo urlencode($profissional['id']); ?>" class="btn btn-primary card-button">
+                          <a href="mensagens/index.html?id=<?php echo urlencode($profissional['id']); ?>" class="btn btn-primary card-button">
                             <i class="fas fa-envelope"></i> Enviar Mensagem
                           </a>
                         </div>
