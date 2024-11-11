@@ -91,7 +91,10 @@ try {
             if ($stmt->affected_rows > 0) {
                 // Commit da transação
                 $conn->commit();
-                echo "Pedido concluído com sucesso! O profissional foi notificado.";
+
+                // Redirecionar para a página 'pedido_concluido.php'
+                header('Location: ../../pedidos/pedido_concluido.php?id=' . $pedido_id);
+                exit();
             } else {
                 throw new Exception("Erro ao enviar a mensagem para o profissional.");
             }

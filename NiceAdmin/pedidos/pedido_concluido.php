@@ -56,6 +56,20 @@ $stmt->execute();
 $result = $stmt->get_result();
 $pedidos = $result->fetch_all(MYSQLI_ASSOC); // Obter todos os pedidos como array associativo
 
+// Obter notificações de mensagens não lidas para o profissional logado
+$profissional_id = $_SESSION['profissional_id'];
+$query_notificacoes = "SELECT conteudo, data_envio FROM mensagens WHERE profissional_id = ? AND lida = 0 ORDER BY data_envio DESC LIMIT 5";
+$stmt_notificacoes = $conn->prepare($query_notificacoes);
+$stmt_notificacoes->bind_param("i", $profissional_id);
+$stmt_notificacoes->execute();
+$result_notificacoes = $stmt_notificacoes->get_result();
+
+// Armazenar todas as notificações não lidas em um array
+$notificacoes = $result_notificacoes->fetch_all(MYSQLI_ASSOC);
+
+// Contar o número de notificações não lidas para exibir no badge de notificações
+$num_notificacoes = count($notificacoes);
+
 // Fechar a conexão
 $stmt->close();
 $conn->close();
@@ -331,6 +345,195 @@ if (isset($_SESSION['recusados'])) {
             }
         }
     </style>
+    <style>
+        /* Estilos gerais */
+        .nav-item .nav-link.nav-icon {
+            position: relative;
+            /* Faz com que o ícone de notificação seja posicionado em relação ao seu contêiner pai */
+            padding: 0.5rem;
+            /* Adiciona preenchimento ao redor do ícone de notificação */
+            font-size: 20px;
+            /* Define o tamanho da fonte para o ícone de notificação */
+        }
+
+        .nav-item .badge-number {
+            position: absolute;
+            /* Posiciona o número de notificações de forma absoluta dentro do contêiner */
+            top: 0;
+            /* Coloca o número no topo */
+            right: 0;
+            /* Coloca o número no canto direito */
+            font-size: 12px;
+            /* Define o tamanho da fonte do número */
+            padding: 4px 6px;
+            /* Adiciona um preenchimento ao redor do número */
+            border-radius: 50%;
+            /* Faz o número aparecer dentro de um círculo */
+        }
+
+        .dropdown-menu.notifications {
+            width: 280px;
+            /* Define a largura do menu suspenso de notificações */
+            max-width: 1000%;
+            /* Isso efetivamente desabilita qualquer limite de largura máxima */
+            padding: 0;
+            /* Remove qualquer preenchimento dentro do menu suspenso */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            /* Adiciona uma sombra suave para dar profundidade ao menu */
+        }
+
+        .dropdown-menu .dropdown-header {
+            font-weight: bold;
+            /* Deixa o texto no cabeçalho em negrito */
+            font-size: 14px;
+            /* Define o tamanho da fonte para o cabeçalho */
+            padding: 10px;
+            /* Adiciona um preenchimento dentro do cabeçalho */
+            border-bottom: 1px solid #ddd;
+            /* Adiciona uma linha de separação abaixo do cabeçalho */
+            display: flex;
+            /* Usa flexbox para o layout */
+            justify-content: space-between;
+            /* Espaça igualmente os itens no cabeçalho */
+            align-items: center;
+            /* Alinha os itens verticalmente ao centro */
+        }
+
+        .dropdown-menu .dropdown-footer {
+            text-align: center;
+            /* Centraliza o texto no rodapé */
+            padding: 10px;
+            /* Adiciona um preenchimento ao rodapé */
+            font-size: 14px;
+            /* Define o tamanho da fonte para o rodapé */
+            color: #007bff;
+            /* Define a cor do texto como azul */
+        }
+
+        .dropdown-menu .dropdown-footer a {
+            color: inherit;
+            /* Faz com que o link herde a cor do texto do rodapé */
+            text-decoration: none;
+            /* Remove o sublinhado do link */
+        }
+
+        /* Notificação individual */
+        .dropdown-menu li a {
+            display: flex;
+            /* Exibe as notificações em um layout flexível */
+            padding: 10px;
+            /* Adiciona um preenchimento em torno de cada notificação */
+            text-decoration: none;
+            /* Remove o sublinhado do link da notificação */
+            color: #333;
+            /* Define a cor do texto como um cinza escuro */
+            transition: background-color 0.3s;
+            /* Adiciona uma transição suave ao mudar a cor de fundo */
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f8f9fa;
+            /* Muda a cor de fundo ao passar o mouse sobre a notificação */
+        }
+
+        .dropdown-menu li a div {
+            display: flex;
+            /* Usa flexbox dentro do item da notificação */
+            flex-direction: column;
+            /* Organiza o conteúdo de forma vertical */
+        }
+
+        .dropdown-menu li a p,
+        .dropdown-menu li a span {
+            margin: 0;
+            /* Remove a margem padrão dos elementos */
+            font-size: 12px;
+            /* Define o tamanho da fonte para 12px */
+        }
+
+        .dropdown-menu li a span {
+            font-weight: 500;
+            /* Deixa o texto em negrito */
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 768px) {
+            .nav-item .nav-link.nav-icon {
+                font-size: 16px;
+                /* Reduz o tamanho do ícone para telas menores */
+            }
+
+            .dropdown-menu.notifications {
+                width: 240px;
+                /* Reduz a largura do menu suspenso para telas menores */
+            }
+        }
+
+        @media (max-width: 425px) {
+            .nav-item .nav-link.nav-icon {
+                font-size: 14px;
+                /* Reduz ainda mais o tamanho do ícone para telas menores */
+            }
+
+            .dropdown-menu.notifications {
+                width: 200px;
+                /* Reduz a largura do menu suspenso para telas ainda menores */
+            }
+
+            .dropdown-menu .dropdown-header,
+            .dropdown-menu .dropdown-footer {
+                font-size: 12px;
+                /* Diminui o tamanho da fonte no cabeçalho e rodapé */
+            }
+
+            .dropdown-menu li a p,
+            .dropdown-menu li a span {
+                font-size: 11px;
+                /* Diminui o tamanho da fonte dos elementos de notificação */
+            }
+        }
+
+        @media (max-width: 375px) {
+            .nav-item .nav-link.nav-icon {
+                font-size: 13px;
+                /* Reduz o tamanho do ícone para telas muito pequenas */
+            }
+
+            .dropdown-menu.notifications {
+                width: 180px;
+                /* Reduz ainda mais a largura do menu suspenso para telas pequenas */
+            }
+
+            .badge-number {
+                font-size: 10px;
+                /* Reduz o tamanho da fonte do número de notificações */
+            }
+        }
+
+        @media (max-width: 32px) {
+            .nav-item .nav-link.nav-icon {
+                font-size: 12px;
+                /* Define o tamanho do ícone para telas muito pequenas */
+            }
+
+            .dropdown-menu.notifications {
+                width: 100px;
+                /* Reduz drasticamente a largura do menu suspenso para telas super pequenas */
+            }
+
+            .dropdown-menu .dropdown-header,
+            .dropdown-menu .dropdown-footer {
+                font-size: 10px;
+                /* Reduz o tamanho da fonte no cabeçalho e rodapé */
+            }
+
+            .badge-number {
+                font-size: 8px;
+                /* Reduz o tamanho da fonte do número de notificações para telas muito pequenas */
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -351,17 +554,34 @@ if (isset($_SESSION['recusados'])) {
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-bell"></i>
-                        <span class="badge bg-primary badge-number">0</span>
+                        <span class="badge bg-primary badge-number"><?= $num_notificacoes ?></span>
                     </a>
 
-                    <ul
-                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                         <li class="dropdown-header">
-                            Você tem 0 notificações
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+                            Você tem <?= $num_notificacoes ?> notificações
+                            <a href="../forms/marcar_notificacoes_como_lidas.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                         </li>
+
+                        <?php if ($num_notificacoes > 0): ?>
+                            <?php foreach ($notificacoes as $notificacao): ?>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                            <p class="small text-muted mb-0"><?= $notificacao['data_envio'] ?></p>
+                                            <span><?= $notificacao['conteudo'] ?></span>
+                                        </div>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <li class="dropdown-footer">
+                                Nenhuma nova notificação
+                            </li>
+                        <?php endif; ?>
+
                         <li class="dropdown-footer">
-                            <a href="#">Mostrar todas as notificações</a>
+                            <a href="../forms/marcar_notificacoes_como_lidas.php">Mostrar todas as notificações</a>
                         </li>
                     </ul>
                 </li>

@@ -46,16 +46,24 @@ if ($result->num_rows === 0) {
 $update_query = "UPDATE pedidos SET status = 'Pendente' WHERE id = ?";
 $stmt_update = $conn->prepare($update_query);
 $stmt_update->bind_param('i', $id_pedido);
-if ($stmt_update->execute()) {
+
+// Apagar os orçamentos associados ao pedido
+$delete_orcamento_query = "DELETE FROM orcamentos WHERE pedido_id = ?";
+$stmt_delete_orcamento = $conn->prepare($delete_orcamento_query);
+$stmt_delete_orcamento->bind_param('i', $id_pedido);
+
+// Executar as atualizações
+if ($stmt_update->execute() && $stmt_delete_orcamento->execute()) {
     // Redirecionar de volta à página principal com uma mensagem de sucesso
     header('Location: ../../pedidos/pedido_pendente.php?message=Pedido voltado com sucesso');
 } else {
-    echo "Erro ao atualizar o pedido: " . $conn->error;
+    echo "Erro ao atualizar o pedido ou remover orçamentos: " . $conn->error;
 }
 
-// Fechar a conexão
+// Fechar as conexões
 $stmt->close();
 $stmt_update->close();
+$stmt_delete_orcamento->close();
 $conn->close();
 ?>
 

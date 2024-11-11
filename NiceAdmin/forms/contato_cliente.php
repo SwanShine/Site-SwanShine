@@ -97,9 +97,10 @@ $conn->close();
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #f4f7fc;
             color: #333;
+            line-height: 1.6;
         }
 
         /* Estilos para o container principal */
@@ -117,6 +118,11 @@ $conn->close();
         .breadcrumb a {
             color: #007bff;
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #0056b3;
         }
 
         .breadcrumb-item.active {
@@ -129,6 +135,7 @@ $conn->close();
             font-weight: bold;
             color: #222;
             margin-bottom: 10px;
+            text-transform: capitalize;
         }
 
         /* Estilos para o título da seção */
@@ -151,8 +158,13 @@ $conn->close();
             margin: 0 auto;
             padding: 20px;
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        form:hover {
+            transform: translateY(-5px);
         }
 
         /* Labels e campos de entrada */
@@ -173,13 +185,15 @@ $conn->close();
             border-radius: 8px;
             font-size: 16px;
             color: #333;
-            transition: border-color 0.3s;
+            background-color: #f8f9fa;
+            transition: border-color 0.3s, background-color 0.3s;
         }
 
         form input[type="text"]:hover,
         form input[type="email"]:hover,
         form textarea:hover {
             border-color: #007bff;
+            background-color: #fff;
         }
 
         form input[readonly] {
@@ -203,12 +217,13 @@ $conn->close();
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s ease;
             margin-top: 15px;
         }
 
         form button[type="submit"]:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
         }
 
         /* Responsividade para tablets e telas médias */
@@ -323,6 +338,7 @@ $conn->close();
             }
         }
     </style>
+
 
 
 </head>
@@ -605,7 +621,7 @@ $conn->close();
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Converse com o Profissional</h1>
+            <h1>Converse com o Cliente</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
@@ -616,33 +632,33 @@ $conn->close();
         </div>
         <!-- Services Section -->
         <section id="services" class="services section">
-            <h2>Entre em contato com, <?php echo htmlspecialchars($profissional['nome']); ?></h2>
             <form action="" method="post">
-                <label>Nome:</label>
-                <input type="text" value="<?php echo htmlspecialchars($profissional['nome']); ?>" readonly><br>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($profissional['nome']); ?>"><br>
 
-                <label>Email:</label>
-                <input type="email" value="<?php echo htmlspecialchars($profissional['email']); ?>" readonly><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($profissional['email']); ?>"><br>
 
-                <label>Telefone:</label>
-                <input type="text" value="<?php echo htmlspecialchars($profissional['celular']); ?>" readonly><br>
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" value="<?php echo htmlspecialchars($profissional['celular']); ?>"><br>
 
-                <label>Endereço:</label>
-                <input type="text" value="<?php echo htmlspecialchars($profissional['rua']) . ", " . htmlspecialchars($profissional['numero']); ?>" readonly><br>
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" value="<?php echo htmlspecialchars($profissional['rua']) . ", " . htmlspecialchars($profissional['numero']); ?>"><br>
 
-                <label>CEP:</label>
-                <input type="text" value="<?php echo htmlspecialchars($profissional['cep']); ?>" readonly><br>
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" name="cep" value="<?php echo htmlspecialchars($profissional['cep']); ?>"><br>
 
-                <label>Descrição do serviço:</label>
-                <textarea name="descricao" placeholder="Escreva o que deseja..."></textarea><br>
+                <label for="descricao">Descrição do serviço:</label>
+                <textarea id="descricao" name="descricao" placeholder="Escreva o que deseja..."><?php echo isset($_POST['descricao']) ? htmlspecialchars($_POST['descricao']) : ''; ?></textarea><br>
 
                 <button type="submit" name="enviar_whatsapp">Enviar para WhatsApp</button>
             </form>
 
             <?php
             if (isset($_POST['enviar_whatsapp'])) {
+                // Verifica se o cliente tem um telefone preenchido
                 if (!empty($cliente['telefone'])) {
-                    $descricao = $_POST['descricao'];
+                    $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : 'Nenhuma descrição fornecida';
 
                     // Formatação em tópicos para o WhatsApp
                     $mensagem = "Olá, meu nome é " . $profissional['nome'] . ".\n";
@@ -667,6 +683,8 @@ $conn->close();
             }
             ?>
         </section><!-- /Services Section -->
+
+
 
     </main>
 

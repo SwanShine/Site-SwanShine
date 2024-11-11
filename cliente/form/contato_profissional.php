@@ -604,26 +604,24 @@ $conn->close();
         </div>
         <!-- Services Section -->
         <section id="services" class="services section">
-
-            <h2>Entre em contato com, <?php echo htmlspecialchars($profissional['nome']); ?></h2>
             <form action="" method="post">
-                <label>Nome:</label>
-                <input type="text" value="<?php echo htmlspecialchars($cliente['nome']); ?>" readonly><br>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($cliente['nome']); ?>"><br>
 
-                <label>Email:</label>
-                <input type="email" value="<?php echo htmlspecialchars($cliente['email']); ?>" readonly><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($cliente['email']); ?>"><br>
 
-                <label>Telefone:</label>
-                <input type="text" value="<?php echo htmlspecialchars($cliente['telefone']); ?>" readonly><br>
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" value="<?php echo htmlspecialchars($cliente['telefone']); ?>"><br>
 
-                <label>Endereço:</label>
-                <input type="text" value="<?php echo htmlspecialchars($cliente['endereco']); ?>" readonly><br>
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" value="<?php echo htmlspecialchars($cliente['endereco']); ?>"><br>
 
-                <label>CEP:</label>
-                <input type="text" value="<?php echo htmlspecialchars($cliente['cep']); ?>" readonly><br>
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" name="cep" value="<?php echo htmlspecialchars($cliente['cep']); ?>"><br>
 
-                <label>Descrição do serviço:</label>
-                <textarea name="descricao" placeholder="Escreva o que deseja..."></textarea><br>
+                <label for="descricao">Descrição do serviço:</label>
+                <textarea id="descricao" name="descricao" placeholder="Escreva o que deseja..."><?php echo isset($_POST['descricao']) ? htmlspecialchars($_POST['descricao']) : ''; ?></textarea><br>
 
                 <button type="submit" name="enviar_whatsapp">Enviar para WhatsApp</button>
             </form>
@@ -631,7 +629,7 @@ $conn->close();
             <?php
             if (isset($_POST['enviar_whatsapp'])) {
                 if (!empty($profissional['celular'])) {
-                    $descricao = $_POST['descricao'];
+                    $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : 'Nenhuma descrição fornecida';
 
                     // Formatação em tópicos para o WhatsApp
                     $mensagem = "Olá, meu nome é " . $cliente['nome'] . ".\n";
@@ -644,7 +642,7 @@ $conn->close();
                     $mensagem .= "• CEP: " . $cliente['cep'] . "\n";
                     $mensagem .= "\n*Descrição do Serviço:*\n" . $descricao;
 
-                    // Remove caracteres não numéricos do número de celular
+                    // Remove caracteres não numéricos do número de celular do profissional
                     $numero_celular = preg_replace('/\D/', '', $profissional['celular']);
 
                     // Gera o link do WhatsApp com o número formatado corretamente
@@ -655,10 +653,10 @@ $conn->close();
                 }
             }
             ?>
-
         </section><!-- /Services Section -->
+
     </main>
-    
+
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
