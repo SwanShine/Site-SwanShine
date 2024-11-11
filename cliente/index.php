@@ -446,13 +446,6 @@ $conn->close();
         </ul>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="mensagem.php">
-          <i class="bi bi-envelope"></i>
-          <span>Mensagens</span>
-        </a>
-      </li>
-
       <!-- Perfil -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="perfil.php">
@@ -529,8 +522,8 @@ $conn->close();
                               <?php endif; ?>
                             </p>
                           </div>
-                          <a href="mensagens/index.html?id=<?php echo urlencode($profissional['id']); ?>" class="btn btn-primary card-button">
-                            <i class="fas fa-envelope"></i> Enviar Mensagem
+                          <a href="form/contato_profissional.php?id=<?php echo urlencode($profissional['id']); ?>" class="btn btn-primary card-button">
+                            <i class="fas fa-envelope"></i> Conversar com Profissional
                           </a>
                         </div>
                       </div>

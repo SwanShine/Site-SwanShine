@@ -432,13 +432,6 @@ $conn->close();
         </ul>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="mensagem.php">
-          <i class="bi bi-envelope"></i>
-          <span>Mensagens</span>
-        </a>
-      </li>
-
       <!-- Perfil -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="perfil.php">
@@ -456,6 +449,7 @@ $conn->close();
 
     </ul>
   </aside><!-- End Sidebar-->
+
 
   <main id="main" class="main">
     <div class="pagetitle">

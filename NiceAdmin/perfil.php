@@ -272,7 +272,7 @@ $conn->close();
                     <li>
                         <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
                     </li>
-
+                   
                     <li>
                         <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
                     </li>
@@ -281,15 +281,6 @@ $conn->close();
                         <a href="pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
                     </li>
                 </ul>
-            </li>
-
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="mensagem.php">
-                    <i class="bi bi-envelope"></i>
-                    <span>Mensagens</span>
-                </a>
             </li>
 
             <!-- Perfil -->

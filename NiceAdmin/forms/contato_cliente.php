@@ -1,86 +1,61 @@
 <?php
-// Iniciar a sessão
-session_start(); // Inicia uma sessão PHP para armazenar dados de usuário durante a navegação.
-
-// Verificar se o usuário está logado
-if (!isset($_SESSION['user_email'])) { // Verifica se o email do usuário está salvo na sessão.
-    header('Location: ../../home/forms/login/login.html'); // Redireciona para a página de login.
-    exit(); // Interrompe a execução do script para garantir que o redirecionamento ocorra.
+session_start();
+if (!isset($_SESSION['user_email'])) {
+    header('Location: ../../home/forms/login/login.html');
+    exit();
 }
 
-// Dados de conexão com o banco de dados
-$servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com"; // Nome do servidor do banco de dados.
-$username = "admin"; // Nome de usuário do banco de dados.
-$password = "gLAHqWkvUoaxwBnm9wKD"; // Senha do banco de dados.
-$dbname = "swanshine"; // Nome do banco de dados.
+$servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
+$username = "admin";
+$password = "gLAHqWkvUoaxwBnm9wKD";
+$dbname = "swanshine";
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Criar conexão
-$conn = new mysqli($servername, $username, $password, $dbname); // Cria uma nova conexão MySQL.
-
-if ($conn->connect_error) { // Verifica se a conexão falhou.
-    die("Conexão falhou: " . $conn->connect_error); // Exibe mensagem de erro.
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Recuperar o email da sessão
-$email = $_SESSION['user_email']; // Obtém o email do usuário da sessão.
+$email_profissional = $_SESSION['user_email'];
+$id_cliente = $_GET['id']; // O id do cliente, passado na URL
 
-// Verificar se o cliente existe na tabela "clientes"
-$stmt = $conn->prepare("SELECT * FROM clientes WHERE email = ?");
-if (!$stmt) {
-    die("Erro na preparação da consulta: " . $conn->error); // Exibe erro se a consulta falhar.
-}
-
-$stmt->bind_param("s", $email); // Substitui "?" pelo email do cliente.
-$stmt->execute(); // Executa a consulta.
-$result = $stmt->get_result(); // Armazena o resultado.
-
-if ($result->num_rows > 0) {
-    $cliente = $result->fetch_assoc(); // Obtém os dados do cliente.
-} else {
-    echo "Cliente não encontrado."; // Mensagem se o cliente não for encontrado.
-    exit(); // Encerra o script.
-}
-
-// Fechar a consulta do cliente
+// Buscar dados do cliente
+$sql_cliente = "SELECT id, telefone, nome, email FROM clientes WHERE id = ?";
+$stmt = $conn->prepare($sql_cliente);
+$stmt->bind_param("i", $id_cliente);
+$stmt->execute();
+$cliente = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
-// Buscar os serviços recusados feitos pelo cliente
-$stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'Excluido' ORDER BY data_pedido DESC");
-if (!$stmt) {
-    die("Erro na preparação da consulta de pedidos: " . $conn->error); // Exibe erro se a consulta falhar.
-}
-
-$stmt->bind_param("s", $email); // Substitui "?" pelo email do cliente.
-$stmt->execute(); // Executa a consulta.
-$result = $stmt->get_result(); // Armazena o resultado.
-
-// Verificar se o cliente tem pedidos recusados
-$pedidos = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $pedidos[] = $row; // Armazena cada pedido no array
-    }
-} else {
-    echo "<div>Nenhum serviço recusado encontrado para este cliente.</div>"; // Mensagem se não houver pedidos recusados.
-}
-
-// Fechar a consulta de pedidos do cliente
+// Buscar dados do profissional
+$sql_profissional = "SELECT id, nome, celular, email, rua, numero, cep FROM profissionais WHERE email = ?";
+$stmt = $conn->prepare($sql_profissional);
+$stmt->bind_param("s", $email_profissional);
+$stmt->execute();
+$profissional = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
-// Fechar a conexão
+// Recuperar mensagens trocadas entre o profissional e o cliente
+$sql_mensagens = "SELECT * FROM mensagens WHERE 
+                  (remetente = ? AND profissional_id = ?) OR 
+                  (remetente = ? AND profissional_id = ?) 
+                  ORDER BY data_envio ASC";
+$stmt = $conn->prepare($sql_mensagens);
+$stmt->bind_param("iiii", $profissional['id'], $id_cliente, $id_cliente, $profissional['id']);
+$stmt->execute();
+$mensagens = $stmt->get_result();
+$stmt->close();
+
 $conn->close();
 ?>
 
-
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Swan Shine - Cliente</title>
+    <title>Swan Shine - Profissional</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -112,231 +87,239 @@ $conn->close();
     <link href="../assets/css/services.css" rel="stylesheet">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        /* Reset básico */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        .section.dashboard {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        /* Estilos para o container principal */
+        .main {
             padding: 20px;
         }
 
-        .row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            /* Permite que os cartões se movam para a linha seguinte */
-        }
-
-        .card-container {
-            width: 100%;
-            max-width: 1200px;
-            padding: 10px;
-        }
-
-        .titulo {
-            text-align: center;
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 14px;
+            color: #6c757d;
             margin-bottom: 20px;
         }
 
-        .card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .breadcrumb a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item.active {
+            color: #495057;
+        }
+
+        /* Título da página */
+        .pagetitle h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para o título da seção */
+        .section-title h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Formulário de contato */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
             padding: 20px;
-            margin: 10px;
-            flex: 1 1 min(30%, 300px);
-            /* Melhor controle de largura */
-            position: relative;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .status {
+        /* Labels e campos de entrada */
+        form label {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+
+        form input[type="text"]:hover,
+        form input[type="email"]:hover,
+        form textarea:hover {
+            border-color: #007bff;
+        }
+
+        form input[readonly] {
+            background-color: #e9ecef;
+        }
+
+        /* Campo de descrição */
+        form textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        /* Botão Enviar */
+        form button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
             font-weight: bold;
-            padding: 8px 12px;
-            /* Reduz o padding */
-            border-radius: 5px;
-            margin-bottom: 10px;
-            display: inline-block;
-            font-size: 1em;
-            /* Reduz o tamanho da fonte */
-        }
-
-        .servico-destaque {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .card-content p {
-            margin: 5px 0;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .button {
-            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin-top: 15px;
         }
 
-        .button.orcamento {
-            background-color: #4caf50;
-            color: white;
+        form button[type="submit"]:hover {
+            background-color: #0056b3;
         }
 
-        .button.orcamento:hover {
-            background-color: #45a049;
-        }
-
-        .button.excluir {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .button.excluir:hover {
-            background-color: #e53935;
-        }
-
-        .no-pedidos {
-            text-align: center;
-        }
-
-        .close-card {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-        }
-
-        /* Estilos responsivos */
-        @media (max-width: 1200px) {
-            .card-container {
-                max-width: 100%;
-            }
-        }
-
+        /* Responsividade para tablets e telas médias */
         @media (max-width: 768px) {
-            .card {
+            .pagetitle h1 {
+                font-size: 24px;
+            }
+
+            .section-title h2 {
+                font-size: 20px;
+            }
+
+            form {
                 padding: 15px;
-                flex: 1 1 calc(45% - 20px);
             }
 
-            .buttons {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .card {
-                padding: 10px;
-                flex: 1 1 calc(50% - 20px);
-            }
-
-            .titulo {
-                font-size: 1.5em;
+            form button[type="submit"] {
+                font-size: 14px;
             }
         }
 
+        /* Responsividade para telas pequenas (425px e menores) */
         @media (max-width: 425px) {
-            .card {
-                padding: 12px;
-                flex: 1 1 calc(50% - 20px);
-                /* Ajusta para 2 cartões por linha */
+            .pagetitle h1 {
+                font-size: 22px;
             }
 
-            .titulo {
-                font-size: 1.4em;
+            .section-title h2 {
+                font-size: 18px;
             }
 
-            .servico-destaque {
-                font-size: 1.1em;
+            .breadcrumb {
+                font-size: 12px;
             }
 
-            .status {
-                font-size: 0.95em;
-                /* Menor para telas menores */
-                padding: 6px 10px;
-                /* Reduz ainda mais o padding */
-            }
-
-            .button {
-                padding: 8px 16px;
-            }
-        }
-
-        @media (max-width: 375px) {
-            .card {
+            form {
                 padding: 10px;
-                flex: 1 1 calc(100% - 20px);
-                /* Ajusta para 1 cartão por linha */
             }
 
-            .titulo {
-                font-size: 1.3em;
+            form label {
+                font-size: 14px;
             }
 
-            .servico-destaque {
-                font-size: 1em;
+            form input[type="text"],
+            form input[type="email"],
+            form textarea {
+                font-size: 14px;
+                padding: 10px;
             }
 
-            .status {
-                font-size: 0.9em;
-                /* Tamanho de fonte menor */
-                padding: 5px 8px;
-                /* Ajuste o padding para se ajustar à tela */
-            }
-
-            .button {
-                padding: 8px 16px;
+            form button[type="submit"] {
+                font-size: 14px;
+                padding: 10px;
             }
         }
 
-        @media (max-width: 320px) {
-            .card {
+        /* Responsividade para telas muito pequenas (375px) */
+        @media (max-width: 375px) {
+            .pagetitle h1 {
+                font-size: 20px;
+            }
+
+            .section-title h2 {
+                font-size: 16px;
+            }
+
+            form label {
+                font-size: 13px;
+            }
+
+            form input[type="text"],
+            form input[type="email"],
+            form textarea {
+                font-size: 13px;
                 padding: 8px;
-                flex: 1 1 calc(100% - 20px);
-                /* Ajusta para 1 cartão por linha em telas muito pequenas */
             }
 
-            .titulo {
-                font-size: 1.2em;
+            form button[type="submit"] {
+                font-size: 13px;
+                padding: 8px;
+            }
+        }
+
+        /* Responsividade para telas muito pequenas (320px) */
+        @media (max-width: 320px) {
+            .pagetitle h1 {
+                font-size: 18px;
             }
 
-            .servico-destaque {
-                font-size: 0.9em;
+            .section-title h2 {
+                font-size: 15px;
             }
 
-            .card-content p {
-                font-size: 0.85em;
-                margin: 3px 0;
+            .breadcrumb {
+                font-size: 11px;
             }
 
-            .button {
-                padding: 6px 12px;
-                font-size: 0.85em;
+            form label {
+                font-size: 12px;
             }
 
-            .status {
-                font-size: 0.85em;
-                padding: 4px 6px;
-                /* Padding bem reduzido */
+            form input[type="text"],
+            form input[type="email"],
+            form textarea {
+                font-size: 12px;
+                padding: 6px;
             }
 
-            .buttons {
-                gap: 5px;
-            }
-
-            .close-card {
-                font-size: 0.8em;
-                top: 8px;
-                right: 8px;
+            form button[type="submit"] {
+                font-size: 12px;
+                padding: 6px;
             }
         }
     </style>
@@ -432,7 +415,7 @@ $conn->close();
                             Você tem 0 mensagens
                             <!-- Texto informando o número de mensagens. -->
 
-                            <a href="mensagem.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+                            <a href="../mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                             <!-- Link para ver todas as mensagens com uma badge arredondada ao lado do texto. -->
                         </li>
 
@@ -444,7 +427,7 @@ $conn->close();
                         <li class="dropdown-footer">
                             <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
 
-                            <a href="../mensagem.php">Mostrar todas as mensagens</a>
+                            <a href="mensagem.html">Mostrar todas as mensagens</a>
                             <!-- Link para mostrar todas as mensagens. -->
                         </li>
                     </ul>
@@ -456,7 +439,7 @@ $conn->close();
 
                     <a
                         class="nav-link nav-profile d-flex align-items-center pe-0"
-                        href="../perfil.php"
+                        href="perfil.php"
                         data-bs-toggle="dropdown">
                         <!-- Link com imagem de perfil que abre o menu suspenso do perfil ao clicar. -->
 
@@ -530,7 +513,7 @@ $conn->close();
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="../form/log_out.php">
+                                href="log_out.php">
                                 <!-- Link para a página de logout com ícone e texto alinhados. -->
 
                                 <i class="bi bi-box-arrow-right"></i>
@@ -588,16 +571,16 @@ $conn->close();
                     class="nav-content collapse"
                     data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+                        <a href="../pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
                     </li>
                     <li>
-                        <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+                        <a href="../pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
                     </li>
                     <li>
-                        <a href="pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
+                        <a href="../pedidos/pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
                     </li>
                     <li>
-                        <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                        <a href="../pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
                     </li>
                 </ul>
             </li>
@@ -620,88 +603,81 @@ $conn->close();
         </ul>
     </aside><!-- End Sidebar-->
 
-
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Pedidos Excluidos </h1>
+            <h1>Converse com o Profissional</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                    <li class="breadcrumb-item">Pedido</li>
-                    <li class="breadcrumb-item active">Pedidos Excluidos</li>
+                    <li class="breadcrumb-item">Painel</li>
+                    <li class="breadcrumb-item active">Convesa</li>
                 </ol>
             </nav>
-        </div><!-- End Page Title -->
+        </div>
+        <!-- Services Section -->
+        <section id="services" class="services section">
+            <h2>Entre em contato com, <?php echo htmlspecialchars($profissional['nome']); ?></h2>
+            <form action="" method="post">
+                <label>Nome:</label>
+                <input type="text" value="<?php echo htmlspecialchars($profissional['nome']); ?>" readonly><br>
 
-        <section class="section dashboard">
-            <div class="row">
-                <div class="card-container">
-                    <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido Excluido com sucesso'): ?>
-                        <div class="card notification-card">
-                            <h3>Pedido Excluido</h3>
-                            <p>O pedido foi excluido com sucesso.</p>
-                            <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
-                        </div>
-                    <?php elseif (!empty($pedidos)): ?>
-                        <?php foreach ($pedidos as $pedido): ?>
-                            <div class="card pedido-card">
-                                <div class="status <?= htmlspecialchars($pedido['status']) ?>"><?= htmlspecialchars($pedido['status']) ?></div>
-                                <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
-                                <div class="card-content">
-                                    <p><strong>Tipo:</strong> <span><?= htmlspecialchars($pedido['tipo']) ?></span></p>
-                                    <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
-                                    <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
-                                    <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
-                                    <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
-                                    <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
-                                    <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
-                                    <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
-                                    <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
-                                </div>
-                                <div class="buttons">
-                                    <button class="button voltar" data-id="<?= htmlspecialchars($pedido['id']) ?>">Voltar Pedido</button>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="card no-pedidos">
-                            <h3>Nenhum serviço solicitado</h3>
-                            <p>Atualmente, não há nenhum pedido disponível para os serviços oferecidos.</p>
-                            <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </section>
+                <label>Email:</label>
+                <input type="email" value="<?php echo htmlspecialchars($profissional['email']); ?>" readonly><br>
 
-        <!-- JavaScript para lidar com os botões de orçamento e recusa -->
-        <script>
-            document.querySelectorAll('.voltar').forEach(button => {
-                button.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    if (confirm('Tem certeza que deseja Voltar este pedido?')) {
-                        window.location.href = `../form/pedido/voltar_pedido.php?id=${id}`;
-                    }
-                });
-            });
-        </script>
+                <label>Telefone:</label>
+                <input type="text" value="<?php echo htmlspecialchars($profissional['celular']); ?>" readonly><br>
 
+                <label>Endereço:</label>
+                <input type="text" value="<?php echo htmlspecialchars($profissional['rua']) . ", " . htmlspecialchars($profissional['numero']); ?>" readonly><br>
 
+                <label>CEP:</label>
+                <input type="text" value="<?php echo htmlspecialchars($profissional['cep']); ?>" readonly><br>
+
+                <label>Descrição do serviço:</label>
+                <textarea name="descricao" placeholder="Escreva o que deseja..."></textarea><br>
+
+                <button type="submit" name="enviar_whatsapp">Enviar para WhatsApp</button>
+            </form>
+
+            <?php
+            if (isset($_POST['enviar_whatsapp'])) {
+                if (!empty($cliente['telefone'])) {
+                    $descricao = $_POST['descricao'];
+
+                    // Formatação em tópicos para o WhatsApp
+                    $mensagem = "Olá, meu nome é " . $profissional['nome'] . ".\n";
+                    $mensagem .= "Estou interessado no serviço e gostaria de saber mais.\n\n";
+                    $mensagem .= "*Dados do Profissional:*\n";
+                    $mensagem .= "• Nome: " . $profissional['nome'] . "\n";
+                    $mensagem .= "• Email: " . $profissional['email'] . "\n";
+                    $mensagem .= "• Telefone: " . $profissional['celular'] . "\n";
+                    $mensagem .= "• Endereço: " . $profissional['rua'] . ", " . $profissional['numero'] . "\n";
+                    $mensagem .= "• CEP: " . $profissional['cep'] . "\n";
+                    $mensagem .= "\n*Descrição do Serviço:*\n" . $descricao;
+
+                    // Remove caracteres não numéricos do número de celular do cliente
+                    $numero_celular = preg_replace('/\D/', '', $cliente['telefone']);
+
+                    // Gera o link do WhatsApp com o número formatado corretamente
+                    $whatsapp_link = "https://wa.me/" . $numero_celular . "?text=" . urlencode($mensagem);
+                    echo "<script>window.open('$whatsapp_link', '_blank');</script>";
+                } else {
+                    echo "<p>O cliente não disponibilizou um número de celular.</p>";
+                }
+            }
+            ?>
+        </section><!-- /Services Section -->
 
     </main>
-    <!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
             &copy; Copyright <strong><span>Swan Shine</span></strong>. Todos os Direitos Reservados
         </div>
-    </footer>
+    </footer><!-- Fim do Rodapé -->
 
-    <a
-        href="#"
-        class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i>
-    </a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -712,10 +688,13 @@ $conn->close();
     <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
     <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Template Main JS File -->
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/main1.js"></script>
+
 </body>
 
 </html>

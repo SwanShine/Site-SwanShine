@@ -17,36 +17,41 @@ $dbname = "swanshine";
 // Criar conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Verificar se a conexão foi bem-sucedida
 if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Recuperar o email da sessão
-$email = $_SESSION['user_email'];
+// Recuperar o ID do pedido da URL
+$pedido_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Verificar se um ID de pedido foi passado
-if (isset($_GET['id'])) {
-    $pedido_id = $_GET['id']; // Usar 'id' como parâmetro
-
-    // Buscar o orçamento do pedido específico
-    $stmt = $conn->prepare("SELECT * FROM pedidos WHERE id = ? AND email = ?");
-    $stmt->bind_param("is", $pedido_id, $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $pedido = $result->fetch_assoc();
-    } else {
-        echo "Pedido não encontrado ou não pertence a este cliente.";
-        exit();
-    }
-
-    $stmt->close();
-} else {
-    echo "Nenhum pedido selecionado.";
+// Verificar se o ID do pedido é válido
+if ($pedido_id <= 0) {
+    echo "Pedido inválido.";
     exit();
 }
 
+// Recuperar os orçamentos relacionados a esse pedido
+$stmt = $conn->prepare("SELECT o.id, o.valor_orcamento, o.detalhes_orcamento, p.nome AS profissional_nome 
+                        FROM orcamentos o
+                        JOIN profissionais p ON o.profissional_id = p.id
+                        WHERE o.pedido_id = ?");
+$stmt->bind_param("i", $pedido_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Verificar se existem orçamentos para esse pedido
+$orcamentos = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $orcamentos[] = $row;
+    }
+} else {
+    echo "Nenhum orçamento encontrado para este pedido.";
+}
+
+// Fechar a consulta e a conexão
+$stmt->close();
 $conn->close();
 ?>
 
@@ -102,112 +107,152 @@ $conn->close();
     <!-- Link para o arquivo CSS -->
 
     <style>
-        /* Estilo do contêiner dos cartões */
-        .card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            /* Bordas arredondadas */
-            padding: 1.5rem;
-            margin: 1rem 0;
-            /* Margem vertical entre os cartões */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            /* Sombra suave */
-            transition: transform 0.2s ease;
-            /* Efeito ao passar o mouse */
+    /* Estilos gerais */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        padding: 20px;
+        margin: 0;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    /* Estilo da seção de orçamentos */
+    .orcamentos {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    /* Estilo dos cartões de orçamento */
+    .orcamento-card {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        width: 100%;
+        box-sizing: border-box;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .orcamento-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .orcamento-card h4 {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .orcamento-card p {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .orcamento-card strong {
+        font-weight: bold;
+    }
+
+    /* Estilo para os botões dentro dos cartões */
+    .orcamento-buttons {
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .orcamento-buttons a {
+        text-decoration: none;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .orcamento-buttons a.recusar {
+        background-color: #f44336;
+    }
+
+    .orcamento-buttons a:hover {
+        background-color: #45a049;
+    }
+
+    .orcamento-buttons a.recusar:hover {
+        background-color: #e53935;
+    }
+
+    /* Estilo para a mensagem quando não houver orçamentos */
+    .sem-orcamentos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        background-color: #ffcccb;
+        color: #ff0000;
+        border-radius: 10px;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+        .orcamento-card {
+            width: calc(50% - 20px);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .orcamento-card {
+            width: calc(50% - 20px);
+        }
+    }
+
+    @media (max-width: 425px) {
+        .orcamento-card {
+            width: 100%;
         }
 
-        /* Efeito ao passar o mouse sobre o cartão */
-        .card:hover {
-            transform: translateY(-4px);
-            /* Leve elevação */
+        .sem-orcamentos {
+            font-size: 16px;
+            height: 150px;
+        }
+    }
+
+    @media (max-width: 375px) {
+        .orcamento-card {
+            width: 100%;
         }
 
-        /* Estilo do título do serviço */
-        .card h3 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 0.5rem;
+        .sem-orcamentos {
+            font-size: 14px;
+            height: 130px;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .orcamento-card {
+            width: 100%;
         }
 
-        /* Estilo do ID do pedido */
-        .card h3 span {
-            font-size: 0.75em;
-            /* Tamanho menor para o ID */
-            color: #666;
-            /* Cor mais clara */
+        .sem-orcamentos {
+            font-size: 12px;
+            height: 120px;
         }
+    }
+</style>
 
-        /* Estilo dos parágrafos dentro do cartão */
-        .card p {
-            margin: 0.5rem 0;
-            /* Margem vertical entre os parágrafos */
-            color: #000;
-            /* Cor de texto padrão */
-        }
-
-        /* Estilo do grupo de botões */
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            /* Distribui espaço entre os botões */
-            margin-top: 1rem;
-            /* Espaço acima dos botões */
-        }
-
-        /* Estilo dos botões */
-        .button-group button {
-            padding: 0.5rem 0.8rem;
-            /* Diminuindo o padding */
-            border: none;
-            border-radius: 5px;
-            /* Bordas arredondadas */
-            color: #fff;
-            font-size: 0.9rem;
-            /* Diminuindo o tamanho da fonte */
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            /* Transições suaves */
-        }
-
-        /* Estilo do botão Aceitar */
-        .button-group .accept {
-            background-color: #28a745;
-            /* Verde */
-        }
-
-        .button-group .accept:hover {
-            background-color: #218838;
-            /* Verde escuro */
-            transform: scale(1.05);
-            /* Leve aumento ao passar o mouse */
-        }
-
-        /* Estilo do botão Recusar */
-        .button-group .reject {
-            background-color: #dc3545;
-            /* Vermelho */
-        }
-
-        .button-group .reject:hover {
-            background-color: #c82333;
-            /* Vermelho escuro */
-            transform: scale(1.05);
-            /* Leve aumento ao passar o mouse */
-        }
-
-        /* Estilo da mensagem quando não há pedidos */
-        .no-orders {
-            text-align: center;
-            /* Centraliza o texto */
-            color: #999;
-            /* Cor mais clara para mensagem */
-            font-size: 1.2rem;
-            /* Tamanho de fonte maior */
-            margin: 2rem 0;
-            /* Margem vertical */
-        }
-    </style>
 
 </head>
 
@@ -359,13 +404,6 @@ $conn->close();
                 </ul>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="../../../mensagem.php">
-                    <i class="bi bi-envelope"></i>
-                    <span>Mensagens</span>
-                </a>
-            </li>
-
             <!-- Perfil -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="../../../perfil.php">
@@ -396,51 +434,38 @@ $conn->close();
             </nav>
         </div>
         <!-- End Page Title -->
-
         <section class="section dashboard">
             <div class="row">
                 <div class="card-container">
-                <?php if (isset($pedido)): ?>
-    <div class="card">
-        <h3>
-            <?= htmlspecialchars($pedido['servicos']) ?>
-            <span style="font-size: 0.5em; color: #666;">(ID:
-                <?= htmlspecialchars($pedido['id']) ?>)</span>
-        </h3>
-        <p><strong>Valor Orçamento:</strong> R$
-            <?= htmlspecialchars(number_format($pedido['valor_orcamento'], 3, ',', '.')) ?></p>
-        <p><strong>Detalhes:</strong> <?= htmlspecialchars($pedido['detalhes_orcamento']) ?></p>
+                    <h1>Orçamentos para o Pedido #<?= htmlspecialchars($pedido_id) ?></h1>
 
-        <div class="button-group">
-            <form action="aceitar.php" method="post">
-                <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
-                <button type="submit" class="accept">Aceitar</button>
-            </form>
-            <form action="recusar.php" method="post">
-                <input type="hidden" name="pedido_id" value="<?= htmlspecialchars($pedido['id']) ?>">
-                <button type="submit" class="reject">Recusar</button>
-            </form>
-        </div>
-    </div>
-<?php endif; ?>
+                    <?php if (!empty($orcamentos)): ?>
+                        <div class="orcamentos">
+                            <?php foreach ($orcamentos as $orcamento): ?>
+                                <div class="orcamento-card">
+                                    <h4>Orçamento de <?= htmlspecialchars($orcamento['profissional_nome']) ?></h4>
+                                    <p><strong>Valor:</strong> R$ <?= number_format($orcamento['valor_orcamento'], 2, ',', '.') ?></p>
+                                    <p><strong>Detalhes:</strong> <?= htmlspecialchars($orcamento['detalhes_orcamento']) ?></p>
 
+                                    <div class="orcamento-buttons">
+                                        <!-- Botões de aceitar e recusar com links para os arquivos PHP -->
+                                        <a href="aceitar.php?id=<?= $orcamento['id'] ?>" class="aceitar">Aceitar</a>
+                                        <a href="recusar.php?id=<?= $orcamento['id'] ?>" class="recusar">Recusar</a>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="sem-orcamentos">
+                            Nenhum orçamento encontrado para este pedido.
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>
 
 
-        <script>
-            // Função para formatar o valor com o prefixo "R$"
-            function formatarValor(campo) {
-                let valor = campo.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-                valor = (valor / 100).toFixed(2); // Divide por 100 e formata para duas casas decimais
-                valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Adiciona pontos para separação de milhar
-                campo.value = `R$ ${valor.replace('.', ',')}`; // Adiciona o prefixo "R$" e substitui o ponto por vírgula
-            }
-        </script>
-
-    </main>
-    <!-- End #main -->
+    </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">

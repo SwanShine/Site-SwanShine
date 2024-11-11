@@ -28,27 +28,60 @@ $email = $_SESSION['user_email'];
 if (isset($_POST['pedido_id'])) {
     $pedido_id = $_POST['pedido_id'];
 
-    // Atualizar o status do pedido para 'pendente'
-    // E definir valor_orcamento e detalhes_orcamento como NULL
-    $stmt = $conn->prepare("
-        UPDATE pedidos 
-        SET status = 'pendente', valor_orcamento = NULL, detalhes_orcamento = NULL 
-        WHERE id = ? AND email = ?
-    ");
-    $stmt->bind_param("is", $pedido_id, $email);
+    // Buscar o orçamento associado a esse pedido
+    $stmt_orcamento = $conn->prepare("SELECT o.profissional_id 
+                                      FROM orcamentos o 
+                                      WHERE o.pedido_id = ?");
+    $stmt_orcamento->bind_param("i", $pedido_id);
+    $stmt_orcamento->execute();
+    $orcamento_result = $stmt_orcamento->get_result();
 
-    if ($stmt->execute()) {
-        // Redirecionar para a página de pedidos pendentes
-        header('Location: ../../../pedidos/pedido_pendente.php?msg=Pedido recusado com sucesso!');
-        exit();
+    if ($orcamento_result->num_rows > 0) {
+        // Recuperar o ID do profissional associado ao orçamento
+        $orcamento = $orcamento_result->fetch_assoc();
+        $profissional_id = $orcamento['profissional_id'];
+
+        // Atualizar o status do pedido para 'pendente' e remover o orçamento
+        $update_stmt = $conn->prepare("UPDATE pedidos 
+                                       SET status = 'pendente', valor_orcamento = NULL, detalhes_orcamento = NULL 
+                                       WHERE id = ? AND email = ?");
+        $update_stmt->bind_param("is", $pedido_id, $email);
+
+        if ($update_stmt->execute()) {
+            // Remover o orçamento da tabela 'orcamentos'
+            $delete_stmt = $conn->prepare("DELETE FROM orcamentos WHERE pedido_id = ? AND profissional_id = ?");
+            $delete_stmt->bind_param("ii", $pedido_id, $profissional_id);
+            $delete_stmt->execute();
+            $delete_stmt->close();
+
+            // Enviar mensagem para o profissional informando que o orçamento foi recusado
+            $message = "Infelizmente, seu orçamento não foi aceito para este pedido.";
+            $insert_msg_stmt = $conn->prepare("INSERT INTO mensagens (remetente, profissional_id, conteudo, data_envio)
+                                              VALUES (?, ?, ?, NOW())");
+            $insert_msg_stmt->bind_param("sis", $email, $profissional_id, $message);
+            $insert_msg_stmt->execute();
+            $insert_msg_stmt->close();
+
+            // Exibir mensagem de sucesso para o cliente sem redirecionamento
+            $msg = "Pedido recusado com sucesso! O orçamento do profissional foi removido.";
+        } else {
+            $msg = "Erro ao atualizar o pedido: " . $conn->error;
+        }
+        
+        $update_stmt->close();
     } else {
-        echo "Erro ao atualizar o pedido: " . $conn->error;
+        $msg = "Orçamento não encontrado para este pedido.";
     }
 
-    $stmt->close();
+    $stmt_orcamento->close();
 } else {
-    echo "Nenhum pedido selecionado.";
+    $msg = "Nenhum pedido selecionado.";
 }
 
 $conn->close();
 ?>
+
+<!-- Exibição da mensagem de sucesso ou erro na página -->
+<div class="alert alert-info">
+    <?php echo isset($msg) ? $msg : ''; ?>
+</div>

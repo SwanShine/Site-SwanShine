@@ -389,8 +389,8 @@ $conn->close();
       </nav>
     </header>
 
-    <!-- ======= Barra Lateral ======= -->
-    <aside id="sidebar" class="sidebar">
+   <!-- ======= Barra Lateral ======= -->
+   <aside id="sidebar" class="sidebar">
       <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
           <a class="nav-link collapsed" href="../../index.php">
@@ -459,13 +459,6 @@ $conn->close();
               >
             </li>
           </ul>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="../../mensagem.php">
-            <i class="bi bi-envelope"></i>
-            <span>Mensagens</span>
-          </a>
         </li>
 
         <!-- Perfil -->

@@ -47,19 +47,19 @@ $stmt->close();
 // Se o profissional recusar um pedido
 if (isset($_POST['recusar_pedido_id'])) {
     $pedido_id = $_POST['recusar_pedido_id'];
-    
+
     // Inserir a recusa na tabela `recusas_profissionais`
     $stmt = $conn->prepare("INSERT INTO recusas_profissionais (pedido_id, profissional_id) VALUES (?, ?)");
     $stmt->bind_param("ii", $pedido_id, $profissional_id);
     $stmt->execute();
     $stmt->close();
-    
+
     // Atualizar o status do pedido para 'pendente' novamente
-    $stmt = $conn->prepare("UPDATE pedidos SET status = 'pendente' WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE pedidos SET status = 'Pendente' WHERE id = ?");
     $stmt->bind_param("i", $pedido_id);
     $stmt->execute();
     $stmt->close();
-    
+
     // Mensagem de sucesso
     echo "Pedido recusado e atualizado para pendente.";
     exit();
@@ -75,7 +75,7 @@ $query = "
     FROM pedidos p
     LEFT JOIN recusas_profissionais rp ON p.id = rp.pedido_id AND rp.profissional_id = ?
     WHERE p.servicos IN ($placeholders)
-    AND p.status = 'em análise'
+    AND p.status = 'Em Andamento'
     AND rp.pedido_id IS NULL
     ORDER BY p.data_pedido DESC
 ";
@@ -92,8 +92,6 @@ $pedidos = $result->fetch_all(MYSQLI_ASSOC); // Obter todos os pedidos como arra
 // Fechar a conexão
 $stmt->close();
 $conn->close();
-
-
 ?>
 
 
@@ -153,209 +151,211 @@ $conn->close();
     <!-- Link para o arquivo CSS -->
 
     <style>
-/* Estilos gerais */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-.section.dashboard {
-    padding: 20px;
-}
+        .section.dashboard {
+            padding: 20px;
+        }
 
-.row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+        .row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-/* Cartões */
-.card-container {
-    max-width: 1200px;
-    width: 100%;
-    padding: 10px;
-}
+        /* Cartões */
+        .card-container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 10px;
+        }
 
-.card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    flex: 1 1 calc(30% - 20px);
-    position: relative;
-}
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            flex: 1 1 calc(30% - 20px);
+            position: relative;
+        }
 
-.status {
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: inline-block;
-}
+        .status {
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
 
-.servico-destaque {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+        .servico-destaque {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-.card-content p {
-    margin: 5px 0;
-}
+        .card-content p {
+            margin: 5px 0;
+        }
 
-.buttons {
-    display: flex;
-    gap: 10px;
-}
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
 
-.button {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        .button {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.button.orcamento {
-    background-color: #4caf50;
-    color: white;
-}
+        .button.orcamento {
+            background-color: #4caf50;
+            color: white;
+        }
 
-.button.orcamento:hover {
-    background-color: #45a049;
-}
+        .button.orcamento:hover {
+            background-color: #45a049;
+        }
 
-.button.recusar {
-    background-color: #f44336;
-    color: white;
-}
+        .button.recusar {
+            background-color: #f44336;
+            color: white;
+        }
 
-.button.recusar:hover {
-    background-color: #e53935;
-}
+        .button.recusar:hover {
+            background-color: #e53935;
+        }
 
-/* Estilos para telas pequenas (320px) */
-@media (max-width: 320px) {
-    .card {
-        padding: 8px;
-        flex: 1 1 calc(100% - 20px); /* 1 cartão por linha */
-    }
+        /* Estilos para telas pequenas (320px) */
+        @media (max-width: 320px) {
+            .card {
+                padding: 8px;
+                flex: 1 1 calc(100% - 20px);
+                /* 1 cartão por linha */
+            }
 
-    .titulo {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
+            .titulo {
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
 
-    .servico-destaque {
-        font-size: 1em;
-    }
+            .servico-destaque {
+                font-size: 1em;
+            }
 
-    .card-content p {
-        font-size: 0.85em;
-        margin: 3px 0;
-    }
+            .card-content p {
+                font-size: 0.85em;
+                margin: 3px 0;
+            }
 
-    .button {
-        padding: 6px 12px;
-        font-size: 0.85em;
-    }
+            .button {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
 
-    .status {
-        font-size: 0.85em;
-    }
+            .status {
+                font-size: 0.85em;
+            }
 
-    .buttons {
-        gap: 5px;
-    }
+            .buttons {
+                gap: 5px;
+            }
 
-    .close-card {
-        font-size: 0.8em;
-        top: 8px;
-        right: 8px;
-    }
-}
+            .close-card {
+                font-size: 0.8em;
+                top: 8px;
+                right: 8px;
+            }
+        }
 
-/* Estilos para 375px */
-@media (max-width: 375px) {
-    .card {
-        padding: 10px;
-        flex: 1 1 calc(100% - 20px); /* 1 cartão por linha */
-    }
+        /* Estilos para 375px */
+        @media (max-width: 375px) {
+            .card {
+                padding: 10px;
+                flex: 1 1 calc(100% - 20px);
+                /* 1 cartão por linha */
+            }
 
-    .titulo {
-        font-size: 1.3em;
-    }
+            .titulo {
+                font-size: 1.3em;
+            }
 
-    .servico-destaque {
-        font-size: 1.1em;
-    }
+            .servico-destaque {
+                font-size: 1.1em;
+            }
 
-    .card-content p {
-        font-size: 0.9em;
-        margin: 4px 0;
-    }
+            .card-content p {
+                font-size: 0.9em;
+                margin: 4px 0;
+            }
 
-    .button {
-        padding: 8px 16px;
-        font-size: 0.9em;
-    }
+            .button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
 
-    .status {
-        font-size: 0.9em;
-    }
+            .status {
+                font-size: 0.9em;
+            }
 
-    .buttons {
-        gap: 8px;
-    }
+            .buttons {
+                gap: 8px;
+            }
 
-    .close-card {
-        font-size: 0.9em;
-    }
-}
+            .close-card {
+                font-size: 0.9em;
+            }
+        }
 
-/* Estilos para 425px */
-@media (max-width: 425px) {
-    .card {
-        padding: 12px;
-        flex: 1 1 calc(50% - 20px); /* 2 cartões por linha */
-    }
+        /* Estilos para 425px */
+        @media (max-width: 425px) {
+            .card {
+                padding: 12px;
+                flex: 1 1 calc(50% - 20px);
+                /* 2 cartões por linha */
+            }
 
-    .titulo {
-        font-size: 1.4em;
-    }
+            .titulo {
+                font-size: 1.4em;
+            }
 
-    .servico-destaque {
-        font-size: 1.1em;
-    }
+            .servico-destaque {
+                font-size: 1.1em;
+            }
 
-    .card-content p {
-        font-size: 1em;
-        margin: 5px 0;
-    }
+            .card-content p {
+                font-size: 1em;
+                margin: 5px 0;
+            }
 
-    .button {
-        padding: 10px 18px;
-        font-size: 1em;
-    }
+            .button {
+                padding: 10px 18px;
+                font-size: 1em;
+            }
 
-    .status {
-        font-size: 1em;
-    }
+            .status {
+                font-size: 1em;
+            }
 
-    .buttons {
-        gap: 10px;
-    }
+            .buttons {
+                gap: 10px;
+            }
 
-    .close-card {
-        font-size: 1em;
-    }
-}
-
+            .close-card {
+                font-size: 1em;
+            }
+        }
     </style>
 
 </head>
@@ -479,140 +479,112 @@ body {
 
     <!-- ======= Barra Lateral ======= -->
     <aside id="sidebar" class="sidebar">
-      <ul class="sidebar-nav" id="sidebar-nav">
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../index.php">
-                <i class="bi bi-grid"></i>
-                <span>Início</span>
-            </a>
-        </li>
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../index.php">
+                    <i class="bi bi-grid"></i>
+                    <span>Início</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a
-                class="nav-link collapsed"
-                data-bs-target="#components-nav"
-                data-bs-toggle="collapse"
-                href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul
-                id="components-nav"
-                class="nav-content collapse"
-                data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
-                </li>
-                <li>
-                    <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
-                </li>
-                <li>
-                    <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
-                </li>
-                <li>
-                    <a href="pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
-                </li>
-            </ul>
-        </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link collapsed"
+                    data-bs-target="#components-nav"
+                    data-bs-toggle="collapse"
+                    href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul
+                    id="components-nav"
+                    class="nav-content collapse"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
+                    </li>
+                </ul>
+            </li>
 
-    
+            <!-- Perfil -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../perfil.php">
+                    <i class="bi bi-person"></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../mensagem.php">
-                <i class="bi bi-envelope"></i>
-                <span>Mensagens</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../suporte.php">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>Suporte</span>
+                </a>
+            </li>
 
-        <!-- Perfil -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../perfil.php">
-                <i class="bi bi-person"></i>
-                <span>Perfil</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="../suporte.php">
-                <i class="bi bi-chat-dots"></i>
-                <span>Suporte</span>
-            </a>
-        </li>
-
-     </ul>
+        </ul>
     </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
-    <div class="pagetitle">
-      <h1>Pedidos em Andamento</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-          <li class="breadcrumb-item">Pedido</li>
-          <li class="breadcrumb-item active">Pedidos em Andamento</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+        <div class="pagetitle">
+            <h1>Pedidos em Andamento</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+                    <li class="breadcrumb-item">Pedido</li>
+                    <li class="breadcrumb-item active">Pedidos em Andamento</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
 
-    <section class="section dashboard">
-    <div class="row">
-        <div class="card-container">
-            <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
-                <div class="card notification-card">
-                    <h3>Pedido Recusado</h3>
-                    <p>O pedido foi recusado com sucesso.</p>
-                    <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
-                </div>
-            <?php elseif (!empty($pedidos)): ?>
-                <?php foreach ($pedidos as $pedido): ?>
-                    <div class="card">
-                        <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Exibe o status -->
-                        <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
-                        <div class="card-content">
-                            <p><strong>Tipo:</strong> <span><?= htmlspecialchars($pedido['tipo']) ?></span></p>
-                            <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
-                            <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
-                            <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
-                            <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
-                            <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
-                            <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
-                            <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
-                            <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
+        <section class="section dashboard">
+            <div class="row">
+                <div class="card-container">
+                    <?php if (isset($_GET['message']) && $_GET['message'] === 'Pedido recusado com sucesso'): ?>
+                        <div class="card notification-card">
+                            <h3>Pedido Recusado</h3>
+                            <p>O pedido foi recusado com sucesso.</p>
+                            <a href="../index.php" class="back-link">&#8592; Voltar para os serviços</a>
                         </div>
-                        <div class="buttons">
-                            <button class="button orcamento" data-id="<?= htmlspecialchars($pedido['id']) ?>">Orçamento</button>
-                            <button class="button recusar" data-id="<?= htmlspecialchars($pedido['id']) ?>">Recusar</button>
+                    <?php elseif (!empty($pedidos)): ?>
+                        <?php foreach ($pedidos as $pedido): ?>
+                            <div class="card">
+                                <div class="status"><?= htmlspecialchars($pedido['status']) ?></div> <!-- Exibe o status -->
+                                <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
+                                <div class="card-content">
+                                    <p><strong>Tipo:</strong> <span><?= htmlspecialchars($pedido['tipo']) ?></span></p>
+                                    <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
+                                    <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
+                                    <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>
+                                    <p><strong>Detalhes:</strong> <span><?= htmlspecialchars($pedido['detalhes']) ?></span></p>
+                                    <p><strong>CEP:</strong> <span><?= htmlspecialchars($pedido['cep']) ?></span></p>
+                                    <p><strong>Nome:</strong> <span><?= htmlspecialchars($pedido['nome']) ?></span></p>
+                                    <p><strong>E-mail:</strong> <span><?= htmlspecialchars($pedido['email']) ?></span></p>
+                                    <p><strong>Telefone:</strong> <span><?= htmlspecialchars($pedido['telefone']) ?></span></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="card no-pedidos">
+                            <h3>Nenhum pedido Em Andamento</h3> <!-- Mensagem atualizada -->
+                            <p>Atualmente, não há nenhum pedido em andamento para os serviços oferecidos.</p>
+                            <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="card no-pedidos">
-                    <h3>Nenhum pedido em andamento</h3> <!-- Mensagem atualizada -->
-                    <p>Atualmente, não há nenhum pedido em andamento para os serviços oferecidos.</p>
-                    <span class="close-card" onclick="this.parentElement.style.display='none'">X</span>
+                    <?php endif; ?>
                 </div>
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
+            </div>
+        </section>
 
-<!-- JavaScript para lidar com os botões de orçamento e recusa -->
-<script>
-    document.querySelectorAll('.recusar').forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            if (confirm('Tem certeza que deseja recusar este pedido?')) {
-                window.location.href = `../forms/pedido/recusar_pedido.php?id=${id}`;
-            }
-        });
-    });
-
-    document.querySelectorAll('.orcamento').forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            window.location.href = `../forms/pedido/orcamento/orcamento_pedido.php?id=${id}`;
-        });
-    });
-</script>
+        <!-- JavaScript para lidar com os botões de orçamento e recusa -->
+        <script>
+        </script>
 
 
 

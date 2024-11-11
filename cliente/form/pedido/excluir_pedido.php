@@ -43,7 +43,7 @@ if ($result->num_rows === 0) {
 }
 
 // Atualizar o pedido para "excluído" e limpar valor_orcamento e detalhes_orcamento
-$update_query = "UPDATE pedidos SET status = 'excluido', valor_orcamento = NULL, detalhes_orcamento = NULL WHERE id = ?";
+$update_query = "UPDATE pedidos SET status = 'Excluido', valor_orcamento = NULL, detalhes_orcamento = NULL WHERE id = ?";
 $stmt_update = $conn->prepare($update_query);
 $stmt_update->bind_param('i', $id_pedido);
 

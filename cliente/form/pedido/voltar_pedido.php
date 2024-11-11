@@ -43,7 +43,7 @@ if ($result->num_rows === 0) {
 }
 
 // Atualizar o status do pedido para "pendente"
-$update_query = "UPDATE pedidos SET status = 'pendente' WHERE id = ?";
+$update_query = "UPDATE pedidos SET status = 'Pendente' WHERE id = ?";
 $stmt_update = $conn->prepare($update_query);
 $stmt_update->bind_param('i', $id_pedido);
 if ($stmt_update->execute()) {

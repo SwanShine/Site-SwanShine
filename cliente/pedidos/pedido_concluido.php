@@ -1,73 +1,68 @@
 <?php
 // Iniciar a sessão
-session_start(); // Inicia uma sessão PHP para armazenar dados de usuário durante a navegação.
+session_start();
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['user_email'])) { // Verifica se o email do usuário está salvo na sessão.
-    header('Location: ../../home/forms/login/login.html'); // Redireciona para a página de login.
-    exit(); // Interrompe a execução do script para garantir que o redirecionamento ocorra.
+if (!isset($_SESSION['user_email'])) {
+    header('Location: ../../home/forms/login/login.html');
+    exit();
 }
 
 // Dados de conexão com o banco de dados
-$servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com"; // Nome do servidor do banco de dados.
-$username = "admin"; // Nome de usuário do banco de dados.
-$password = "gLAHqWkvUoaxwBnm9wKD"; // Senha do banco de dados.
-$dbname = "swanshine"; // Nome do banco de dados.
+$servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
+$username = "admin";
+$password = "gLAHqWkvUoaxwBnm9wKD";
+$dbname = "swanshine";
 
 // Criar conexão
-$conn = new mysqli($servername, $username, $password, $dbname); // Cria uma nova conexão MySQL.
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) { // Verifica se a conexão falhou.
-    die("Conexão falhou: " . $conn->connect_error); // Exibe mensagem de erro.
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
 }
 
 // Recuperar o email da sessão
-$email = $_SESSION['user_email']; // Obtém o email do usuário da sessão.
+$email = $_SESSION['user_email'];
 
 // Verificar se o cliente existe na tabela "clientes"
 $stmt = $conn->prepare("SELECT * FROM clientes WHERE email = ?");
 if (!$stmt) {
-    die("Erro na preparação da consulta: " . $conn->error); // Exibe erro se a consulta falhar.
+    die("Erro na preparação da consulta: " . $conn->error);
 }
 
-$stmt->bind_param("s", $email); // Substitui "?" pelo email do cliente.
-$stmt->execute(); // Executa a consulta.
-$result = $stmt->get_result(); // Armazena o resultado.
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    $cliente = $result->fetch_assoc(); // Obtém os dados do cliente.
+    $cliente = $result->fetch_assoc();
 } else {
-    echo "Cliente não encontrado."; // Mensagem se o cliente não for encontrado.
-    exit(); // Encerra o script.
+    echo "Cliente não encontrado.";
+    exit();
 }
 
-// Fechar a consulta do cliente
 $stmt->close();
 
-// Buscar os serviços recusados feitos pelo cliente
-$stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'concluido' ORDER BY data_pedido DESC");
+// Buscar os serviços com status 'concluído' feitos pelo cliente
+$stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'Concluído' ORDER BY data_pedido DESC");
 if (!$stmt) {
-    die("Erro na preparação da consulta de pedidos: " . $conn->error); // Exibe erro se a consulta falhar.
+    die("Erro na preparação da consulta de pedidos: " . $conn->error);
 }
 
-$stmt->bind_param("s", $email); // Substitui "?" pelo email do cliente.
-$stmt->execute(); // Executa a consulta.
-$result = $stmt->get_result(); // Armazena o resultado.
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Verificar se o cliente tem pedidos recusados
 $pedidos = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $pedidos[] = $row; // Armazena cada pedido no array
+        $pedidos[] = $row; // Armazena os pedidos no array
     }
 } else {
-    echo "<div>Nenhum serviço recusado encontrado para este cliente.</div>"; // Mensagem se não houver pedidos recusados.
+    echo "<div>Nenhum serviço concluído encontrado para este cliente.</div>"; // Exibe mensagem caso não haja pedidos
 }
 
-// Fechar a consulta de pedidos do cliente
 $stmt->close();
-
-// Fechar a conexão
 $conn->close();
 ?>
 
@@ -112,205 +107,233 @@ $conn->close();
     <link href="../assets/css/services.css" rel="stylesheet">
 
     <style>
-      body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-.section.dashboard {
-    padding: 20px;
-}
+        .section.dashboard {
+            padding: 20px;
+        }
 
-.row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Permite que os cartões se movam para a linha seguinte */
-}
+        .row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Permite que os cartões se movam para a linha seguinte */
+        }
 
-.card-container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 10px;
-}
+        .card-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 10px;
+        }
 
-.titulo {
-    text-align: center;
-    margin-bottom: 20px;
-}
+        .titulo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    flex: 1 1 min(30%, 300px); /* Melhor controle de largura */
-    position: relative;
-}
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            flex: 1 1 min(30%, 300px);
+            /* Melhor controle de largura */
+            position: relative;
+        }
 
-.status {
-    font-weight: bold;
-    padding: 8px 12px; /* Reduz o padding */
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: inline-block;
-    font-size: 1em; /* Reduz o tamanho da fonte */
-}
+        .status {
+            font-weight: bold;
+            padding: 8px 12px;
+            /* Reduz o padding */
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: inline-block;
+            font-size: 1em;
+            /* Reduz o tamanho da fonte */
+        }
 
-.servico-destaque {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+        .servico-destaque {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-.card-content p {
-    margin: 5px 0;
-}
+        .card-content p {
+            margin: 5px 0;
+        }
 
-.buttons {
-    display: flex;
-    gap: 10px;
-}
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
 
-.button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.button.orcamento {
-    background-color: #4caf50;
-    color: white;
-}
+        .button.orcamento {
+            background-color: #4caf50;
+            color: white;
+        }
 
-.button.orcamento:hover {
-    background-color: #45a049;
-}
+        .button.orcamento:hover {
+            background-color: #45a049;
+        }
 
-.button.excluir {
-    background-color: #f44336;
-    color: white;
-}
+        .button.excluir {
+            background-color: #f44336;
+            color: white;
+        }
 
-.button.excluir:hover {
-    background-color: #e53935;
-}
+        .button.excluir:hover {
+            background-color: #e53935;
+        }
 
-.no-pedidos {
-    text-align: center;
-}
+        .no-pedidos {
+            text-align: center;
+        }
 
-.close-card {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
+        .close-card {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
 
-/* Estilos responsivos */
-@media (max-width: 1200px) {
-    .card-container {
-        max-width: 100%;
-    }
-}
+        /* Estilos responsivos */
+        @media (max-width: 1200px) {
+            .card-container {
+                max-width: 100%;
+            }
+        }
 
-@media (max-width: 768px) {
-    .card {
-        padding: 15px;
-        flex: 1 1 calc(45% - 20px);
-    }
-    .buttons {
-        flex-direction: column;
-    }
-}
+        @media (max-width: 768px) {
+            .card {
+                padding: 15px;
+                flex: 1 1 calc(45% - 20px);
+            }
 
-@media (max-width: 480px) {
-    .card {
-        padding: 10px;
-        flex: 1 1 calc(50% - 20px);
-    }
-    .titulo {
-        font-size: 1.5em;
-    }
-}
+            .buttons {
+                flex-direction: column;
+            }
+        }
 
-@media (max-width: 425px) {
-    .card {
-        padding: 12px;
-        flex: 1 1 calc(50% - 20px); /* Ajusta para 2 cartões por linha */
-    }
-    .titulo {
-        font-size: 1.4em;
-    }
-    .servico-destaque {
-        font-size: 1.1em;
-    }
-    .status {
-        font-size: 0.95em; /* Menor para telas menores */
-        padding: 6px 10px; /* Reduz ainda mais o padding */
-    }
-    .button {
-        padding: 8px 16px;
-    }
-}
+        @media (max-width: 480px) {
+            .card {
+                padding: 10px;
+                flex: 1 1 calc(50% - 20px);
+            }
 
-@media (max-width: 375px) {
-    .card {
-        padding: 10px;
-        flex: 1 1 calc(100% - 20px); /* Ajusta para 1 cartão por linha */
-    }
-    .titulo {
-        font-size: 1.3em;
-    }
-    .servico-destaque {
-        font-size: 1em;
-    }
-    .status {
-        font-size: 0.9em; /* Tamanho de fonte menor */
-        padding: 5px 8px; /* Ajuste o padding para se ajustar à tela */
-    }
-    .button {
-        padding: 8px 16px;
-    }
-}
+            .titulo {
+                font-size: 1.5em;
+            }
+        }
 
-@media (max-width: 320px) {
-    .card {
-        padding: 8px;
-        flex: 1 1 calc(100% - 20px); /* Ajusta para 1 cartão por linha em telas muito pequenas */
-    }
-    .titulo {
-        font-size: 1.2em;
-    }
-    .servico-destaque {
-        font-size: 0.9em;
-    }
-    .card-content p {
-        font-size: 0.85em;
-        margin: 3px 0;
-    }
-    .button {
-        padding: 6px 12px;
-        font-size: 0.85em;
-    }
-    .status {
-        font-size: 0.85em;
-        padding: 4px 6px; /* Padding bem reduzido */
-    }
-    .buttons {
-        gap: 5px;
-    }
-    .close-card {
-        font-size: 0.8em;
-        top: 8px;
-        right: 8px;
-    }
-}
+        @media (max-width: 425px) {
+            .card {
+                padding: 12px;
+                flex: 1 1 calc(50% - 20px);
+                /* Ajusta para 2 cartões por linha */
+            }
 
+            .titulo {
+                font-size: 1.4em;
+            }
+
+            .servico-destaque {
+                font-size: 1.1em;
+            }
+
+            .status {
+                font-size: 0.95em;
+                /* Menor para telas menores */
+                padding: 6px 10px;
+                /* Reduz ainda mais o padding */
+            }
+
+            .button {
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .card {
+                padding: 10px;
+                flex: 1 1 calc(100% - 20px);
+                /* Ajusta para 1 cartão por linha */
+            }
+
+            .titulo {
+                font-size: 1.3em;
+            }
+
+            .servico-destaque {
+                font-size: 1em;
+            }
+
+            .status {
+                font-size: 0.9em;
+                /* Tamanho de fonte menor */
+                padding: 5px 8px;
+                /* Ajuste o padding para se ajustar à tela */
+            }
+
+            .button {
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .card {
+                padding: 8px;
+                flex: 1 1 calc(100% - 20px);
+                /* Ajusta para 1 cartão por linha em telas muito pequenas */
+            }
+
+            .titulo {
+                font-size: 1.2em;
+            }
+
+            .servico-destaque {
+                font-size: 0.9em;
+            }
+
+            .card-content p {
+                font-size: 0.85em;
+                margin: 3px 0;
+            }
+
+            .button {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+
+            .status {
+                font-size: 0.85em;
+                padding: 4px 6px;
+                /* Padding bem reduzido */
+            }
+
+            .buttons {
+                gap: 5px;
+            }
+
+            .close-card {
+                font-size: 0.8em;
+                top: 8px;
+                right: 8px;
+            }
+        }
     </style>
 
 
@@ -519,85 +542,78 @@ $conn->close();
     </header>
 
 
-  <!-- ======= Barra Lateral ======= -->
-  <aside id="sidebar" class="sidebar">
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../index.php">
-          <i class="bi bi-grid"></i>
-          <span>Início</span>
-        </a>
-      </li>
+    <!-- ======= Barra Lateral ======= -->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../index.php">
+                    <i class="bi bi-grid"></i>
+                    <span>Início</span>
+                </a>
+            </li>
 
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          data-bs-target="#components-nav"
-          data-bs-toggle="collapse"
-          href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul
-          id="components-nav"
-          class="nav-content collapse"
-          data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-          </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link collapsed"
+                    data-bs-target="#components-nav"
+                    data-bs-toggle="collapse"
+                    href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul
+                    id="components-nav"
+                    class="nav-content collapse"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a
+                    class="nav-link collapsed"
+                    data-bs-target="#components-nav"
+                    data-bs-toggle="collapse"
+                    href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul
+                    id="components-nav"
+                    class="nav-content collapse"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
+                    </li>
+                    <li>
+                        <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Perfil -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../perfil.php">
+                    <i class="bi bi-person"></i>
+                    <span>Perfil</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="../suporte.php">
+                    <i class="bi bi-chat-dots"></i>
+                    <span>Suporte</span>
+                </a>
+            </li>
+
         </ul>
-      </li>
-
-      <li class="nav-item">
-        <a
-          class="nav-link collapsed"
-          data-bs-target="#components-nav"
-          data-bs-toggle="collapse"
-          href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul
-          id="components-nav"
-          class="nav-content collapse"
-          data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
-          </li>
-          <li>
-            <a href="pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
-          </li>
-          <li>
-            <a href="pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
-          </li>
-          <li>
-            <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../mensagem.php">
-          <i class="bi bi-envelope"></i>
-          <span>Mensagens</span>
-        </a>
-      </li>
-
-      <!-- Perfil -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../perfil.php">
-          <i class="bi bi-person"></i>
-          <span>Perfil</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../suporte.php">
-          <i class="bi bi-chat-dots"></i>
-          <span>Suporte</span>
-        </a>
-      </li>
-
-    </ul>
-  </aside><!-- End Sidebar-->
+    </aside><!-- End Sidebar-->
 
 
     <main id="main" class="main">
@@ -627,7 +643,7 @@ $conn->close();
                                 <div class="status <?= htmlspecialchars($pedido['status']) ?>"><?= htmlspecialchars($pedido['status']) ?></div>
                                 <div class="servico-destaque"><?= htmlspecialchars($pedido['servicos']) ?></div>
                                 <div class="card-content">
-                                <p><strong>Tipo:</strong> <span><?= htmlspecialchars($pedido['tipo']) ?></span></p>
+                                    <p><strong>Tipo:</strong> <span><?= htmlspecialchars($pedido['tipo']) ?></span></p>
                                     <p><strong>Estilo:</strong> <span><?= htmlspecialchars($pedido['estilo']) ?></span></p>
                                     <p><strong>Atendimento:</strong> <span><?= htmlspecialchars($pedido['atendimento']) ?></span></p>
                                     <p><strong>Urgência:</strong> <span><?= htmlspecialchars($pedido['urgencia']) ?></span></p>

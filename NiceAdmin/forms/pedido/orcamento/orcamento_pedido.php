@@ -15,6 +15,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 }
 
 $id_pedido = intval($_GET['id']); // Sanitizar o ID do pedido
+$email = $_SESSION['user_email']; // Recuperar o e-mail do usuário logado
 
 // Dados de conexão com o banco de dados
 $servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
@@ -30,9 +31,23 @@ if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Atualizar o status do pedido para "em análise"
-$stmt = $conn->prepare("UPDATE pedidos SET status = 'em análise' WHERE id = ?");
-$stmt->bind_param("i", $id_pedido);
+// Buscar o ID do profissional logado
+$stmt = $conn->prepare("SELECT id FROM profissionais WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+$profissional = $result->fetch_assoc();
+
+if (!$profissional) {
+    echo "Profissional não encontrado.";
+    exit();
+}
+
+$profissional_id = $profissional['id'];
+
+// Atualizar o status do pedido para "em negociação" apenas para o profissional
+$stmt = $conn->prepare("UPDATE pedidos SET status = 'em negociação' WHERE id = ? AND id IN (SELECT pedido_id FROM recusas_profissionais WHERE profissional_id != ?) AND status = 'pendente'");
+$stmt->bind_param("ii", $id_pedido, $profissional_id);
 
 if ($stmt->execute()) {
     // Redirecionar para o formulário de orçamento

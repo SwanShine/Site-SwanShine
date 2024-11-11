@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
 $stmt->close();
 
 // Buscar os serviços pendentes feitos pelo cliente
-$stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'pendente' ORDER BY data_pedido DESC");
+$stmt = $conn->prepare("SELECT * FROM pedidos WHERE email = ? AND status = 'Pendente' ORDER BY data_pedido DESC");
 if (!$stmt) {
   die("Erro na preparação da consulta de pedidos: " . $conn->error); // Exibe erro se a consulta falhar.
 }
@@ -110,411 +110,439 @@ $conn->close();
   <link href="../assets/css/services.css" rel="stylesheet">
 
   <style>
-      body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-.section.dashboard {
-    padding: 20px;
-}
-
-.row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Permite que os cartões se movam para a linha seguinte */
-}
-
-.card-container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 10px;
-}
-
-.titulo {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 10px;
-    flex: 1 1 min(30%, 300px); /* Melhor controle de largura */
-    position: relative;
-}
-
-.status {
-    font-weight: bold;
-    padding: 8px 12px; /* Reduz o padding */
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: inline-block;
-    font-size: 1em; /* Reduz o tamanho da fonte */
-}
-
-.servico-destaque {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.card-content p {
-    margin: 5px 0;
-}
-
-.buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.button.orcamento {
-    background-color: #4caf50;
-    color: white;
-}
-
-.button.orcamento:hover {
-    background-color: #45a049;
-}
-
-.button.excluir {
-    background-color: #f44336;
-    color: white;
-}
-
-.button.excluir:hover {
-    background-color: #e53935;
-}
-
-.no-pedidos {
-    text-align: center;
-}
-
-.close-card {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-/* Estilos responsivos */
-@media (max-width: 1200px) {
-    .card-container {
-        max-width: 100%;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
     }
-}
 
-@media (max-width: 768px) {
+    .section.dashboard {
+      padding: 20px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      /* Permite que os cartões se movam para a linha seguinte */
+    }
+
+    .card-container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 10px;
+    }
+
+    .titulo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
     .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 10px;
+      flex: 1 1 min(30%, 300px);
+      /* Melhor controle de largura */
+      position: relative;
+    }
+
+    .status {
+      font-weight: bold;
+      padding: 8px 12px;
+      /* Reduz o padding */
+      border-radius: 5px;
+      margin-bottom: 10px;
+      display: inline-block;
+      font-size: 1em;
+      /* Reduz o tamanho da fonte */
+    }
+
+    .servico-destaque {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      margin: 5px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button.orcamento {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .button.orcamento:hover {
+      background-color: #45a049;
+    }
+
+    .button.excluir {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .button.excluir:hover {
+      background-color: #e53935;
+    }
+
+    .no-pedidos {
+      text-align: center;
+    }
+
+    .close-card {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 1200px) {
+      .card-container {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .card {
         padding: 15px;
         flex: 1 1 calc(45% - 20px);
-    }
-    .buttons {
-        flex-direction: column;
-    }
-}
+      }
 
-@media (max-width: 480px) {
-    .card {
+      .buttons {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
         padding: 10px;
         flex: 1 1 calc(50% - 20px);
-    }
-    .titulo {
+      }
+
+      .titulo {
         font-size: 1.5em;
+      }
     }
-}
 
-@media (max-width: 425px) {
-    .card {
+    @media (max-width: 425px) {
+      .card {
         padding: 12px;
-        flex: 1 1 calc(50% - 20px); /* Ajusta para 2 cartões por linha */
-    }
-    .titulo {
+        flex: 1 1 calc(50% - 20px);
+        /* Ajusta para 2 cartões por linha */
+      }
+
+      .titulo {
         font-size: 1.4em;
-    }
-    .servico-destaque {
+      }
+
+      .servico-destaque {
         font-size: 1.1em;
-    }
-    .status {
-        font-size: 0.95em; /* Menor para telas menores */
-        padding: 6px 10px; /* Reduz ainda mais o padding */
-    }
-    .button {
-        padding: 8px 16px;
-    }
-}
+      }
 
-@media (max-width: 375px) {
-    .card {
+      .status {
+        font-size: 0.95em;
+        /* Menor para telas menores */
+        padding: 6px 10px;
+        /* Reduz ainda mais o padding */
+      }
+
+      .button {
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .card {
         padding: 10px;
-        flex: 1 1 calc(100% - 20px); /* Ajusta para 1 cartão por linha */
-    }
-    .titulo {
-        font-size: 1.3em;
-    }
-    .servico-destaque {
-        font-size: 1em;
-    }
-    .status {
-        font-size: 0.9em; /* Tamanho de fonte menor */
-        padding: 5px 8px; /* Ajuste o padding para se ajustar à tela */
-    }
-    .button {
-        padding: 8px 16px;
-    }
-}
+        flex: 1 1 calc(100% - 20px);
+        /* Ajusta para 1 cartão por linha */
+      }
 
-@media (max-width: 320px) {
-    .card {
-        padding: 8px;
-        flex: 1 1 calc(100% - 20px); /* Ajusta para 1 cartão por linha em telas muito pequenas */
-    }
-    .titulo {
-        font-size: 1.2em;
-    }
-    .servico-destaque {
+      .titulo {
+        font-size: 1.3em;
+      }
+
+      .servico-destaque {
+        font-size: 1em;
+      }
+
+      .status {
         font-size: 0.9em;
+        /* Tamanho de fonte menor */
+        padding: 5px 8px;
+        /* Ajuste o padding para se ajustar à tela */
+      }
+
+      .button {
+        padding: 8px 16px;
+      }
     }
-    .card-content p {
+
+    @media (max-width: 320px) {
+      .card {
+        padding: 8px;
+        flex: 1 1 calc(100% - 20px);
+        /* Ajusta para 1 cartão por linha em telas muito pequenas */
+      }
+
+      .titulo {
+        font-size: 1.2em;
+      }
+
+      .servico-destaque {
+        font-size: 0.9em;
+      }
+
+      .card-content p {
         font-size: 0.85em;
         margin: 3px 0;
-    }
-    .button {
+      }
+
+      .button {
         padding: 6px 12px;
         font-size: 0.85em;
-    }
-    .status {
+      }
+
+      .status {
         font-size: 0.85em;
-        padding: 4px 6px; /* Padding bem reduzido */
-    }
-    .buttons {
+        padding: 4px 6px;
+        /* Padding bem reduzido */
+      }
+
+      .buttons {
         gap: 5px;
-    }
-    .close-card {
+      }
+
+      .close-card {
         font-size: 0.8em;
         top: 8px;
         right: 8px;
+      }
     }
-}
-
-    </style>
+  </style>
 
 
 </head>
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-        <!-- Cabeçalho com ID "header", classe para fixar no topo e aplicar estilo flex para alinhamento dos itens. -->
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <!-- Cabeçalho com ID "header", classe para fixar no topo e aplicar estilo flex para alinhamento dos itens. -->
 
-        <div class="d-flex align-items-center justify-content-between">
-            <!-- Div que alinha os itens de forma flexível e justifica o conteúdo entre os elementos. -->
+    <div class="d-flex align-items-center justify-content-between">
+      <!-- Div que alinha os itens de forma flexível e justifica o conteúdo entre os elementos. -->
 
-            <a href="../index.php" class="logo d-flex align-items-center">
-                <!-- Link que redireciona para a página "index.php" com a classe "logo", exibindo logo e texto. -->
+      <a href="../index.php" class="logo d-flex align-items-center">
+        <!-- Link que redireciona para a página "index.php" com a classe "logo", exibindo logo e texto. -->
 
-                <img src="../assets/img/logo_preta.png" alt="" />
-                <!-- Imagem do logo com o caminho "../assets/img/logo_preta.png". O atributo "alt" está vazio. -->
+        <img src="../assets/img/logo_preta.png" alt="" />
+        <!-- Imagem do logo com o caminho "../assets/img/logo_preta.png". O atributo "alt" está vazio. -->
 
-                <span class="d-none d-lg-block">Swan Shine</span>
-                <!-- Texto "SwanShine" que só aparece em telas grandes, escondido em telas menores. -->
-            </a>
+        <span class="d-none d-lg-block">Swan Shine</span>
+        <!-- Texto "SwanShine" que só aparece em telas grandes, escondido em telas menores. -->
+      </a>
 
-            <i class="bi bi-list toggle-sidebar-btn"></i>
-            <!-- Ícone do Bootstrap Icons para alternar o sidebar. -->
-        </div>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+      <!-- Ícone do Bootstrap Icons para alternar o sidebar. -->
+    </div>
 
-        <nav class="header-nav ms-auto">
-            <!-- Barra de navegação à direita (margem esquerda automática para empurrar conteúdo). -->
+    <nav class="header-nav ms-auto">
+      <!-- Barra de navegação à direita (margem esquerda automática para empurrar conteúdo). -->
 
-            <ul class="d-flex align-items-center">
-                <!-- Lista não ordenada com itens alinhados ao centro, usando display flex. -->
+      <ul class="d-flex align-items-center">
+        <!-- Lista não ordenada com itens alinhados ao centro, usando display flex. -->
 
-                <!-- Notifications Dropdown -->
-                <li class="nav-item dropdown">
-                    <!-- Item da lista que contém o dropdown de notificações. -->
+        <!-- Notifications Dropdown -->
+        <li class="nav-item dropdown">
+          <!-- Item da lista que contém o dropdown de notificações. -->
 
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <!-- Link com ícone de sino que abre o menu suspenso de notificações ao clicar. -->
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <!-- Link com ícone de sino que abre o menu suspenso de notificações ao clicar. -->
 
-                        <i class="bi bi-bell"></i>
-                        <!-- Ícone de sino representando as notificações. -->
+            <i class="bi bi-bell"></i>
+            <!-- Ícone de sino representando as notificações. -->
 
-                        <span class="badge bg-primary badge-number">0</span>
-                        <!-- Badge com o número de notificações (aqui definido como 0) com fundo azul. -->
-                    </a>
+            <span class="badge bg-primary badge-number">0</span>
+            <!-- Badge com o número de notificações (aqui definido como 0) com fundo azul. -->
+          </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <!-- Menu suspenso alinhado à direita (end) com uma seta indicativa, contendo notificações. -->
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <!-- Menu suspenso alinhado à direita (end) com uma seta indicativa, contendo notificações. -->
 
-                        <li class="dropdown-header">
-                            <!-- Cabeçalho do dropdown que exibe a contagem de notificações. -->
+            <li class="dropdown-header">
+              <!-- Cabeçalho do dropdown que exibe a contagem de notificações. -->
 
-                            Você tem 0 notificações
-                            <!-- Texto que informa o número de notificações. -->
+              Você tem 0 notificações
+              <!-- Texto que informa o número de notificações. -->
 
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-                            <!-- Link para ver todas as notificações com uma badge arredondada ao lado do texto. -->
-                        </li>
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+              <!-- Link para ver todas as notificações com uma badge arredondada ao lado do texto. -->
+            </li>
 
-                        <li class="dropdown-footer">
-                            <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as notificações. -->
+            <li class="dropdown-footer">
+              <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as notificações. -->
 
-                            <a href="#">Mostrar todas as notificações</a>
-                            <!-- Link para mostrar todas as notificações. -->
-                        </li>
-                    </ul>
-                </li>
+              <a href="#">Mostrar todas as notificações</a>
+              <!-- Link para mostrar todas as notificações. -->
+            </li>
+          </ul>
+        </li>
 
-                <!-- Messages Dropdown -->
-                <li class="nav-item dropdown">
-                    <!-- Item da lista que contém o dropdown de mensagens. -->
+        <!-- Messages Dropdown -->
+        <li class="nav-item dropdown">
+          <!-- Item da lista que contém o dropdown de mensagens. -->
 
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <!-- Link com ícone de chat que abre o menu suspenso de mensagens ao clicar. -->
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <!-- Link com ícone de chat que abre o menu suspenso de mensagens ao clicar. -->
 
-                        <i class="bi bi-chat-left-text"></i>
-                        <!-- Ícone de chat para representar mensagens. -->
+            <i class="bi bi-chat-left-text"></i>
+            <!-- Ícone de chat para representar mensagens. -->
 
-                        <span class="badge bg-success badge-number">0</span>
-                        <!-- Badge com o número de mensagens (aqui definido como 0) com fundo verde. -->
-                    </a>
+            <span class="badge bg-success badge-number">0</span>
+            <!-- Badge com o número de mensagens (aqui definido como 0) com fundo verde. -->
+          </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo mensagens. -->
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo mensagens. -->
 
-                        <li class="dropdown-header">
-                            <!-- Cabeçalho do dropdown que exibe a contagem de mensagens. -->
+            <li class="dropdown-header">
+              <!-- Cabeçalho do dropdown que exibe a contagem de mensagens. -->
 
-                            Você tem 0 mensagens
-                            <!-- Texto informando o número de mensagens. -->
+              Você tem 0 mensagens
+              <!-- Texto informando o número de mensagens. -->
 
-                            <a href="mensagem.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-                            <!-- Link para ver todas as mensagens com uma badge arredondada ao lado do texto. -->
-                        </li>
+              <a href="mensagem.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
+              <!-- Link para ver todas as mensagens com uma badge arredondada ao lado do texto. -->
+            </li>
 
-                        <li>
-                            <hr class="dropdown-divider" />
-                            <!-- Linha divisória dentro do dropdown. -->
-                        </li>
+            <li>
+              <hr class="dropdown-divider" />
+              <!-- Linha divisória dentro do dropdown. -->
+            </li>
 
-                        <li class="dropdown-footer">
-                            <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
+            <li class="dropdown-footer">
+              <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
 
-                            <a href="../mensagem.php">Mostrar todas as mensagens</a>
-                            <!-- Link para mostrar todas as mensagens. -->
-                        </li>
-                    </ul>
-                </li>
+              <a href="../mensagem.php">Mostrar todas as mensagens</a>
+              <!-- Link para mostrar todas as mensagens. -->
+            </li>
+          </ul>
+        </li>
 
-                <!-- Profile Dropdown -->
-                <li class="nav-item dropdown pe-3">
-                    <!-- Item da lista que contém o dropdown de perfil. O "pe-3" aplica padding à direita. -->
+        <!-- Profile Dropdown -->
+        <li class="nav-item dropdown pe-3">
+          <!-- Item da lista que contém o dropdown de perfil. O "pe-3" aplica padding à direita. -->
 
-                    <a
-                        class="nav-link nav-profile d-flex align-items-center pe-0"
-                        href="../perfil.php"
-                        data-bs-toggle="dropdown">
-                        <!-- Link com imagem de perfil que abre o menu suspenso do perfil ao clicar. -->
+          <a
+            class="nav-link nav-profile d-flex align-items-center pe-0"
+            href="../perfil.php"
+            data-bs-toggle="dropdown">
+            <!-- Link com imagem de perfil que abre o menu suspenso do perfil ao clicar. -->
 
-                        <img
-                            src="../assets/img/usuario.png"
-                            alt="Profile"
-                            class="rounded-circle" />
-                        <!-- Imagem de perfil (usuário) em formato circular. -->
-                    </a>
+            <img
+              src="../assets/img/usuario.png"
+              alt="Profile"
+              class="rounded-circle" />
+            <!-- Imagem de perfil (usuário) em formato circular. -->
+          </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo opções de perfil. -->
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo opções de perfil. -->
 
-                        <li>
-                            <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="../perfil.php">
-                                <!-- Link para a página de perfil com ícone e texto alinhados. -->
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="../perfil.php">
+                <!-- Link para a página de perfil com ícone e texto alinhados. -->
 
-                                <i class="bi bi-person"></i>
-                                <!-- Ícone de pessoa (perfil). -->
+                <i class="bi bi-person"></i>
+                <!-- Ícone de pessoa (perfil). -->
 
-                                <span>Meu Perfil</span>
-                                <!-- Texto "Meu Perfil". -->
-                            </a>
-                        </li>
+                <span>Meu Perfil</span>
+                <!-- Texto "Meu Perfil". -->
+              </a>
+            </li>
 
-                        <li>
-                            <hr class="dropdown-divider" />
-                            <!-- Linha divisória dentro do dropdown. -->
-                        </li>
+            <li>
+              <hr class="dropdown-divider" />
+              <!-- Linha divisória dentro do dropdown. -->
+            </li>
 
-                        <li>
-                            <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="../perfil.php">
-                                <!-- Link para configurações da conta com ícone e texto alinhados. -->
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="../perfil.php">
+                <!-- Link para configurações da conta com ícone e texto alinhados. -->
 
-                                <i class="bi bi-gear"></i>
-                                <!-- Ícone de engrenagem (configurações). -->
+                <i class="bi bi-gear"></i>
+                <!-- Ícone de engrenagem (configurações). -->
 
-                                <span>Configurações da Conta</span>
-                                <!-- Texto "Configurações da Conta". -->
-                            </a>
-                        </li>
+                <span>Configurações da Conta</span>
+                <!-- Texto "Configurações da Conta". -->
+              </a>
+            </li>
 
-                        <li>
-                            <hr class="dropdown-divider" />
-                            <!-- Linha divisória dentro do dropdown. -->
-                        </li>
+            <li>
+              <hr class="dropdown-divider" />
+              <!-- Linha divisória dentro do dropdown. -->
+            </li>
 
-                        <li>
-                            <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="../suporte.php">
-                                <!-- Link para a página de ajuda com ícone e texto alinhados. -->
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="../suporte.php">
+                <!-- Link para a página de ajuda com ícone e texto alinhados. -->
 
-                                <i class="bi bi-question-circle"></i>
-                                <!-- Ícone de círculo com ponto de interrogação (ajuda). -->
+                <i class="bi bi-question-circle"></i>
+                <!-- Ícone de círculo com ponto de interrogação (ajuda). -->
 
-                                <span>Precisa de Ajuda?</span>
-                                <!-- Texto "Precisa de Ajuda?". -->
-                            </a>
-                        </li>
+                <span>Precisa de Ajuda?</span>
+                <!-- Texto "Precisa de Ajuda?". -->
+              </a>
+            </li>
 
-                        <li>
-                            <hr class="dropdown-divider" />
-                            <!-- Linha divisória dentro do dropdown. -->
-                        </li>
+            <li>
+              <hr class="dropdown-divider" />
+              <!-- Linha divisória dentro do dropdown. -->
+            </li>
 
-                        <li>
-                            <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="../form/log_out.php">
-                                <!-- Link para a página de logout com ícone e texto alinhados. -->
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="../form/log_out.php">
+                <!-- Link para a página de logout com ícone e texto alinhados. -->
 
-                                <i class="bi bi-box-arrow-right"></i>
-                                <!-- Ícone de seta saindo de uma caixa (sair/logout). -->
+                <i class="bi bi-box-arrow-right"></i>
+                <!-- Ícone de seta saindo de uma caixa (sair/logout). -->
 
-                                <span>Sair</span>
-                                <!-- Texto "Sair". -->
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </header>
+                <span>Sair</span>
+                <!-- Texto "Sair". -->
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
 
   <!-- ======= Barra Lateral ======= -->
@@ -570,13 +598,6 @@ $conn->close();
             <a href="pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
           </li>
         </ul>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../mensagem.php">
-          <i class="bi bi-envelope"></i>
-          <span>Mensagens</span>
-        </a>
       </li>
 
       <!-- Perfil -->
@@ -665,7 +686,7 @@ $conn->close();
       document.querySelectorAll('.orcamento').forEach(button => {
         button.addEventListener('click', function() {
           const id = this.getAttribute('data-id');
-          window.location.href = `../form/pedido/orcamento/orcamento_pedido.php?id=${id}`;
+          window.location.href = `../form/pedido/orcamento/visualizar_orcamento.php?id=${id}`;
         });
       });
     </script>
