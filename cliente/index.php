@@ -25,10 +25,22 @@ if ($conn->connect_error) {
 // Recuperar o email da sessão
 $email = $_SESSION['user_email'];
 
+// Obter o serviço filtrado (se houver)
+$servico_filtrado = isset($_GET['servico']) ? $_GET['servico'] : '';
+
 // Consultar os dados dos profissionais
 $sql = "SELECT * FROM profissionais";
+
+// Se houver um serviço selecionado, adicionar à consulta
+if ($servico_filtrado != '') {
+    // Proteger o valor de entrada contra SQL Injection
+    $servico_filtrado = $conn->real_escape_string($servico_filtrado);
+    $sql .= " WHERE servicos LIKE '%" . $servico_filtrado . "%'";
+}
+
 $result = $conn->query($sql);
 
+// Array para armazenar os profissionais filtrados por serviço
 $profissionais = [
   'Barbeiro' => [],
   'Maquiagem' => [],
@@ -43,29 +55,24 @@ $profissionais = [
 if ($result->num_rows > 0) {
   // Separar os profissionais por serviço
   while ($row = $result->fetch_assoc()) {
-    $servico = $row['servicos'];
-    if (array_key_exists($servico, $profissionais)) {
-      $profissionais[$servico][] = $row;
+    $servicos = explode(",", $row['servicos']); // Assume que os serviços são armazenados separados por vírgulas
+    foreach ($servicos as $servico) {
+        $servico = trim($servico); // Remover espaços extras
+        if (array_key_exists($servico, $profissionais)) {
+            $profissionais[$servico][] = $row;
+        }
     }
-  }
+  } 
 } else {
   echo "Nenhum profissional encontrado.";
-}
-
-// Selecionar apenas 3 profissionais aleatórios por categoria
-$profissionais_selecionados = [];
-foreach ($profissionais as $servico => $lista) {
-  if (count($lista) > 3) {
-    shuffle($lista); // Embaralha os profissionais
-    $profissionais_selecionados[$servico] = array_slice($lista, 0, 3); // Pega os 3 primeiros após embaralhar
-  } else {
-    $profissionais_selecionados[$servico] = $lista;
-  }
 }
 
 // Fechar conexão
 $conn->close();
 ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -216,83 +223,6 @@ $conn->close();
 
       <ul class="d-flex align-items-center">
         <!-- Lista não ordenada com itens alinhados ao centro, usando display flex. -->
-
-        <!-- Notifications Dropdown -->
-        <li class="nav-item dropdown">
-          <!-- Item da lista que contém o dropdown de notificações. -->
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <!-- Link com ícone de sino que abre o menu suspenso de notificações ao clicar. -->
-
-            <i class="bi bi-bell"></i>
-            <!-- Ícone de sino representando as notificações. -->
-
-            <span class="badge bg-primary badge-number">0</span>
-            <!-- Badge com o número de notificações (aqui definido como 0) com fundo azul. -->
-          </a>
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <!-- Menu suspenso alinhado à direita (end) com uma seta indicativa, contendo notificações. -->
-
-            <li class="dropdown-header">
-              <!-- Cabeçalho do dropdown que exibe a contagem de notificações. -->
-
-              Você tem 0 notificações
-              <!-- Texto que informa o número de notificações. -->
-
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-              <!-- Link para ver todas as notificações com uma badge arredondada ao lado do texto. -->
-            </li>
-
-            <li class="dropdown-footer">
-              <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as notificações. -->
-
-              <a href="#">Mostrar todas as notificações</a>
-              <!-- Link para mostrar todas as notificações. -->
-            </li>
-          </ul>
-        </li>
-
-        <!-- Messages Dropdown -->
-        <li class="nav-item dropdown">
-          <!-- Item da lista que contém o dropdown de mensagens. -->
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <!-- Link com ícone de chat que abre o menu suspenso de mensagens ao clicar. -->
-
-            <i class="bi bi-chat-left-text"></i>
-            <!-- Ícone de chat para representar mensagens. -->
-
-            <span class="badge bg-success badge-number">0</span>
-            <!-- Badge com o número de mensagens (aqui definido como 0) com fundo verde. -->
-          </a>
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo mensagens. -->
-
-            <li class="dropdown-header">
-              <!-- Cabeçalho do dropdown que exibe a contagem de mensagens. -->
-
-              Você tem 0 mensagens
-              <!-- Texto informando o número de mensagens. -->
-
-              <a href="mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-              <!-- Link para ver todas as mensagens com uma badge arredondada ao lado do texto. -->
-            </li>
-
-            <li>
-              <hr class="dropdown-divider" />
-              <!-- Linha divisória dentro do dropdown. -->
-            </li>
-
-            <li class="dropdown-footer">
-              <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
-
-              <a href="mensagem.html">Mostrar todas as mensagens</a>
-              <!-- Link para mostrar todas as mensagens. -->
-            </li>
-          </ul>
-        </li>
 
         <!-- Profile Dropdown -->
         <li class="nav-item dropdown pe-3">

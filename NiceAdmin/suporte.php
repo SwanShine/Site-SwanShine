@@ -98,268 +98,212 @@ $conn->close();
     <link href="assets/css/services.css" rel="stylesheet">
 
     <style>
-        .container {
-            padding: 20px;
-            /* Espaçamento interno da container */
+        /* Estilos Gerais */
+        body {
+            font-family: inter, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
 
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #000;
+        }
+
+        /* Links */
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #000;
+        }
+
+        /* Perguntas frequentes (FAQ) */
+        .faq {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            margin-top: 30px;
+        }
+
+        .faq h2 {
+            color: #000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .faq ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .faq li {
+            margin-bottom: 20px;
+        }
+
+        .faq li strong {
+            color: #000;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .faq-content {
+            display: none;
+            padding-top: 10px;
+            color: #000;
+            line-height: 1.6;
+        }
+
+        .faq li.active .faq-toggle {
+            transform: rotate(90deg);
+        }
+
+        /* Cards de Feedback */
+        .feedback-cards {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .feedback-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feedback-card:hover {
+            transform: scale(1.05);
+        }
+
+        .feedback-card p {
+            color: #000;
+            font-size: 0.9rem;
+        }
+
+        .feedback-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        /* Cards de Serviço */
         .service-category {
             font-size: 2.2rem;
-            /* Tamanho do título da categoria */
             color: #333;
-            /* Cor do texto */
         }
 
         .service-card {
             background-color: #fff;
-            /* Fundo do card */
             border-radius: 10px;
-            /* Bordas arredondadas */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            /* Sombra do card */
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            /* Transição suave */
+            margin-bottom: 20px;
+            /* Espaço entre os cards */
         }
 
         .service-card:hover {
             transform: translateY(-5px);
-            /* Levanta o card ao passar o mouse */
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-            /* Sombra mais intensa ao hover */
         }
 
         .card-title {
             font-size: 1.5rem;
-            /* Tamanho do título do card */
             color: #007bff;
-            /* Cor do título */
             margin-bottom: 10px;
-            /* Espaçamento abaixo do título */
         }
 
         .card-details p {
             color: #555;
-            /* Cor do texto das descrições */
             margin-bottom: 5px;
-            /* Espaçamento entre as descrições */
         }
 
         .btn.card-button {
             display: inline-block;
-            /* Exibe o botão em linha */
             margin-top: 15px;
-            /* Espaço acima do botão */
             padding: 12px 20px;
-            /* Espaçamento interno do botão */
             font-size: 1.1rem;
-            /* Tamanho da fonte do botão */
             background-color: #007bff;
-            /* Cor de fundo do botão */
-            color: #fff;
-            /* Cor do texto do botão */
+            color: white;
+            text-decoration: none;
             border-radius: 5px;
-            /* Bordas arredondadas */
             transition: background-color 0.3s ease;
-            /* Transição suave para a cor de fundo */
         }
 
         .btn.card-button:hover {
             background-color: #0056b3;
-            /* Cor de fundo ao passar o mouse */
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .feedback-card {
+                width: 48%;
+            }
+
+            .service-card {
+                width: 48%;
+            }
         }
 
         @media (max-width: 768px) {
             .service-card {
+                width: 100%;
+                /* Os cards ocupam toda a largura */
                 margin-bottom: 15px;
-                /* Espaçamento entre os cards em telas pequenas */
-            }
-        }
-    </style>
-    <style>
-        /* Estilos gerais */
-        .nav-item .nav-link.nav-icon {
-            position: relative;
-            /* Faz com que o ícone de notificação seja posicionado em relação ao seu contêiner pai */
-            padding: 0.5rem;
-            /* Adiciona preenchimento ao redor do ícone de notificação */
-            font-size: 20px;
-            /* Define o tamanho da fonte para o ícone de notificação */
-        }
-
-        .nav-item .badge-number {
-            position: absolute;
-            /* Posiciona o número de notificações de forma absoluta dentro do contêiner */
-            top: 0;
-            /* Coloca o número no topo */
-            right: 0;
-            /* Coloca o número no canto direito */
-            font-size: 12px;
-            /* Define o tamanho da fonte do número */
-            padding: 4px 6px;
-            /* Adiciona um preenchimento ao redor do número */
-            border-radius: 50%;
-            /* Faz o número aparecer dentro de um círculo */
-        }
-
-        .dropdown-menu.notifications {
-            width: 280px;
-            /* Define a largura do menu suspenso de notificações */
-            max-width: 1000%;
-            /* Isso efetivamente desabilita qualquer limite de largura máxima */
-            padding: 0;
-            /* Remove qualquer preenchimento dentro do menu suspenso */
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-            /* Adiciona uma sombra suave para dar profundidade ao menu */
-        }
-
-        .dropdown-menu .dropdown-header {
-            font-weight: bold;
-            /* Deixa o texto no cabeçalho em negrito */
-            font-size: 14px;
-            /* Define o tamanho da fonte para o cabeçalho */
-            padding: 10px;
-            /* Adiciona um preenchimento dentro do cabeçalho */
-            border-bottom: 1px solid #ddd;
-            /* Adiciona uma linha de separação abaixo do cabeçalho */
-            display: flex;
-            /* Usa flexbox para o layout */
-            justify-content: space-between;
-            /* Espaça igualmente os itens no cabeçalho */
-            align-items: center;
-            /* Alinha os itens verticalmente ao centro */
-        }
-
-        .dropdown-menu .dropdown-footer {
-            text-align: center;
-            /* Centraliza o texto no rodapé */
-            padding: 10px;
-            /* Adiciona um preenchimento ao rodapé */
-            font-size: 14px;
-            /* Define o tamanho da fonte para o rodapé */
-            color: #007bff;
-            /* Define a cor do texto como azul */
-        }
-
-        .dropdown-menu .dropdown-footer a {
-            color: inherit;
-            /* Faz com que o link herde a cor do texto do rodapé */
-            text-decoration: none;
-            /* Remove o sublinhado do link */
-        }
-
-        /* Notificação individual */
-        .dropdown-menu li a {
-            display: flex;
-            /* Exibe as notificações em um layout flexível */
-            padding: 10px;
-            /* Adiciona um preenchimento em torno de cada notificação */
-            text-decoration: none;
-            /* Remove o sublinhado do link da notificação */
-            color: #333;
-            /* Define a cor do texto como um cinza escuro */
-            transition: background-color 0.3s;
-            /* Adiciona uma transição suave ao mudar a cor de fundo */
-        }
-
-        .dropdown-menu li a:hover {
-            background-color: #f8f9fa;
-            /* Muda a cor de fundo ao passar o mouse sobre a notificação */
-        }
-
-        .dropdown-menu li a div {
-            display: flex;
-            /* Usa flexbox dentro do item da notificação */
-            flex-direction: column;
-            /* Organiza o conteúdo de forma vertical */
-        }
-
-        .dropdown-menu li a p,
-        .dropdown-menu li a span {
-            margin: 0;
-            /* Remove a margem padrão dos elementos */
-            font-size: 12px;
-            /* Define o tamanho da fonte para 12px */
-        }
-
-        .dropdown-menu li a span {
-            font-weight: 500;
-            /* Deixa o texto em negrito */
-        }
-
-        /* Responsividade para telas menores */
-        @media (max-width: 768px) {
-            .nav-item .nav-link.nav-icon {
-                font-size: 16px;
-                /* Reduz o tamanho do ícone para telas menores */
+                /* Maior espaçamento entre os cards */
             }
 
-            .dropdown-menu.notifications {
-                width: 240px;
-                /* Reduz a largura do menu suspenso para telas menores */
+            .feedback-card {
+                width: 100%;
+                /* Feedback cards ocupando 100% */
+                margin-bottom: 20px;
+            }
+
+            .faq li {
+                font-size: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                /* Ajuste de tamanho do título */
             }
         }
 
-        @media (max-width: 425px) {
-            .nav-item .nav-link.nav-icon {
-                font-size: 14px;
-                /* Reduz ainda mais o tamanho do ícone para telas menores */
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 1.5rem;
+                /* Título menor em telas muito pequenas */
             }
 
-            .dropdown-menu.notifications {
-                width: 200px;
-                /* Reduz a largura do menu suspenso para telas ainda menores */
-            }
-
-            .dropdown-menu .dropdown-header,
-            .dropdown-menu .dropdown-footer {
-                font-size: 12px;
-                /* Diminui o tamanho da fonte no cabeçalho e rodapé */
-            }
-
-            .dropdown-menu li a p,
-            .dropdown-menu li a span {
-                font-size: 11px;
-                /* Diminui o tamanho da fonte dos elementos de notificação */
-            }
-        }
-
-        @media (max-width: 375px) {
-            .nav-item .nav-link.nav-icon {
-                font-size: 13px;
-                /* Reduz o tamanho do ícone para telas muito pequenas */
-            }
-
-            .dropdown-menu.notifications {
-                width: 180px;
-                /* Reduz ainda mais a largura do menu suspenso para telas pequenas */
-            }
-
-            .badge-number {
-                font-size: 10px;
-                /* Reduz o tamanho da fonte do número de notificações */
-            }
-        }
-
-        @media (max-width: 32px) {
-            .nav-item .nav-link.nav-icon {
-                font-size: 12px;
-                /* Define o tamanho do ícone para telas muito pequenas */
-            }
-
-            .dropdown-menu.notifications {
-                width: 100px;
-                /* Reduz drasticamente a largura do menu suspenso para telas super pequenas */
-            }
-
-            .dropdown-menu .dropdown-header,
-            .dropdown-menu .dropdown-footer {
-                font-size: 10px;
-                /* Reduz o tamanho da fonte no cabeçalho e rodapé */
-            }
-
-            .badge-number {
-                font-size: 8px;
-                /* Reduz o tamanho da fonte do número de notificações para telas muito pequenas */
+            .faq li strong {
+                font-size: 1rem;
+                /* Ajuste do tamanho da fonte */
             }
         }
     </style>
@@ -393,8 +337,8 @@ $conn->close();
                             <a href="forms/marcar_notificacoes_como_lidas.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                         </li>
 
-                        <?php if ($num_notificacoes > 0): ?>
-                            <?php foreach ($notificacoes as $notificacao): ?>
+                        <?php if ($num_notificacoes > 0) : ?>
+                            <?php foreach ($notificacoes as $notificacao) : ?>
                                 <li>
                                     <a href="#">
                                         <div>
@@ -404,7 +348,7 @@ $conn->close();
                                     </a>
                                 </li>
                             <?php endforeach; ?>
-                        <?php else: ?>
+                        <?php else : ?>
                             <li class="dropdown-footer">
                                 Nenhuma nova notificação
                             </li>
@@ -423,8 +367,7 @@ $conn->close();
                         <span class="badge bg-success badge-number">0</span>
                     </a>
 
-                    <ul
-                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                         <li class="dropdown-header">
                             Você tem 0 mensagens
                             <a href="mensagem.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
@@ -440,23 +383,14 @@ $conn->close();
 
                 <!-- Profile Dropdown -->
                 <li class="nav-item dropdown pe-3">
-                    <a
-                        class="nav-link nav-profile d-flex align-items-center pe-0"
-                        href="perfil.php"
-                        data-bs-toggle="dropdown">
-                        <img
-                            src="assets/img/usuario.png"
-                            alt="Profile"
-                            class="rounded-circle" />
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="perfil.php" data-bs-toggle="dropdown">
+                        <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle" />
                     </a>
 
-                    <ul
-                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 
                         <li>
-                            <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="perfil.php">
+                            <a class="dropdown-item d-flex align-items-center" href="perfil.php">
                                 <i class="bi bi-person"></i>
                                 <span>Meu Perfil</span>
                             </a>
@@ -465,9 +399,7 @@ $conn->close();
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="perfil.php">
+                            <a class="dropdown-item d-flex align-items-center" href="perfil.php">
                                 <i class="bi bi-gear"></i>
                                 <span>Configurações da Conta</span>
                             </a>
@@ -476,9 +408,7 @@ $conn->close();
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="suporte.php">
+                            <a class="dropdown-item d-flex align-items-center" href="suporte.php">
                                 <i class="bi bi-question-circle"></i>
                                 <span>Precisa de Ajuda?</span>
                             </a>
@@ -487,9 +417,7 @@ $conn->close();
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
-                            <a
-                                class="dropdown-item d-flex align-items-center"
-                                href="forms/log_out.php">
+                            <a class="dropdown-item d-flex align-items-center" href="forms/log_out.php">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sair</span>
                             </a>
@@ -511,17 +439,10 @@ $conn->close();
             </li>
 
             <li class="nav-item">
-                <a
-                    class="nav-link collapsed"
-                    data-bs-target="#components-nav"
-                    data-bs-toggle="collapse"
-                    href="#">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>Pedidos</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul
-                    id="components-nav"
-                    class="nav-content collapse"
-                    data-bs-parent="#sidebar-nav">
+                <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="pedidos/pedido_pendente.php"><i class="bi bi-circle"></i><span>Pedidos Pendentes</span></a>
                     </li>
@@ -559,8 +480,7 @@ $conn->close();
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Seja Bem vindo! <?= htmlspecialchars($_SESSION['nome']) ?></h3>
-            </h1>
+            <h1>Seja Bem vindo! <?= htmlspecialchars($_SESSION['nome']) ?></h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
@@ -575,17 +495,156 @@ $conn->close();
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Suporte</h2>
-                <p>Entre em contato e tire suas duvidas aqui no SAC.</p>
+                <p>Entre em contato e tire suas dúvidas aqui no SAC.</p>
             </div><!-- End Section Title -->
 
             <div class="container">
                 <div class="row gy-4">
+                    <!-- Perguntas Frequentes (FAQ) -->
+                    <div class="col-12">
+                        <div class="faq">
+                            <h2>Perguntas Frequentes</h2>
+                            <ul>
+                                <li>
+                                    <strong class="faq-question">
+                                        Como solicitar um serviço?
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </strong>
+                                    <div class="faq-content">
+                                        <p> <b> Solicitar um serviço é fácil! </b> Basta seguir os passos abaixo:</p>
+                                        <ul>
+                                            <li>1. Clique no menu lateral e selecione <a href="servicos.php">"Contratar Serviço"</a>.</li>
+                                            <li>2. Escolha o serviço que deseja solicitar.</li>
+                                            <li>3. Preencha todos os campos obrigatórios do formulário.</li>
+                                            <li>4. Envie o formulário para concluir sua solicitação.</li>
+                                        </ul>
+                                        <p>Em poucos minutos, seu pedido estará pronto para ser processado!</p>
+                                    </div>
+                                </li>
 
+                                <li>
+                                    <strong class="faq-question">
+                                        Como funciona um pedido pendente?
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </strong>
+                                    <div class="faq-content">
+                                        <p>Um pedido pendente significa que você solicitou um serviço, mas ainda está aguardando o profissional enviar o orçamento. Após o orçamento ser enviado, você poderá escolher o que melhor o agrada, e o pedido será movido para "Em Andamento".</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <strong class="faq-question">
+                                        Como funciona um pedido em andamento?
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </strong>
+                                    <div class="faq-content">
+                                        <p>Quando um pedido está "Em Andamento", isso indica que o profissional enviou um orçamento e você já o escolheu. A solicitação agora está pronta para ser realizada.</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <strong class="faq-question">
+                                        Excluí meu pedido, e agora?
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </strong>
+                                    <div class="faq-content">
+                                        <p>Se você excluiu um pedido por engano, não se preocupe! Acesse a seção <a href="pedidos/pedido_excluido.php">"Pedidos Excluídos"</a> e clique em "Voltar Pedido". Seu pedido será restaurado e estará novamente disponível.</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <strong class="faq-question">
+                                        Como concluir um pedido?
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </strong>
+                                    <div class="faq-content">
+                                        <p>Para concluir um pedido, siga os seguintes passos:</p>
+                                        <ul>
+                                            <li>Solicite o serviço.</li>
+                                            <li>Aceite um orçamento.</li>
+                                            <li>Realize o serviço.</li>
+                                            <li>Após a conclusão, clique em "Concluir" na seção de <a href="pedidos/pedido_andamento.php">Pedidos em Andamento</a>.</li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <strong class="faq-question">
+                                        Como alterar minha senha?
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </strong>
+                                    <div class="faq-content">
+                                        <p>Para alterar sua senha, vá até a aba <b>Perfil</b> e clique em <b>"Mudar Senha"</b> ou <a href="perfil.php">clique aqui</a>. Em seguida, insira sua nova senha.</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <strong class="faq-question">
+                                        Como mudar minhas informações?
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </strong>
+                                    <div class="faq-content">
+                                        <p>Para atualizar suas informações, vá até a aba <b>Perfil</b> e clique em <b>"Editar Perfil"</b> ou <a href="perfil.php">clique aqui</a> para editar seus dados.</p>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <strong class="faq-question">
+                                        É seguro cadastrar meus dados na plataforma?
+                                        <i class="faq-toggle bi bi-chevron-right"></i>
+                                    </strong>
+                                    <div class="faq-content">
+                                        <p>Sim! A nossa plataforma preza pela segurança de seus dados. Tratamos suas informações com o máximo de cuidado e de acordo com as melhores práticas de segurança.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Cards de Feedback -->
+                    <div class="col-md-6">
+                        <div class="feedback-card" style="text-align: center;">
+                            <h3>Precisa de mais ajuda?</h3>
+                            <p>Se você não encontrou a resposta para sua dúvida, envie uma mensagem para nossa central de atendimento.</p>
+                            <a href="mailto:sap@swanshine.com.br">Enviar mensagem</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
+        <script>
+            // Função para exibir/esconder as respostas das perguntas
+            const faqQuestions = document.querySelectorAll('.faq-question');
 
-        </section><!-- /Services Section -->
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const content = question.nextElementSibling;
+                    const icon = question.querySelector('.faq-toggle');
+
+                    // Alterna a visibilidade da resposta
+                    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+
+                    // Alterna o ícone da seta
+                    if (content.style.display === 'block') {
+                        icon.classList.replace('bi-chevron-right', 'bi-chevron-down');
+                    } else {
+                        icon.classList.replace('bi-chevron-down', 'bi-chevron-right');
+                    }
+
+                    // Fecha outros itens abertos
+                    faqQuestions.forEach(otherQuestion => {
+                        if (otherQuestion !== question) {
+                            const otherContent = otherQuestion.nextElementSibling;
+                            const otherIcon = otherQuestion.querySelector('.faq-toggle');
+                            otherContent.style.display = 'none';
+                            otherIcon.classList.replace('bi-chevron-down', 'bi-chevron-right');
+                        }
+                    });
+                });
+            });
+        </script>
+        <!-- /Services Section -->
 
 
     </main>
