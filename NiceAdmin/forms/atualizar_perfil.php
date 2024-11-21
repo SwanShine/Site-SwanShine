@@ -48,26 +48,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $linkedin = $_POST['linkedin'] ?? '';
     $whatsapp = $_POST['whatsapp'] ?? '';
 
+    // Cria o array de endereço (exceto o CEP)
+    $endereco = [
+        "rua" => $rua,
+        "numero" => $numero,
+        "complemento" => $complemento,
+        "bairro" => $bairro,
+        "cidade" => $cidade,
+        "estado" => $estado
+    ];
+
+    // Converte o array para JSON
+    $enderecoJson = json_encode($endereco);
+
     // Preparar a consulta SQL para atualizar os dados
     $sql = "UPDATE profissionais 
-            SET nome = ?, celular = ?, data_de_aniversario = ?, genero = ?, cep = ?, rua = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, estado = ?, servicos = ?, tiktok = ?, facebook = ?, instagram = ?, linkedin = ?, whatsapp = ? 
+            SET nome = ?, celular = ?, data_de_aniversario = ?, genero = ?, cep = ?, endereco = ?, servicos = ?, tiktok = ?, facebook = ?, instagram = ?, linkedin = ?, whatsapp = ? 
             WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
     // Corrigir a string de tipo para corresponder ao número de variáveis
     if ($stmt) {
-        $stmt->bind_param("ssssssssssssssssss", 
+        // Bind de parâmetros
+        $stmt->bind_param("ssssssssssssss", 
             $nome, 
             $celular, 
             $data_de_aniversario, 
             $genero, 
             $cep, 
-            $rua, 
-            $numero, 
-            $complemento, 
-            $bairro, 
-            $cidade, 
-            $estado, 
+            $enderecoJson, 
             $servicos, 
             $tiktok, 
             $facebook, 

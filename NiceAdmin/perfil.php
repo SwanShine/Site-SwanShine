@@ -27,7 +27,7 @@ $email = $_SESSION['user_email'];
 
 // Usar prepared statements para buscar o profissional pelo email
 $stmt = $conn->prepare("
-    SELECT id, nome, email, celular, data_de_aniversario, genero, cep, rua, numero, complemento, referencia, bairro, cidade, estado, servicos, cpf, tiktok, facebook, instagram, linkedin, whatsapp 
+    SELECT id, nome, email, celular, data_de_aniversario, genero, cep, endereco, servicos, cpf, tiktok, facebook, instagram, linkedin, whatsapp 
     FROM profissionais 
     WHERE email = ?
 ");
@@ -47,13 +47,22 @@ if ($result->num_rows > 0) {
     $data_de_aniversario = $row['data_de_aniversario'];
     $genero = $row['genero'];
     $cep = $row['cep'];
-    $rua = $row['rua'];
-    $numero = $row['numero'];
-    $complemento = $row['complemento'];
-    $referencia = $row['referencia'];
-    $bairro = $row['bairro'];
-    $cidade = $row['cidade'];
-    $estado = $row['estado'];
+    $endereco = json_decode($row['endereco'], true); // Decodifica o JSON do endereço
+
+    // Acessando os dados do JSON (caso o JSON tenha sido armazenado corretamente)
+    if ($endereco !== null) {
+        $rua = $endereco['rua'];
+        $numero = $endereco['numero'];
+        $complemento = $endereco['complemento'];
+        $referencia = $endereco['referencia'];
+        $bairro = $endereco['bairro'];
+        $cidade = $endereco['cidade'];
+        $estado = $endereco['estado'];
+    } else {
+        // Se o JSON não for válido
+        $rua = $numero = $complemento = $referencia = $bairro = $cidade = $estado = "Não encontrado";
+    }
+
     $servicos = $row['servicos'];
     $cpf = $row['cpf'];
     $tiktok = $row['tiktok'];
@@ -65,6 +74,7 @@ if ($result->num_rows > 0) {
     // Definir valores padrão se nenhum resultado for encontrado
     $nome = $email = $celular = $data_de_aniversario = $genero = $cep = $rua = $numero = $complemento = $referencia = $bairro = $cidade = $estado = $servicos = $cpf = $tiktok = $facebook = $instagram = $linkedin = $whatsapp = "Não encontrado";
 }
+
 // Obter notificações de mensagens não lidas para o profissional logado
 $profissional_id = $_SESSION['profissional_id'];
 $query_notificacoes = "SELECT conteudo, data_envio FROM mensagens WHERE profissional_id = ? AND lida = 0 ORDER BY data_envio DESC LIMIT 5";
@@ -624,15 +634,16 @@ $conn->close();
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row"><br>
                                             <div class="col-lg-3 col-md-4 label">Endereço</div>
-                                            <div class="col-lg-9 col-md-8">
-                                                <div class="bordered-field">
-                                                    <?php echo htmlspecialchars($rua); ?>, <?php echo htmlspecialchars($numero); ?>, <?php echo htmlspecialchars($complemento); ?> <br>
-                                                    <?php echo htmlspecialchars($bairro); ?>, <?php echo htmlspecialchars($cidade); ?> - <?php echo htmlspecialchars($estado); ?>, <?php echo htmlspecialchars($cep); ?>
+                                                <div class="col-lg-9 col-md-8">
+                                                    <div class="bordered-field">
+                                                        <?php echo htmlspecialchars($rua); ?>, <?php echo htmlspecialchars($numero); ?>, <?php echo htmlspecialchars($complemento); ?> 
+                                                        <?php echo htmlspecialchars($bairro); ?>, <?php echo htmlspecialchars($cidade); ?> - <?php echo htmlspecialchars($estado); ?>, <?php echo htmlspecialchars($cep); ?>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </div>
+
 
                                         <div class="row">
                                             <div class="col-lg-3 col-md-4 label">Serviços</div>

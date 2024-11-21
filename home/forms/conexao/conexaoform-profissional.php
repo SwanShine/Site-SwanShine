@@ -42,6 +42,8 @@ try {
         $cell = sanitize_input($_POST["cell"]);
         $birthdate = sanitize_input($_POST["birthdate"]);
         $gender = sanitize_input($_POST["gender"]);
+
+        // Campos de endereço
         $cep = sanitize_input($_POST["cep"]);
         $street = sanitize_input($_POST["street"]);
         $number = sanitize_input($_POST["number"]);
@@ -50,6 +52,8 @@ try {
         $neighborhood = sanitize_input($_POST["neighborhood"]);
         $city = sanitize_input($_POST["city"]);
         $state = sanitize_input($_POST["state"]);
+
+        // Serviço
         $servico = sanitize_input($_POST["servico"]);
 
         // Verifica se os e-mails e senhas conferem
@@ -60,16 +64,30 @@ try {
             throw new Exception("As senhas não conferem.");
         }
 
+        // Cria o array de endereço (exceto o CEP)
+        $endereco = [
+            "rua" => $street,
+            "numero" => $number,
+            "complemento" => $complement,
+            "referencia" => $reference,
+            "bairro" => $neighborhood,
+            "cidade" => $city,
+            "estado" => $state
+        ];
+
+        // Converte o array para JSON
+        $enderecoJson = json_encode($endereco);
+
         // Prepara a declaração SQL
-        $stmt = $conn->prepare("INSERT INTO profissionais (nome, email, senha, celular, data_de_aniversario, genero, cep, rua, numero, complemento, referencia, bairro, cidade, estado, servicos, cpf) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO profissionais (nome, email, senha, celular, data_de_aniversario, genero, cep, endereco, servicos, cpf) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         if ($stmt === false) {
             throw new Exception("Erro ao preparar a declaração: " . $conn->error);
         }
 
         // Vincula os parâmetros
-        $stmt->bind_param("ssssssssssssssss", $name, $email, $password, $cell, $birthdate, $gender, $cep, $street, $number, $complement, $reference, $neighborhood, $city, $state, $servico, $cpf);
+        $stmt->bind_param("ssssssssss", $name, $email, $password, $cell, $birthdate, $gender, $cep, $enderecoJson, $servico, $cpf);
 
         // Executa a declaração
         if ($stmt->execute()) {
