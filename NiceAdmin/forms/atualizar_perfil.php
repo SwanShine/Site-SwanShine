@@ -22,12 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_SESSION['user_email'])) {
         $email = $_SESSION['user_email'];
     } else {
-        // Redirecionar se o email da sessão não estiver presente
         header('Location: ../home/forms/login/login.html');
         exit();
     }
 
-    // Atualizar os dados do perfil com base nos campos do formulário
+    // Dados do formulário
     $nome = $_POST['fullName'] ?? '';
     $celular = $_POST['celular'] ?? '';
     $data_de_aniversario = $_POST['data_de_aniversario'] ?? '';
@@ -40,69 +39,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cidade = $_POST['cidade'] ?? '';
     $estado = $_POST['estado'] ?? '';
     $servicos = $_POST['servicos'] ?? '';
-
-    // Redes sociais
     $tiktok = $_POST['tiktok'] ?? '';
     $facebook = $_POST['facebook'] ?? '';
     $instagram = $_POST['instagram'] ?? '';
     $linkedin = $_POST['linkedin'] ?? '';
     $whatsapp = $_POST['whatsapp'] ?? '';
 
-    // Cria o array de endereço (exceto o CEP)
-    $endereco = [
+    // Criação do JSON de endereço
+    $endereco = json_encode([
         "rua" => $rua,
         "numero" => $numero,
         "complemento" => $complemento,
         "bairro" => $bairro,
         "cidade" => $cidade,
         "estado" => $estado
-    ];
-
-    // Converte o array para JSON
-    $enderecoJson = json_encode($endereco);
+    ]);
 
     // Preparar a consulta SQL para atualizar os dados
     $sql = "UPDATE profissionais 
-            SET nome = ?, celular = ?, data_de_aniversario = ?, genero = ?, cep = ?, endereco = ?, servicos = ?, tiktok = ?, facebook = ?, instagram = ?, linkedin = ?, whatsapp = ? 
+            SET nome = ?, celular = ?, data_de_aniversario = ?, genero = ?, cep = ?, endereco = ?, servicos = ?, 
+                tiktok = ?, facebook = ?, instagram = ?, linkedin = ?, whatsapp = ? 
             WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
-    // Corrigir a string de tipo para corresponder ao número de variáveis
     if ($stmt) {
-        // Bind de parâmetros
-        $stmt->bind_param("ssssssssssssss", 
-            $nome, 
-            $celular, 
-            $data_de_aniversario, 
-            $genero, 
-            $cep, 
-            $enderecoJson, 
-            $servicos, 
-            $tiktok, 
-            $facebook, 
-            $instagram, 
-            $linkedin, 
-            $whatsapp, 
-            $email
+        // Corrigir a string de tipos para 13 marcadores
+        $stmt->bind_param(
+            "sssssssssssss",
+            $nome, $celular, $data_de_aniversario, $genero, $cep, $endereco, $servicos,
+            $tiktok, $facebook, $instagram, $linkedin, $whatsapp, $email
         );
 
         if ($stmt->execute()) {
-            // Verificar se o formulário para upload ou remoção de imagem foi enviado
+            // Upload de imagem de perfil
             if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
-                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // Tipos permitidos
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
                 $fileType = mime_content_type($_FILES['profileImage']['tmp_name']);
-                
+
                 if (in_array($fileType, $allowedTypes)) {
                     $targetDir = "uploads/";
                     $targetFile = $targetDir . basename($_FILES["profileImage"]["name"]);
 
-                    // Verificar se o diretório de uploads existe, caso contrário, criá-lo
                     if (!is_dir($targetDir)) {
                         mkdir($targetDir, 0755, true);
                     }
 
                     if (move_uploaded_file($_FILES["profileImage"]["tmp_name"], $targetFile)) {
-                        // Atualizar o caminho da imagem no banco de dados
                         $sql = "UPDATE profissionais SET profileImage = ? WHERE email = ?";
                         $stmt = $conn->prepare($sql);
                         $stmt->bind_param("ss", $targetFile, $email);
@@ -113,8 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     echo "Tipo de arquivo não permitido. Apenas JPG, PNG e GIF são permitidos.";
                 }
-            } elseif (isset($_POST['removeImage'])) {
-                // Se o botão de remover imagem for clicado
+            }
+
+            // Remoção de imagem de perfil
+            if (isset($_POST['removeImage'])) {
                 $sql = "UPDATE profissionais SET profileImage = NULL WHERE email = ?";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("s", $email);
@@ -124,18 +108,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Erro ao atualizar o perfil: " . $stmt->error;
         }
 
-        // Fechar a declaração
         $stmt->close();
     } else {
         echo "Erro ao preparar a consulta: " . $conn->error;
     }
 
-    // Fechar a conexão
     $conn->close();
 
     // Redirecionar após a atualização
     header("Location: ../perfil.php");
-    exit;
+    exit();
 } else {
     echo "Método de solicitação inválido.";
 }

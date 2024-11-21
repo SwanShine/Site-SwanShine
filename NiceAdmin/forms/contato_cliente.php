@@ -27,12 +27,25 @@ $cliente = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
 // Buscar dados do profissional
-$sql_profissional = "SELECT id, nome, celular, email, rua, numero, cep FROM profissionais WHERE email = ?";
+$sql_profissional = "SELECT id, nome, celular, email, endereco, cep FROM profissionais WHERE email = ?";
 $stmt = $conn->prepare($sql_profissional);
 $stmt->bind_param("s", $email_profissional);
 $stmt->execute();
 $profissional = $stmt->get_result()->fetch_assoc();
 $stmt->close();
+
+// Decodificar o JSON do campo 'endereco' para obter os detalhes
+if (!empty($profissional['endereco'])) {
+    $endereco = json_decode($profissional['endereco'], true);
+    $rua = $endereco['rua'] ?? 'Não informado';
+    $numero = $endereco['numero'] ?? 'Não informado';
+    $complemento = $endereco['complemento'] ?? 'Não informado';
+    $bairro = $endereco['bairro'] ?? 'Não informado';
+    $cidade = $endereco['cidade'] ?? 'Não informado';
+    $estado = $endereco['estado'] ?? 'Não informado';
+} else {
+    $rua = $numero = $complemento = $bairro = $cidade = $estado = 'Não informado';
+}
 
 // Recuperar mensagens trocadas entre o profissional e o cliente
 $sql_mensagens = "SELECT * FROM mensagens WHERE 
@@ -47,6 +60,7 @@ $stmt->close();
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -154,9 +168,9 @@ $conn->close();
 
         /* Formulário de contato */
         form {
-            max-width: 600px;
+            width: 100%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
@@ -169,21 +183,24 @@ $conn->close();
 
         /* Labels e campos de entrada */
         form label {
-            font-size: 16px;
+            font-size: 18px;
+            /* Aumentado */
             color: #333;
             font-weight: 500;
             display: block;
-            margin: 15px 0 5px;
+            margin: 20px 0 5px;
         }
 
         form input[type="text"],
         form input[type="email"],
         form textarea {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
+            /* Aumentado */
             border: 1px solid #ccc;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 18px;
+            /* Aumentado */
             color: #333;
             background-color: #f8f9fa;
             transition: border-color 0.3s, background-color 0.3s;
@@ -202,15 +219,18 @@ $conn->close();
 
         /* Campo de descrição */
         form textarea {
-            height: 100px;
+            height: 120px;
+            /* Aumentado */
             resize: vertical;
         }
 
         /* Botão Enviar */
         form button[type="submit"] {
             width: 100%;
-            padding: 12px;
-            font-size: 16px;
+            padding: 18px;
+            /* Aumentado */
+            font-size: 18px;
+            /* Aumentado */
             font-weight: bold;
             color: #fff;
             background-color: #007bff;
@@ -218,7 +238,7 @@ $conn->close();
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s ease;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         form button[type="submit"]:hover {
@@ -237,11 +257,11 @@ $conn->close();
             }
 
             form {
-                padding: 15px;
+                padding: 25px;
             }
 
             form button[type="submit"] {
-                font-size: 14px;
+                font-size: 16px;
             }
         }
 
@@ -260,23 +280,28 @@ $conn->close();
             }
 
             form {
-                padding: 10px;
+                padding: 15px;
             }
 
             form label {
-                font-size: 14px;
+                font-size: 16px;
+                /* Aumentado */
             }
 
             form input[type="text"],
             form input[type="email"],
             form textarea {
-                font-size: 14px;
-                padding: 10px;
+                font-size: 16px;
+                /* Aumentado */
+                padding: 12px;
+                /* Aumentado */
             }
 
             form button[type="submit"] {
-                font-size: 14px;
-                padding: 10px;
+                font-size: 16px;
+                /* Aumentado */
+                padding: 14px;
+                /* Aumentado */
             }
         }
 
@@ -291,19 +316,21 @@ $conn->close();
             }
 
             form label {
-                font-size: 13px;
+                font-size: 15px;
             }
 
             form input[type="text"],
             form input[type="email"],
             form textarea {
-                font-size: 13px;
-                padding: 8px;
+                font-size: 15px;
+                padding: 10px;
+                /* Aumentado */
             }
 
             form button[type="submit"] {
-                font-size: 13px;
-                padding: 8px;
+                font-size: 15px;
+                padding: 12px;
+                /* Aumentado */
             }
         }
 
@@ -314,7 +341,7 @@ $conn->close();
             }
 
             .section-title h2 {
-                font-size: 15px;
+                font-size: 14px;
             }
 
             .breadcrumb {
@@ -322,25 +349,26 @@ $conn->close();
             }
 
             form label {
-                font-size: 12px;
+                font-size: 14px;
+                /* Aumentado */
             }
 
             form input[type="text"],
             form input[type="email"],
             form textarea {
-                font-size: 12px;
-                padding: 6px;
+                font-size: 14px;
+                /* Aumentado */
+                padding: 8px;
             }
 
             form button[type="submit"] {
-                font-size: 12px;
-                padding: 6px;
+                font-size: 14px;
+                /* Aumentado */
+                padding: 10px;
+                /* Aumentado */
             }
         }
     </style>
-
-
-
 </head>
 
 <body>
@@ -643,7 +671,7 @@ $conn->close();
                 <input type="text" id="telefone" name="telefone" value="<?php echo htmlspecialchars($profissional['celular']); ?>"><br>
 
                 <label for="endereco">Endereço:</label>
-                <input type="text" id="endereco" name="endereco" value="<?php echo htmlspecialchars($profissional['rua']) . ", " . htmlspecialchars($profissional['numero']); ?>"><br>
+                <input type="text" id="endereco" name="endereco" value="<?php echo htmlspecialchars("$rua, $numero, $complemento, $bairro, $cidade, $estado"); ?>"><br>
 
                 <label for="cep">CEP:</label>
                 <input type="text" id="cep" name="cep" value="<?php echo htmlspecialchars($profissional['cep']); ?>"><br>
@@ -667,7 +695,7 @@ $conn->close();
                     $mensagem .= "• Nome: " . $profissional['nome'] . "\n";
                     $mensagem .= "• Email: " . $profissional['email'] . "\n";
                     $mensagem .= "• Telefone: " . $profissional['celular'] . "\n";
-                    $mensagem .= "• Endereço: " . $profissional['rua'] . ", " . $profissional['numero'] . "\n";
+                    $mensagem .= "• Endereço: $rua, $numero, $complemento, $bairro, $cidade, $estado\n";
                     $mensagem .= "• CEP: " . $profissional['cep'] . "\n";
                     $mensagem .= "\n*Descrição do Serviço:*\n" . $descricao;
 
@@ -678,10 +706,70 @@ $conn->close();
                     $whatsapp_link = "https://wa.me/" . $numero_celular . "?text=" . urlencode($mensagem);
                     echo "<script>window.open('$whatsapp_link', '_blank');</script>";
                 } else {
-                    echo "<p>O cliente não disponibilizou um número de celular.</p>";
+                    // Caso o cliente não tenha telefone, exibe o popup
+                    echo "
+        <div id='popup' class='popup'>
+            <div class='popup-content'>
+                <p>O cliente não disponibilizou um número de celular.</p>
+                <button onclick='fecharPopup()'>Fechar</button>
+            </div>
+        </div>
+        <script>
+            // Exibe o popup ao carregar a página
+            document.getElementById('popup').style.display = 'block';
+
+            // Função para fechar o popup
+            function fecharPopup() {
+                document.getElementById('popup').style.display = 'none';
+            }
+        </script>
+        <style>
+            .popup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+            .popup-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                text-align: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .popup-content p {
+                margin: 0 0 20px;
+            }
+            .popup-content button {
+                background-color: #007bff;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .popup-content button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+        ";
                 }
             }
             ?>
+
+
+
+
+
+
         </section><!-- /Services Section -->
 
 

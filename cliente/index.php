@@ -55,14 +55,25 @@ $profissionais = [
 if ($result->num_rows > 0) {
   // Separar os profissionais por serviço
   while ($row = $result->fetch_assoc()) {
+    // Decodificar o JSON do campo 'endereco' para obter os detalhes
+    $endereco = json_decode($row['endereco'], true);
+    $rua = $endereco['rua'] ?? 'Não informado';
+    $numero = $endereco['numero'] ?? 'Não informado';
+    $complemento = $endereco['complemento'] ?? 'Não informado';
+    $bairro = $endereco['bairro'] ?? 'Não informado';
+    $cidade = $endereco['cidade'] ?? 'Não informado';
+    $estado = $endereco['estado'] ?? 'Não informado';
+    
+    // Processar os serviços
     $servicos = explode(",", $row['servicos']); // Assume que os serviços são armazenados separados por vírgulas
     foreach ($servicos as $servico) {
         $servico = trim($servico); // Remover espaços extras
         if (array_key_exists($servico, $profissionais)) {
+            // Adicionar o profissional ao array correspondente ao serviço
             $profissionais[$servico][] = $row;
         }
     }
-  } 
+} 
 } else {
   echo "Nenhum profissional encontrado.";
 }
@@ -70,6 +81,7 @@ if ($result->num_rows > 0) {
 // Fechar conexão
 $conn->close();
 ?>
+
 
 
 
@@ -431,7 +443,9 @@ $conn->close();
                             <p><strong>Celular:</strong> <?php echo htmlspecialchars($profissional['celular']); ?></p>
                             <p><strong>Data de Aniversário:</strong> <?php echo htmlspecialchars($profissional['data_de_aniversario']); ?></p>
                             <p><strong>Gênero:</strong> <?php echo htmlspecialchars($profissional['genero']); ?></p>
-                            <p><strong>Endereço:</strong> <?php echo htmlspecialchars($profissional['rua']); ?>, <?php echo htmlspecialchars($profissional['numero']); ?>, <?php echo htmlspecialchars($profissional['complemento']); ?> - <?php echo htmlspecialchars($profissional['bairro']); ?>, <?php echo htmlspecialchars($profissional['cidade']); ?>/<?php echo htmlspecialchars($profissional['estado']); ?> - <?php echo htmlspecialchars($profissional['cep']); ?></p>
+                            <p><strong>Endereço:</strong> 
+                            <?php echo htmlspecialchars("$rua, $numero, $complemento, $bairro, $cidade, $estado"); ?></p>
+
                             <p><strong>CPF:</strong> <?php echo htmlspecialchars($profissional['cpf']); ?></p>
                             <p><strong>Redes Sociais:</strong></p>
                             <p>
