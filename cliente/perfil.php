@@ -4,8 +4,8 @@ session_start();
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-    header('Location: ../home/forms/login/login.html');
-    exit();
+  header('Location: ../home/forms/login/login.html');
+  exit();
 }
 
 // Dados de conexão com o banco de dados
@@ -19,7 +19,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexão
 if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+  die("Conexão falhou: " . $conn->connect_error);
 }
 
 // Recuperar o email da sessão
@@ -27,34 +27,34 @@ $email = $_SESSION['user_email'];
 
 // Processar o upload da imagem
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['imagem'])) {
-    if ($_FILES['imagem']['error'] == 0) {
-        $upload_dir = 'form/uploads/';
-        $imagem_nome = basename($_FILES['imagem']['name']);
-        $target_file = $upload_dir . $imagem_nome;
+  if ($_FILES['imagem']['error'] == 0) {
+    $upload_dir = 'form/uploads/';
+    $imagem_nome = basename($_FILES['imagem']['name']);
+    $target_file = $upload_dir . $imagem_nome;
 
-        // Mover a imagem para o diretório de uploads
-        if (move_uploaded_file($_FILES['imagem']['tmp_name'], $target_file)) {
-            // Usar prepared statements para atualizar o caminho da imagem do cliente pelo email
-            $stmt = $conn->prepare("UPDATE clientes SET imagem = ? WHERE email = ?");
-            $stmt->bind_param("ss", $target_file, $email);
-            $stmt->execute();
+    // Mover a imagem para o diretório de uploads
+    if (move_uploaded_file($_FILES['imagem']['tmp_name'], $target_file)) {
+      // Usar prepared statements para atualizar o caminho da imagem do cliente pelo email
+      $stmt = $conn->prepare("UPDATE clientes SET imagem = ? WHERE email = ?");
+      $stmt->bind_param("ss", $target_file, $email);
+      $stmt->execute();
 
-            // Verificar se a atualização foi bem-sucedida
-            if ($stmt->affected_rows > 0) {
-                echo "Imagem enviada com sucesso!";
-            } else {
-                echo "Erro ao atualizar a imagem.";
-            }
-        } else {
-            echo "Erro ao mover o arquivo para o diretório de uploads.";
-        }
+      // Verificar se a atualização foi bem-sucedida
+      if ($stmt->affected_rows > 0) {
+        echo "Imagem enviada com sucesso!";
+      } else {
+        echo "Erro ao atualizar a imagem.";
+      }
     } else {
-        echo "Erro ao enviar a imagem.";
+      echo "Erro ao mover o arquivo para o diretório de uploads.";
     }
+  } else {
+    echo "Erro ao enviar a imagem.";
+  }
 }
 
 // Usar prepared statements para buscar o cliente pelo email
-$stmt = $conn->prepare("SELECT nome, endereco, email, cpf, telefone, genero, imagem, cep FROM clientes WHERE email = ?");
+$stmt = $conn->prepare("SELECT id, nome, endereco, email, cpf, telefone, genero, imagem, cep FROM clientes WHERE email = ?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 
@@ -63,18 +63,19 @@ $result = $stmt->get_result();
 
 // Verificar se retornou algum resultado
 if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $nome = $row['nome'];
-    $endereco = $row['endereco'];
-    $email = $row['email'];
-    $cpf = $row['cpf'];
-    $telefone = $row['telefone'];
-    $genero = $row['genero'];
-    $imagem = $row['imagem']; // Obter o caminho da imagem
-    $cep = $row['cep'];
+  $row = $result->fetch_assoc();
+  $id = $row['id'];
+  $nome = $row['nome'];
+  $endereco = $row['endereco'];
+  $email = $row['email'];
+  $cpf = $row['cpf'];
+  $telefone = $row['telefone'];
+  $genero = $row['genero'];
+  $imagem = $row['imagem']; // Obter o caminho da imagem
+  $cep = $row['cep'];
 } else {
-    $nome = $endereco = $email = $cpf = $telefone = $genero = $cep = "Não encontrado";
-    $imagem = null; // Imagem padrão caso não haja
+  $nome = $endereco = $email = $cpf = $telefone = $genero = $cep = "Não encontrado";
+  $imagem = null; // Imagem padrão caso não haja
 }
 
 // Fechar a conexão
@@ -120,7 +121,125 @@ $conn->close();
   <link href="assets/css/services.css" rel="stylesheet">
 
   <style>
-      
+    /* Estilo geral */
+    .section.profile {
+      padding: 20px;
+    }
+
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-weight: bold;
+    }
+
+    .profile-input {
+      border-radius: 5px;
+    }
+
+    .nav-tabs .nav-link {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+
+    .nav-tabs .nav-link.active {
+      background-color: #fd2b50;
+      color: #fff;
+    }
+
+    .btn-primary {
+      background-color: #ef972f;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+
+    .btn-danger {
+      background-color: #ef972f;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+
+    /* Estilo responsivo */
+    @media (max-width: 1200px) {
+
+      /* Ajuste em telas grandes */
+      .col-xl-4,
+      .col-xl-8 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    }
+
+    @media (max-width: 992px) {
+
+      /* Ajuste em telas médias */
+      .col-xl-4,
+      .col-xl-8 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      /* Ajuste em tablets */
+      .profile-label {
+        font-size: 0.9rem;
+      }
+
+      .profile-input {
+        font-size: 0.9rem;
+        padding: 8px;
+      }
+
+      .btn-primary,
+      .btn-danger {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+      }
+
+      .nav-tabs .nav-link {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+    }
+
+    @media (max-width: 576px) {
+
+      /* Ajuste em dispositivos móveis */
+      .profile-label {
+        font-size: 0.8rem;
+      }
+
+      .profile-input {
+        font-size: 0.8rem;
+        padding: 6px;
+      }
+
+      .btn-primary,
+      .btn-danger {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+      }
+
+      .card-title {
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      .nav-tabs .nav-link {
+        font-size: 0.8rem;
+        padding: 8px;
+      }
+    }
   </style>
 </head>
 
@@ -328,8 +447,7 @@ $conn->close();
             </div>
           </div>
         </div> -->
-        <div class="col-xl-4">
-          <div class="card">
+        <!--<div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
               <?php if ($imagem): ?>
@@ -338,207 +456,224 @@ $conn->close();
                 <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
               <?php endif; ?>
 
-              <h2><?php echo htmlspecialchars($nome); ?></h2>
+              <h2><?php echo htmlspecialchars($nome); ?></h2> <h6> Id: #  <?php echo htmlspecialchars(string: $id); ?></h6>
 
             </div>
 
-          </div>
-        </div>
-        <div class="col-xl-8">
-          <div class="card">
-            <div class="card-body pt-3">
-              <!-- Abas com Bordas -->
-              <ul class="nav nav-tabs nav-tabs-bordered">
+          </div> -->
+      </div>
+      <div class="col-xl-8">
+        <div class="card">
+          <div class="card-body pt-3">
+            <!-- Abas com Bordas -->
+            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Visão Geral</button>
-                </li>
+              <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Visão Geral</button>
+              </li>
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
-                </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
+              </li>
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Mudar Senha</button>
-                </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Mudar Senha</button>
+              </li>
 
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configurações</button>
-                </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configurações</button>
+              </li>
 
-              </ul>
+            </ul>
 
-              <div class="tab-content pt-2">
+            <div class="tab-content pt-2">
 
-                <!-- Visão Geral -->
-                <div class="tab-pane fade show active" id="profile-overview">
+              <!-- Visão Geral -->
+              <div class="tab-pane fade show active" id="profile-overview">
 
-                  <h5 class="card-title">Detalhes do Perfil</h5>
-                  <form action="update_profile.php" method="POST">
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-lg-3 col-md-4 col-form-label profile-label">Nome Completo</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="fullName" type="text" class="form-control profile-input" id="fullName" value="<?php echo htmlspecialchars($nome); ?>" readonly>
-                      </div>
+                <h5 class="card-title">Detalhes do Perfil</h5>
+                <form action="update_profile.php" method="POST">
+                  <div class="row mb-3">
+                    <label for="id" class="col-lg-3 col-md-4 col-form-label profile-label">ID:</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="id" type="text" class="form-control profile-input" id="id" value="<?php echo htmlspecialchars($id); ?>" readonly>
                     </div>
-                    <div class="row mb-3">
-                      <label for="address" class="col-lg-3 col-md-4 col-form-label profile-label">Endereço</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="address" type="text" class="form-control profile-input" id="address" value="<?php echo htmlspecialchars($endereco); ?>" readonly>
-                      </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="fullName" class="col-lg-3 col-md-4 col-form-label profile-label">Nome Completo</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="fullName" type="text" class="form-control profile-input" id="fullName" value="<?php echo htmlspecialchars($nome); ?>" readonly>
                     </div>
-                    <div class="row mb-3">
-                      <label for="cep" class="col-lg-3 col-md-4 col-form-label profile-label">CEP:</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="cep" type="text" class="form-control profile-input" id="cep" value="<?php echo htmlspecialchars($cep); ?>" readonly>
-                      </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="address" class="col-lg-3 col-md-4 col-form-label profile-label">Endereço</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="address" type="text" class="form-control profile-input" id="address" value="<?php echo htmlspecialchars($endereco); ?>" readonly>
                     </div>
-                    <div class="row mb-3">
-                      <label for="email" class="col-lg-3 col-md-4 col-form-label profile-label">Email</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="email" type="email" class="form-control profile-input" id="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
-                      </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="cep" class="col-lg-3 col-md-4 col-form-label profile-label">CEP:</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="cep" type="text" class="form-control profile-input" id="cep" value="<?php echo htmlspecialchars($cep); ?>" readonly>
                     </div>
-                    <div class="row mb-3">
-                      <label for="cpf" class="col-lg-3 col-md-4 col-form-label profile-label">CPF</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="cpf" type="text" class="form-control profile-input" id="cpf" value="<?php echo htmlspecialchars($cpf); ?>" readonly>
-                      </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="email" class="col-lg-3 col-md-4 col-form-label profile-label">Email</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="email" type="email" class="form-control profile-input" id="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
                     </div>
-                    <div class="row mb-3">
-                      <label for="phone" class="col-lg-3 col-md-4 col-form-label profile-label">Telefone</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="phone" type="text" class="form-control profile-input" id="phone" value="<?php echo htmlspecialchars($telefone); ?>" readonly>
-                      </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="cpf" class="col-lg-3 col-md-4 col-form-label profile-label">CPF</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="cpf" type="text" class="form-control profile-input" id="cpf" value="<?php echo htmlspecialchars($cpf); ?>" readonly>
                     </div>
-                    <div class="row mb-3">
-                      <label for="gender" class="col-lg-3 col-md-4 col-form-label profile-label">Gênero</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="gender" type="text" class="form-control profile-input" id="gender" value="<?php echo htmlspecialchars($genero); ?>" readonly>
-                      </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="phone" class="col-lg-3 col-md-4 col-form-label profile-label">Telefone</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="phone" type="text" class="form-control profile-input" id="phone" value="<?php echo htmlspecialchars($telefone); ?>" readonly>
                     </div>
-                  </form>
-                </div><!-- Visão Geral -->
+                  </div>
+                  <div class="row mb-3">
+                    <label for="gender" class="col-lg-3 col-md-4 col-form-label profile-label">Gênero</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="gender" type="text" class="form-control profile-input" id="gender" value="<?php echo htmlspecialchars($genero); ?>" readonly>
+                    </div>
+                  </div>
+                </form>
+              </div><!-- Visão Geral -->
 
-                <!-- Editar Perfil -->
-                <div class="tab-pane fade" id="profile-edit">
-                  <h5 class="card-title">Editar Perfil</h5>
-                  <form action="form/atualizar_perfil.php" method="POST" enctype="multipart/form-data" onsubmit="return confirmUpdate();">
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-lg-3 col-md-4 col-form-label">Nome Completo</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($nome); ?>">
-                      </div>
+              <!-- Editar Perfil -->
+              <div class="tab-pane fade" id="profile-edit">
+                <h5 class="card-title">Editar Perfil</h5>
+                <form action="form/atualizar_perfil.php" method="POST" enctype="multipart/form-data" onsubmit="return confirmUpdate();">
+                  <div class="row mb-3">
+                    <label for="fullName" class="col-lg-3 col-md-4 col-form-label">Nome Completo</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($nome); ?>">
                     </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="address" class="col-lg-3 col-md-4 col-form-label">Endereço</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="address" type="text" class="form-control" id="address" value="<?php echo htmlspecialchars($endereco); ?>">
-                      </div>
+                  <div class="row mb-3">
+                    <label for="address" class="col-lg-3 col-md-4 col-form-label">Endereço</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="address" type="text" class="form-control" id="address" value="<?php echo htmlspecialchars($endereco); ?>">
                     </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="cep" class="col-lg-3 col-md-4 col-form-label">CEP:</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="cep" type="text" class="form-control" id="cep" value="<?php echo htmlspecialchars($cep); ?>">
-                      </div>
+                  <div class="row mb-3">
+                    <label for="cep" class="col-lg-3 col-md-4 col-form-label">CEP:</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="cep" type="text" class="form-control" id="cep" value="<?php echo htmlspecialchars($cep); ?>">
                     </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="email" class="col-lg-3 col-md-4 col-form-label">Email</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="email" type="email" class="form-control" id="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
-                      </div>
+                  <div class="row mb-3">
+                    <label for="email" class="col-lg-3 col-md-4 col-form-label">Email</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="email" type="email" class="form-control" id="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
                     </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="cpf" class="col-lg-3 col-md-4 col-form-label">CPF</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="cpf" type="text" class="form-control" id="cpf" value="<?php echo htmlspecialchars($cpf); ?>">
-                      </div>
+                  <div class="row mb-3">
+                    <label for="cpf" class="col-lg-3 col-md-4 col-form-label">CPF</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="cpf" type="text" class="form-control" id="cpf" value="<?php echo htmlspecialchars($cpf); ?>">
                     </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="phone" class="col-lg-3 col-md-4 col-form-label">Telefone</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="phone" type="text" class="form-control" id="phone" value="<?php echo htmlspecialchars($telefone); ?>">
-                      </div>
+                  <div class="row mb-3">
+                    <label for="phone" class="col-lg-3 col-md-4 col-form-label">Telefone</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="phone" type="text" class="form-control" id="phone" value="<?php echo htmlspecialchars($telefone); ?>">
                     </div>
+                  </div>
 
-                    <div class="row mb-3">
-                      <label for="gender" class="col-lg-3 col-md-4 col-form-label">Gênero</label>
-                      <div class="col-lg-9 col-md-8">
-                        <input name="gender" type="text" class="form-control" id="gender" value="<?php echo htmlspecialchars($genero); ?>">
-                      </div>
+                  <div class="row mb-3">
+                    <label for="gender" class="col-lg-3 col-md-4 col-form-label">Gênero</label>
+                    <div class="col-lg-9 col-md-8">
+                      <input name="gender" type="text" class="form-control" id="gender" value="<?php echo htmlspecialchars($genero); ?>">
                     </div>
+                  </div>
 
-                   <!-- <div class="row mb-3">
+                  <!-- <div class="row mb-3">
                       <label for="imagem" class="col-lg-3 col-md-4 col-form-label">Imagem de Perfil</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="imagem" type="file" class="form-control" id="imagem">
                       </div>
                     </div>-->
 
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                    </div>
-                  </form>
-                </div><!-- Editar Perfil -->
-
-                <!-- Mudar Senha -->
-                <div class="tab-pane fade pt-3" id="profile-change-password">
-                  <h5 class="card-title">Mudar Senha</h5>
-                  <form action="form/update_password.php" method="POST" onsubmit="return confirmUpdate() && validatePassword();">
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nova Senha</label>
-                      <div class="col-md-8 col-lg-9 position-relative">
-                        <input name="newPassword" type="password" class="form-control profile-input" id="newPassword" required>
-                        <i class="fas fa-eye toggle-password" onclick="togglePassword('newPassword')"></i>
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar Nova Senha</label>
-                      <div class="col-md-8 col-lg-9 position-relative">
-                        <input name="confirmPassword" type="password" class="form-control profile-input" id="confirmPassword" required>
-                        <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Alterar Senha</button>
-                    </div>
-                  </form>
-                </div><!-- Mudar Senha -->
-
-                <!-- Configurações -->
-                <div class="tab-pane fade pt-3" id="profile-settings">
-                  <h5 class="card-title">Configurações</h5>
-
                   <div class="text-center">
-  <button type="button" class="btn btn-danger" onclick="confirmDelete()">Desativar Conta</button>
-</div>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                  </div>
+                </form>
+              </div><!-- Editar Perfil -->
 
-<script>
-  function confirmDelete() {
-    // Pergunta ao usuário se ele realmente deseja desativar a conta
-    const confirmation = confirm("Tem certeza de que deseja desativar sua conta? Esta ação não pode ser desfeita.");
+              <!-- Mudar Senha -->
+              <div class="tab-pane fade pt-3" id="profile-change-password">
+                <h5 class="card-title">Mudar Senha</h5>
+                <form action="form/update_password.php" method="POST" onsubmit="return confirmUpdate() && validatePassword();">
+                  <div class="row mb-3">
+                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nova Senha</label>
+                    <div class="col-md-8 col-lg-9 position-relative">
+                      <input name="newPassword" type="password" class="form-control profile-input" id="newPassword" required>
+                      <i class="fas fa-eye toggle-password" onclick="togglePassword('newPassword')"></i>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar Nova Senha</label>
+                    <div class="col-md-8 col-lg-9 position-relative">
+                      <input name="confirmPassword" type="password" class="form-control profile-input" id="confirmPassword" required>
+                      <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Alterar Senha</button>
+                  </div>
+                </form>
+              </div><!-- Mudar Senha -->
 
-    // Se o usuário confirmar, redireciona para a página de desativação
-    if (confirmation) {
-      // Redireciona para o arquivo de desativação de conta
-      window.location.href = 'form/conta/desativar_conta.php';
-    }
-  }
-</script>
+              <!-- Configurações -->
+              <div class="tab-pane fade pt-3" id="profile-settings">
+                <h5 class="card-title">Configurações</h5>
+
+                <div class="text-center">
+                  <button type="button" class="btn btn-danger" onclick="confirmDesa()">Desativar Conta</button>
+                  <button type="button" class="btn btn-danger" onclick="confirmDelete()">Deletar Conta</button>
+                </div>
+
+                <script>
+                  function confirmDesa() {
+                    // Pergunta ao usuário se ele realmente deseja desativar a conta
+                    const confirmation = confirm("Tem certeza de que deseja desativar sua conta?");
+
+                    // Se o usuário confirmar, redireciona para a página de desativação
+                    if (confirmation) {
+                      // Redireciona para o arquivo de desativação de conta
+                      window.location.href = 'form/conta/desativar_conta.php';
+                    }
+                  }
+                  function confirmDelete() {
+                    // Pergunta ao usuário se ele realmente deseja desativar a conta
+                    const confirmation = confirm("Tem certeza de que deseja deletar sua conta? Esta ação não pode ser desfeita.");
+
+                    // Se o usuário confirmar, redireciona para a página de desativação
+                    if (confirmation) {
+                      // Redireciona para o arquivo de desativação de conta
+                      window.location.href = 'form/conta/deletar_conta.php';
+                    }
+                  }
+                </script>
 
 
 
-                </div> <!-- Configurações -->
+              </div> <!-- Configurações -->
 
-              </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -601,3 +736,4 @@ $conn->close();
 </body>
 
 </html>
+

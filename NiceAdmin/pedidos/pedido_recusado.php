@@ -800,7 +800,10 @@ $conn->close();
         <script>
             document.querySelectorAll('.orcamento').forEach(button => {
                 button.addEventListener('click', function() {
+                    // Captura o ID do pedido armazenado no atributo 'data-id' do botão
                     const id = this.getAttribute('data-id');
+
+                    // Redireciona para a página 'contato_cliente.php', passando o ID como parâmetro na URL
                     window.location.href = `../forms/contato_cliente.php?id=${id}`;
                 });
             });

@@ -51,13 +51,13 @@ if ($result->num_rows > 0) {
 
     // Acessando os dados do JSON (caso o JSON tenha sido armazenado corretamente)
     if ($endereco !== null) {
-        $rua = $endereco['rua'];
-        $numero = $endereco['numero'];
-        $complemento = $endereco['complemento'];
-        $referencia = $endereco['referencia'];
-        $bairro = $endereco['bairro'];
-        $cidade = $endereco['cidade'];
-        $estado = $endereco['estado'];
+        $rua = isset($endereco['rua']) ? $endereco['rua'] : "Não encontrado";
+        $numero = isset($endereco['numero']) ? $endereco['numero'] : "Não encontrado";
+        $complemento = isset($endereco['complemento']) ? $endereco['complemento'] : "Não encontrado";
+        $referencia = isset($endereco['referencia']) ? $endereco['referencia'] : "Não encontrado";
+        $bairro = isset($endereco['bairro']) ? $endereco['bairro'] : "Não encontrado";
+        $cidade = isset($endereco['cidade']) ? $endereco['cidade'] : "Não encontrado";
+        $estado = isset($endereco['estado']) ? $endereco['estado'] : "Não encontrado";
     } else {
         // Se o JSON não for válido
         $rua = $numero = $complemento = $referencia = $bairro = $cidade = $estado = "Não encontrado";
@@ -76,23 +76,30 @@ if ($result->num_rows > 0) {
 }
 
 // Obter notificações de mensagens não lidas para o profissional logado
-$profissional_id = $_SESSION['profissional_id'];
-$query_notificacoes = "SELECT conteudo, data_envio FROM mensagens WHERE profissional_id = ? AND lida = 0 ORDER BY data_envio DESC LIMIT 5";
-$stmt_notificacoes = $conn->prepare($query_notificacoes);
-$stmt_notificacoes->bind_param("i", $profissional_id);
-$stmt_notificacoes->execute();
-$result_notificacoes = $stmt_notificacoes->get_result();
+$profissional_id = $_SESSION['profissional_id'] ?? null; // Usar null coalescing para evitar undefined index
 
-// Armazenar todas as notificações não lidas em um array
-$notificacoes = $result_notificacoes->fetch_all(MYSQLI_ASSOC);
+if ($profissional_id) {
+    $query_notificacoes = "SELECT conteudo, data_envio FROM mensagens WHERE profissional_id = ? AND lida = 0 ORDER BY data_envio DESC LIMIT 5";
+    $stmt_notificacoes = $conn->prepare($query_notificacoes);
+    $stmt_notificacoes->bind_param("i", $profissional_id);
+    $stmt_notificacoes->execute();
+    $result_notificacoes = $stmt_notificacoes->get_result();
 
-// Contar o número de notificações não lidas para exibir no badge de notificações
-$num_notificacoes = count($notificacoes);
+    // Armazenar todas as notificações não lidas em um array
+    $notificacoes = $result_notificacoes->fetch_all(MYSQLI_ASSOC);
+
+    // Contar o número de notificações não lidas para exibir no badge de notificações
+    $num_notificacoes = count($notificacoes);
+} else {
+    $notificacoes = [];
+    $num_notificacoes = 0;
+}
 
 // Fechar a conexão
 $stmt->close();
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -101,7 +108,7 @@ $conn->close();
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>SwanShine - Perfil</title>
+    <title>Swan Shine - Perfil</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -142,8 +149,7 @@ $conn->close();
             margin: 20px 0;
             /* Margem superior e inferior para espaçamento entre os campos */
         }
-    </style>
-    <style>
+
         /* Estilos gerais */
         .nav-item .nav-link.nav-icon {
             position: relative;
@@ -331,6 +337,127 @@ $conn->close();
             }
         }
     </style>
+    <style>
+        /* Estilo geral */
+        .section.profile {
+            padding: 20px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        .profile-input {
+            border-radius: 5px;
+        }
+
+        .nav-tabs .nav-link {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: #fd2b50;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #ef972f;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        .btn-danger {
+            background-color: #ef972f;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        /* Estilo responsivo */
+        @media (max-width: 1200px) {
+
+            /* Ajuste em telas grandes */
+            .col-xl-4,
+            .col-xl-8 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        @media (max-width: 992px) {
+
+            /* Ajuste em telas médias */
+            .col-xl-4,
+            .col-xl-8 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Ajuste em tablets */
+            .profile-label {
+                font-size: 0.9rem;
+            }
+
+            .profile-input {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            .btn-primary,
+            .btn-danger {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+
+            .nav-tabs .nav-link {
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            /* Ajuste em dispositivos móveis */
+            .profile-label {
+                font-size: 0.8rem;
+            }
+
+            .profile-input {
+                font-size: 0.8rem;
+                padding: 6px;
+            }
+
+            .btn-primary,
+            .btn-danger {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+
+            .card-title {
+                font-size: 1rem;
+                text-align: center;
+            }
+
+            .nav-tabs .nav-link {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+        }
+    </style>
 
 </head>
 
@@ -451,6 +578,7 @@ $conn->close();
                             </a>
                         </li>
                         <li>
+                            t
                             <hr class="dropdown-divider" />
                         </li>
                         <li>
@@ -495,7 +623,7 @@ $conn->close();
                     <li>
                         <a href="pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
                     </li>
-                   
+
                     <li>
                         <a href="pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
                     </li>
@@ -537,381 +665,319 @@ $conn->close();
             </nav>
         </div><!-- End Page Title -->
 
+
+
         <section class="section profile">
             <div class="row">
-                <div class="col-xl-4">
-                    <div class="card">
-                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                <!--<div class="col-xl-4">
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+              <img src="assets/img/usuario.png" alt="Perfil" class="rounded-circle">
+              <h2>Usuário</h2>
+              <h3>...</h3>
+              <div class="social-links mt-2">
+                <a href="#" class="email"><i class="bi bi-email"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+                <!--<div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                            <img src="assets/img/usuario.png" alt="Perfil" class="rounded-circle">
-                            <h2><?php echo htmlspecialchars($nome); ?></h2>
-                            <h3><?php echo htmlspecialchars($servicos); ?></h3>
-                            <div class="social-links mt-2">
-                                <a href="<?php echo htmlspecialchars($tiktok); ?>" class="tiktok" target="_blank" title="TikTok"><i class="bi bi-tiktok"></i></a>
-                                <a href="<?php echo htmlspecialchars($facebook); ?>" class="facebook" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a>
-                                <a href="<?php echo htmlspecialchars($instagram); ?>" class="instagram" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
-                                <a href="<?php echo htmlspecialchars($linkedin); ?>" class="linkedin" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                                <a href="<?php echo htmlspecialchars($whatsapp); ?>" class="whatsapp" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+              <?php if ($imagem): ?>
+                <img src="<?= htmlspecialchars($imagem) ?>" alt="Imagem do Cliente" style="max-width: 200px; max-height: 200px;">
+              <?php else: ?>
+                <img src="assets/img/usuario.png" alt="Profile" class="rounded-circle">
+              <?php endif; ?>
 
-                            </div>
+              <h2><?php echo htmlspecialchars($nome); ?></h2> <h6> Id: #  <?php echo htmlspecialchars(string: $id); ?></h6>
 
-                        </div>
-                    </div>
+            </div>
 
-                </div>
+          </div> -->
+            </div>
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Abas com Bordas -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
 
-                <div class="col-xl-8">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Visão Geral</button>
+                            </li>
 
-                    <div class="card">
-                        <div class="card-body pt-3">
-                            <!-- Abas Com Bordas -->
-                            <ul class="nav nav-tabs nav-tabs-bordered">
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
+                            </li>
 
-                                <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Visão Geral</button>
-                                </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Mudar Senha</button>
+                            </li>
 
-                                <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
-                                </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configurações</button>
+                            </li>
 
-                                <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Alterar Senha</button>
-                                </li>
+                        </ul>
 
-                                <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Configurações</button>
-                                </li>
+                        <div class="tab-content pt-2">
 
-                            </ul>
+                            <!-- Visão Geral -->
+                            <div class="tab-pane fade show active" id="profile-overview">
 
-                            <div class="tab-content pt-2">
-
-                                <!-- Visão Geral-->
-                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                                    <h5 class="card-title">Detalhes do Perfil</h5>
-
-                                    <div style="max-height: 300px; overflow-y: auto;"> <!-- Adicione esta div para scroll -->
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Nome Completo</div>
-                                            <div class="col-lg-9 col-md-8">
-                                                <div class="bordered-field"><?php echo htmlspecialchars($nome); ?></div>
+                                <h5 class="card-title">Detalhes do Perfil</h5>
+                                <form action="update_profile.php" method="POST">
+                                    <div class="row mb-3">
+                                        <label for="id" class="col-lg-3 col-md-4 col-form-label profile-label">ID:</label>
+                                        <div class="col-lg-9 col-md-8">
+                                            <input name="id" type="text" class="form-control profile-input" id="id" value="<?php echo htmlspecialchars($id); ?>" readonly>
+                                        </div>
+                                    </div><!--id-->
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-lg-3 col-md-4 col-form-label profile-label">Nome Completo</label>
+                                        <div class="col-lg-9 col-md-8">
+                                            <input name="fullName" type="text" class="form-control profile-input" id="fullName" value="<?php echo htmlspecialchars($nome); ?>" readonly>
+                                        </div>
+                                    </div><!--nome-->
+                                    <div class="row mb-3">
+                                        <label for="email" class="col-lg-3 col-md-4 col-form-label profile-label">Email</label>
+                                        <div class="col-lg-9 col-md-8">
+                                            <input name="email" type="email" class="form-control profile-input" id="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
+                                        </div>
+                                    </div><!--email-->
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Celular</div>
+                                        <div class="col-lg-9 col-md-8">
+                                            <div class="bordered-field"><?php echo htmlspecialchars($celular); ?></div>
+                                        </div>
+                                    </div><!--telefone-->
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Data de Nascimento</div>
+                                        <div class="col-lg-9 col-md-8">
+                                            <div class="bordered-field"><?php echo htmlspecialchars($data_de_aniversario); ?></div>
+                                        </div>
+                                    </div><!--data nascimento-->
+                                    <div class="row mb-3">
+                                        <label for="gender" class="col-lg-3 col-md-4 col-form-label profile-label">Gênero</label>
+                                        <div class="col-lg-9 col-md-8">
+                                            <input name="gender" type="text" class="form-control profile-input" id="gender" value="<?php echo htmlspecialchars($genero); ?>" readonly>
+                                        </div>
+                                    </div><!--genero-->
+                                    <div class="row mb-3">
+                                        <label for="cpf" class="col-lg-3 col-md-4 col-form-label profile-label">CPF</label>
+                                        <div class="col-lg-9 col-md-8">
+                                            <input name="cpf" type="text" class="form-control profile-input" id="cpf" value="<?php echo htmlspecialchars($cpf); ?>" readonly>
+                                        </div>
+                                    </div><!--cpf-->
+                                    <div class="row"><br>
+                                        <div class="col-lg-3 col-md-4 label">Endereço</div>
+                                        <div class="col-lg-9 col-md-8">
+                                            <div class="bordered-field">
+                                                <?php echo htmlspecialchars($rua); ?>, <?php echo htmlspecialchars($numero); ?>, <?php echo htmlspecialchars($complemento); ?>
+                                                <?php echo htmlspecialchars($bairro); ?>, <?php echo htmlspecialchars($cidade); ?> - <?php echo htmlspecialchars($estado); ?>, <?php echo htmlspecialchars($cep); ?>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Email</div>
-                                            <div class="col-lg-9 col-md-8">
-                                                <div class="bordered-field"><?php echo htmlspecialchars($email); ?></div>
-                                            </div>
+                                    </div><!--endereço-->
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Serviços</div>
+                                        <div class="col-lg-9 col-md-8">
+                                            <div class="bordered-field"><?php echo htmlspecialchars($servicos); ?></div>
                                         </div>
+                                    </div><!--serviços-->
+                                </form>
+                            </div><!-- Visão Geral -->
 
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Celular</div>
-                                            <div class="col-lg-9 col-md-8">
-                                                <div class="bordered-field"><?php echo htmlspecialchars($celular); ?></div>
-                                            </div>
+                            <!-- Editar Perfil -->
+                            <div class="tab-pane fade" id="profile-edit">
+                                <h5 class="card-title">Editar Perfil</h5>
+                                <form action="forms/atualizar_perfil.php" method="POST" enctype="multipart/form-data" onsubmit="return confirmUpdate();">
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nome Completo</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($nome); ?>">
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Data de Nascimento</div>
-                                            <div class="col-lg-9 col-md-8">
-                                                <div class="bordered-field"><?php echo htmlspecialchars($data_de_aniversario); ?></div>
-                                            </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="celular" class="col-md-4 col-lg-3 col-form-label">Celular</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="celular" type="text" class="form-control" id="celular" value="<?php echo htmlspecialchars($celular); ?>">
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Gênero</div>
-                                            <div class="col-lg-9 col-md-8">
-                                                <div class="bordered-field"><?php echo htmlspecialchars($genero); ?></div>
-                                            </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="data_de_aniversario" class="col-md-4 col-lg-3 col-form-label">Data de Nascimento</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="data_de_aniversario" type="date" class="form-control" id="data_de_aniversario" value="<?php echo htmlspecialchars($data_de_aniversario); ?>">
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">CPF</div>
-                                            <div class="col-lg-9 col-md-8">
-                                                <div class="bordered-field"><?php echo htmlspecialchars($cpf); ?></div>
-                                            </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="genero" class="col-md-4 col-lg-3 col-form-label">Gênero</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <select name="genero" id="genero" class="form-control">
+                                                <option value="Masculino" <?php echo $genero === 'Masculino' ? 'selected' : ''; ?>>Masculino</option>
+                                                <option value="Feminino" <?php echo $genero === 'Feminino' ? 'selected' : ''; ?>>Feminino</option>
+                                                <option value="Outro" <?php echo $genero === 'Outro' ? 'selected' : ''; ?>>Outro</option>
+                                            </select>
                                         </div>
-
-                                        <div class="row"><br>
-                                            <div class="col-lg-3 col-md-4 label">Endereço</div>
-                                                <div class="col-lg-9 col-md-8">
-                                                    <div class="bordered-field">
-                                                        <?php echo htmlspecialchars($rua); ?>, <?php echo htmlspecialchars($numero); ?>, <?php echo htmlspecialchars($complemento); ?> 
-                                                        <?php echo htmlspecialchars($bairro); ?>, <?php echo htmlspecialchars($cidade); ?> - <?php echo htmlspecialchars($estado); ?>, <?php echo htmlspecialchars($cep); ?>
-                                                    </div>
-                                                </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-4 label">Serviços</div>
-                                            <div class="col-lg-9 col-md-8">
-                                                <div class="bordered-field"><?php echo htmlspecialchars($servicos); ?></div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- Fecha a div para scroll -->
-                                </div><!-- Visão Geral-->
-
-                                <!-- Editar perfil -->
-                                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-                                    <div style="max-height: 400px; overflow-y: auto;">
-                                        <!-- Formulário de Edição do Perfil -->
-                                        <form action="forms/atualizar_perfil.php" method="POST">
-                                            <div class="row mb-3">
-                                                <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nome Completo</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($nome); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="celular" class="col-md-4 col-lg-3 col-form-label">Celular</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="celular" type="text" class="form-control" id="celular" value="<?php echo htmlspecialchars($celular); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="data_de_aniversario" class="col-md-4 col-lg-3 col-form-label">Data de Nascimento</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="data_de_aniversario" type="date" class="form-control" id="data_de_aniversario" value="<?php echo htmlspecialchars($data_de_aniversario); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="genero" class="col-md-4 col-lg-3 col-form-label">Gênero</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <select name="genero" id="genero" class="form-control">
-                                                        <option value="Masculino" <?php echo $genero === 'Masculino' ? 'selected' : ''; ?>>Masculino</option>
-                                                        <option value="Feminino" <?php echo $genero === 'Feminino' ? 'selected' : ''; ?>>Feminino</option>
-                                                        <option value="Outro" <?php echo $genero === 'Outro' ? 'selected' : ''; ?>>Outro</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="cep" class="col-md-4 col-lg-3 col-form-label">CEP</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="cep" type="text" class="form-control" id="cep" value="<?php echo htmlspecialchars($cep); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="rua" class="col-md-4 col-lg-3 col-form-label">Rua</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="rua" type="text" class="form-control" id="rua" value="<?php echo htmlspecialchars($rua); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="numero" class="col-md-4 col-lg-3 col-form-label">Número</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="numero" type="text" class="form-control" id="numero" value="<?php echo htmlspecialchars($numero); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="complemento" class="col-md-4 col-lg-3 col-form-label">Complemento</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="complemento" type="text" class="form-control" id="complemento" value="<?php echo htmlspecialchars($complemento); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="bairro" class="col-md-4 col-lg-3 col-form-label">Bairro</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="bairro" type="text" class="form-control" id="bairro" value="<?php echo htmlspecialchars($bairro); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="cidade" class="col-md-4 col-lg-3 col-form-label">Cidade</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="cidade" type="text" class="form-control" id="cidade" value="<?php echo htmlspecialchars($cidade); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="estado" type="text" class="form-control" id="estado" value="<?php echo htmlspecialchars($estado); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="servicos" class="col-md-4 col-lg-3 col-form-label">Serviços</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="servicos" type="text" class="form-control" id="servicos" value="<?php echo htmlspecialchars($servicos); ?>">
-                                                </div>
-                                            </div>
-
-                                            <!-- Redes Sociais -->
-                                            <div class="row mb-3">
-                                                <label for="tiktok" class="col-md-4 col-lg-3 col-form-label">TikTok</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="tiktok" type="text" class="form-control" id="tiktok" value="<?php echo htmlspecialchars($tiktok); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="facebook" class="col-md-4 col-lg-3 col-form-label">Facebook</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="facebook" type="text" class="form-control" id="facebook" value="<?php echo htmlspecialchars($facebook); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="instagram" class="col-md-4 col-lg-3 col-form-label">Instagram</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="instagram" type="text" class="form-control" id="instagram" value="<?php echo htmlspecialchars($instagram); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="linkedin" type="text" class="form-control" id="linkedin" value="<?php echo htmlspecialchars($linkedin); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="whatsapp" class="col-md-4 col-lg-3 col-form-label">WhatsApp</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="whatsapp" type="text" class="form-control" id="whatsapp" value="<?php echo htmlspecialchars($whatsapp); ?>">
-                                                </div>
-                                            </div>
-
-                                            <div class="text-center">
-                                                <button type="submit" class="btn btn-primary" onclick="return confirmProfileUpdate();">Salvar Alterações</button>
-                                            </div>
-                                        </form>
-                                    </div><!-- Formulário de Edição do Perfil -->
-                                </div><!-- Editar perfil -->
-
-
-                                <!-- Mudar Senha -->
-                                <div class="tab-pane fade pt-3" id="profile-change-password">
-                                    <h5 class="card-title">Mudar Senha</h5>
-                                    <form action="form/update_password.php" method="POST" onsubmit="return confirmUpdate() && validatePassword();">
-                                        <div class="row mb-3">
-                                            <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nova Senha</label>
-                                            <div class="col-md-8 col-lg-9 position-relative">
-                                                <input name="newPassword" type="password" class="form-control profile-input" id="newPassword" required>
-                                                <i class="fas fa-eye toggle-password" onclick="togglePassword('newPassword')"></i>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar Nova Senha</label>
-                                            <div class="col-md-8 col-lg-9 position-relative">
-                                                <input name="confirmPassword" type="password" class="form-control profile-input" id="confirmPassword" required>
-                                                <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
-                                            </div>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary">Alterar Senha</button>
-                                        </div>
-                                    </form>
-                                </div><!-- Mudar Senha -->
-
-                                <!-- Configurações -->
-                                <div class="tab-pane fade pt-3" id="profile-settings">
-                                    <h5 class="card-title">Configurações</h5>
-
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Desativar Conta</button>
                                     </div>
 
-                                    <script>
-                                        function confirmDelete() {
-                                            // Pergunta ao usuário se ele realmente deseja deletar a conta
-                                            const confirmation = confirm("Tem certeza de que deseja desativar sua conta? Esta ação não pode ser desfeita.");
+                                    <div class="row mb-3">
+                                        <label for="cep" class="col-md-4 col-lg-3 col-form-label">CEP</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="cep" type="text" class="form-control" id="cep" value="<?php echo htmlspecialchars($cep); ?>">
+                                        </div>
+                                    </div>
 
-                                            // Se o usuário confirmar, faz a requisição para deletar a conta
-                                            if (confirmation) {
-                                                // Obtenha o ID do usuário corretamente
-                                                const userId = <?php echo json_encode($id); ?>; // Certifique-se de que $id esteja definido e contém o ID do usuário
+                                    <div class="row mb-3">
+                                        <label for="rua" class="col-md-4 col-lg-3 col-form-label">Rua</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="rua" type="text" class="form-control" id="rua" value="<?php echo htmlspecialchars($rua); ?>">
+                                        </div>
+                                    </div>
 
-                                                fetch('forms/desativar_conta.php', {
-                                                        method: 'POST',
-                                                        headers: {
-                                                            'Content-Type': 'application/json',
-                                                        },
-                                                        body: JSON.stringify({
-                                                            user_id: userId
-                                                        }),
-                                                    })
-                                                    .then(response => {
-                                                        if (!response.ok) {
-                                                            throw new Error('Erro ao deletar a conta');
-                                                        }
-                                                        return response.json();
-                                                    })
-                                                    .then(data => {
-                                                        // Ação após a exclusão bem-sucedida
-                                                        alert('Conta deletada com sucesso!');
-                                                        // Redirecionar ou atualizar a página, se necessário
-                                                        // window.location.reload();
-                                                    })
-                                                    .catch(error => {
-                                                        console.error('Erro:', error);
-                                                        alert('Não foi possível deletar a conta. Tente novamente mais tarde.');
-                                                    });
-                                            }
+                                    <div class="row mb-3">
+                                        <label for="numero" class="col-md-4 col-lg-3 col-form-label">Número</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="numero" type="text" class="form-control" id="numero" value="<?php echo htmlspecialchars($numero); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="complemento" class="col-md-4 col-lg-3 col-form-label">Complemento</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="complemento" type="text" class="form-control" id="complemento" value="<?php echo htmlspecialchars($complemento); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="bairro" class="col-md-4 col-lg-3 col-form-label">Bairro</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="bairro" type="text" class="form-control" id="bairro" value="<?php echo htmlspecialchars($bairro); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="cidade" class="col-md-4 col-lg-3 col-form-label">Cidade</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="cidade" type="text" class="form-control" id="cidade" value="<?php echo htmlspecialchars($cidade); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="estado" class="col-md-4 col-lg-3 col-form-label">Estado</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="estado" type="text" class="form-control" id="estado" value="<?php echo htmlspecialchars($estado); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="servicos" class="col-md-4 col-lg-3 col-form-label">Serviços</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="servicos" type="text" class="form-control" id="servicos" value="<?php echo htmlspecialchars($servicos); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary" onclick="return confirmProfileUpdate();">Salvar Alterações</button>
+                                    </div>
+                                </form>
+                            </div><!-- Editar Perfil -->
+
+                            <!-- Mudar Senha -->
+                            <div class="tab-pane fade pt-3" id="profile-change-password">
+                                <h5 class="card-title">Mudar Senha</h5>
+                                <form action="form/update_password.php" method="POST" onsubmit="return confirmUpdate() && validatePassword();">
+                                    <div class="row mb-3">
+                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nova Senha</label>
+                                        <div class="col-md-8 col-lg-9 position-relative">
+                                            <input name="newPassword" type="password" class="form-control profile-input" id="newPassword" required>
+                                            <i class="fas fa-eye toggle-password" onclick="togglePassword('newPassword')"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Confirmar Nova Senha</label>
+                                        <div class="col-md-8 col-lg-9 position-relative">
+                                            <input name="confirmPassword" type="password" class="form-control profile-input" id="confirmPassword" required>
+                                            <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Alterar Senha</button>
+                                    </div>
+                                </form>
+                            </div><!-- Mudar Senha -->
+
+                            <!-- Configurações -->
+                            <div class="tab-pane fade pt-3" id="profile-settings">
+                                <h5 class="card-title">Configurações</h5>
+
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-danger" onclick="confirmDesa()">Desativar Conta</button>
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Deletar Conta</button>
+                                </div>
+
+                                <script>
+                                    function confirmDesa() {
+                                        // Pergunta ao usuário se ele realmente deseja desativar a conta
+                                        const confirmation = confirm("Tem certeza de que deseja desativar sua conta?");
+
+                                        // Se o usuário confirmar, redireciona para a página de desativação
+                                        if (confirmation) {
+                                            // Redireciona para o arquivo de desativação de conta
+                                            window.location.href = 'forms/conta/desativar_conta.php';
                                         }
-                                    </script>
-                                </div> <!-- Configurações -->
-                            </div><!-- Final das Abas -->
+                                    }
+
+                                    function confirmDelete() {
+                                        // Pergunta ao usuário se ele realmente deseja desativar a conta
+                                        const confirmation = confirm("Tem certeza de que deseja deletar sua conta? Esta ação não pode ser desfeita.");
+
+                                        // Se o usuário confirmar, redireciona para a página de desativação
+                                        if (confirmation) {
+                                            // Redireciona para o arquivo de desativação de conta
+                                            window.location.href = 'forms/conta/deletar_conta.php';
+                                        }
+                                    }
+                                </script>
+
+                            </div> <!-- Configurações -->
 
                         </div>
                     </div>
-
                 </div>
             </div>
+            </div>
         </section>
+        <script>
+            function validatePassword() {
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
 
+                if (newPassword !== confirmPassword) {
+                    alert('As senhas não coincidem!');
+                    return false;
+                }
+                return true;
+            }
+
+            function confirmUpdate() {
+                return confirm('Tem certeza que deseja alterar?');
+            }
+
+            function togglePassword(id) {
+                const passwordField = document.getElementById(id);
+                const icon = passwordField.nextElementSibling;
+
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+        </script>
 
     </main><!-- End #main -->
-    <script>
-        function validatePassword() {
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
 
-            if (newPassword !== confirmPassword) {
-                alert('As senhas não coincidem!');
-                return false;
-            }
-            return true;
-        }
-
-        function confirmUpdate() {
-            return confirm('Tem certeza de que deseja atualizar sua senha?');
-        }
-
-        function togglePassword(id) {
-            const passwordField = document.getElementById(id);
-            const icon = passwordField.nextElementSibling;
-
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordField.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        function confirmProfileUpdate() {
-            return confirm('Tem certeza de que deseja salvar as alterações no seu perfil?');
-        }
-
-        function confirmSettingsUpdate() {
-            return confirm('Tem certeza de que deseja salvar as alterações nas configurações?');
-        }
-    </script>
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">

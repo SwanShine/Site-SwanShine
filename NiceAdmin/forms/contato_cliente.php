@@ -1,63 +1,84 @@
 <?php
+// Iniciar a sessão
 session_start();
+
+// Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
-    header('Location: ../../home/forms/login/login.html');
+    header('Location: ../home/forms/login/login.html');
     exit();
 }
 
+// Dados de conexão com o banco de dados
 $servername = "swanshine.cpkoaos0ad68.us-east-2.rds.amazonaws.com";
 $username = "admin";
 $password = "gLAHqWkvUoaxwBnm9wKD";
 $dbname = "swanshine";
+
+// Criar conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Verificar conexão
 if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-$email_profissional = $_SESSION['user_email'];
-$id_cliente = $_GET['id']; // O id do cliente, passado na URL
+// Recuperar o email da sessão
+$email = $_SESSION['user_email'];
 
-// Buscar dados do cliente
-$sql_cliente = "SELECT id, telefone, nome, email FROM clientes WHERE id = ?";
-$stmt = $conn->prepare($sql_cliente);
-$stmt->bind_param("i", $id_cliente);
+// Usar prepared statements para buscar o profissional pelo email
+$stmt = $conn->prepare("
+    SELECT id, nome, email, celular, data_de_aniversario, genero, cep, endereco, servicos, cpf, tiktok, facebook, instagram, linkedin, whatsapp 
+    FROM profissionais 
+    WHERE email = ?
+");
+$stmt->bind_param("s", $email);
 $stmt->execute();
-$cliente = $stmt->get_result()->fetch_assoc();
-$stmt->close();
 
-// Buscar dados do profissional
-$sql_profissional = "SELECT id, nome, celular, email, endereco, cep FROM profissionais WHERE email = ?";
-$stmt = $conn->prepare($sql_profissional);
-$stmt->bind_param("s", $email_profissional);
-$stmt->execute();
-$profissional = $stmt->get_result()->fetch_assoc();
-$stmt->close();
+// Obter o resultado da consulta
+$result = $stmt->get_result();
 
-// Decodificar o JSON do campo 'endereco' para obter os detalhes
-if (!empty($profissional['endereco'])) {
-    $endereco = json_decode($profissional['endereco'], true);
-    $rua = $endereco['rua'] ?? 'Não informado';
-    $numero = $endereco['numero'] ?? 'Não informado';
-    $complemento = $endereco['complemento'] ?? 'Não informado';
-    $bairro = $endereco['bairro'] ?? 'Não informado';
-    $cidade = $endereco['cidade'] ?? 'Não informado';
-    $estado = $endereco['estado'] ?? 'Não informado';
+// Verificar se retornou algum resultado
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $profissional = $row; // Salvar os dados do profissional
+
+    // Decodificar o JSON do endereço
+    $endereco = json_decode($row['endereco'], true);
+    $rua = isset($endereco['rua']) ? $endereco['rua'] : "Não encontrado";
+    $numero = isset($endereco['numero']) ? $endereco['numero'] : "Não encontrado";
+    $complemento = isset($endereco['complemento']) ? $endereco['complemento'] : "Não encontrado";
+    $bairro = isset($endereco['bairro']) ? $endereco['bairro'] : "Não encontrado";
+    $cidade = isset($endereco['cidade']) ? $endereco['cidade'] : "Não encontrado";
+    $estado = isset($endereco['estado']) ? $endereco['estado'] : "Não encontrado";
 } else {
-    $rua = $numero = $complemento = $bairro = $cidade = $estado = 'Não informado';
+    // Caso não encontre o profissional
+    $profissional = array();
+    $rua = $numero = $complemento = $bairro = $cidade = $estado = "Não encontrado";
 }
 
-// Recuperar mensagens trocadas entre o profissional e o cliente
-$sql_mensagens = "SELECT * FROM mensagens WHERE 
-                  (remetente = ? AND profissional_id = ?) OR 
-                  (remetente = ? AND profissional_id = ?) 
-                  ORDER BY data_envio ASC";
-$stmt = $conn->prepare($sql_mensagens);
-$stmt->bind_param("iiii", $profissional['id'], $id_cliente, $id_cliente, $profissional['id']);
-$stmt->execute();
-$mensagens = $stmt->get_result();
-$stmt->close();
+// Buscar o telefone do cliente associado ao pedido
+$pedido_id = $_GET['id'];  // Usando o ID do pedido passado via GET
+$query_pedido_cliente = "
+    SELECT c.telefone 
+    FROM pedidos p 
+    JOIN clientes c ON p.email = c.email 
+    WHERE p.id = ?
+";
+$stmt_pedido_cliente = $conn->prepare($query_pedido_cliente);
+$stmt_pedido_cliente->bind_param("i", $pedido_id);
+$stmt_pedido_cliente->execute();
+$result_pedido_cliente = $stmt_pedido_cliente->get_result();
 
+if ($result_pedido_cliente->num_rows > 0) {
+    $cliente = $result_pedido_cliente->fetch_assoc();
+    $telefone_cliente = $cliente['telefone'];  // Obter o telefone do cliente
+} else {
+    $telefone_cliente = "Não encontrado";
+}
+
+// Fechar a conexão com o banco
+$stmt->close();
+$stmt_pedido_cliente->close();
 $conn->close();
 ?>
 
@@ -373,198 +394,112 @@ $conn->close();
 
 <body>
 
-    <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
-        <!-- Cabeçalho com ID "header", classe para fixar no topo e aplicar estilo flex para alinhamento dos itens. -->
-
         <div class="d-flex align-items-center justify-content-between">
-            <!-- Div que alinha os itens de forma flexível e justifica o conteúdo entre os elementos. -->
-
             <a href="../index.php" class="logo d-flex align-items-center">
-                <!-- Link que redireciona para a página "index.php" com a classe "logo", exibindo logo e texto. -->
-
                 <img src="../assets/img/logo_preta.png" alt="" />
-                <!-- Imagem do logo com o caminho "../assets/img/logo_preta.png". O atributo "alt" está vazio. -->
-
                 <span class="d-none d-lg-block">Swan Shine</span>
-                <!-- Texto "SwanShine" que só aparece em telas grandes, escondido em telas menores. -->
             </a>
-
             <i class="bi bi-list toggle-sidebar-btn"></i>
-            <!-- Ícone do Bootstrap Icons para alternar o sidebar. -->
         </div>
 
         <nav class="header-nav ms-auto">
-            <!-- Barra de navegação à direita (margem esquerda automática para empurrar conteúdo). -->
-
             <ul class="d-flex align-items-center">
-                <!-- Lista não ordenada com itens alinhados ao centro, usando display flex. -->
-
                 <!-- Notifications Dropdown -->
                 <li class="nav-item dropdown">
-                    <!-- Item da lista que contém o dropdown de notificações. -->
-
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <!-- Link com ícone de sino que abre o menu suspenso de notificações ao clicar. -->
-
                         <i class="bi bi-bell"></i>
-                        <!-- Ícone de sino representando as notificações. -->
-
                         <span class="badge bg-primary badge-number">0</span>
-                        <!-- Badge com o número de notificações (aqui definido como 0) com fundo azul. -->
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <!-- Menu suspenso alinhado à direita (end) com uma seta indicativa, contendo notificações. -->
-
+                    <ul
+                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                         <li class="dropdown-header">
-                            <!-- Cabeçalho do dropdown que exibe a contagem de notificações. -->
-
                             Você tem 0 notificações
-                            <!-- Texto que informa o número de notificações. -->
-
                             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-                            <!-- Link para ver todas as notificações com uma badge arredondada ao lado do texto. -->
                         </li>
-
                         <li class="dropdown-footer">
-                            <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as notificações. -->
-
                             <a href="#">Mostrar todas as notificações</a>
-                            <!-- Link para mostrar todas as notificações. -->
                         </li>
                     </ul>
                 </li>
 
                 <!-- Messages Dropdown -->
                 <li class="nav-item dropdown">
-                    <!-- Item da lista que contém o dropdown de mensagens. -->
-
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <!-- Link com ícone de chat que abre o menu suspenso de mensagens ao clicar. -->
-
                         <i class="bi bi-chat-left-text"></i>
-                        <!-- Ícone de chat para representar mensagens. -->
-
                         <span class="badge bg-success badge-number">0</span>
-                        <!-- Badge com o número de mensagens (aqui definido como 0) com fundo verde. -->
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo mensagens. -->
-
+                    <ul
+                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                         <li class="dropdown-header">
-                            <!-- Cabeçalho do dropdown que exibe a contagem de mensagens. -->
-
                             Você tem 0 mensagens
-                            <!-- Texto informando o número de mensagens. -->
-
-                            <a href="../mensagem.html"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
-                            <!-- Link para ver todas as mensagens com uma badge arredondada ao lado do texto. -->
+                            <a href="../mensagem.php"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todas</span></a>
                         </li>
-
                         <li>
                             <hr class="dropdown-divider" />
-                            <!-- Linha divisória dentro do dropdown. -->
                         </li>
-
                         <li class="dropdown-footer">
-                            <!-- Rodapé do dropdown, oferecendo a opção de mostrar todas as mensagens. -->
-
-                            <a href="mensagem.html">Mostrar todas as mensagens</a>
-                            <!-- Link para mostrar todas as mensagens. -->
+                            <a href="../mensagem.php">Mostrar todas as mensagens</a>
                         </li>
                     </ul>
                 </li>
 
                 <!-- Profile Dropdown -->
                 <li class="nav-item dropdown pe-3">
-                    <!-- Item da lista que contém o dropdown de perfil. O "pe-3" aplica padding à direita. -->
-
                     <a
                         class="nav-link nav-profile d-flex align-items-center pe-0"
                         href="perfil.php"
                         data-bs-toggle="dropdown">
-                        <!-- Link com imagem de perfil que abre o menu suspenso do perfil ao clicar. -->
-
                         <img
                             src="../assets/img/usuario.png"
                             alt="Profile"
                             class="rounded-circle" />
-                        <!-- Imagem de perfil (usuário) em formato circular. -->
                     </a>
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <!-- Menu suspenso alinhado à direita com uma seta indicativa, contendo opções de perfil. -->
+                    <ul
+                        class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
                                 href="../perfil.php">
-                                <!-- Link para a página de perfil com ícone e texto alinhados. -->
-
                                 <i class="bi bi-person"></i>
-                                <!-- Ícone de pessoa (perfil). -->
-
                                 <span>Meu Perfil</span>
-                                <!-- Texto "Meu Perfil". -->
                             </a>
                         </li>
-
                         <li>
                             <hr class="dropdown-divider" />
-                            <!-- Linha divisória dentro do dropdown. -->
                         </li>
-
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
                                 href="../perfil.php">
-                                <!-- Link para configurações da conta com ícone e texto alinhados. -->
-
                                 <i class="bi bi-gear"></i>
-                                <!-- Ícone de engrenagem (configurações). -->
-
                                 <span>Configurações da Conta</span>
-                                <!-- Texto "Configurações da Conta". -->
                             </a>
                         </li>
-
                         <li>
                             <hr class="dropdown-divider" />
-                            <!-- Linha divisória dentro do dropdown. -->
                         </li>
-
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
                                 href="../suporte.php">
-                                <!-- Link para a página de ajuda com ícone e texto alinhados. -->
-
                                 <i class="bi bi-question-circle"></i>
-                                <!-- Ícone de círculo com ponto de interrogação (ajuda). -->
-
                                 <span>Precisa de Ajuda?</span>
-                                <!-- Texto "Precisa de Ajuda?". -->
                             </a>
                         </li>
-
                         <li>
                             <hr class="dropdown-divider" />
-                            <!-- Linha divisória dentro do dropdown. -->
                         </li>
-
                         <li>
                             <a
                                 class="dropdown-item d-flex align-items-center"
-                                href="log_out.php">
-                                <!-- Link para a página de logout com ícone e texto alinhados. -->
-
+                                href="../../log_out.php">
                                 <i class="bi bi-box-arrow-right"></i>
-                                <!-- Ícone de seta saindo de uma caixa (sair/logout). -->
-
                                 <span>Sair</span>
-                                <!-- Texto "Sair". -->
                             </a>
                         </li>
                     </ul>
@@ -572,7 +507,6 @@ $conn->close();
             </ul>
         </nav>
     </header>
-
 
     <!-- ======= Barra Lateral ======= -->
     <aside id="sidebar" class="sidebar">
@@ -582,24 +516,6 @@ $conn->close();
                     <i class="bi bi-grid"></i>
                     <span>Início</span>
                 </a>
-            </li>
-
-            <li class="nav-item">
-                <a
-                    class="nav-link collapsed"
-                    data-bs-target="#components-nav"
-                    data-bs-toggle="collapse"
-                    href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Serviços</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul
-                    id="components-nav"
-                    class="nav-content collapse"
-                    data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="../servicos.php"><i class="bi bi-circle"></i><span>Contrate o Serviço</span></a>
-                    </li>
-                </ul>
             </li>
 
             <li class="nav-item">
@@ -621,10 +537,10 @@ $conn->close();
                         <a href="../pedidos/pedido_andamento.php"><i class="bi bi-circle"></i><span>Pedidos Em Andamento</span></a>
                     </li>
                     <li>
-                        <a href="../pedidos/pedido_excluido.php"><i class="bi bi-circle"></i><span>Pedidos Excluidos</span></a>
+                        <a href="../pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
                     </li>
                     <li>
-                        <a href="../pedidos/pedido_concluido.php"><i class="bi bi-circle"></i><span>Pedidos Concluidos</span></a>
+                        <a href="../pedidos/pedido_recusado.php"><i class="bi bi-circle"></i><span>Pedidos Recusados</span></a>
                     </li>
                 </ul>
             </li>
@@ -658,6 +574,7 @@ $conn->close();
                 </ol>
             </nav>
         </div>
+
         <!-- Services Section -->
         <section id="services" class="services section">
             <form action="" method="post">
@@ -708,71 +625,60 @@ $conn->close();
                 } else {
                     // Caso o cliente não tenha telefone, exibe o popup
                     echo "
-        <div id='popup' class='popup'>
-            <div class='popup-content'>
-                <p>O cliente não disponibilizou um número de celular.</p>
-                <button onclick='fecharPopup()'>Fechar</button>
+            <div id='popup' class='popup'>
+                <div class='popup-content'>
+                    <p>O cliente não disponibilizou um número de celular.</p>
+                    <button onclick='fecharPopup()'>Fechar</button>
+                </div>
             </div>
-        </div>
-        <script>
-            // Exibe o popup ao carregar a página
-            document.getElementById('popup').style.display = 'block';
-
-            // Função para fechar o popup
-            function fecharPopup() {
-                document.getElementById('popup').style.display = 'none';
-            }
-        </script>
-        <style>
-            .popup {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 1000;
-            }
-            .popup-content {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: #fff;
-                padding: 20px;
-                border-radius: 8px;
-                text-align: center;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-            .popup-content p {
-                margin: 0 0 20px;
-            }
-            .popup-content button {
-                background-color: #007bff;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-            .popup-content button:hover {
-                background-color: #0056b3;
-            }
-        </style>
-        ";
+            <script>
+                document.getElementById('popup').style.display = 'block';
+                function fecharPopup() {
+                    document.getElementById('popup').style.display = 'none';
+                }
+            </script>
+            <style>
+                .popup {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 1000;
+                }
+                .popup-content {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 8px;
+                    text-align: center;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+                .popup-content p {
+                    margin: 0 0 20px;
+                }
+                .popup-content button {
+                    background-color: #007bff;
+                    color: white;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                .popup-content button:hover {
+                    background-color: #0056b3;
+                }
+            </style>
+            ";
                 }
             }
             ?>
-
-
-
-
-
-
         </section><!-- /Services Section -->
-
-
 
     </main>
 
