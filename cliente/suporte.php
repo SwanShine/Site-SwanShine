@@ -462,7 +462,7 @@ $conn->close();
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
+              <a class="dropdown-item d-flex align-items-center" href="suporte.php">
                 <!-- Link para a página de ajuda com ícone e texto alinhados. -->
 
                 <i class="bi bi-question-circle"></i>

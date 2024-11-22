@@ -204,7 +204,7 @@ $conn->close();
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="manutencao.html">
+              <a class="dropdown-item d-flex align-items-center" href="suporte.php">
                 <i class="bi bi-question-circle"></i>
                 <span>Precisa de Ajuda?</span>
               </a>
@@ -473,12 +473,12 @@ $conn->close();
                       </div>
                     </div>
 
-                    <div class="row mb-3">
+                   <!-- <div class="row mb-3">
                       <label for="imagem" class="col-lg-3 col-md-4 col-form-label">Imagem de Perfil</label>
                       <div class="col-lg-9 col-md-8">
                         <input name="imagem" type="file" class="form-control" id="imagem">
                       </div>
-                    </div>
+                    </div>-->
 
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Salvar Alterações</button>
@@ -515,47 +515,24 @@ $conn->close();
                   <h5 class="card-title">Configurações</h5>
 
                   <div class="text-center">
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Desativar Conta</button>
-                  </div>
+  <button type="button" class="btn btn-danger" onclick="confirmDelete()">Desativar Conta</button>
+</div>
 
-                  <script>
-                    function confirmDelete() {
-                      // Pergunta ao usuário se ele realmente deseja Desativar a conta
-                      const confirmation = confirm("Tem certeza de que deseja Desativar sua conta? Esta ação não pode ser desfeita.");
+<script>
+  function confirmDelete() {
+    // Pergunta ao usuário se ele realmente deseja desativar a conta
+    const confirmation = confirm("Tem certeza de que deseja desativar sua conta? Esta ação não pode ser desfeita.");
 
-                      // Se o usuário confirmar, faz a requisição para Desativar a conta
-                      if (confirmation) {
-                        // Substitua 'ID_DO_USUÁRIO_AQUI' pelo ID do usuário que deseja Desativar
-                        const userId = '$nome';
+    // Se o usuário confirmar, redireciona para a página de desativação
+    if (confirmation) {
+      // Redireciona para o arquivo de desativação de conta
+      window.location.href = 'form/conta/desativar_conta.php';
+    }
+  }
+</script>
 
-                        fetch('form/Desativar_conta.php', {
-                            method: 'POST',
-                            headers: {
-                              'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                              user_id: userId
-                            }),
-                          })
-                          .then(response => {
-                            if (!response.ok) {
-                              throw new Error('Erro ao Desativar a conta');
-                            }
-                            return response.json();
-                          })
-                          .then(data => {
-                            // Ação após a exclusão bem-sucedida
-                            alert('Conta desativada com sucesso!');
-                            // Redirecionar ou atualizar a página, se necessário
-                            // window.location.reload();
-                          })
-                          .catch(error => {
-                            console.error('Erro:', error);
-                            alert('Não foi possível Desativar a conta. Tente novamente mais tarde.');
-                          });
-                      }
-                    }
-                  </script>
+
+
                 </div> <!-- Configurações -->
 
               </div>

@@ -83,10 +83,6 @@ $conn->close();
 ?>
 
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -297,7 +293,7 @@ $conn->close();
             <li>
               <a
                 class="dropdown-item d-flex align-items-center"
-                href="manutencao.html">
+                href="suporte.php">
                 <!-- Link para a página de ajuda com ícone e texto alinhados. -->
 
                 <i class="bi bi-question-circle"></i>

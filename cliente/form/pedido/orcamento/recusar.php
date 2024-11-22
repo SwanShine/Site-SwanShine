@@ -17,7 +17,7 @@ $dbname = "swanshine";
 // Criar conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar a conexão com o banco de dados
+// Verificar a conexão
 if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
@@ -25,71 +25,61 @@ if ($conn->connect_error) {
 // Recuperar o email do usuário logado
 $email = $_SESSION['user_email'];
 
-// Função para lidar com erros e mensagens
-function setMessage($msg, $isError = false) {
-    return '<div class="alert ' . ($isError ? 'alert-danger' : 'alert-info') . '">' . $msg . '</div>';
-}
+// Verificar se um ID de orçamento foi passado
+if (isset($_GET['id'])) {
+    $orcamento_id = $_GET['id'];
 
-// Verificar se o ID do pedido foi enviado via POST
-if (isset($_POST['pedido_id'])) {
-    $pedido_id = $_POST['pedido_id'];
+    // Buscar informações do orçamento e do profissional associado
+    $stmt = $conn->prepare("
+        SELECT o.profissional_id, o.pedido_id 
+        FROM orcamentos o
+        WHERE o.id = ?
+    ");
+    $stmt->bind_param("i", $orcamento_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // Validar o ID do pedido (garantir que seja um número inteiro positivo)
-    if (!filter_var($pedido_id, FILTER_VALIDATE_INT) || $pedido_id <= 0) {
-        echo setMessage("ID do pedido inválido.", true);
-        exit();
-    }
-
-    // Buscar o orçamento associado ao pedido
-    $stmt_orcamento = $conn->prepare("SELECT o.profissional_id 
-                                      FROM orcamentos o 
-                                      WHERE o.pedido_id = ?");
-    $stmt_orcamento->bind_param("i", $pedido_id);
-    $stmt_orcamento->execute();
-    $orcamento_result = $stmt_orcamento->get_result();
-
-    if ($orcamento_result->num_rows > 0) {
-        // Recuperar o ID do profissional
-        $orcamento = $orcamento_result->fetch_assoc();
+    // Verificar se o orçamento foi encontrado
+    if ($result->num_rows > 0) {
+        $orcamento = $result->fetch_assoc();
         $profissional_id = $orcamento['profissional_id'];
+        $pedido_id = $orcamento['pedido_id'];
 
-        // Atualizar o status do pedido para 'pendente' e remover o orçamento
-        $update_stmt = $conn->prepare("UPDATE pedidos 
-                                       SET status = 'pendente', valor_orcamento = NULL, detalhes_orcamento = NULL 
-                                       WHERE id = ? AND email = ?");
-        $update_stmt->bind_param("is", $pedido_id, $email);
+        // Inserir mensagem de recusa para o profissional
+        $decline_message = "Infelizmente, seu orçamento para o pedido #$pedido_id foi recusado.";
+        $insert_msg_stmt = $conn->prepare("
+            INSERT INTO mensagens (remetente, profissional_id, conteudo, data_envio)
+            VALUES (?, ?, ?, NOW())
+        ");
+        $insert_msg_stmt->bind_param("sis", $email, $profissional_id, $decline_message);
 
-        if ($update_stmt->execute()) {
-            // Remover o orçamento da tabela de orçamentos
-            $delete_stmt = $conn->prepare("DELETE FROM orcamentos WHERE pedido_id = ? AND profissional_id = ?");
-            $delete_stmt->bind_param("ii", $pedido_id, $profissional_id);
-            $delete_stmt->execute();
+        if ($insert_msg_stmt->execute()) {
+            // Excluir o orçamento da tabela
+            $delete_stmt = $conn->prepare("DELETE FROM orcamentos WHERE id = ?");
+            $delete_stmt->bind_param("i", $orcamento_id);
+
+            if ($delete_stmt->execute()) {
+                // Redirecionar para pedidos pendentes sem alterar o status
+                header('Location: ../../../pedidos/pedido_pendente.php');
+                exit();
+            } else {
+                echo "Erro ao excluir o orçamento: " . $conn->error;
+            }
+
             $delete_stmt->close();
-
-            // Enviar mensagem ao profissional
-            $message = "Infelizmente, seu orçamento não foi aceito para este pedido.";
-            $insert_msg_stmt = $conn->prepare("INSERT INTO mensagens (remetente, profissional_id, conteudo, data_envio)
-                                              VALUES (?, ?, ?, NOW())");
-            $insert_msg_stmt->bind_param("sis", $email, $profissional_id, $message);
-            $insert_msg_stmt->execute();
-            $insert_msg_stmt->close();
-
-            // Mensagem de sucesso
-            echo setMessage("Pedido recusado com sucesso! O orçamento do profissional foi removido.");
         } else {
-            echo setMessage("Erro ao atualizar o pedido: " . $conn->error, true);
+            echo "Erro ao enviar a mensagem de recusa: " . $conn->error;
         }
 
-        $update_stmt->close();
+        $insert_msg_stmt->close();
     } else {
-        echo setMessage("Orçamento não encontrado para este pedido.", true);
+        echo "Orçamento não encontrado.";
     }
 
-    $stmt_orcamento->close();
+    $stmt->close();
 } else {
-    echo setMessage("Nenhum pedido selecionado.", true);
+    echo "Nenhum orçamento selecionado.";
 }
 
-// Fechar a conexão
 $conn->close();
 ?>

@@ -108,149 +108,163 @@ $conn->close();
 
     <style>
     /* Estilos gerais */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        padding: 20px;
-        margin: 0;
-    }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    padding: 20px;
+    margin: 0;
+}
 
-    h1 {
-        text-align: center;
-        color: #333;
-        margin-bottom: 30px;
-    }
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
 
-    /* Estilo da seção de orçamentos */
-    .orcamentos {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 0 auto;
-    }
+/* Estilo da seção de orçamentos */
+.orcamentos {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+}
 
-    /* Estilo dos cartões de orçamento */
+/* Estilo dos cartões de orçamento */
+.orcamento-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.orcamento-card:hover {
+    transform: translateY(-5px);
+}
+
+.orcamento-card h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.orcamento-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.orcamento-card strong {
+    font-weight: bold;
+}
+
+/* Estilo para os botões dentro dos cartões */
+.orcamento-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px; /* Espaço uniforme entre os botões */
+    justify-content: center; /* Centraliza os botões no cartão */
+}
+
+.orcamento-buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-align: center;
+    flex: 1; /* Os botões terão tamanhos iguais */
+    max-width: 150px; /* Define uma largura máxima para evitar botões muito grandes */
+}
+
+.orcamento-buttons a.recusar {
+    background-color: #f44336;
+}
+
+.orcamento-buttons a:hover {
+    background-color: #45a049;
+}
+
+.orcamento-buttons a.recusar:hover {
+    background-color: #e53935;
+}
+
+/* Estilo para a mensagem quando não houver orçamentos */
+.sem-orcamentos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: #ffcccb;
+    color: #ff0000;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
     .orcamento-card {
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 10px;
-        background-color: #fff;
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .orcamento-card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 425px) {
+    .orcamento-card {
         width: 100%;
-        box-sizing: border-box;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
     }
 
-    .orcamento-card:hover {
-        transform: translateY(-5px);
+    .sem-orcamentos {
+        font-size: 16px;
+        height: 150px;
     }
 
-    .orcamento-card h4 {
-        font-size: 18px;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    .orcamento-card p {
-        font-size: 14px;
-        color: #555;
-    }
-
-    .orcamento-card strong {
-        font-weight: bold;
-    }
-
-    /* Estilo para os botões dentro dos cartões */
     .orcamento-buttons {
-        margin-top: 15px;
-        display: flex;
-        justify-content: space-between;
+        flex-direction: column; /* Botões empilhados em telas menores */
+        gap: 10px;
     }
 
     .orcamento-buttons a {
-        text-decoration: none;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: background-color 0.3s;
+        max-width: none; /* Permitir largura total em telas pequenas */
+    }
+}
+
+@media (max-width: 375px) {
+    .orcamento-card {
+        width: 100%;
     }
 
-    .orcamento-buttons a.recusar {
-        background-color: #f44336;
-    }
-
-    .orcamento-buttons a:hover {
-        background-color: #45a049;
-    }
-
-    .orcamento-buttons a.recusar:hover {
-        background-color: #e53935;
-    }
-
-    /* Estilo para a mensagem quando não houver orçamentos */
     .sem-orcamentos {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 200px;
-        background-color: #ffcccb;
-        color: #ff0000;
-        border-radius: 10px;
-        padding: 20px;
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 320px) {
+    .orcamento-card {
+        width: 100%;
     }
 
-    /* Responsividade */
-    @media (max-width: 1024px) {
-        .orcamento-card {
-            width: calc(50% - 20px);
-        }
+    .sem-orcamentos {
+        font-size: 12px;
+        height: 120px;
     }
+}
 
-    @media (max-width: 768px) {
-        .orcamento-card {
-            width: calc(50% - 20px);
-        }
-    }
-
-    @media (max-width: 425px) {
-        .orcamento-card {
-            width: 100%;
-        }
-
-        .sem-orcamentos {
-            font-size: 16px;
-            height: 150px;
-        }
-    }
-
-    @media (max-width: 375px) {
-        .orcamento-card {
-            width: 100%;
-        }
-
-        .sem-orcamentos {
-            font-size: 14px;
-            height: 130px;
-        }
-    }
-
-    @media (max-width: 320px) {
-        .orcamento-card {
-            width: 100%;
-        }
-
-        .sem-orcamentos {
-            font-size: 12px;
-            height: 120px;
-        }
-    }
 </style>
 
 

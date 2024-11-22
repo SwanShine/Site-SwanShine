@@ -126,7 +126,7 @@
             <li>
               <a
                 class="dropdown-item d-flex align-items-center"
-                href="manutencao.html">
+                href="suporte.php">
                 <i class="bi bi-question-circle"></i>
                 <span>Precisa de Ajuda?</span>
               </a>
