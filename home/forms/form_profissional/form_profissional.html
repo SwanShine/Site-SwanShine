@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swan Shine - Profissional</title>
+    <link rel="stylesheet" href="form_profissional.css">
+    <link rel="shortcut icon" href="../../assets/img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <main>
+        <div class="breadcrumb">
+            <a href="../../../index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2>Torne-se um Profissional Swan Shine</h2>
+            <p>Já é um membro? <a href="../login/login.html">Login</a></p>
+        </div>
+        <div class="form-container">
+            <form action="../conexao/conexaoform-profissional.php" method="POST">
+                <div class="section">
+                    <h2>Dados Pessoais</h2>
+                    <div class="form-group">
+                        <label for="name">Nome:</label>
+                        <input type="text" id="name" name="name" required placeholder="Digite seu Nome Completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required placeholder="swanshine@gmail.com">
+                    </div>
+                    <div class="form-group password-container">
+                        <label for="password">Crie uma senha:</label>
+                        <input type="password" id="password" name="password" required placeholder="Digite sua senha">
+                        <i class="fas fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="cpf">CPF:</label>
+                        <input type="text" id="cpf" name="cpf" required placeholder="000.000.000-00">
+                    </div>
+                    <div class="form-group">
+                        <label for="repeat-email">Repetir e-mail:</label>
+                        <input type="email" id="repeat-email" name="repeat-email" required placeholder="swanshine@gmail.com">
+                    </div>
+                    <div class="form-group password-container">
+                        <label for="repeat-password">Repetir senha:</label>
+                        <input type="password" id="repeat-password" name="repeat-password" required placeholder="Repita a senha">
+                        <i class="fas fa-eye" id="toggleRepeatPassword" style="cursor: pointer;"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="cell">Celular:</label>
+                        <input type="text" id="cell" name="cell" placeholder="+55 (00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthdate">Nascimento:</label>
+                        <input type="date" id="birthdate" name="birthdate">
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gênero:</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Selecione</option>
+                            <option value="feminino">Mulher</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>Endereço:</h2>
+                    <div class="form-group">
+                        <label for="cep">CEP</label>
+                        <input type="text" id="cep" name="cep" placeholder="00000-000">
+                    </div>
+                    <div class="form-group">
+                        <label for="street">Rua:</label>
+                        <input type="text" id="street" name="street" placeholder="Nome da rua">
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Número:</label>
+                        <input type="text" id="number" name="number" placeholder="000">
+                    </div>
+                    <div class="form-group">
+                        <label for="complement">Complemento:</label>
+                        <input type="text" id="complement" name="complement" placeholder="Apto, bloco, etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="reference">Referência:</label>
+                        <input type="text" id="reference" name="reference" placeholder="Ponto de referência">
+                    </div>
+                    <div class="form-group">
+                        <label for="neighborhood">Bairro:</label>
+                        <input type="text" id="neighborhood" name="neighborhood" placeholder="Seu bairro">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Cidade:</label>
+                        <input type="text" id="city" name="city" placeholder="Sua cidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">Estado:</label>
+                        <select id="state" name="state">
+                            <option value="" disabled selected>Selecione um estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <section class="section">
+                    <h2>Dados Profissionais</h2>
+                    <div class="form-group">
+                        <label for="servico">Serviços</label>
+                        <select id="servico" name="servico" required onchange="changeText()">
+                            <option value="">Selecione:</option>
+                            <option value="Barbeiro">Barbeiro</option>
+                            <option value="Maquiagem">Maquiagem</option>
+                            <option value="Depilacao">Depilação</option>
+                            <option value="Nail Designer">Nail Designer</option>
+                            <option value="Lash Designer">Lash Designer</option>
+                            <option value="Cabelereira">Cabelereira</option>
+                            <option value="Trancista">Trancista</option>
+                            <option value="Esteticista">Esteticista</option>
+                        </select>
+                    </div>
+                </section>
+                <div class="form-group">
+                    <button type="submit" class="submit-button">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+   
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.6/dist/inputmask.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Máscaras de entrada
+            Inputmask({ "mask": "999.999.999-99" }).mask(document.getElementById("cpf"));
+            Inputmask({ "mask": "(99) 99999-9999" }).mask(document.getElementById("cell"));
+            Inputmask({ "mask": "99999-999" }).mask(document.getElementById("cep"));
+
+            // Validação de senhas
+            const form = document.getElementById("clienteForm");
+            form.addEventListener("submit", function(event) {
+                const senha = document.getElementById("password").value;
+                const confirmarSenha = document.getElementById("repeat-password").value;
+                
+                if (senha !== confirmarSenha) {
+                    alert("As senhas não coincidem.");
+                    event.preventDefault(); // Impede o envio do formulário
+                }
+            });
+        });
+    </script>
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const toggleRepeatPassword = document.getElementById('toggleRepeatPassword');
+        const repeatPasswordInput = document.getElementById('repeat-password');
+    
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePassword.classList.toggle('fa-eye');
+            togglePassword.classList.toggle('fa-eye-slash');
+        });
+    
+        toggleRepeatPassword.addEventListener('click', () => {
+            const type = repeatPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            repeatPasswordInput.setAttribute('type', type);
+            toggleRepeatPassword.classList.toggle('fa-eye');
+            toggleRepeatPassword.classList.toggle('fa-eye-slash');
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif; /* Fonte atualizada */
+}
+
+body {
+    background-image: url(../img/background.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.box {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os filhos se movam para a próxima linha em telas menores */
+    width: 100%; /* Ajuste para que a largura seja 100% */
+    max-width: 930px; /* Limite a largura máxima */
+}
+
+.img-box {
+    background-color: rgba(255, 255, 255, 0.4);
+    width: 50%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 20px 0 0 20px;
+}
+
+.img-box img {
+    width: 100%;
+}
+
+.form-box {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(40px);
+    padding: 30px 40px;
+    width: 100%;
+    border-radius: 0 20px 20px 0;
+}
+
+.form-box h2 {
+    font-size: 30px;
+}
+
+.form-box p {
+    font-weight: bold;
+    color: #3D3D3D;
+}
+
+.form-box p a {
+    color: #ff66c4;
+    text-decoration: none;
+}
+
+.form-box form {
+    margin: 20px 0;
+}
+
+form .input-group {
+    margin-bottom: 15px;
+}
+
+form .input-group label {
+    color: #3D3D3D;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form .input-group input,
+form .input-group select {
+    width: 100%;
+    height: 47px;
+    background-color: rgba(255, 255, 255, 0.32);
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid transparent;
+    padding: 15px;
+    font-size: 15px;
+    color: #616161;
+    transition: all 0.4s ease;
+}
+
+form .input-group input:focus,
+form .input-group select:focus {
+    border-color: #ff66c4;
+}
+
+form .input-group button {
+    width: 100%;
+    height: 47px;
+    background: #ff66c4;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    margin-top: 15px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Adicionando as novas classes para o layout flex */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap; /* Permite que os filhos se movam para a próxima linha em telas menores */
+}
+
+.form-row .input-group {
+    flex: 1;
+    min-width: 250px; /* Garante que o grupo tenha uma largura mínima */
+}
+
+@media (max-width: 930px) {
+    .img-box {
+        display: none;
+    }
+
+    .form-box {
+        width: 100%;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+/* Ícone seta */
+.back-link {
+    position: absolute;
+    top: 1px;
+    right: 20px;
+    font-size: 24px;
+    color: #000; /* Ou qualquer cor que você preferir */
+}
+
+.form-box {
+    position: relative;
+    padding: 20px;
+}
+
+/* Estilo para o container de senha */
+.password-container {
+    position: relative; /* Permite que o ícone seja posicionado em relação ao campo de senha */
+}
+
+.password-container input {
+    width: calc(100% - 40px); /* Ajusta a largura do input para deixar espaço para o ícone */
+    padding-right: 40px; /* Adiciona espaço à direita para o ícone */
+}
+
+.password-container i {
+    position: absolute; /* Posiciona o ícone sobre o campo de senha */
+    right: 10px; /* Ajusta a posição do ícone à direita */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta para centralizar corretamente */
+}

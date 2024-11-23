@@ -1,0 +1,196 @@
+/* Importa a fonte Poppins do Google Fonts com diferentes pesos */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+/* Reseta o padding e margin para todos os elementos e define a fonte padrão */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estiliza o body da página */
+body {
+    background-image: url(../img/background.png); /* Define uma imagem de fundo */
+    background-position: center; /* Centraliza a imagem de fundo */
+    background-repeat: no-repeat; /* Impede a repetição da imagem de fundo */
+    background-size: cover; /* Faz a imagem de fundo cobrir todo o viewport */
+    display: flex; /* Usa flexbox para centrar o conteúdo */
+    align-items: center; /* Alinha o conteúdo verticalmente no centro */
+    justify-content: center; /* Alinha o conteúdo horizontalmente no centro */
+    padding: 20px; /* Adiciona preenchimento em torno do conteúdo */
+    min-height: 100vh; /* Garante que o corpo tenha pelo menos a altura da tela */
+}
+
+/* Estiliza a área de breadcrumb */
+.breadcrumb {
+    padding: 10px 20px; /* Adiciona preenchimento interno */
+    background-color: rgba(255, 255, 255, 0.4); /* Define uma cor de fundo semitransparente */
+    margin: 20px auto; /* Adiciona margem automática para centralizar e margem superior/inferior */
+    max-width: 800px; /* Define a largura máxima */
+    border-radius: 10px; /* Adiciona bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+}
+
+/* Estiliza o texto dentro da breadcrumb */
+.breadcrumb p {
+    font-weight: bold; /* Define o texto como negrito */
+    color: #3D3D3D; /* Define a cor do texto */
+}
+
+/* Estiliza o link dentro da breadcrumb */
+.breadcrumb p a {
+    color: #ff66c4; /* Define a cor do link */
+    text-decoration: none; /* Remove o sublinhado do link */
+}
+
+/* Estiliza o contêiner do formulário */
+.form-container {
+    display: flex; /* Usa flexbox para disposição */
+    flex-wrap: wrap; /* Permite que os itens se movam para a linha seguinte */
+    background-color: rgba(255, 255, 255, 0.4); /* Define uma cor de fundo semitransparente */
+    backdrop-filter: blur(40px); /* Adiciona um efeito de desfoque no fundo */
+    padding: 30px 40px; /* Adiciona preenchimento interno */
+    margin: 20px auto; /* Adiciona margem automática para centralizar e margem superior/inferior */
+    max-width: 800px; /* Define a largura máxima */
+    border-radius: 20px; /* Adiciona bordas arredondadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+}
+
+/* Estiliza os cabeçalhos dentro do contêiner do formulário */
+.form-container h2 {
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 20px; /* Adiciona margem inferior */
+    font-size: 30px; /* Define o tamanho da fonte */
+}
+
+/* Estiliza as seções dentro do formulário */
+.section {
+    display: flex; /* Usa flexbox para disposição */
+    flex-wrap: wrap; /* Permite que os itens se movam para a linha seguinte */
+    gap: 20px; /* Adiciona espaço entre os itens */
+    margin-bottom: 20px; /* Adiciona margem inferior */
+    width: 100%; /* Define a largura como 100% do contêiner pai */
+}
+
+/* Estiliza os cabeçalhos dentro das seções */
+.section h2 {
+    width: 100%; /* Define a largura como 100% do contêiner pai */
+}
+
+/* Estiliza os grupos de formulário */
+.form-group {
+    flex: 1; /* Permite que o grupo de formulário se expanda para preencher o espaço disponível */
+    display: flex; /* Usa flexbox para disposição */
+    flex-direction: column; /* Organiza os itens verticalmente */
+    margin-bottom: 15px; /* Adiciona margem inferior */
+}
+
+/* Estiliza os rótulos dos grupos de formulário */
+.form-group label {
+    color: #3D3D3D; /* Define a cor do texto */
+    font-weight: bold; /* Define o texto como negrito */
+    margin-bottom: 5px; /* Adiciona margem inferior */
+}
+
+/* Estiliza os campos de entrada e seleção */
+.form-group input,
+.form-group select {
+    padding: 15px; /* Adiciona preenchimento interno */
+    border: 2px solid transparent; /* Define a borda como transparente por padrão */
+    border-radius: 20px; /* Adiciona bordas arredondadas */
+    background-color: rgba(255, 255, 255, 0.32); /* Define uma cor de fundo semitransparente */
+    outline: none; /* Remove o contorno padrão dos campos */
+    font-size: 15px; /* Define o tamanho da fonte */
+    color: #616161; /* Define a cor do texto */
+    transition: all 0.4s ease; /* Adiciona uma transição suave para alterações */
+    flex: 1; /* Permite que o campo se expanda para preencher o espaço disponível */
+}
+
+/* Estiliza os campos de entrada e seleção quando estão em foco */
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #ff66c4; /* Define a cor da borda quando o campo está em foco */
+}
+
+/* Estiliza os campos de entrada tipo checkbox e radio */
+.form-group input[type="checkbox"],
+.form-group input[type="radio"] {
+    width: auto; /* Define a largura automática para estes campos */
+    margin-right: 10px; /* Adiciona margem direita */
+}
+
+/* Estiliza o botão de envio */
+.submit-button {
+    background-color: #ff66c4; /* Define a cor de fundo do botão */
+    color: white; /* Define a cor do texto do botão */
+    padding: 10px 20px; /* Adiciona preenchimento interno */
+    border: none; /* Remove a borda padrão */
+    border-radius: 20px; /* Adiciona bordas arredondadas */
+    cursor: pointer; /* Muda o cursor para uma mão ao passar sobre o botão */
+    width: 100%; /* Define a largura como 100% do contêiner pai */
+    font-size: 16px; /* Define o tamanho da fonte */
+    margin-top: 15px; /* Adiciona margem superior */
+}
+
+/* Estiliza o botão de envio quando o mouse passa sobre ele */
+.submit-button:hover {
+    background-color: #ff66c4; /* Define a cor de fundo do botão ao passar o mouse */
+}
+
+/* CSS para tornar o formulário responsivo em todas as telas */
+@media (max-width: 930px) {
+  /* Ajusta a orientação dos elementos quando a largura da tela é menor que 930px */
+  .form-container {
+      padding: 20px; /* Reduz o preenchimento para telas menores */
+  }
+
+  .form-group {
+      width: 100%; /* Define a largura total para os grupos de formulários */
+  }
+}
+
+@media (max-width: 600px) {
+  /* Ajustes adicionais para telas muito estreitas */
+  .breadcrumb {
+      padding: 5px 10px; /* Reduz o preenchimento para breadcrumbs em telas pequenas */
+      max-width: 100%; /* Garante que o breadcrumb não ultrapasse a largura da tela */
+  }
+
+  .form-container {
+      padding: 15px; /* Reduz ainda mais o preenchimento para telas muito pequenas */
+  }
+
+  .form-group input,
+  .form-group select {
+      font-size: 14px; /* Reduz o tamanho da fonte para campos de entrada em telas pequenas */
+  }
+}
+
+/*estilo da seta*/
+.breadcrumb {
+    position: relative;
+    padding: 20px;
+    /* Outros estilos que você possa ter para o breadcrumb */
+}
+
+.back-link {
+    position: absolute;
+    top: 1px;
+    right: 20px;
+    font-size: 24px;
+    color: #000; /* Ou qualquer cor que você preferir */
+    text-decoration: none;
+}
+.password-container {
+    position: relative;
+}
+
+.password-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000; /* Ajuste a cor conforme necessário */
+    cursor: pointer; /* Adiciona um cursor de ponteiro para indicar que é clicável */
+}
